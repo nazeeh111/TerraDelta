@@ -11,6 +11,7 @@ import re
 
 import numpy as np
 import rasterio
+from rasterio.enums import ColorInterp
 from rasterio.features import rasterize
 from rasterio.warp import transform_geom, transform_bounds
 from scipy import ndimage
@@ -142,15 +143,34 @@ def ingest_region(region_dir: Path, cache_dir: Path, *, labels: bool = False) ->
     SN7 labels_match are postprocessed ID-matched labels, used only when labels=True.
     """
     region_dir, cache_dir = Path(region_dir), Path(cache_dir)
+    if cache_dir.exists() and any(cache_dir.iterdir()):
+        raise ValueError("Import cache must be new/empty; preserve prior observation versions")
     images = sorted((region_dir / "images_masked").glob("*.tif"))
     if not images:
         raise ValueError(f"No permitted images_masked GeoTIFFs in {region_dir}")
+    catalog_file = region_dir.parent / "acquisition-manifest.json"
+    catalog = (
+        {item["local"]: item for item in json.loads(catalog_file.read_text())}
+        if catalog_file.exists()
+        else {}
+    )
+    provenance_file = region_dir / "provenance.json"
+    provenance = json.loads(provenance_file.read_text()) if provenance_file.exists() else {}
     frames, rgbs, valids, targets, edges, instances = [], [], [], [], [], []
     grid = None
     for image in images:
         with rasterio.open(image) as ds:
             if ds.crs is None or ds.count != 4 or ds.dtypes != ("uint8",) * 4:
                 raise ValueError("Expected explicit CRS and four uint8 RGB/alpha bands")
+            if ds.colorinterp != (
+                ColorInterp.red,
+                ColorInterp.green,
+                ColorInterp.blue,
+                ColorInterp.alpha,
+            ):
+                raise ValueError(
+                    "Expected explicit RGB and alpha band roles; a fourth spectral band is not validity"
+                )
             this_grid = (ds.crs, ds.transform, ds.width, ds.height)
             if grid is not None and (
                 ds.crs != grid[0]
@@ -197,12 +217,27 @@ def ingest_region(region_dir: Path, cache_dir: Path, *, labels: bool = False) ->
             start, end = month_bounds(image.name)
             registration = {"usable": False, "reason": "pending_sequence_registration"}
             digest = sha256(image)
+            remote = catalog.get(str(image.relative_to(region_dir.parent)))
+            if remote:
+                if remote["sha256"] != digest or not remote["key"].startswith(
+                    "spacenet/SN7_buildings/"
+                ):
+                    raise ValueError("Image differs from its acquired source identity")
+                uri = "https://spacenet-dataset.s3.amazonaws.com/" + remote["key"]
+                license = "CC-BY-SA-4.0"
+            else:
+                uri = image.resolve().as_uri()
+                license = provenance.get("license")
             frames.append(
                 {
-                    "source_id": f"sn7:{image.stem}",
+                    "source_id": f"sn7:{image.stem}"
+                    if remote
+                    else f"local:{image.stem}:{digest[:12]}",
                     "filename": image.name,
                     "sha256": digest,
-                    "uri": f"https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/{region_dir.name}/images_masked/{image.name}",
+                    "uri": uri,
+                    "license": license,
+                    "derived_from": provenance.get("derived_from", []),
                     "local_image": str(image.resolve()),
                     "source_transform": list(ds.transform)[:6],
                     "source_nodata": ds.nodata,
@@ -213,6 +248,7 @@ def ingest_region(region_dir: Path, cache_dir: Path, *, labels: bool = False) ->
                     "availability_assumption": "retrospective_month_end",
                     "valid_fraction": float(valid.mean()),
                     "udm_polygons": udm_count,
+                    "udm_sha256": sha256(udm_path) if udm_path.exists() else None,
                     "registration": registration,
                 }
             )
@@ -279,7 +315,9 @@ def ingest_region(region_dir: Path, cache_dir: Path, *, labels: bool = False) ->
         "resolution_native": list(map(abs, (transform.a, transform.e))),
         "resolution_units": crs.linear_units,
         "nodata": "alpha==0 or source UDM",
-        "license": "CC-BY-SA-4.0",
+        "license": next(iter({f["license"] for f in frames}))
+        if len({f["license"] for f in frames}) == 1
+        else "mixed; see source licenses",
         "labels_postprocessed": labels,
         "registration_protocol": "anchor_and_all_accepted_offsets_v2",
         "alignment": "source grid unchanged; affine roundoff tolerance 1e-6 native units; image-only diagnostics, no label-assisted alignment",

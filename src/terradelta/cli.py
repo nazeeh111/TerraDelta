@@ -50,16 +50,30 @@ def ingest(region_dir: Path, output: Annotated[Path, typer.Option()], labels: bo
 def run(
     cache_dir: Path,
     spatial_weights: Annotated[Path, typer.Option()],
-    temporal_weights: Annotated[Path, typer.Option()],
     calibration: Annotated[Path, typer.Option()],
     output: Annotated[Path, typer.Option()],
+    temporal_weights: Annotated[Path | None, typer.Option()] = None,
+    event_gate_weights: Annotated[Path | None, typer.Option()] = None,
+    method: Annotated[str | None, typer.Option(
+        help="Event method; defaults to observation_gate with gate weights, otherwise observation."
+    )] = None,
     device: str = "cpu",
     end: str | None = None,
 ):
     """Compute an image-only history into a NEW output directory. End restricts prefix."""
-    from .pipeline import predict_sequence, reconstruct, prefix_frames
+    from .pipeline import (
+        GATE_METHODS, LEARNED_TEMPORAL_METHODS, METHODS,
+        predict_sequence, reconstruct, prefix_frames,
+    )
     from .features import prepare_features
 
+    selected_method = method or ("observation_gate" if event_gate_weights else "observation")
+    if selected_method not in METHODS:
+        raise typer.BadParameter("method must be one of: " + ", ".join(METHODS))
+    if selected_method in LEARNED_TEMPORAL_METHODS and temporal_weights is None:
+        raise typer.BadParameter("This method requires --temporal-weights")
+    if selected_method in GATE_METHODS[:2] and event_gate_weights is None:
+        raise typer.BadParameter("This method requires --event-gate-weights")
     if output.exists() and any(output.iterdir()):
         raise typer.BadParameter("Output must be new/empty")
     output.mkdir(parents=True, exist_ok=True)
@@ -80,7 +94,8 @@ def run(
         (effective_cache / "metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
     prepare_features(effective_cache, output / "rasters/probabilities.npy", output / "features")
     report = reconstruct(
-        output / "features", temporal_weights, output / "history", calibration_path=calibration
+        output / "features", temporal_weights, output / "history", calibration_path=calibration,
+        method=selected_method, event_gate_weights=event_gate_weights,
     )
     typer.echo(json.dumps(report, indent=2))
 

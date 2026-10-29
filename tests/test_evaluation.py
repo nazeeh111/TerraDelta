@@ -14,6 +14,8 @@ from terradelta.evaluation import (
     match_events,
     region_area_time,
     summarize_regions,
+    ground_truth_audit,
+    deduplicate_physical_references,
 )
 from terradelta.schema import EventRevision, ObservationInterval, SourceIdentity
 
@@ -120,6 +122,68 @@ def test_ground_truth_cloud_gaps_initial_inventory_and_transient_labels(tmp_path
     # Registration rejection is a model abstention, not deletion from truth.
     assert meta["frames"][2]["registration"]["usable"] is False
     assert by_id[1]["first_support_index"] == 2
+
+
+def test_label_identity_replacement_is_not_physical_footprint_change(tmp_path):
+    labels = np.zeros((6, 8, 8), dtype="int32")
+    labels[:3, 2:5, 2:5] = 1
+    labels[3:, 2:5, 2:5] = 2
+    valid = np.ones_like(labels, dtype=bool)
+    np.save(tmp_path / "instances.npy", labels)
+    np.save(tmp_path / "valid.npy", valid)
+    (tmp_path / "metadata.json").write_text(json.dumps(metadata(valid)))
+    legacy = ground_truth_events(tmp_path, protocol="matched_id_v1")
+    assert len(legacy) == 2
+    assert all(e["any_building_coverage_first_support"] == 1 for e in legacy)
+    assert ground_truth_events(tmp_path, protocol="physical_coverage_v2") == []
+
+
+def test_renamed_reference_does_not_duplicate_one_physical_addition(tmp_path):
+    labels = np.zeros((6, 8, 8), dtype="int32")
+    labels[2:4, 2:5, 2:5] = 1
+    labels[4:, 2:5, 2:5] = 2
+    valid = np.ones_like(labels, dtype=bool)
+    np.save(tmp_path / "instances.npy", labels)
+    np.save(tmp_path / "valid.npy", valid)
+    (tmp_path / "metadata.json").write_text(json.dumps(metadata(valid)))
+    result = ground_truth_events(tmp_path)
+    assert len(result) == 1 and result[0]["change_class"] == "building_addition"
+    assert len(result[0]["reference_truth_ids"]) == 2
+
+
+def test_ambiguity_is_audited_separately_from_observed_stability(tmp_path):
+    labels = np.zeros((6, 8, 8), dtype="int32")
+    labels[:, 2:4, 2:4] = 1
+    labels[1:5, 3, 2:4] = 0
+    valid = np.ones_like(labels, dtype=bool)
+    np.save(tmp_path / "instances.npy", labels)
+    np.save(tmp_path / "valid.npy", valid)
+    (tmp_path / "metadata.json").write_text(json.dumps(metadata(valid)))
+    audit = ground_truth_audit(tmp_path)
+    assert audit["physical_coverage_event_count"] == 0
+    counts = audit["observation_and_exclusion_counts"]
+    assert counts["ambiguous_coverage_reference_frames"] == 4
+    assert counts["source_valid_reference_frames"] == 6
+    assert counts["references"][0]["usable_state_frames"] == 2
+
+
+def test_truth_groups_cannot_chain_beyond_overlap_or_time_limits():
+    events = []
+    for i, date in enumerate(
+        ["2020-03-31T00:00:00Z", "2020-05-31T00:00:00Z", "2020-07-31T00:00:00Z"]
+    ):
+        events.append(
+            truth(
+                mapping(box(-80 + i * 0.00099, 37, -79.997 + i * 0.00099, 37.001)),
+                truth_id=f"t{i}",
+                object_id=i,
+                first_support=date,
+            )
+        )
+    groups = deduplicate_physical_references(events)
+    assert len(groups) == 2
+    assert sorted(len(g["reference_members"]) for g in groups) == [1, 2]
+    assert sum(len(g["reference_truth_ids"]) for g in groups) == 3
 
 
 def test_matching_is_one_to_one_and_indices_reference_original_revisions():

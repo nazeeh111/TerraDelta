@@ -1,0 +1,32 @@
+{
+  "actual_http_loopback": true,
+  "installed_package_api": true,
+  "area_a_events": 19,
+  "area_b_events": 43,
+  "early_date_events": 0,
+  "outside_bbox_events": 0,
+  "snapshot_replay_identical": true,
+  "geojson_and_geoparquet_independent_rows": 19,
+  "inspected_event_revision_count": 1,
+  "stdlib_second_consumer": {
+    "snapshot_time": "2026-10-29T07:54:22.338527Z",
+    "groups": [
+      {
+        "region": "area-b",
+        "change_class": "building_addition",
+        "state": "proposed",
+        "events": 5,
+        "footprint_area_m2": 667.46,
+        "distinct_supporting_sources": 3
+      },
+      {
+        "region": "area-b",
+        "change_class": "building_removal",
+        "state": "proposed",
+        "events": 38,
+        "footprint_area_m2": 10881.71,
+        "distinct_supporting_sources": 3
+      }
+    ]
+  }
+}

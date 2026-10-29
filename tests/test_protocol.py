@@ -42,6 +42,8 @@ def boundary(tmp_path):
     for name in ["spatial.pt", "temporal.pt", "calibration.json", "config.json"]:
         (tmp_path / name).write_text("{}")
     info = {
+        "feature_protocol": "calendar_quality_v2",
+        "supervision_protocol": None,
         "region_id": "area",
         "spatial_weights_sha256": sha256(tmp_path / "spatial.pt"),
         "metadata_semantic_sha256": semantic_metadata_hash(cache / "metadata.json"),
@@ -90,3 +92,50 @@ def test_local_host_paths_are_not_experiment_identity(tmp_path):
     doc["frames"][0]["local_image"] = "/another/host/image.tif"
     metadata.write_text(json.dumps(doc))
     validate_experiment(path, **kwargs)
+
+
+def test_old_supervision_semantics_are_rejected(tmp_path):
+    from terradelta.features import validate_feature_protocol
+
+    root = tmp_path / "features"
+    root.mkdir()
+    (root / "sites.json").write_text(
+        json.dumps(
+            {
+                "feature_protocol": "calendar_quality_v2",
+                "supervision_protocol": "legacy_presence_25percent",
+            }
+        )
+    )
+    with pytest.raises(ValueError, match="Supervision protocol"):
+        validate_feature_protocol(root, supervision=True)
+
+
+def test_gate_experiment_requires_and_binds_gate_weights(tmp_path):
+    kwargs = boundary(tmp_path)
+    kwargs["config"].write_text(json.dumps({"event_gate": {"truth_ready": True}}))
+    with pytest.raises(ValueError, match="gate weights"):
+        freeze_experiment(tmp_path / "missing.json", **kwargs)
+    gate = tmp_path / "gate.pt"
+    gate.write_bytes(b"original trained gate")
+    kwargs["event_gate_weights"] = gate
+    frozen = tmp_path / "freeze.json"
+    freeze_experiment(frozen, **kwargs)
+    validate_experiment(frozen, **kwargs)
+    gate.write_bytes(b"different weights")
+    with pytest.raises(ValueError, match="event_gate_weights"):
+        validate_experiment(frozen, **kwargs)
+
+
+def test_gate_reliability_is_proposal_weighted():
+    import importlib.util
+    script = Path(__file__).resolve().parents[1] / 'scripts/evaluate_gate_calibration.py'
+    spec = importlib.util.spec_from_file_location('gate_reliability_test', script)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    # One repeated proposal and one single-row proposal carry equal mass.
+    result = module.reliability(np.array([.1, .1, .9]), np.array([0, 0, 1]), np.array([.5, .5, 1.]))
+    assert result['proposal_mass'] == 2
+    assert result['positive_fraction'] == .5
+    assert result['brier'] == pytest.approx(.01)
+    assert sum(item['proposal_mass'] for item in result['bins']) == pytest.approx(2)

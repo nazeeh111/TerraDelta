@@ -46,7 +46,10 @@ def _source(frame: dict) -> SourceIdentity:
         "published_at",
         "availability_assumption",
     ]
-    return SourceIdentity(**{k: frame[k] for k in fields}, license="CC-BY-SA-4.0")
+    license = frame.get("license")
+    if license is None and frame["uri"].startswith("https://spacenet-dataset.s3.amazonaws.com/"):
+        license = "CC-BY-SA-4.0"
+    return SourceIdentity(**{k: frame[k] for k in fields}, license=license)
 
 
 def decode_events(
@@ -114,6 +117,10 @@ def decode_events(
                         detected_at=available,
                         sources=[sources[s] for s in support],
                         quality={
+                            "site_id": site + 1,
+                            "support_before_index": candidate["before"],
+                            "support_first_index": candidate["first"],
+                            "support_current_index": t,
                             "mode": "retrospective" if retrospective else "online_prefix",
                             "availability_assumption": "retrospective_month_end",
                             "registration": frames[t]["registration"],

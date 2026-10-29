@@ -1,0 +1,95 @@
+{
+  "checks": {
+    "L15-0457E-1135N_1831_3648_13": {
+      "prefix_observations": 12,
+      "prefix_sites": 6524,
+      "full_sites": 7759,
+      "methods": {
+        "proposal_tracking": {
+          "passed": true,
+          "prefix_revisions": 16913,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true
+        },
+        "observation_gate": {
+          "passed": true,
+          "prefix_revisions": 29965,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true
+        },
+        "gate_no_quality": {
+          "passed": true,
+          "prefix_revisions": 29469,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true
+        }
+      },
+      "features_sha256": "fd73c045c2dbad908000ecfb1abdb0a09c48dffea043b062640c88aa305298b0"
+    },
+    "L15-1049E-1370N_4196_2710_13": {
+      "prefix_observations": 12,
+      "prefix_sites": 5693,
+      "full_sites": 7458,
+      "methods": {
+        "proposal_tracking": {
+          "passed": true,
+          "prefix_revisions": 16918,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true
+        },
+        "observation_gate": {
+          "passed": true,
+          "prefix_revisions": 24976,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true
+        },
+        "gate_no_quality": {
+          "passed": true,
+          "prefix_revisions": 24896,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true
+        }
+      },
+      "features_sha256": "af946580ee6fd63b6ec02ebf0b487b68405be250da5bee408ee957c131121e4b"
+    },
+    "L15-1848E-0793N_7394_5018_13": {
+      "prefix_observations": 12,
+      "prefix_sites": 1485,
+      "full_sites": 2343,
+      "methods": {
+        "proposal_tracking": {
+          "passed": true,
+          "prefix_revisions": 1814,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true
+        },
+        "observation_gate": {
+          "passed": true,
+          "prefix_revisions": 1814,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true
+        },
+        "gate_no_quality": {
+          "passed": true,
+          "prefix_revisions": 1814,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true
+        }
+      },
+      "features_sha256": "6b7b1e5416a7682e61cdb362ff7720c56d0eb0e817893b737ef54bd6605c255e"
+    }
+  },
+  "labels_read": false,
+  "event_gate_weights_sha256": "9bae4c22a5fc6dca64b270a0e37a8d899424477ed7b2c4f6ac5c2e6e811e62ba",
+  "scope": "Real native-image candidate/feature prefix; trained temporal occupancy and event-gate revision prefixes; synthetic future feature and availability edits. Spatial CNN is frame independent.",
+  "transaction_clock": "Fixed shared origin: complete revisions including record_time must agree."
+}

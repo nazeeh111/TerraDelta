@@ -1,0 +1,380 @@
+{
+  "freeze_manifest": {
+    "format": "terradelta-full-freeze-v3",
+    "event_gate_weights_sha256": "9bae4c22a5fc6dca64b270a0e37a8d899424477ed7b2c4f6ac5c2e6e811e62ba",
+    "temporal_weights_sha256": "11af3e5e4e105795f4c74d00887afc786b906e786cb2c2c5afb4c085a5115295",
+    "spatial_weights_sha256": "7ab95679a2009918dbab62fca64244476df519080cb8c0d376c00d1494983886",
+    "calibration_sha256": "6d448246aa6c0cc21fcd69d675c6f591bd7aef996edaa2da9ccb659f7b4b95cf",
+    "config_sha256": "71dfe56a1ff2e7d6cb75547e2bc81b02a1ca6b96f8ffed61367fc8ebbc7899b3",
+    "confirmation_regions": [
+      "L15-0457E-1135N_1831_3648_13",
+      "L15-1049E-1370N_4196_2710_13",
+      "L15-1848E-0793N_7394_5018_13"
+    ],
+    "region_inputs": {
+      "L15-0457E-1135N_1831_3648_13": {
+        "features_sha256": "fd73c045c2dbad908000ecfb1abdb0a09c48dffea043b062640c88aa305298b0",
+        "sites_sha256": "991e114356511b736234429eea5497a256e3e4ecfcd8b8031bc0ea4b23150f21",
+        "sites_raster_sha256": "ab0e457481c44002b26f5b173da82e576763be392cf3e26b1d52e0bc13488300",
+        "metadata_semantic_sha256": "d3778cba1bd418e2c1cc38d4b2261e5b684df425452c507e45ebe5e8acb4eeb1",
+        "rgb_sha256": "2ebb1aac02076969bac0bd30effba3227c013c23ddcdbaf8af9e0c492b0e6c3d",
+        "valid_sha256": "2b684a8f57a33d7995d7536a580b1e20cea5bc065622b1d83133877f5108fed2",
+        "truth_instances_sha256": "ba1f1c8042357321a724186846f6a716a64c3d23855244ab2b50fbda73a5552f",
+        "probability_sha256": "ae240e975c4ed32b35c6427c95b9b47675c64a21c37be93204bb5e38a02ed56a"
+      },
+      "L15-1049E-1370N_4196_2710_13": {
+        "features_sha256": "af946580ee6fd63b6ec02ebf0b487b68405be250da5bee408ee957c131121e4b",
+        "sites_sha256": "ded32b75e90feea9688d72e626137d9ec9dca7e3a80f920363bfd0a53412e0a2",
+        "sites_raster_sha256": "5098725269275350b8b7aab5f9f69fb58f81ff78954bb18f7cbccfb9245a100d",
+        "metadata_semantic_sha256": "46aa1fee04e52766de3fa70ae11ce5f7c30091f01fd182ed2a29c5595b5ff2f5",
+        "rgb_sha256": "b3cc45e40954d959307fbbc3fc45fa6fccb7d1de0aa3d0c5eb6fad8601f5ebd9",
+        "valid_sha256": "463403c08af4925234bf0376d659c86f5a0803ea291b30dcb14f11f29c444634",
+        "truth_instances_sha256": "bdbdd5631034a9ede5e0c48b057231c708863f253e0d9f5eb2b59cdbee90e33e",
+        "probability_sha256": "9c6126465065582b65bb52d415a01e705f5d1936d2bde83a6c940563a25efa46"
+      },
+      "L15-1848E-0793N_7394_5018_13": {
+        "features_sha256": "6b7b1e5416a7682e61cdb362ff7720c56d0eb0e817893b737ef54bd6605c255e",
+        "sites_sha256": "d9c578a1463b838d672d6ab0e2bbebebe1555d118eaaced63622d222b10ab2de",
+        "sites_raster_sha256": "17e55f7c1d4d7504de2dd84ad3d60e367ee8c79708391cf0f5dcf803b8208696",
+        "metadata_semantic_sha256": "37bb3e1ce8d59b387c43cbe46f94e8b3e744f48e3cefeb0037124bbef36aa1c1",
+        "rgb_sha256": "282dddb00cc0208a1b71eb6e33e98085fff2060d131c7aa02ca725b9a4b9f1cb",
+        "valid_sha256": "b1f435c787d945130f34eeda511f056c011dfac73b84161d164869ecade58578",
+        "truth_instances_sha256": "d967bc8a0622dd9fce8597bceb99a971084ec3c88a5b73dd8407e70da6b438d8",
+        "probability_sha256": "3c14edfd240be2e35f694078efda7a496b3946c0dad8847f0588a5fb080088f8"
+      }
+    },
+    "protocol_sources": {
+      "pyproject.toml": "7fdb9505d72ffa37b18ab3fba2a3243e53311574c56cd3e328cee425f693b5f2",
+      "uv.lock": "80f6fa8523172487e2955878a33a043c84362da5ff711d3803a3b293080c606a",
+      "src/terradelta/acquire.py": "6eb0794cc0677315ac039cebec1faf0bcd03c9f544d6989eef76dd04cd71bf69",
+      "src/terradelta/data.py": "0e1fa709eb635191101ce1b9e2e669bb3ea04e50d3a1ac51cabdf0de489d02ea",
+      "src/terradelta/spatial.py": "a17c7fb5974592460a34ffa72dffce1b014608091d9ad106c07b79f8446190af",
+      "src/terradelta/features.py": "cb0ef4acf31e23ffac7d79d374ef24120a2e75a9c01cbb68bc4b2764ca41a31f",
+      "src/terradelta/temporal.py": "d2d0deb93a86bf7bed1f95f2c26ac60168faf5c1ad11ae8b98dbcda9f22a0042",
+      "src/terradelta/event_gate.py": "6a4c0431c47b6977f863a6ee8ef3844dff7693040a05b79fc2e46e21b9d51267",
+      "src/terradelta/decoder.py": "716eac715ec0e38396bd6bf7f36170e4b72d98bcf5a18b3c9096889ec215fe4e",
+      "src/terradelta/pipeline.py": "fcbefe4b5b0a973c465081d01a4ed2d35df74316c11af08231d71f1577bae4c4",
+      "src/terradelta/evaluation.py": "66fd8b765a9d4dc552efefc4b4728858e0370b40808946ae1573121b4d2b3c7b",
+      "src/terradelta/schema.py": "9500c25425e546e7a895c9e2e4bbe333e1ef7c93b0eec0fa330aefa98339ebb1",
+      "src/terradelta/store.py": "cb7fcfabdbf354236b898adfd72be230c38e4e94be99b14c5b83f1962700c58b",
+      "src/terradelta/service.py": "b8a2e0212793fa914b0c646cbc0b9a0b018df8424a1a6319c828e891a2a5d058",
+      "src/terradelta/cli.py": "e1eb808946a1cbb631ab81413cde19a76e9a0410839333405bbed5139f8795ea",
+      "src/terradelta/protocol.py": "4ec510607dafca176d289130291c86ee71a73ce12d5cb2ee55467f9e504d0944",
+      "scripts/train_spatial.py": "787158065edc05b89b0affa7a56d50b3ee5428fa6f52a6955661c14b58189b28",
+      "scripts/train_temporal.py": "51ffac04d01bde86dc0af4cc0a0b8f2deba98f56ec149c565527870aed897e4e",
+      "scripts/train_event_gate.py": "91533ef9e5c86b41b40909ad56ded674892c2701a89af6ac97ff8f7f6fbd64dc",
+      "scripts/calibrate.py": "f780c1e8756b9690039f3f4a94d9410310b57294702f4e6efc897c9a24639292",
+      "scripts/evaluate.py": "1e079b80cefdc74e0beb500485a14a96c0d655cbba83f4b217f6b9d8613e0d67",
+      "scripts/evaluate_gate_calibration.py": "d9d9e5ce0ad53099978417699d55d8fb645f14589739bbe8d6fc4d8101e64a0d",
+      "scripts/predict_all.py": "d722b1c839a9bfcd6905bb229148db93b41cd8778bf033e5abbe257582d96d63",
+      "scripts/rebuild_features.py": "dfcc3113b592c3632ee268ffb64b7168e91698f818617b0d1cf4dad0b67b2265",
+      "scripts/check_online_invariance.py": "368ca14990fdacc187943569ea958abd7c810fae6d7c7d2edcb62969cb926725",
+      "scripts/stress_and_calibration.py": "dd468d6cfb1daa81b4219c7b4e9571ab222745872c93528de192b6fb357837ba",
+      "scripts/export_rasters.py": "b0d21afe998acd47b07b720cf8f9a7c7ed0e79594ffdddbd6c8b697b91b93835"
+    },
+    "frozen_at": "2026-10-29T07:56:33.956700+00:00",
+    "policy": "No model, threshold, data, decoder or metric tuning after confirmation scoring."
+  },
+  "regions": {
+    "L15-0457E-1135N_1831_3648_13": {
+      "observation_gate": {
+        "prefix_rows": 20252,
+        "proposal_mass": 5997.0,
+        "positive_fraction": 0.009171252292813074,
+        "brier": 0.008927720731705988,
+        "constant_prevalence_oracle_brier": 0.009087140424194643,
+        "expected_calibration_error": 0.008256815638925876,
+        "bins": [
+          {
+            "lower": 0.0,
+            "rows": 19801,
+            "proposal_mass": 5873.833333333332,
+            "mean_score": 0.01443765981574017,
+            "positive_fraction": 0.007022671168742729
+          },
+          {
+            "lower": 0.1,
+            "rows": 371,
+            "proposal_mass": 102.91666666666667,
+            "mean_score": 0.13550580250106845,
+            "positive_fraction": 0.097165991902834
+          },
+          {
+            "lower": 0.2,
+            "rows": 57,
+            "proposal_mass": 14.25,
+            "mean_score": 0.2395027334752836,
+            "positive_fraction": 0.12280701754385966
+          },
+          {
+            "lower": 0.3,
+            "rows": 17,
+            "proposal_mass": 4.5,
+            "mean_score": 0.3338072150945664,
+            "positive_fraction": 0.27777777777777785
+          },
+          {
+            "lower": 0.4,
+            "rows": 6,
+            "proposal_mass": 1.5,
+            "mean_score": 0.43275734782218933,
+            "positive_fraction": 0.5
+          }
+        ]
+      },
+      "gate_no_quality": {
+        "prefix_rows": 20252,
+        "proposal_mass": 5997.0,
+        "positive_fraction": 0.009171252292813074,
+        "brier": 0.008967660082796914,
+        "constant_prevalence_oracle_brier": 0.009087140424194643,
+        "expected_calibration_error": 0.004743370585583112,
+        "bins": [
+          {
+            "lower": 0.0,
+            "rows": 19905,
+            "proposal_mass": 5898.499999999999,
+            "mean_score": 0.011177243377973847,
+            "positive_fraction": 0.00733237263711113
+          },
+          {
+            "lower": 0.1,
+            "rows": 269,
+            "proposal_mass": 77.66666666666666,
+            "mean_score": 0.13397399639079244,
+            "positive_fraction": 0.10622317596566522
+          },
+          {
+            "lower": 0.2,
+            "rows": 45,
+            "proposal_mass": 11.916666666666668,
+            "mean_score": 0.2423891354274083,
+            "positive_fraction": 0.14685314685314688
+          },
+          {
+            "lower": 0.3,
+            "rows": 14,
+            "proposal_mass": 3.5833333333333335,
+            "mean_score": 0.33053372696388605,
+            "positive_fraction": 0.13953488372093023
+          },
+          {
+            "lower": 0.4,
+            "rows": 8,
+            "proposal_mass": 2.083333333333333,
+            "mean_score": 0.4368311810493469,
+            "positive_fraction": 0.36
+          },
+          {
+            "lower": 0.5,
+            "rows": 5,
+            "proposal_mass": 1.75,
+            "mean_score": 0.5307181988443647,
+            "positive_fraction": 0.0
+          },
+          {
+            "lower": 0.6,
+            "rows": 1,
+            "proposal_mass": 0.25,
+            "mean_score": 0.6600364446640015,
+            "positive_fraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "rows": 4,
+            "proposal_mass": 1.0,
+            "mean_score": 0.738058015704155,
+            "positive_fraction": 0.25
+          },
+          {
+            "lower": 0.8,
+            "rows": 1,
+            "proposal_mass": 0.25,
+            "mean_score": 0.812249481678009,
+            "positive_fraction": 1.0
+          }
+        ]
+      }
+    },
+    "L15-1049E-1370N_4196_2710_13": {
+      "observation_gate": {
+        "prefix_rows": 11622,
+        "proposal_mass": 3567.0,
+        "positive_fraction": 0.0008410428931875525,
+        "brier": 0.0025547481492620297,
+        "constant_prevalence_oracle_brier": 0.0008403355400393713,
+        "expected_calibration_error": 0.021698045845385733,
+        "bins": [
+          {
+            "lower": 0.0,
+            "rows": 11162,
+            "proposal_mass": 3425.166666666667,
+            "mean_score": 0.01690529999691452,
+            "positive_fraction": 0.0005839131915721862
+          },
+          {
+            "lower": 0.1,
+            "rows": 377,
+            "proposal_mass": 114.83333333333333,
+            "mean_score": 0.13378424353692112,
+            "positive_fraction": 0.008708272859216255
+          },
+          {
+            "lower": 0.2,
+            "rows": 70,
+            "proposal_mass": 22.08333333333333,
+            "mean_score": 0.24202336663345123,
+            "positive_fraction": 0.0
+          },
+          {
+            "lower": 0.3,
+            "rows": 10,
+            "proposal_mass": 3.583333333333333,
+            "mean_score": 0.3280934233998144,
+            "positive_fraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "rows": 2,
+            "proposal_mass": 0.8333333333333333,
+            "mean_score": 0.41377487182617184,
+            "positive_fraction": 0.0
+          },
+          {
+            "lower": 0.5,
+            "rows": 1,
+            "proposal_mass": 0.5,
+            "mean_score": 0.5308113694190979,
+            "positive_fraction": 0.0
+          }
+        ]
+      },
+      "gate_no_quality": {
+        "prefix_rows": 11622,
+        "proposal_mass": 3567.0,
+        "positive_fraction": 0.0008410428931875525,
+        "brier": 0.0025904576459309897,
+        "constant_prevalence_oracle_brier": 0.0008403355400393713,
+        "expected_calibration_error": 0.014513114740502226,
+        "bins": [
+          {
+            "lower": 0.0,
+            "rows": 11300,
+            "proposal_mass": 3472.7499999999995,
+            "mean_score": 0.010291289696420205,
+            "positive_fraction": 0.0007198905766323518
+          },
+          {
+            "lower": 0.1,
+            "rows": 212,
+            "proposal_mass": 63.16666666666666,
+            "mean_score": 0.13692293536301336,
+            "positive_fraction": 0.0079155672823219
+          },
+          {
+            "lower": 0.2,
+            "rows": 54,
+            "proposal_mass": 15.750000000000002,
+            "mean_score": 0.23772095679921454,
+            "positive_fraction": 0.0
+          },
+          {
+            "lower": 0.3,
+            "rows": 28,
+            "proposal_mass": 7.666666666666666,
+            "mean_score": 0.34390876474587817,
+            "positive_fraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "rows": 15,
+            "proposal_mass": 4.25,
+            "mean_score": 0.44081552764948684,
+            "positive_fraction": 0.0
+          },
+          {
+            "lower": 0.5,
+            "rows": 6,
+            "proposal_mass": 1.5833333333333333,
+            "mean_score": 0.5547231561259219,
+            "positive_fraction": 0.0
+          },
+          {
+            "lower": 0.6,
+            "rows": 4,
+            "proposal_mass": 1.0833333333333333,
+            "mean_score": 0.6320503491621751,
+            "positive_fraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "rows": 3,
+            "proposal_mass": 0.75,
+            "mean_score": 0.7506676912307739,
+            "positive_fraction": 0.0
+          }
+        ]
+      }
+    },
+    "L15-1848E-0793N_7394_5018_13": {
+      "observation_gate": {
+        "prefix_rows": 2489,
+        "proposal_mass": 751.0,
+        "positive_fraction": 0.02663115845539281,
+        "brier": 0.026282508298777894,
+        "constant_prevalence_oracle_brier": 0.02592193985471657,
+        "expected_calibration_error": 0.01764709804181324,
+        "bins": [
+          {
+            "lower": 0.0,
+            "rows": 2482,
+            "proposal_mass": 749.25,
+            "mean_score": 0.00927022227396287,
+            "positive_fraction": 0.02669336002669336
+          },
+          {
+            "lower": 0.1,
+            "rows": 7,
+            "proposal_mass": 1.75,
+            "mean_score": 0.11353409609624318,
+            "positive_fraction": 0.0
+          }
+        ]
+      },
+      "gate_no_quality": {
+        "prefix_rows": 2489,
+        "proposal_mass": 751.0,
+        "positive_fraction": 0.02663115845539281,
+        "brier": 0.024577468947305343,
+        "constant_prevalence_oracle_brier": 0.02592193985471657,
+        "expected_calibration_error": 0.016358150689006062,
+        "bins": [
+          {
+            "lower": 0.0,
+            "rows": 2454,
+            "proposal_mass": 738.0,
+            "mean_score": 0.007699589437951189,
+            "positive_fraction": 0.021341463414634144
+          },
+          {
+            "lower": 0.1,
+            "rows": 29,
+            "proposal_mass": 10.75,
+            "mean_score": 0.14191789439944336,
+            "positive_fraction": 0.2558139534883721
+          },
+          {
+            "lower": 0.2,
+            "rows": 6,
+            "proposal_mass": 2.25,
+            "mean_score": 0.2253842055797577,
+            "positive_fraction": 0.6666666666666666
+          }
+        ]
+      }
+    }
+  },
+  "target": "One-to-one physical geometry/time compatibility of raw first-confirmed proposals; not construction-date coverage",
+  "sampling": "At most four available prefixes per proposal, stopping at observed retraction; each proposal totals one",
+  "limits": "This evaluates the candidate distribution, not unknown objects omitted by spatial proposals. Three regions do not guarantee arbitrary-shift calibration."
+}

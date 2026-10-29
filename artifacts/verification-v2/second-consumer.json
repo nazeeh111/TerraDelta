@@ -1,0 +1,21 @@
+{
+  "snapshot_time": "2026-10-29T07:54:22.338527Z",
+  "groups": [
+    {
+      "region": "area-b",
+      "change_class": "building_addition",
+      "state": "proposed",
+      "events": 5,
+      "footprint_area_m2": 667.46,
+      "distinct_supporting_sources": 3
+    },
+    {
+      "region": "area-b",
+      "change_class": "building_removal",
+      "state": "proposed",
+      "events": 38,
+      "footprint_area_m2": 10881.71,
+      "distinct_supporting_sources": 3
+    }
+  ]
+}

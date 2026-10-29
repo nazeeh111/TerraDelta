@@ -1,0 +1,53 @@
+{
+  "version": "sn7-regions-v4-event-gate",
+  "selection": "Fixed before label/outcome inspection; complete sequences, no neighboring AOIs across splits",
+  "train": [
+    "L15-0331E-1257N_1327_3160_13",
+    "L15-0506E-1204N_2027_3374_13",
+    "L15-0924E-1108N_3699_3757_13",
+    "L15-1276E-1107N_5105_3761_13",
+    "L15-1669E-1153N_6678_3579_13"
+  ],
+  "development": [
+    "L15-0632E-0892N_2528_4620_13",
+    "L15-1389E-1284N_5557_3054_13"
+  ],
+  "confirmation": [
+    "L15-0457E-1135N_1831_3648_13",
+    "L15-1049E-1370N_4196_2710_13",
+    "L15-1848E-0793N_7394_5018_13"
+  ],
+  "seed": 2901,
+  "truth_protocol": "physical_coverage_v2",
+  "occupancy_supervision": "80percent present,20percent absent; middle fraction unknown; >=80percent source valid",
+  "temporal_selection": "event_62d",
+  "temporal_spatial_residual": false,
+  "minimum_temporal_selection_step": 200,
+  "resource_limits": {
+    "download_bytes": 3000000000,
+    "spatial_training_steps": 5000,
+    "patch_size": 64,
+    "batch_size": 16,
+    "cpu_threads": 6,
+    "development_patch_size": 128,
+    "input_scale": 2,
+    "temporal_training_steps": 2000
+  },
+  "ground_truth": "Source-matched building IDs and monthly presence, masked by actual observation validity. Interval-censored visibility transitions, not known physical event dates.",
+  "publication_assumption": "retrospective_month_end; original image publication timestamps unknown; S3 LastModified is distribution metadata only",
+  "registration": "image-only phase correlation on mutually valid unchanged reference regions; report estimated shifts, reject excessive/low-support observations; no label-assisted alignment",
+  "confirmation_policy": "Freeze trained weights, calibration, thresholds, metrics and semantics before computing confirmation metrics. No region-specific tuning.",
+  "spatial_initial_weights_sha256": "d5e9551959461959f56de1901793e4ed009a7be7014cf156cc1fcfd2ec0c032d",
+  "development_revision": "2x internal model interpolation, warm-start v1,5000 additionalsteps; same native outputs and fixed development crops; not isolated upsampling ablation",
+  "spatial_training_config": "configs/experiment-v2.json",
+  "temporal_training_config": "configs/experiment-v3.json",
+  "event_gate": {
+    "truth_ready": true,
+    "truth_source_sha256": "66fd8b765a9d4dc552efefc4b4728858e0370b40808946ae1573121b4d2b3c7b",
+    "supervision_source_sha256": "cb0ef4acf31e23ffac7d79d374ef24120a2e75a9c01cbb68bc4b2764ca41a31f",
+    "proposal_threshold": 0.55,
+    "confirmations": 2,
+    "minimum_dwell_days": 20,
+    "training_steps": 2000
+  }
+}

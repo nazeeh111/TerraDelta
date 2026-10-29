@@ -9,10 +9,9 @@ from scipy.ndimage import shift
 import torch
 
 from terradelta.data import load_region, registration_diagnostic
-from terradelta.decoder import DecoderConfig, decode_events
 from terradelta.evaluation import evaluate_events, ground_truth_events
-from terradelta.features import feature_cube, labels_for_sites
-from terradelta.pipeline import method_scores
+from terradelta.features import feature_cube, labels_for_sites, validate_feature_protocol
+from terradelta.pipeline import method_events, method_scores
 from terradelta.protocol import validate_experiment
 from terradelta.spatial import load_model, predict_scene
 
@@ -41,7 +40,7 @@ def reliability(p, y, valid):
         "brier": float(np.mean((prediction - truth) ** 2)) if len(truth) else None,
         "expected_calibration_error": ece,
         "bins": bins,
-        "target": "candidate occupancy overlap>=25percent on source-valid labels; not event correctness",
+        "target": "candidate occupancy coverage>=80percent; <=20percent absent; middle coverage unknown; not event correctness",
     }
 
 
@@ -66,9 +65,12 @@ def main():
     ]:
         parser.add_argument("--" + arg, type=Path, required=True)
     parser.add_argument("--device", default="cpu")
+    parser.add_argument("--event-gate-weights", type=Path)
     args = parser.parse_args()
     config = json.loads(args.config.read_text())
     cal = json.loads(args.calibration.read_text())
+    if config.get("truth_protocol") != "physical_coverage_v2":
+        raise ValueError("Stress scoring requires audited physical_coverage_v2 truth")
     validate_experiment(
         args.freeze_manifest,
         repo=Path(__file__).resolve().parents[1],
@@ -79,6 +81,7 @@ def main():
         spatial_weights=args.spatial_weights,
         calibration=args.calibration,
         config=args.config,
+        event_gate_weights=args.event_gate_weights,
     )
     if args.output.exists():
         raise ValueError("Stress output must be new")
@@ -88,13 +91,13 @@ def main():
     for aoi in config["confirmation"]:
         root = args.features_root / aoi
         f = np.load(root / "features.npz")
-        info = json.loads((root / "sites.json").read_text())
+        info = validate_feature_protocol(root, supervision=False)
         region = load_region(
             args.cache_root / aoi, labels=True
         )  # allowed only after full validation
         sites = np.load(root / "sites.npy")
         p = np.load(args.predictions_root / aoi / "probabilities.npy", mmap_mode="r")
-        truth = ground_truth_events(args.cache_root / aoi)
+        truth = ground_truth_events(args.cache_root / aoi, protocol="physical_coverage_v2")
         y, supervised = labels_for_sites(region["instances"], region["valid"], sites)
         occupancy = {}
         for method in ["pairwise", "smoothing", "hmm", "watch_lstm", "no_quality", "observation"]:
@@ -118,23 +121,45 @@ def main():
                 static_x[i, :, 0:3] = f["x"][i, good[0], 0:3]
                 static_x[i, :, 8:11] = f["x"][i, good[0], 8:11]
         static_x[:, :, [11, 12, 13]] = 0
+        event_methods = [
+            "smoothing",
+            "hmm",
+            "watch_lstm",
+            "no_quality",
+            "observation",
+            "proposal_tracking",
+        ]
+        if args.event_gate_weights:
+            event_methods.extend(["observation_gate", "gate_no_quality"])
         controls = {}
         for name, x, usable, target in [
             ("four_missing_observations", cloud_x, cloud_usable, truth),
             ("static_evidence_calendar_control", static_x, f["usable"], []),
+            ("all_observations_missing", np.zeros_like(f["x"]), np.zeros_like(f["usable"]), []),
         ]:
             controls[name] = {}
-            for method in ["smoothing", "hmm", "watch_lstm", "no_quality", "observation"]:
-                scores = method_scores(x, usable, method, args.weights, cal["occupancy"])
-                settings = DecoderConfig(**cal["decoders"][method])
-                events = decode_events(
-                    scores,
+            for method in event_methods:
+                events = method_events(
+                    x,
                     usable,
                     f["births"],
                     info,
-                    settings,
+                    method,
+                    temporal_weights=args.weights,
+                    calibration=cal,
+                    event_gate_weights=args.event_gate_weights,
                     model_revision="frozen-stress:" + method,
                 )
+                if name == "all_observations_missing" and events:
+                    raise AssertionError(f"{method} emitted events with no usable observations")
+                if method in {"proposal_tracking", "observation_gate", "gate_no_quality"}:
+                    if name == "static_evidence_calendar_control" and events:
+                        raise AssertionError(f"{method} changed state on static spatial evidence")
+                    for event in events:
+                        site = event.quality["site_id"] - 1
+                        current = event.quality["support_current_index"]
+                        if not usable[site, current]:
+                            raise AssertionError(f"{method} emitted on missing evidence")
                 controls[name][method] = evaluate_events(events, target, region["metadata"])
         eligible = [
             i
@@ -166,11 +191,14 @@ def main():
         image_controls["injected_3px_shift"] = registration_diagnostic(rgb, shifted, valid)
         report[aoi] = {
             "occupancy_reliability": occupancy,
+            "event_methods": event_methods,
+            "event_gate_score_scope": "Event compatibility is evaluated through event metrics; it is not candidate occupancy reliability.",
             "controls": controls,
             "image_controls": image_controls,
             "cloud_gap_frame_indices": [gap_start, gap_end],
             "limits": [
                 "Controls are synthetic perturbations of real evidence, never new supporting observations.",
+                "Event-gate methods share the proposal_tracking raw policy and use frozen event-gate calibration, not occupancy calibration.",
                 "Temporal controls condition on the common candidate set and do not measure proposal recall loss.",
                 "Brightness is a radiometry sensitivity test, not a complete simulated season.",
                 "Real complete regional sequences also contain natural seasonal/cloud variation.",
@@ -178,7 +206,17 @@ def main():
         }
         print(aoi, "stress complete", flush=True)
     args.output.write_text(
-        json.dumps({"frozen": True, "regions": report}, indent=2, allow_nan=False) + "\n"
+        json.dumps(
+            {
+                "frozen": True,
+                "truth_protocol": "physical_coverage_v2",
+                "event_gate_weights_provided": args.event_gate_weights is not None,
+                "regions": report,
+            },
+            indent=2,
+            allow_nan=False,
+        )
+        + "\n"
     )
 
 

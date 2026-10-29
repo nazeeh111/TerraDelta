@@ -1,0 +1,82 @@
+{
+  "package_origin": "isolated venv/lib/python3.12/site-packages/terradelta/__init__.py",
+  "runs": {
+    "a-full": {
+      "seconds": 14.0324,
+      "frames": 3,
+      "probability_sha256": "bd1f8f6e8d07c4da8e37ffed49959d714673e95b4e90bb9a22252fe07edfce32",
+      "native_transform": [
+        4.77731426716,
+        0.0,
+        -11079088.627766754,
+        0.0,
+        -4.77731426716,
+        2190379.4825401795
+      ],
+      "export_rows": 27
+    },
+    "a-prefix": {
+      "seconds": 1.5964,
+      "frames": 2,
+      "probability_sha256": "4ce2d779606fcdc46abcb21f8b645d9c32a7f5b4b216b26bf2ae494a0632d93a",
+      "native_transform": [
+        4.77731426716,
+        0.0,
+        -11079088.627766754,
+        0.0,
+        -4.77731426716,
+        2190379.4825401795
+      ],
+      "export_rows": 12
+    },
+    "b-full": {
+      "seconds": 1.5851,
+      "frames": 3,
+      "probability_sha256": "d581b66804e60addd1213e84bb838f7b5c17e8eed2e2f98c0b807485908e916c",
+      "native_transform": [
+        4.77731426716,
+        0.0,
+        -11077865.63531436,
+        0.0,
+        -4.77731426716,
+        2189156.490087786
+      ],
+      "export_rows": 46
+    }
+  },
+  "changed_pixel_max_probability_delta": 0.9996151924133301,
+  "public_input_provenance": [
+    {
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_01_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "sha256": "e49e5931ac8654100669cc4ade518b8f91d5ccb81b2386ae6bd5b746e4595514",
+      "bytes": 4193671
+    },
+    {
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/labels/global_monthly_2018_01_mosaic_L15-0457E-1135N_1831_3648_13_UDM.geojson",
+      "sha256": "57637baf82c3fd2638c3f55889f45a17a5a20115cf8644b0c7a3cf03f23a9e11",
+      "bytes": 217
+    },
+    {
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_02_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "sha256": "03ed0821fe956bb1c0834e129aafb86080735ed0bb0cc6ea7106e538365e33df",
+      "bytes": 4193671
+    },
+    {
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/labels/global_monthly_2018_02_mosaic_L15-0457E-1135N_1831_3648_13_UDM.geojson",
+      "sha256": "57637baf82c3fd2638c3f55889f45a17a5a20115cf8644b0c7a3cf03f23a9e11",
+      "bytes": 217
+    },
+    {
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_03_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "sha256": "bfeb4fa584a522c4216002607891707c03369d01e8fed5120abb3fe9451b47bc",
+      "bytes": 4193671
+    },
+    {
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/labels/global_monthly_2018_03_mosaic_L15-0457E-1135N_1831_3648_13_UDM.geojson",
+      "sha256": "57637baf82c3fd2638c3f55889f45a17a5a20115cf8644b0c7a3cf03f23a9e11",
+      "bytes": 217
+    }
+  ],
+  "limits": "Wheel installation and cold public cropped-input check; remote clean-clone verification remains separate.",
+  "wheel_sha256": "88db20ae3da55144247877961e4163d77d89397bf881d0bc1f92c1231339cd71"
+}

@@ -12,7 +12,7 @@ import time
 import numpy as np
 import torch
 
-from terradelta.spatial import BuildingUNet, masked_segmentation_loss
+from terradelta.spatial import BuildingUNet, load_model, masked_segmentation_loss
 import terradelta.spatial as spatial_module
 
 
@@ -119,12 +119,34 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--steps", type=int, default=3000)
     parser.add_argument("--device", choices=("auto", "cpu", "mps"), default="auto")
+    parser.add_argument("--initial", type=Path, help="Optional own-model warm-start checkpoint")
+    parser.add_argument("--input-scale", type=int, choices=(1, 2), default=None,
+                        help="Must agree with frozen resource_limits.input_scale")
     args = parser.parse_args()
     config_bytes = args.config.read_bytes()
     config = json.loads(config_bytes)
     limits = config["resource_limits"]
+    input_scale = limits.get("input_scale", 1)
+    if input_scale not in (1, 2) or (args.input_scale is not None and args.input_scale != input_scale):
+        raise ValueError("input scale must agree with frozen configuration (1 or 2)")
     if not 1 <= args.steps <= limits["spatial_training_steps"]:
         raise ValueError("steps exceed frozen resource limit")
+    if args.output.exists():
+        raise FileExistsError("output checkpoint exists; use a new versioned output path")
+    initial_identity = None
+    if args.initial is not None:
+        initial_hash = hashlib.sha256(args.initial.read_bytes()).hexdigest()
+        expected_hash = config.get("spatial_initial_weights_sha256")
+        if expected_hash is not None and initial_hash != expected_hash:
+            raise ValueError("initial weights differ from frozen configuration hash")
+        initial_checkpoint = torch.load(args.initial, map_location="cpu", weights_only=True)
+        initial_identity = {
+            "filename": args.initial.name, "sha256": initial_hash,
+            "selected_step": initial_checkpoint.get("training", {}).get("selected_step"),
+            "selection_budget": initial_checkpoint.get("training", {}).get("requested_steps"),
+        }
+    elif config.get("spatial_initial_weights_sha256"):
+        raise ValueError("frozen configuration requires --initial")
     torch.set_num_threads(min(6, int(limits["cpu_threads"])))
     seed = int(config["seed"])
     torch.manual_seed(seed)
@@ -135,10 +157,16 @@ def main():
         device = "mps" if torch.backends.mps.is_available() else "cpu"
     training = [open_region(args.cache, region) for region in config["train"]]
     development = [open_region(args.cache, region) for region in config["development"]]
-    model = BuildingUNet().to(device)
+    model = BuildingUNet(input_scale=input_scale)
+    if args.initial is not None:
+        model.load_state_dict(load_model(args.initial).state_dict(), strict=True)
+    model = model.to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=0.001, weight_decay=0.0001)
     batch_size, patch = min(16, limits["batch_size"]), min(128, limits["patch_size"])
-    dev_data = development_batch(development, patch)
+    development_patch = int(limits.get("development_patch_size", patch))
+    if development_patch < 1:
+        raise ValueError("development patch size must be positive")
+    dev_data = development_batch(development, development_patch)
     positive_weights = torch.tensor([3.0, 6.0], device=device)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     trace, best, started = [], -1.0, time.monotonic()
@@ -167,15 +195,22 @@ def main():
             if metrics["selection_score"] > best:
                 best = metrics["selection_score"]
                 checkpoint = {
-                    "format": "terradelta-spatial-v1",
+                    "format": "terradelta-spatial-v2" if input_scale != 1 else "terradelta-spatial-v1",
                     "architecture": {"name": "BuildingUNet", "base_channels": 16,
-                                     "inputs": "RGB uint8 normalized /255", "outputs": ["footprint", "boundary"]},
+                                     "input_scale": int(input_scale),
+                                     "inputs": "native RGB uint8 normalized /255; optional internal bilinear interpolation",
+                                     "native_output": "mean probability across internal cells; equivalent logits",
+                                     "outputs": ["footprint", "boundary"]},
                     "state_dict": {key: value.detach().cpu() for key, value in model.state_dict().items()},
                     "training": {"config_sha256": hashlib.sha256(config_bytes).hexdigest(),
                                  "config": config, "train_regions": config["train"],
                                  "development_regions": config["development"], "seed": seed,
                                  "selected_step": step, "requested_steps": args.steps,
-                                 "device": device, "pretrained": False,
+                                 "device": device, "pretrained": initial_identity is not None,
+                                 "external_pretraining": False, "initial_weights": initial_identity,
+                                 "native_training_patch_size": patch,
+                                 "native_development_patch_size": development_patch,
+                                 "internal_training_patch_size": patch * int(input_scale),
                                  "parameters": sum(p.numel() for p in model.parameters()),
                                  "cache_metadata_sha256": {
                                      r["region_id"]: r["metadata_sha256"]
@@ -191,7 +226,8 @@ def main():
                                  },
                                  "positive_weights": [3.0, 6.0], "trace": trace.copy(),
                                  "development_pixel_metrics": metrics,
-                                 "selection": "maximum mean footprint/boundary Dice on fixed development crops at threshold 0.5"},
+                                 "selection": "maximum mean footprint/boundary Dice on fixed development crops at threshold 0.5",
+                                 "revision_caveat": config.get("development_revision")},
                 }
                 temporary = args.output.with_suffix(args.output.suffix + ".tmp")
                 torch.save(checkpoint, temporary)

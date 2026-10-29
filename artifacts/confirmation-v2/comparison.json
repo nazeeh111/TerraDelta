@@ -1,0 +1,1669 @@
+{
+  "provenance": {
+    "split": "confirmation",
+    "regions": [
+      "L15-0457E-1135N_1831_3648_13",
+      "L15-1049E-1370N_4196_2710_13",
+      "L15-1848E-0793N_7394_5018_13"
+    ],
+    "methods": [
+      "pairwise",
+      "spatial_tracking",
+      "smoothing",
+      "hmm",
+      "ted",
+      "sn7_retrospective",
+      "observation",
+      "no_quality",
+      "watch_lstm",
+      "proposal_tracking",
+      "observation_gate",
+      "gate_no_quality"
+    ],
+    "temporal_weights_sha256": "11af3e5e4e105795f4c74d00887afc786b906e786cb2c2c5afb4c085a5115295",
+    "event_gate_weights_sha256": "9bae4c22a5fc6dca64b270a0e37a8d899424477ed7b2c4f6ac5c2e6e811e62ba",
+    "calibration_sha256": "6d448246aa6c0cc21fcd69d675c6f591bd7aef996edaa2da9ccb659f7b4b95cf",
+    "config_sha256": "71dfe56a1ff2e7d6cb75547e2bc81b02a1ca6b96f8ffed61367fc8ebbc7899b3",
+    "evaluation_sha256": "66fd8b765a9d4dc552efefc4b4728858e0370b40808946ae1573121b4d2b3c7b",
+    "freeze_manifest": {
+      "format": "terradelta-full-freeze-v3",
+      "event_gate_weights_sha256": "9bae4c22a5fc6dca64b270a0e37a8d899424477ed7b2c4f6ac5c2e6e811e62ba",
+      "temporal_weights_sha256": "11af3e5e4e105795f4c74d00887afc786b906e786cb2c2c5afb4c085a5115295",
+      "spatial_weights_sha256": "7ab95679a2009918dbab62fca64244476df519080cb8c0d376c00d1494983886",
+      "calibration_sha256": "6d448246aa6c0cc21fcd69d675c6f591bd7aef996edaa2da9ccb659f7b4b95cf",
+      "config_sha256": "71dfe56a1ff2e7d6cb75547e2bc81b02a1ca6b96f8ffed61367fc8ebbc7899b3",
+      "confirmation_regions": [
+        "L15-0457E-1135N_1831_3648_13",
+        "L15-1049E-1370N_4196_2710_13",
+        "L15-1848E-0793N_7394_5018_13"
+      ],
+      "region_inputs": {
+        "L15-0457E-1135N_1831_3648_13": {
+          "features_sha256": "fd73c045c2dbad908000ecfb1abdb0a09c48dffea043b062640c88aa305298b0",
+          "sites_sha256": "991e114356511b736234429eea5497a256e3e4ecfcd8b8031bc0ea4b23150f21",
+          "sites_raster_sha256": "ab0e457481c44002b26f5b173da82e576763be392cf3e26b1d52e0bc13488300",
+          "metadata_semantic_sha256": "d3778cba1bd418e2c1cc38d4b2261e5b684df425452c507e45ebe5e8acb4eeb1",
+          "rgb_sha256": "2ebb1aac02076969bac0bd30effba3227c013c23ddcdbaf8af9e0c492b0e6c3d",
+          "valid_sha256": "2b684a8f57a33d7995d7536a580b1e20cea5bc065622b1d83133877f5108fed2",
+          "truth_instances_sha256": "ba1f1c8042357321a724186846f6a716a64c3d23855244ab2b50fbda73a5552f",
+          "probability_sha256": "ae240e975c4ed32b35c6427c95b9b47675c64a21c37be93204bb5e38a02ed56a"
+        },
+        "L15-1049E-1370N_4196_2710_13": {
+          "features_sha256": "af946580ee6fd63b6ec02ebf0b487b68405be250da5bee408ee957c131121e4b",
+          "sites_sha256": "ded32b75e90feea9688d72e626137d9ec9dca7e3a80f920363bfd0a53412e0a2",
+          "sites_raster_sha256": "5098725269275350b8b7aab5f9f69fb58f81ff78954bb18f7cbccfb9245a100d",
+          "metadata_semantic_sha256": "46aa1fee04e52766de3fa70ae11ce5f7c30091f01fd182ed2a29c5595b5ff2f5",
+          "rgb_sha256": "b3cc45e40954d959307fbbc3fc45fa6fccb7d1de0aa3d0c5eb6fad8601f5ebd9",
+          "valid_sha256": "463403c08af4925234bf0376d659c86f5a0803ea291b30dcb14f11f29c444634",
+          "truth_instances_sha256": "bdbdd5631034a9ede5e0c48b057231c708863f253e0d9f5eb2b59cdbee90e33e",
+          "probability_sha256": "9c6126465065582b65bb52d415a01e705f5d1936d2bde83a6c940563a25efa46"
+        },
+        "L15-1848E-0793N_7394_5018_13": {
+          "features_sha256": "6b7b1e5416a7682e61cdb362ff7720c56d0eb0e817893b737ef54bd6605c255e",
+          "sites_sha256": "d9c578a1463b838d672d6ab0e2bbebebe1555d118eaaced63622d222b10ab2de",
+          "sites_raster_sha256": "17e55f7c1d4d7504de2dd84ad3d60e367ee8c79708391cf0f5dcf803b8208696",
+          "metadata_semantic_sha256": "37bb3e1ce8d59b387c43cbe46f94e8b3e744f48e3cefeb0037124bbef36aa1c1",
+          "rgb_sha256": "282dddb00cc0208a1b71eb6e33e98085fff2060d131c7aa02ca725b9a4b9f1cb",
+          "valid_sha256": "b1f435c787d945130f34eeda511f056c011dfac73b84161d164869ecade58578",
+          "truth_instances_sha256": "d967bc8a0622dd9fce8597bceb99a971084ec3c88a5b73dd8407e70da6b438d8",
+          "probability_sha256": "3c14edfd240be2e35f694078efda7a496b3946c0dad8847f0588a5fb080088f8"
+        }
+      },
+      "protocol_sources": {
+        "pyproject.toml": "7fdb9505d72ffa37b18ab3fba2a3243e53311574c56cd3e328cee425f693b5f2",
+        "uv.lock": "80f6fa8523172487e2955878a33a043c84362da5ff711d3803a3b293080c606a",
+        "src/terradelta/acquire.py": "6eb0794cc0677315ac039cebec1faf0bcd03c9f544d6989eef76dd04cd71bf69",
+        "src/terradelta/data.py": "0e1fa709eb635191101ce1b9e2e669bb3ea04e50d3a1ac51cabdf0de489d02ea",
+        "src/terradelta/spatial.py": "a17c7fb5974592460a34ffa72dffce1b014608091d9ad106c07b79f8446190af",
+        "src/terradelta/features.py": "cb0ef4acf31e23ffac7d79d374ef24120a2e75a9c01cbb68bc4b2764ca41a31f",
+        "src/terradelta/temporal.py": "d2d0deb93a86bf7bed1f95f2c26ac60168faf5c1ad11ae8b98dbcda9f22a0042",
+        "src/terradelta/event_gate.py": "6a4c0431c47b6977f863a6ee8ef3844dff7693040a05b79fc2e46e21b9d51267",
+        "src/terradelta/decoder.py": "716eac715ec0e38396bd6bf7f36170e4b72d98bcf5a18b3c9096889ec215fe4e",
+        "src/terradelta/pipeline.py": "fcbefe4b5b0a973c465081d01a4ed2d35df74316c11af08231d71f1577bae4c4",
+        "src/terradelta/evaluation.py": "66fd8b765a9d4dc552efefc4b4728858e0370b40808946ae1573121b4d2b3c7b",
+        "src/terradelta/schema.py": "9500c25425e546e7a895c9e2e4bbe333e1ef7c93b0eec0fa330aefa98339ebb1",
+        "src/terradelta/store.py": "cb7fcfabdbf354236b898adfd72be230c38e4e94be99b14c5b83f1962700c58b",
+        "src/terradelta/service.py": "b8a2e0212793fa914b0c646cbc0b9a0b018df8424a1a6319c828e891a2a5d058",
+        "src/terradelta/cli.py": "e1eb808946a1cbb631ab81413cde19a76e9a0410839333405bbed5139f8795ea",
+        "src/terradelta/protocol.py": "4ec510607dafca176d289130291c86ee71a73ce12d5cb2ee55467f9e504d0944",
+        "scripts/train_spatial.py": "787158065edc05b89b0affa7a56d50b3ee5428fa6f52a6955661c14b58189b28",
+        "scripts/train_temporal.py": "51ffac04d01bde86dc0af4cc0a0b8f2deba98f56ec149c565527870aed897e4e",
+        "scripts/train_event_gate.py": "91533ef9e5c86b41b40909ad56ded674892c2701a89af6ac97ff8f7f6fbd64dc",
+        "scripts/calibrate.py": "f780c1e8756b9690039f3f4a94d9410310b57294702f4e6efc897c9a24639292",
+        "scripts/evaluate.py": "1e079b80cefdc74e0beb500485a14a96c0d655cbba83f4b217f6b9d8613e0d67",
+        "scripts/evaluate_gate_calibration.py": "d9d9e5ce0ad53099978417699d55d8fb645f14589739bbe8d6fc4d8101e64a0d",
+        "scripts/predict_all.py": "d722b1c839a9bfcd6905bb229148db93b41cd8778bf033e5abbe257582d96d63",
+        "scripts/rebuild_features.py": "dfcc3113b592c3632ee268ffb64b7168e91698f818617b0d1cf4dad0b67b2265",
+        "scripts/check_online_invariance.py": "368ca14990fdacc187943569ea958abd7c810fae6d7c7d2edcb62969cb926725",
+        "scripts/stress_and_calibration.py": "dd468d6cfb1daa81b4219c7b4e9571ab222745872c93528de192b6fb357837ba",
+        "scripts/export_rasters.py": "b0d21afe998acd47b07b720cf8f9a7c7ed0e79594ffdddbd6c8b697b91b93835"
+      },
+      "frozen_at": "2026-10-29T07:56:33.956700+00:00",
+      "policy": "No model, threshold, data, decoder or metric tuning after confirmation scoring."
+    },
+    "created_at": "2026-10-29T07:56:49.195503+00:00",
+    "regions_inputs": {
+      "L15-0457E-1135N_1831_3648_13": {
+        "features_sha256": "fd73c045c2dbad908000ecfb1abdb0a09c48dffea043b062640c88aa305298b0",
+        "sites_sha256": "991e114356511b736234429eea5497a256e3e4ecfcd8b8031bc0ea4b23150f21",
+        "instances_sha256": "ba1f1c8042357321a724186846f6a716a64c3d23855244ab2b50fbda73a5552f",
+        "valid_sha256": "2b684a8f57a33d7995d7536a580b1e20cea5bc065622b1d83133877f5108fed2",
+        "metadata_sha256": "8679288849d76df2f0e7ddf22f0bb16d34f294018ab4dab145325d60456cbf30"
+      },
+      "L15-1049E-1370N_4196_2710_13": {
+        "features_sha256": "af946580ee6fd63b6ec02ebf0b487b68405be250da5bee408ee957c131121e4b",
+        "sites_sha256": "ded32b75e90feea9688d72e626137d9ec9dca7e3a80f920363bfd0a53412e0a2",
+        "instances_sha256": "bdbdd5631034a9ede5e0c48b057231c708863f253e0d9f5eb2b59cdbee90e33e",
+        "valid_sha256": "463403c08af4925234bf0376d659c86f5a0803ea291b30dcb14f11f29c444634",
+        "metadata_sha256": "23ef4bf25989b5104c5ee73d779952156c1f2cddeb2a56d6245cd0465620761f"
+      },
+      "L15-1848E-0793N_7394_5018_13": {
+        "features_sha256": "6b7b1e5416a7682e61cdb362ff7720c56d0eb0e817893b737ef54bd6605c255e",
+        "sites_sha256": "d9c578a1463b838d672d6ab0e2bbebebe1555d118eaaced63622d222b10ab2de",
+        "instances_sha256": "d967bc8a0622dd9fce8597bceb99a971084ec3c88a5b73dd8407e70da6b438d8",
+        "valid_sha256": "b1f435c787d945130f34eeda511f056c011dfac73b84161d164869ecade58578",
+        "metadata_sha256": "47c8df98d34978d3e91850aa9659df415fbd6565c1908c10d1366e48e1713f3a"
+      }
+    }
+  },
+  "methods": {
+    "pairwise": {
+      "event": {
+        "tp": 11,
+        "fp": 812,
+        "fn": 1495,
+        "predictions": 823,
+        "targets": 1506,
+        "precision": 0.013365735115431349,
+        "recall": 0.0073041168658698535,
+        "f1": 0.009446114212108201
+      },
+      "spatial_object": {
+        "tp": 21,
+        "fp": 802,
+        "fn": 1485,
+        "predictions": 823,
+        "targets": 1506,
+        "precision": 0.02551640340218712,
+        "recall": 0.013944223107569721,
+        "f1": 0.018033490768570203
+      },
+      "within_62_days": {
+        "tp": 10,
+        "fp": 813,
+        "fn": 1496,
+        "predictions": 823,
+        "targets": 1506,
+        "precision": 0.012150668286755772,
+        "recall": 0.006640106241699867,
+        "f1": 0.008587376556462
+      },
+      "final_retained": {
+        "tp": 7,
+        "fp": 367,
+        "fn": 1499,
+        "predictions": 374,
+        "targets": 1506,
+        "precision": 0.01871657754010695,
+        "recall": 0.004648074369189907,
+        "f1": 0.007446808510638298
+      },
+      "false_confirmed_alerts_per_source_valid_km2_year": 11.937616396697027,
+      "duplicate_confirmed_events": 1,
+      "retracted_event_ids": 898,
+      "confirmed_then_retracted_event_ids": 449,
+      "ever_confirmed_events": 823,
+      "final_retained_events": 374,
+      "region_bootstrap_95_percentile_intervals": {
+        "event.precision": {
+          "lower": 0.0,
+          "upper": 0.02756892230576441,
+          "defined_resamples": 2000
+        },
+        "event.recall": {
+          "lower": 0.0,
+          "upper": 0.01788617886178862,
+          "defined_resamples": 2000
+        },
+        "event.f1": {
+          "lower": 0.0,
+          "upper": 0.021696252465483234,
+          "defined_resamples": 2000
+        },
+        "spatial_object.precision": {
+          "lower": 0.0,
+          "upper": 0.05263157894736842,
+          "defined_resamples": 2000
+        },
+        "spatial_object.recall": {
+          "lower": 0.0,
+          "upper": 0.03414634146341464,
+          "defined_resamples": 2000
+        },
+        "spatial_object.f1": {
+          "lower": 0.0,
+          "upper": 0.04142011834319527,
+          "defined_resamples": 2000
+        },
+        "within_62_days.precision": {
+          "lower": 0.0,
+          "upper": 0.02506265664160401,
+          "defined_resamples": 2000
+        },
+        "within_62_days.recall": {
+          "lower": 0.0,
+          "upper": 0.016260162601626018,
+          "defined_resamples": 2000
+        },
+        "within_62_days.f1": {
+          "lower": 0.0,
+          "upper": 0.01972386587771203,
+          "defined_resamples": 2000
+        },
+        "final_retained.precision": {
+          "lower": 0.0,
+          "upper": 0.027777777777777776,
+          "defined_resamples": 2000
+        },
+        "final_retained.recall": {
+          "lower": 0.0,
+          "upper": 0.011382113821138212,
+          "defined_resamples": 2000
+        },
+        "final_retained.f1": {
+          "lower": 0.0,
+          "upper": 0.016147635524798153,
+          "defined_resamples": 2000
+        },
+        "false_confirmed_alerts_per_source_valid_km2_year": {
+          "lower": 0.5662909803885079,
+          "upper": 21.97205843967243,
+          "defined_resamples": 2000
+        }
+      },
+      "regions": [
+        "L15-0457E-1135N_1831_3648_13",
+        "L15-1049E-1370N_4196_2710_13",
+        "L15-1848E-0793N_7394_5018_13"
+      ],
+      "uncertainty": {
+        "resampling_unit": "complete geographic region",
+        "regions": 3,
+        "samples": 2000,
+        "seed": 2901,
+        "limit": "Only a few regions; percentile intervals are unstable and do not establish geographic generalization.",
+        "zero_denominators": "undefined precision/recall remain null; excluded from that bootstrap percentile"
+      }
+    },
+    "spatial_tracking": {
+      "event": {
+        "tp": 3,
+        "fp": 47,
+        "fn": 1503,
+        "predictions": 50,
+        "targets": 1506,
+        "precision": 0.06,
+        "recall": 0.00199203187250996,
+        "f1": 0.0038560411311053984
+      },
+      "spatial_object": {
+        "tp": 3,
+        "fp": 47,
+        "fn": 1503,
+        "predictions": 50,
+        "targets": 1506,
+        "precision": 0.06,
+        "recall": 0.00199203187250996,
+        "f1": 0.0038560411311053984
+      },
+      "within_62_days": {
+        "tp": 2,
+        "fp": 48,
+        "fn": 1504,
+        "predictions": 50,
+        "targets": 1506,
+        "precision": 0.04,
+        "recall": 0.0013280212483399733,
+        "f1": 0.002570694087403599
+      },
+      "final_retained": {
+        "tp": 3,
+        "fp": 41,
+        "fn": 1503,
+        "predictions": 44,
+        "targets": 1506,
+        "precision": 0.06818181818181818,
+        "recall": 0.00199203187250996,
+        "f1": 0.003870967741935484
+      },
+      "false_confirmed_alerts_per_source_valid_km2_year": 0.6909704071979806,
+      "duplicate_confirmed_events": 0,
+      "retracted_event_ids": 82,
+      "confirmed_then_retracted_event_ids": 6,
+      "ever_confirmed_events": 50,
+      "final_retained_events": 44,
+      "region_bootstrap_95_percentile_intervals": {
+        "event.precision": {
+          "lower": 0.0,
+          "upper": 0.1875,
+          "defined_resamples": 2000
+        },
+        "event.recall": {
+          "lower": 0.0,
+          "upper": 0.004878048780487805,
+          "defined_resamples": 2000
+        },
+        "event.f1": {
+          "lower": 0.0,
+          "upper": 0.009508716323296355,
+          "defined_resamples": 2000
+        },
+        "spatial_object.precision": {
+          "lower": 0.0,
+          "upper": 0.1875,
+          "defined_resamples": 2000
+        },
+        "spatial_object.recall": {
+          "lower": 0.0,
+          "upper": 0.004878048780487805,
+          "defined_resamples": 2000
+        },
+        "spatial_object.f1": {
+          "lower": 0.0,
+          "upper": 0.009508716323296355,
+          "defined_resamples": 2000
+        },
+        "within_62_days.precision": {
+          "lower": 0.0,
+          "upper": 0.125,
+          "defined_resamples": 2000
+        },
+        "within_62_days.recall": {
+          "lower": 0.0,
+          "upper": 0.0032520325203252032,
+          "defined_resamples": 2000
+        },
+        "within_62_days.f1": {
+          "lower": 0.0,
+          "upper": 0.006339144215530904,
+          "defined_resamples": 2000
+        },
+        "final_retained.precision": {
+          "lower": 0.0,
+          "upper": 0.2,
+          "defined_resamples": 2000
+        },
+        "final_retained.recall": {
+          "lower": 0.0,
+          "upper": 0.004878048780487805,
+          "defined_resamples": 2000
+        },
+        "final_retained.f1": {
+          "lower": 0.0,
+          "upper": 0.009523809523809525,
+          "defined_resamples": 2000
+        },
+        "false_confirmed_alerts_per_source_valid_km2_year": {
+          "lower": 0.14157274509712697,
+          "upper": 1.690158341513264,
+          "defined_resamples": 2000
+        }
+      },
+      "regions": [
+        "L15-0457E-1135N_1831_3648_13",
+        "L15-1049E-1370N_4196_2710_13",
+        "L15-1848E-0793N_7394_5018_13"
+      ],
+      "uncertainty": {
+        "resampling_unit": "complete geographic region",
+        "regions": 3,
+        "samples": 2000,
+        "seed": 2901,
+        "limit": "Only a few regions; percentile intervals are unstable and do not establish geographic generalization.",
+        "zero_denominators": "undefined precision/recall remain null; excluded from that bootstrap percentile"
+      }
+    },
+    "smoothing": {
+      "event": {
+        "tp": 18,
+        "fp": 1461,
+        "fn": 1488,
+        "predictions": 1479,
+        "targets": 1506,
+        "precision": 0.012170385395537525,
+        "recall": 0.01195219123505976,
+        "f1": 0.012060301507537688
+      },
+      "spatial_object": {
+        "tp": 36,
+        "fp": 1443,
+        "fn": 1470,
+        "predictions": 1479,
+        "targets": 1506,
+        "precision": 0.02434077079107505,
+        "recall": 0.02390438247011952,
+        "f1": 0.024120603015075376
+      },
+      "within_62_days": {
+        "tp": 11,
+        "fp": 1468,
+        "fn": 1495,
+        "predictions": 1479,
+        "targets": 1506,
+        "precision": 0.0074374577417173765,
+        "recall": 0.0073041168658698535,
+        "f1": 0.007370184254606365
+      },
+      "final_retained": {
+        "tp": 17,
+        "fp": 1316,
+        "fn": 1489,
+        "predictions": 1333,
+        "targets": 1506,
+        "precision": 0.012753188297074268,
+        "recall": 0.011288180610889775,
+        "f1": 0.011976047904191617
+      },
+      "false_confirmed_alerts_per_source_valid_km2_year": 21.478888615239356,
+      "duplicate_confirmed_events": 0,
+      "retracted_event_ids": 877,
+      "confirmed_then_retracted_event_ids": 146,
+      "ever_confirmed_events": 1479,
+      "final_retained_events": 1333,
+      "region_bootstrap_95_percentile_intervals": {
+        "event.precision": {
+          "lower": 0.0,
+          "upper": 0.016098484848484848,
+          "defined_resamples": 2000
+        },
+        "event.recall": {
+          "lower": 0.0,
+          "upper": 0.03225806451612903,
+          "defined_resamples": 2000
+        },
+        "event.f1": {
+          "lower": 0.0,
+          "upper": 0.020347097546379412,
+          "defined_resamples": 2000
+        },
+        "spatial_object.precision": {
+          "lower": 0.0,
+          "upper": 0.03314393939393939,
+          "defined_resamples": 2000
+        },
+        "spatial_object.recall": {
+          "lower": 0.0,
+          "upper": 0.056910569105691054,
+          "defined_resamples": 2000
+        },
+        "spatial_object.f1": {
+          "lower": 0.0,
+          "upper": 0.041891083183722325,
+          "defined_resamples": 2000
+        },
+        "within_62_days.precision": {
+          "lower": 0.0,
+          "upper": 0.00946969696969697,
+          "defined_resamples": 2000
+        },
+        "within_62_days.recall": {
+          "lower": 0.0,
+          "upper": 0.03225806451612903,
+          "defined_resamples": 2000
+        },
+        "within_62_days.f1": {
+          "lower": 0.0,
+          "upper": 0.011968880909634948,
+          "defined_resamples": 2000
+        },
+        "final_retained.precision": {
+          "lower": 0.0,
+          "upper": 0.01609657947686117,
+          "defined_resamples": 2000
+        },
+        "final_retained.recall": {
+          "lower": 0.0,
+          "upper": 0.03225806451612903,
+          "defined_resamples": 2000
+        },
+        "final_retained.f1": {
+          "lower": 0.0,
+          "upper": 0.019888129272840272,
+          "defined_resamples": 2000
+        },
+        "false_confirmed_alerts_per_source_valid_km2_year": {
+          "lower": 1.274154705874143,
+          "upper": 29.719570044289927,
+          "defined_resamples": 2000
+        }
+      },
+      "regions": [
+        "L15-0457E-1135N_1831_3648_13",
+        "L15-1049E-1370N_4196_2710_13",
+        "L15-1848E-0793N_7394_5018_13"
+      ],
+      "uncertainty": {
+        "resampling_unit": "complete geographic region",
+        "regions": 3,
+        "samples": 2000,
+        "seed": 2901,
+        "limit": "Only a few regions; percentile intervals are unstable and do not establish geographic generalization.",
+        "zero_denominators": "undefined precision/recall remain null; excluded from that bootstrap percentile"
+      }
+    },
+    "hmm": {
+      "event": {
+        "tp": 13,
+        "fp": 1175,
+        "fn": 1493,
+        "predictions": 1188,
+        "targets": 1506,
+        "precision": 0.010942760942760943,
+        "recall": 0.008632138114209827,
+        "f1": 0.009651076466221232
+      },
+      "spatial_object": {
+        "tp": 34,
+        "fp": 1154,
+        "fn": 1472,
+        "predictions": 1188,
+        "targets": 1506,
+        "precision": 0.02861952861952862,
+        "recall": 0.02257636122177955,
+        "f1": 0.025241276911655532
+      },
+      "within_62_days": {
+        "tp": 9,
+        "fp": 1179,
+        "fn": 1497,
+        "predictions": 1188,
+        "targets": 1506,
+        "precision": 0.007575757575757576,
+        "recall": 0.00597609561752988,
+        "f1": 0.0066815144766146995
+      },
+      "final_retained": {
+        "tp": 13,
+        "fp": 1127,
+        "fn": 1493,
+        "predictions": 1140,
+        "targets": 1506,
+        "precision": 0.011403508771929825,
+        "recall": 0.008632138114209827,
+        "f1": 0.009826152683295541
+      },
+      "false_confirmed_alerts_per_source_valid_km2_year": 17.27426017994952,
+      "duplicate_confirmed_events": 0,
+      "retracted_event_ids": 513,
+      "confirmed_then_retracted_event_ids": 48,
+      "ever_confirmed_events": 1188,
+      "final_retained_events": 1140,
+      "region_bootstrap_95_percentile_intervals": {
+        "event.precision": {
+          "lower": 0.0,
+          "upper": 0.018518518518518517,
+          "defined_resamples": 2000
+        },
+        "event.recall": {
+          "lower": 0.0,
+          "upper": 0.03225806451612903,
+          "defined_resamples": 2000
+        },
+        "event.f1": {
+          "lower": 0.0,
+          "upper": 0.019002375296912115,
+          "defined_resamples": 2000
+        },
+        "spatial_object.precision": {
+          "lower": 0.0038022813688212928,
+          "upper": 0.07142857142857142,
+          "defined_resamples": 2000
+        },
+        "spatial_object.recall": {
+          "lower": 0.0011627906976744186,
+          "upper": 0.06451612903225806,
+          "defined_resamples": 2000
+        },
+        "spatial_object.f1": {
+          "lower": 0.002288329519450801,
+          "upper": 0.04908946951702296,
+          "defined_resamples": 2000
+        },
+        "within_62_days.precision": {
+          "lower": 0.0,
+          "upper": 0.012345679012345678,
+          "defined_resamples": 2000
+        },
+        "within_62_days.recall": {
+          "lower": 0.0,
+          "upper": 0.03225806451612903,
+          "defined_resamples": 2000
+        },
+        "within_62_days.f1": {
+          "lower": 0.0,
+          "upper": 0.012668250197941409,
+          "defined_resamples": 2000
+        },
+        "final_retained.precision": {
+          "lower": 0.0,
+          "upper": 0.018808777429467086,
+          "defined_resamples": 2000
+        },
+        "final_retained.recall": {
+          "lower": 0.0,
+          "upper": 0.03225806451612903,
+          "defined_resamples": 2000
+        },
+        "final_retained.f1": {
+          "lower": 0.0,
+          "upper": 0.019154030327214685,
+          "defined_resamples": 2000
+        },
+        "false_confirmed_alerts_per_source_valid_km2_year": {
+          "lower": 0.9910092156798889,
+          "upper": 27.729160290451986,
+          "defined_resamples": 2000
+        }
+      },
+      "regions": [
+        "L15-0457E-1135N_1831_3648_13",
+        "L15-1049E-1370N_4196_2710_13",
+        "L15-1848E-0793N_7394_5018_13"
+      ],
+      "uncertainty": {
+        "resampling_unit": "complete geographic region",
+        "regions": 3,
+        "samples": 2000,
+        "seed": 2901,
+        "limit": "Only a few regions; percentile intervals are unstable and do not establish geographic generalization.",
+        "zero_denominators": "undefined precision/recall remain null; excluded from that bootstrap percentile"
+      }
+    },
+    "ted": {
+      "event": {
+        "tp": 1,
+        "fp": 51,
+        "fn": 1505,
+        "predictions": 52,
+        "targets": 1506,
+        "precision": 0.019230769230769232,
+        "recall": 0.0006640106241699867,
+        "f1": 0.0012836970474967907
+      },
+      "spatial_object": {
+        "tp": 2,
+        "fp": 50,
+        "fn": 1504,
+        "predictions": 52,
+        "targets": 1506,
+        "precision": 0.038461538461538464,
+        "recall": 0.0013280212483399733,
+        "f1": 0.0025673940949935813
+      },
+      "within_62_days": {
+        "tp": 0,
+        "fp": 52,
+        "fn": 1506,
+        "predictions": 52,
+        "targets": 1506,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "final_retained": {
+        "tp": 1,
+        "fp": 33,
+        "fn": 1505,
+        "predictions": 34,
+        "targets": 1506,
+        "precision": 0.029411764705882353,
+        "recall": 0.0006640106241699867,
+        "f1": 0.0012987012987012987
+      },
+      "false_confirmed_alerts_per_source_valid_km2_year": 0.7497763992999364,
+      "duplicate_confirmed_events": 0,
+      "retracted_event_ids": 78,
+      "confirmed_then_retracted_event_ids": 18,
+      "ever_confirmed_events": 52,
+      "final_retained_events": 34,
+      "region_bootstrap_95_percentile_intervals": {
+        "event.precision": {
+          "lower": 0.0,
+          "upper": 0.05263157894736842,
+          "defined_resamples": 1933
+        },
+        "event.recall": {
+          "lower": 0.0,
+          "upper": 0.0016260162601626016,
+          "defined_resamples": 2000
+        },
+        "event.f1": {
+          "lower": 0.0,
+          "upper": 0.0031545741324921135,
+          "defined_resamples": 2000
+        },
+        "spatial_object.precision": {
+          "lower": 0.0,
+          "upper": 0.10526315789473684,
+          "defined_resamples": 1933
+        },
+        "spatial_object.recall": {
+          "lower": 0.0,
+          "upper": 0.0032520325203252032,
+          "defined_resamples": 2000
+        },
+        "spatial_object.f1": {
+          "lower": 0.0,
+          "upper": 0.006309148264984227,
+          "defined_resamples": 2000
+        },
+        "within_62_days.precision": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "defined_resamples": 1933
+        },
+        "within_62_days.recall": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "defined_resamples": 2000
+        },
+        "within_62_days.f1": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "defined_resamples": 2000
+        },
+        "final_retained.precision": {
+          "lower": 0.0,
+          "upper": 0.0625,
+          "defined_resamples": 1933
+        },
+        "final_retained.recall": {
+          "lower": 0.0,
+          "upper": 0.0016260162601626016,
+          "defined_resamples": 2000
+        },
+        "final_retained.f1": {
+          "lower": 0.0,
+          "upper": 0.003169572107765452,
+          "defined_resamples": 2000
+        },
+        "false_confirmed_alerts_per_source_valid_km2_year": {
+          "lower": 0.0,
+          "upper": 1.7429757896855536,
+          "defined_resamples": 2000
+        }
+      },
+      "regions": [
+        "L15-0457E-1135N_1831_3648_13",
+        "L15-1049E-1370N_4196_2710_13",
+        "L15-1848E-0793N_7394_5018_13"
+      ],
+      "uncertainty": {
+        "resampling_unit": "complete geographic region",
+        "regions": 3,
+        "samples": 2000,
+        "seed": 2901,
+        "limit": "Only a few regions; percentile intervals are unstable and do not establish geographic generalization.",
+        "zero_denominators": "undefined precision/recall remain null; excluded from that bootstrap percentile"
+      }
+    },
+    "sn7_retrospective": {
+      "event": {
+        "tp": 7,
+        "fp": 199,
+        "fn": 1499,
+        "predictions": 206,
+        "targets": 1506,
+        "precision": 0.03398058252427184,
+        "recall": 0.004648074369189907,
+        "f1": 0.008177570093457943
+      },
+      "spatial_object": {
+        "tp": 12,
+        "fp": 194,
+        "fn": 1494,
+        "predictions": 206,
+        "targets": 1506,
+        "precision": 0.05825242718446602,
+        "recall": 0.00796812749003984,
+        "f1": 0.014018691588785047
+      },
+      "within_62_days": {
+        "tp": 0,
+        "fp": 206,
+        "fn": 1506,
+        "predictions": 206,
+        "targets": 1506,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "final_retained": {
+        "tp": 7,
+        "fp": 188,
+        "fn": 1499,
+        "predictions": 195,
+        "targets": 1506,
+        "precision": 0.035897435897435895,
+        "recall": 0.004648074369189907,
+        "f1": 0.00823045267489712
+      },
+      "false_confirmed_alerts_per_source_valid_km2_year": 2.925598107072301,
+      "duplicate_confirmed_events": 0,
+      "retracted_event_ids": 344,
+      "confirmed_then_retracted_event_ids": 11,
+      "ever_confirmed_events": 206,
+      "final_retained_events": 195,
+      "region_bootstrap_95_percentile_intervals": {
+        "event.precision": {
+          "lower": 0.0,
+          "upper": 0.051470588235294115,
+          "defined_resamples": 2000
+        },
+        "event.recall": {
+          "lower": 0.0,
+          "upper": 0.011382113821138212,
+          "defined_resamples": 2000
+        },
+        "event.f1": {
+          "lower": 0.0,
+          "upper": 0.018641810918774968,
+          "defined_resamples": 2000
+        },
+        "spatial_object.precision": {
+          "lower": 0.0,
+          "upper": 0.08823529411764706,
+          "defined_resamples": 2000
+        },
+        "spatial_object.recall": {
+          "lower": 0.0,
+          "upper": 0.01951219512195122,
+          "defined_resamples": 2000
+        },
+        "spatial_object.f1": {
+          "lower": 0.0,
+          "upper": 0.03195739014647137,
+          "defined_resamples": 2000
+        },
+        "within_62_days.precision": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "defined_resamples": 2000
+        },
+        "within_62_days.recall": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "defined_resamples": 2000
+        },
+        "within_62_days.f1": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "defined_resamples": 2000
+        },
+        "final_retained.precision": {
+          "lower": 0.0,
+          "upper": 0.05426356589147287,
+          "defined_resamples": 2000
+        },
+        "final_retained.recall": {
+          "lower": 0.0,
+          "upper": 0.011382113821138212,
+          "defined_resamples": 2000
+        },
+        "final_retained.f1": {
+          "lower": 0.0,
+          "upper": 0.01881720430107527,
+          "defined_resamples": 2000
+        },
+        "false_confirmed_alerts_per_source_valid_km2_year": {
+          "lower": 0.4247182352913809,
+          "upper": 3.689917743708759,
+          "defined_resamples": 2000
+        }
+      },
+      "regions": [
+        "L15-0457E-1135N_1831_3648_13",
+        "L15-1049E-1370N_4196_2710_13",
+        "L15-1848E-0793N_7394_5018_13"
+      ],
+      "uncertainty": {
+        "resampling_unit": "complete geographic region",
+        "regions": 3,
+        "samples": 2000,
+        "seed": 2901,
+        "limit": "Only a few regions; percentile intervals are unstable and do not establish geographic generalization.",
+        "zero_denominators": "undefined precision/recall remain null; excluded from that bootstrap percentile"
+      }
+    },
+    "observation": {
+      "event": {
+        "tp": 3,
+        "fp": 1342,
+        "fn": 1503,
+        "predictions": 1345,
+        "targets": 1506,
+        "precision": 0.0022304832713754648,
+        "recall": 0.00199203187250996,
+        "f1": 0.002104524728165556
+      },
+      "spatial_object": {
+        "tp": 10,
+        "fp": 1335,
+        "fn": 1496,
+        "predictions": 1345,
+        "targets": 1506,
+        "precision": 0.007434944237918215,
+        "recall": 0.006640106241699867,
+        "f1": 0.00701508242721852
+      },
+      "within_62_days": {
+        "tp": 0,
+        "fp": 1345,
+        "fn": 1506,
+        "predictions": 1345,
+        "targets": 1506,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "final_retained": {
+        "tp": 3,
+        "fp": 1330,
+        "fn": 1503,
+        "predictions": 1333,
+        "targets": 1506,
+        "precision": 0.002250562640660165,
+        "recall": 0.00199203187250996,
+        "f1": 0.0021134202183867557
+      },
+      "false_confirmed_alerts_per_source_valid_km2_year": 19.729410350206173,
+      "duplicate_confirmed_events": 0,
+      "retracted_event_ids": 235,
+      "confirmed_then_retracted_event_ids": 12,
+      "ever_confirmed_events": 1345,
+      "final_retained_events": 1333,
+      "region_bootstrap_95_percentile_intervals": {
+        "event.precision": {
+          "lower": 0.0,
+          "upper": 0.008310249307479225,
+          "defined_resamples": 2000
+        },
+        "event.recall": {
+          "lower": 0.0,
+          "upper": 0.004878048780487805,
+          "defined_resamples": 2000
+        },
+        "event.f1": {
+          "lower": 0.0,
+          "upper": 0.006147540983606557,
+          "defined_resamples": 2000
+        },
+        "spatial_object.precision": {
+          "lower": 0.0,
+          "upper": 0.1111111111111111,
+          "defined_resamples": 2000
+        },
+        "spatial_object.recall": {
+          "lower": 0.0,
+          "upper": 0.014634146341463415,
+          "defined_resamples": 2000
+        },
+        "spatial_object.f1": {
+          "lower": 0.0,
+          "upper": 0.018442622950819672,
+          "defined_resamples": 2000
+        },
+        "within_62_days.precision": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "defined_resamples": 2000
+        },
+        "within_62_days.recall": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "defined_resamples": 2000
+        },
+        "within_62_days.f1": {
+          "lower": 0.0,
+          "upper": 0.0,
+          "defined_resamples": 2000
+        },
+        "final_retained.precision": {
+          "lower": 0.0,
+          "upper": 0.008333333333333333,
+          "defined_resamples": 2000
+        },
+        "final_retained.recall": {
+          "lower": 0.0,
+          "upper": 0.004878048780487805,
+          "defined_resamples": 2000
+        },
+        "final_retained.f1": {
+          "lower": 0.0,
+          "upper": 0.006153846153846154,
+          "defined_resamples": 2000
+        },
+        "false_confirmed_alerts_per_source_valid_km2_year": {
+          "lower": 0.6370773529370715,
+          "upper": 51.49701196798226,
+          "defined_resamples": 2000
+        }
+      },
+      "regions": [
+        "L15-0457E-1135N_1831_3648_13",
+        "L15-1049E-1370N_4196_2710_13",
+        "L15-1848E-0793N_7394_5018_13"
+      ],
+      "uncertainty": {
+        "resampling_unit": "complete geographic region",
+        "regions": 3,
+        "samples": 2000,
+        "seed": 2901,
+        "limit": "Only a few regions; percentile intervals are unstable and do not establish geographic generalization.",
+        "zero_denominators": "undefined precision/recall remain null; excluded from that bootstrap percentile"
+      }
+    },
+    "no_quality": {
+      "event": {
+        "tp": 8,
+        "fp": 1300,
+        "fn": 1498,
+        "predictions": 1308,
+        "targets": 1506,
+        "precision": 0.0061162079510703364,
+        "recall": 0.005312084993359893,
+        "f1": 0.005685856432125089
+      },
+      "spatial_object": {
+        "tp": 22,
+        "fp": 1286,
+        "fn": 1484,
+        "predictions": 1308,
+        "targets": 1506,
+        "precision": 0.016819571865443424,
+        "recall": 0.014608233731739707,
+        "f1": 0.015636105188343994
+      },
+      "within_62_days": {
+        "tp": 1,
+        "fp": 1307,
+        "fn": 1505,
+        "predictions": 1308,
+        "targets": 1506,
+        "precision": 0.0007645259938837921,
+        "recall": 0.0006640106241699867,
+        "f1": 0.0007107320540156361
+      },
+      "final_retained": {
+        "tp": 8,
+        "fp": 1288,
+        "fn": 1498,
+        "predictions": 1296,
+        "targets": 1506,
+        "precision": 0.006172839506172839,
+        "recall": 0.005312084993359893,
+        "f1": 0.005710206995003569
+      },
+      "false_confirmed_alerts_per_source_valid_km2_year": 19.111947433135636,
+      "duplicate_confirmed_events": 0,
+      "retracted_event_ids": 178,
+      "confirmed_then_retracted_event_ids": 12,
+      "ever_confirmed_events": 1308,
+      "final_retained_events": 1296,
+      "region_bootstrap_95_percentile_intervals": {
+        "event.precision": {
+          "lower": 0.0,
+          "upper": 0.14285714285714285,
+          "defined_resamples": 2000
+        },
+        "event.recall": {
+          "lower": 0.0,
+          "upper": 0.011382113821138212,
+          "defined_resamples": 2000
+        },
+        "event.f1": {
+          "lower": 0.0,
+          "upper": 0.012623985572587917,
+          "defined_resamples": 2000
+        },
+        "spatial_object.precision": {
+          "lower": 0.0,
+          "upper": 0.14285714285714285,
+          "defined_resamples": 2000
+        },
+        "spatial_object.recall": {
+          "lower": 0.0,
+          "upper": 0.03414634146341464,
+          "defined_resamples": 2000
+        },
+        "spatial_object.f1": {
+          "lower": 0.0,
+          "upper": 0.03787195671776375,
+          "defined_resamples": 2000
+        },
+        "within_62_days.precision": {
+          "lower": 0.0,
+          "upper": 0.0020242914979757085,
+          "defined_resamples": 2000
+        },
+        "within_62_days.recall": {
+          "lower": 0.0,
+          "upper": 0.0016260162601626016,
+          "defined_resamples": 2000
+        },
+        "within_62_days.f1": {
+          "lower": 0.0,
+          "upper": 0.0018034265103697023,
+          "defined_resamples": 2000
+        },
+        "final_retained.precision": {
+          "lower": 0.0,
+          "upper": 0.14285714285714285,
+          "defined_resamples": 2000
+        },
+        "final_retained.recall": {
+          "lower": 0.0,
+          "upper": 0.011382113821138212,
+          "defined_resamples": 2000
+        },
+        "final_retained.f1": {
+          "lower": 0.0,
+          "upper": 0.012658227848101266,
+          "defined_resamples": 2000
+        },
+        "false_confirmed_alerts_per_source_valid_km2_year": {
+          "lower": 0.4247182352913809,
+          "upper": 42.623680675037626,
+          "defined_resamples": 2000
+        }
+      },
+      "regions": [
+        "L15-0457E-1135N_1831_3648_13",
+        "L15-1049E-1370N_4196_2710_13",
+        "L15-1848E-0793N_7394_5018_13"
+      ],
+      "uncertainty": {
+        "resampling_unit": "complete geographic region",
+        "regions": 3,
+        "samples": 2000,
+        "seed": 2901,
+        "limit": "Only a few regions; percentile intervals are unstable and do not establish geographic generalization.",
+        "zero_denominators": "undefined precision/recall remain null; excluded from that bootstrap percentile"
+      }
+    },
+    "watch_lstm": {
+      "event": {
+        "tp": 5,
+        "fp": 1018,
+        "fn": 1501,
+        "predictions": 1023,
+        "targets": 1506,
+        "precision": 0.004887585532746823,
+        "recall": 0.0033200531208499337,
+        "f1": 0.0039541320680110716
+      },
+      "spatial_object": {
+        "tp": 13,
+        "fp": 1010,
+        "fn": 1493,
+        "predictions": 1023,
+        "targets": 1506,
+        "precision": 0.01270772238514174,
+        "recall": 0.008632138114209827,
+        "f1": 0.010280743376828785
+      },
+      "within_62_days": {
+        "tp": 2,
+        "fp": 1021,
+        "fn": 1504,
+        "predictions": 1023,
+        "targets": 1506,
+        "precision": 0.0019550342130987292,
+        "recall": 0.0013280212483399733,
+        "f1": 0.0015816528272044287
+      },
+      "final_retained": {
+        "tp": 5,
+        "fp": 942,
+        "fn": 1501,
+        "predictions": 947,
+        "targets": 1506,
+        "precision": 0.005279831045406547,
+        "recall": 0.0033200531208499337,
+        "f1": 0.0040766408479412965
+      },
+      "false_confirmed_alerts_per_source_valid_km2_year": 14.966124989947751,
+      "duplicate_confirmed_events": 0,
+      "retracted_event_ids": 330,
+      "confirmed_then_retracted_event_ids": 76,
+      "ever_confirmed_events": 1023,
+      "final_retained_events": 947,
+      "region_bootstrap_95_percentile_intervals": {
+        "event.precision": {
+          "lower": 0.0,
+          "upper": 0.16666666666666666,
+          "defined_resamples": 2000
+        },
+        "event.recall": {
+          "lower": 0.0,
+          "upper": 0.0065040650406504065,
+          "defined_resamples": 2000
+        },
+        "event.f1": {
+          "lower": 0.0,
+          "upper": 0.008403361344537815,
+          "defined_resamples": 2000
+        },
+        "spatial_object.precision": {
+          "lower": 0.0,
+          "upper": 0.16666666666666666,
+          "defined_resamples": 2000
+        },
+        "spatial_object.recall": {
+          "lower": 0.0,
+          "upper": 0.01951219512195122,
+          "defined_resamples": 2000
+        },
+        "spatial_object.f1": {
+          "lower": 0.0,
+          "upper": 0.025210084033613446,
+          "defined_resamples": 2000
+        },
+        "within_62_days.precision": {
+          "lower": 0.0,
+          "upper": 0.005934718100890208,
+          "defined_resamples": 2000
+        },
+        "within_62_days.recall": {
+          "lower": 0.0,
+          "upper": 0.0032520325203252032,
+          "defined_resamples": 2000
+        },
+        "within_62_days.f1": {
+          "lower": 0.0,
+          "upper": 0.004201680672268907,
+          "defined_resamples": 2000
+        },
+        "final_retained.precision": {
+          "lower": 0.0,
+          "upper": 0.16666666666666666,
+          "defined_resamples": 2000
+        },
+        "final_retained.recall": {
+          "lower": 0.0,
+          "upper": 0.0065040650406504065,
+          "defined_resamples": 2000
+        },
+        "final_retained.f1": {
+          "lower": 0.0,
+          "upper": 0.008438818565400843,
+          "defined_resamples": 2000
+        },
+        "false_confirmed_alerts_per_source_valid_km2_year": {
+          "lower": 0.35393186274281746,
+          "upper": 35.91586475715686,
+          "defined_resamples": 2000
+        }
+      },
+      "regions": [
+        "L15-0457E-1135N_1831_3648_13",
+        "L15-1049E-1370N_4196_2710_13",
+        "L15-1848E-0793N_7394_5018_13"
+      ],
+      "uncertainty": {
+        "resampling_unit": "complete geographic region",
+        "regions": 3,
+        "samples": 2000,
+        "seed": 2901,
+        "limit": "Only a few regions; percentile intervals are unstable and do not establish geographic generalization.",
+        "zero_denominators": "undefined precision/recall remain null; excluded from that bootstrap percentile"
+      }
+    },
+    "proposal_tracking": {
+      "event": {
+        "tp": 78,
+        "fp": 10237,
+        "fn": 1428,
+        "predictions": 10315,
+        "targets": 1506,
+        "precision": 0.00756180319922443,
+        "recall": 0.05179282868525897,
+        "f1": 0.01319685305811691
+      },
+      "spatial_object": {
+        "tp": 118,
+        "fp": 10197,
+        "fn": 1388,
+        "predictions": 10315,
+        "targets": 1506,
+        "precision": 0.011439650993698498,
+        "recall": 0.07835325365205843,
+        "f1": 0.019964470010997378
+      },
+      "within_62_days": {
+        "tp": 57,
+        "fp": 10258,
+        "fn": 1449,
+        "predictions": 10315,
+        "targets": 1506,
+        "precision": 0.005525933107125546,
+        "recall": 0.037848605577689244,
+        "f1": 0.009643854157854665
+      },
+      "final_retained": {
+        "tp": 71,
+        "fp": 7817,
+        "fn": 1435,
+        "predictions": 7888,
+        "targets": 1506,
+        "precision": 0.009001014198782962,
+        "recall": 0.04714475431606906,
+        "f1": 0.015116031509474133
+      },
+      "false_confirmed_alerts_per_source_valid_km2_year": 150.4992352869304,
+      "duplicate_confirmed_events": 0,
+      "retracted_event_ids": 22564,
+      "confirmed_then_retracted_event_ids": 2427,
+      "ever_confirmed_events": 10315,
+      "final_retained_events": 7888,
+      "region_bootstrap_95_percentile_intervals": {
+        "event.precision": {
+          "lower": 0.0008410428931875525,
+          "upper": 0.02663115845539281,
+          "defined_resamples": 2000
+        },
+        "event.recall": {
+          "lower": 0.023255813953488372,
+          "upper": 0.0967741935483871,
+          "defined_resamples": 2000
+        },
+        "event.f1": {
+          "lower": 0.0016675931072818232,
+          "upper": 0.024829298572315334,
+          "defined_resamples": 2000
+        },
+        "spatial_object.precision": {
+          "lower": 0.0014017381553125877,
+          "upper": 0.03195739014647137,
+          "defined_resamples": 2000
+        },
+        "spatial_object.recall": {
+          "lower": 0.027906976744186046,
+          "upper": 0.16129032258064516,
+          "defined_resamples": 2000
+        },
+        "spatial_object.f1": {
+          "lower": 0.0027793218454697055,
+          "upper": 0.0297951582867784,
+          "defined_resamples": 2000
+        },
+        "within_62_days.precision": {
+          "lower": 0.000560695262125035,
+          "upper": 0.015978695073235686,
+          "defined_resamples": 2000
+        },
+        "within_62_days.recall": {
+          "lower": 0.013953488372093023,
+          "upper": 0.06991869918699187,
+          "defined_resamples": 2000
+        },
+        "within_62_days.f1": {
+          "lower": 0.0011117287381878821,
+          "upper": 0.0148975791433892,
+          "defined_resamples": 2000
+        },
+        "final_retained.precision": {
+          "lower": 0.0013020833333333333,
+          "upper": 0.02482758620689655,
+          "defined_resamples": 2000
+        },
+        "final_retained.recall": {
+          "lower": 0.020930232558139535,
+          "upper": 0.0967741935483871,
+          "defined_resamples": 2000
+        },
+        "final_retained.f1": {
+          "lower": 0.002569593147751606,
+          "upper": 0.022712933753943218,
+          "defined_resamples": 2000
+        },
+        "false_confirmed_alerts_per_source_valid_km2_year": {
+          "lower": 51.74483833299991,
+          "upper": 188.2413852860398,
+          "defined_resamples": 2000
+        }
+      },
+      "regions": [
+        "L15-0457E-1135N_1831_3648_13",
+        "L15-1049E-1370N_4196_2710_13",
+        "L15-1848E-0793N_7394_5018_13"
+      ],
+      "uncertainty": {
+        "resampling_unit": "complete geographic region",
+        "regions": 3,
+        "samples": 2000,
+        "seed": 2901,
+        "limit": "Only a few regions; percentile intervals are unstable and do not establish geographic generalization.",
+        "zero_denominators": "undefined precision/recall remain null; excluded from that bootstrap percentile"
+      }
+    },
+    "observation_gate": {
+      "event": {
+        "tp": 27,
+        "fp": 671,
+        "fn": 1479,
+        "predictions": 698,
+        "targets": 1506,
+        "precision": 0.03868194842406877,
+        "recall": 0.017928286852589643,
+        "f1": 0.024500907441016333
+      },
+      "spatial_object": {
+        "tp": 35,
+        "fp": 663,
+        "fn": 1471,
+        "predictions": 698,
+        "targets": 1506,
+        "precision": 0.050143266475644696,
+        "recall": 0.023240371845949535,
+        "f1": 0.03176043557168784
+      },
+      "within_62_days": {
+        "tp": 17,
+        "fp": 681,
+        "fn": 1489,
+        "predictions": 698,
+        "targets": 1506,
+        "precision": 0.024355300859598854,
+        "recall": 0.011288180610889775,
+        "f1": 0.015426497277676952
+      },
+      "final_retained": {
+        "tp": 26,
+        "fp": 541,
+        "fn": 1480,
+        "predictions": 567,
+        "targets": 1506,
+        "precision": 0.04585537918871252,
+        "recall": 0.017264276228419653,
+        "f1": 0.025084418716835505
+      },
+      "false_confirmed_alerts_per_source_valid_km2_year": 9.864705175103087,
+      "duplicate_confirmed_events": 0,
+      "retracted_event_ids": 22564,
+      "confirmed_then_retracted_event_ids": 131,
+      "ever_confirmed_events": 698,
+      "final_retained_events": 567,
+      "region_bootstrap_95_percentile_intervals": {
+        "event.precision": {
+          "lower": 0.0,
+          "upper": 0.08,
+          "defined_resamples": 2000
+        },
+        "event.recall": {
+          "lower": 0.0,
+          "upper": 0.04227642276422764,
+          "defined_resamples": 2000
+        },
+        "event.f1": {
+          "lower": 0.0,
+          "upper": 0.05531914893617021,
+          "defined_resamples": 2000
+        },
+        "spatial_object.precision": {
+          "lower": 0.0,
+          "upper": 0.10461538461538461,
+          "defined_resamples": 2000
+        },
+        "spatial_object.recall": {
+          "lower": 0.0,
+          "upper": 0.055284552845528454,
+          "defined_resamples": 2000
+        },
+        "spatial_object.f1": {
+          "lower": 0.0,
+          "upper": 0.07234042553191489,
+          "defined_resamples": 2000
+        },
+        "within_62_days.precision": {
+          "lower": 0.0,
+          "upper": 0.04923076923076923,
+          "defined_resamples": 2000
+        },
+        "within_62_days.recall": {
+          "lower": 0.0,
+          "upper": 0.03225806451612903,
+          "defined_resamples": 2000
+        },
+        "within_62_days.f1": {
+          "lower": 0.0,
+          "upper": 0.03404255319148936,
+          "defined_resamples": 2000
+        },
+        "final_retained.precision": {
+          "lower": 0.0,
+          "upper": 0.08561643835616438,
+          "defined_resamples": 2000
+        },
+        "final_retained.recall": {
+          "lower": 0.0,
+          "upper": 0.04065040650406504,
+          "defined_resamples": 2000
+        },
+        "final_retained.f1": {
+          "lower": 0.0,
+          "upper": 0.05512679162072767,
+          "defined_resamples": 2000
+        },
+        "false_confirmed_alerts_per_source_valid_km2_year": {
+          "lower": 0.6370773529370715,
+          "upper": 19.17273368654109,
+          "defined_resamples": 2000
+        }
+      },
+      "regions": [
+        "L15-0457E-1135N_1831_3648_13",
+        "L15-1049E-1370N_4196_2710_13",
+        "L15-1848E-0793N_7394_5018_13"
+      ],
+      "uncertainty": {
+        "resampling_unit": "complete geographic region",
+        "regions": 3,
+        "samples": 2000,
+        "seed": 2901,
+        "limit": "Only a few regions; percentile intervals are unstable and do not establish geographic generalization.",
+        "zero_denominators": "undefined precision/recall remain null; excluded from that bootstrap percentile"
+      }
+    },
+    "gate_no_quality": {
+      "event": {
+        "tp": 42,
+        "fp": 1679,
+        "fn": 1464,
+        "predictions": 1721,
+        "targets": 1506,
+        "precision": 0.02440441603718768,
+        "recall": 0.027888446215139442,
+        "f1": 0.026030368763557483
+      },
+      "spatial_object": {
+        "tp": 55,
+        "fp": 1666,
+        "fn": 1451,
+        "predictions": 1721,
+        "targets": 1506,
+        "precision": 0.031958163858221963,
+        "recall": 0.03652058432934927,
+        "f1": 0.03408738766656337
+      },
+      "within_62_days": {
+        "tp": 27,
+        "fp": 1694,
+        "fn": 1479,
+        "predictions": 1721,
+        "targets": 1506,
+        "precision": 0.01568855316676351,
+        "recall": 0.017928286852589643,
+        "f1": 0.01673380849085838
+      },
+      "final_retained": {
+        "tp": 42,
+        "fp": 1450,
+        "fn": 1464,
+        "predictions": 1492,
+        "targets": 1506,
+        "precision": 0.028150134048257374,
+        "recall": 0.027888446215139442,
+        "f1": 0.028018679119412943
+      },
+      "false_confirmed_alerts_per_source_valid_km2_year": 24.683815184795947,
+      "duplicate_confirmed_events": 0,
+      "retracted_event_ids": 22564,
+      "confirmed_then_retracted_event_ids": 229,
+      "ever_confirmed_events": 1721,
+      "final_retained_events": 1492,
+      "region_bootstrap_95_percentile_intervals": {
+        "event.precision": {
+          "lower": 0.0014285714285714286,
+          "upper": 0.061224489795918366,
+          "defined_resamples": 2000
+        },
+        "event.recall": {
+          "lower": 0.0069767441860465115,
+          "upper": 0.056910569105691054,
+          "defined_resamples": 2000
+        },
+        "event.f1": {
+          "lower": 0.0027359781121751026,
+          "upper": 0.045513654096228866,
+          "defined_resamples": 2000
+        },
+        "spatial_object.precision": {
+          "lower": 0.0014285714285714286,
+          "upper": 0.061224489795918366,
+          "defined_resamples": 2000
+        },
+        "spatial_object.recall": {
+          "lower": 0.0069767441860465115,
+          "upper": 0.07804878048780488,
+          "defined_resamples": 2000
+        },
+        "spatial_object.f1": {
+          "lower": 0.0027359781121751026,
+          "upper": 0.06241872561768531,
+          "defined_resamples": 2000
+        },
+        "within_62_days.precision": {
+          "lower": 0.0014285714285714286,
+          "upper": 0.05102040816326531,
+          "defined_resamples": 2000
+        },
+        "within_62_days.recall": {
+          "lower": 0.005813953488372093,
+          "upper": 0.03414634146341464,
+          "defined_resamples": 2000
+        },
+        "within_62_days.f1": {
+          "lower": 0.0027359781121751026,
+          "upper": 0.027308192457737322,
+          "defined_resamples": 2000
+        },
+        "final_retained.precision": {
+          "lower": 0.0018018018018018018,
+          "upper": 0.061855670103092786,
+          "defined_resamples": 2000
+        },
+        "final_retained.recall": {
+          "lower": 0.0069767441860465115,
+          "upper": 0.056910569105691054,
+          "defined_resamples": 2000
+        },
+        "final_retained.f1": {
+          "lower": 0.0034129692832764505,
+          "upper": 0.048109965635738834,
+          "defined_resamples": 2000
+        },
+        "false_confirmed_alerts_per_source_valid_km2_year": {
+          "lower": 6.512346274467841,
+          "upper": 36.91939627243036,
+          "defined_resamples": 2000
+        }
+      },
+      "regions": [
+        "L15-0457E-1135N_1831_3648_13",
+        "L15-1049E-1370N_4196_2710_13",
+        "L15-1848E-0793N_7394_5018_13"
+      ],
+      "uncertainty": {
+        "resampling_unit": "complete geographic region",
+        "regions": 3,
+        "samples": 2000,
+        "seed": 2901,
+        "limit": "Only a few regions; percentile intervals are unstable and do not establish geographic generalization.",
+        "zero_denominators": "undefined precision/recall remain null; excluded from that bootstrap percentile"
+      }
+    }
+  },
+  "comparison_basis": "Shared native imagery, labels, candidate sites and spatial predictions; fixed 62-day detection horizon plus measured delay.",
+  "claim_limit": "A controlled local temporal adaptation comparison, not reproduction of published full-system scores or physical event-date accuracy."
+}

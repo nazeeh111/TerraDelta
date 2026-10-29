@@ -1,0 +1,5199 @@
+{
+  "version": "terradelta-calibration-v2",
+  "event_gates": {
+    "proposal_tracking": {
+      "threshold": 0.55,
+      "timing_padding_days": 31
+    },
+    "observation_gate": {
+      "scale": 0.2242971151116341,
+      "bias": -2.9724185778733077,
+      "threshold": 0.1,
+      "success": true,
+      "calibration_kind": "positive_slope_platt",
+      "prefix_rows": 18077,
+      "proposal_mass": 5505.0,
+      "event_prevalence": 0.01798365122615804,
+      "brier": 0.01712529273791346,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "rows": 17717,
+          "proposal_weight": 5401.333333333334,
+          "score_mean": 0.01606408588724069,
+          "positive_fraction": 0.015212293260923227
+        },
+        {
+          "lower": 0.1,
+          "rows": 304,
+          "proposal_weight": 87.66666666666666,
+          "score_mean": 0.13221202477699445,
+          "positive_fraction": 0.1739543726235741
+        },
+        {
+          "lower": 0.2,
+          "rows": 50,
+          "proposal_weight": 14.416666666666666,
+          "score_mean": 0.2347330258071767,
+          "positive_fraction": 0.07514450867052022
+        },
+        {
+          "lower": 0.30000000000000004,
+          "rows": 5,
+          "proposal_weight": 1.3333333333333333,
+          "score_mean": 0.31468669697642326,
+          "positive_fraction": 0.18750000000000003
+        },
+        {
+          "lower": 0.4,
+          "rows": 1,
+          "proposal_weight": 0.25,
+          "score_mean": 0.4436367154121399,
+          "positive_fraction": 1.0
+        }
+      ],
+      "meaning": "event compatibility under frozen one-to-one physical geometry/time matching; not arbitrary-shift or timing-coverage guarantee",
+      "prevalence_weights": "each real DEV proposal totals one across bounded available prefix rows",
+      "timing_padding_days": 31
+    },
+    "gate_no_quality": {
+      "scale": 0.3533321043192058,
+      "bias": -3.3329514364285253,
+      "threshold": 0.05,
+      "success": true,
+      "calibration_kind": "positive_slope_platt",
+      "prefix_rows": 18077,
+      "proposal_mass": 5505.0,
+      "event_prevalence": 0.01798365122615804,
+      "brier": 0.016801296377169518,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "rows": 17605,
+          "proposal_weight": 5364.416666666667,
+          "score_mean": 0.014210215717031606,
+          "positive_fraction": 0.013577120842589285
+        },
+        {
+          "lower": 0.1,
+          "rows": 322,
+          "proposal_weight": 96.66666666666667,
+          "score_mean": 0.13637351122652663,
+          "positive_fraction": 0.18620689655172412
+        },
+        {
+          "lower": 0.2,
+          "rows": 88,
+          "proposal_weight": 26.916666666666664,
+          "score_mean": 0.2380995629557146,
+          "positive_fraction": 0.20433436532507737
+        },
+        {
+          "lower": 0.30000000000000004,
+          "rows": 35,
+          "proposal_weight": 10.166666666666666,
+          "score_mean": 0.33145571976411536,
+          "positive_fraction": 0.1885245901639344
+        },
+        {
+          "lower": 0.4,
+          "rows": 16,
+          "proposal_weight": 4.083333333333333,
+          "score_mean": 0.4416538543847142,
+          "positive_fraction": 0.12244897959183673
+        },
+        {
+          "lower": 0.5,
+          "rows": 6,
+          "proposal_weight": 1.5,
+          "score_mean": 0.5577287971973419,
+          "positive_fraction": 0.16666666666666666
+        },
+        {
+          "lower": 0.6000000000000001,
+          "rows": 3,
+          "proposal_weight": 0.75,
+          "score_mean": 0.6126169363657633,
+          "positive_fraction": 0.0
+        },
+        {
+          "lower": 0.7000000000000001,
+          "rows": 1,
+          "proposal_weight": 0.25,
+          "score_mean": 0.7071765065193176,
+          "positive_fraction": 0.0
+        },
+        {
+          "lower": 0.8,
+          "rows": 1,
+          "proposal_weight": 0.25,
+          "score_mean": 0.8107103705406189,
+          "positive_fraction": 0.0
+        }
+      ],
+      "meaning": "event compatibility under frozen one-to-one physical geometry/time matching; not arbitrary-shift or timing-coverage guarantee",
+      "prevalence_weights": "each real DEV proposal totals one across bounded available prefix rows",
+      "timing_padding_days": 31
+    }
+  },
+  "event_gate_weights_sha256": "9bae4c22a5fc6dca64b270a0e37a8d899424477ed7b2c4f6ac5c2e6e811e62ba",
+  "created_at": "2026-10-29T07:44:48.360588+00:00",
+  "development_regions": [
+    "L15-0632E-0892N_2528_4620_13",
+    "L15-1389E-1284N_5557_3054_13"
+  ],
+  "occupancy": {
+    "pairwise": {
+      "scale": 0.3669806437215127,
+      "bias": -1.0920819620549023,
+      "n": 123312,
+      "success": true,
+      "brier": 0.10707905143499374,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "n": 58242,
+          "mean_score": 0.05669745057821274,
+          "observed_presence": 0.06742557138204575
+        },
+        {
+          "lower": 0.1,
+          "n": 35071,
+          "mean_score": 0.14164996147155762,
+          "observed_presence": 0.12329275161027908
+        },
+        {
+          "lower": 0.2,
+          "n": 17607,
+          "mean_score": 0.25007355213165283,
+          "observed_presence": 0.1979326456785202
+        },
+        {
+          "lower": 0.30000000000000004,
+          "n": 9152,
+          "mean_score": 0.341365784406662,
+          "observed_presence": 0.35325610637664795
+        },
+        {
+          "lower": 0.4,
+          "n": 2804,
+          "mean_score": 0.4373549520969391,
+          "observed_presence": 0.6679742932319641
+        },
+        {
+          "lower": 0.5,
+          "n": 379,
+          "mean_score": 0.5317036509513855,
+          "observed_presence": 0.9076517224311829
+        },
+        {
+          "lower": 0.6000000000000001,
+          "n": 50,
+          "mean_score": 0.6364660859107971,
+          "observed_presence": 0.8600000143051147
+        },
+        {
+          "lower": 0.7000000000000001,
+          "n": 6,
+          "mean_score": 0.7371537089347839,
+          "observed_presence": 1.0
+        },
+        {
+          "lower": 0.8,
+          "n": 1,
+          "mean_score": 0.8088520765304565,
+          "observed_presence": 1.0
+        }
+      ],
+      "meaning": "occupancy calibration on two development AOIs; not event correctness or arbitrary-shift guarantee"
+    },
+    "spatial_tracking": {
+      "scale": 0.3669806437215127,
+      "bias": -1.0920819620549023,
+      "n": 123312,
+      "success": true,
+      "brier": 0.10707905143499374,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "n": 58242,
+          "mean_score": 0.05669745057821274,
+          "observed_presence": 0.06742557138204575
+        },
+        {
+          "lower": 0.1,
+          "n": 35071,
+          "mean_score": 0.14164996147155762,
+          "observed_presence": 0.12329275161027908
+        },
+        {
+          "lower": 0.2,
+          "n": 17607,
+          "mean_score": 0.25007355213165283,
+          "observed_presence": 0.1979326456785202
+        },
+        {
+          "lower": 0.30000000000000004,
+          "n": 9152,
+          "mean_score": 0.341365784406662,
+          "observed_presence": 0.35325610637664795
+        },
+        {
+          "lower": 0.4,
+          "n": 2804,
+          "mean_score": 0.4373549520969391,
+          "observed_presence": 0.6679742932319641
+        },
+        {
+          "lower": 0.5,
+          "n": 379,
+          "mean_score": 0.5317036509513855,
+          "observed_presence": 0.9076517224311829
+        },
+        {
+          "lower": 0.6000000000000001,
+          "n": 50,
+          "mean_score": 0.6364660859107971,
+          "observed_presence": 0.8600000143051147
+        },
+        {
+          "lower": 0.7000000000000001,
+          "n": 6,
+          "mean_score": 0.7371537089347839,
+          "observed_presence": 1.0
+        },
+        {
+          "lower": 0.8,
+          "n": 1,
+          "mean_score": 0.8088520765304565,
+          "observed_presence": 1.0
+        }
+      ],
+      "meaning": "occupancy calibration on two development AOIs; not event correctness or arbitrary-shift guarantee"
+    },
+    "ted": {
+      "scale": 0.3076614823955483,
+      "bias": -1.2553932947549853,
+      "n": 123312,
+      "success": true,
+      "brier": 0.11089882999658585,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "n": 53443,
+          "mean_score": 0.06160378083586693,
+          "observed_presence": 0.07407892495393753
+        },
+        {
+          "lower": 0.1,
+          "n": 37357,
+          "mean_score": 0.1436537206172943,
+          "observed_presence": 0.1300157904624939
+        },
+        {
+          "lower": 0.2,
+          "n": 26040,
+          "mean_score": 0.24431677162647247,
+          "observed_presence": 0.18755760788917542
+        },
+        {
+          "lower": 0.30000000000000004,
+          "n": 5779,
+          "mean_score": 0.33623334765434265,
+          "observed_presence": 0.5071811676025391
+        },
+        {
+          "lower": 0.4,
+          "n": 619,
+          "mean_score": 0.42635318636894226,
+          "observed_presence": 0.8626817464828491
+        },
+        {
+          "lower": 0.5,
+          "n": 71,
+          "mean_score": 0.5280032753944397,
+          "observed_presence": 0.9577465057373047
+        },
+        {
+          "lower": 0.6000000000000001,
+          "n": 2,
+          "mean_score": 0.6444162726402283,
+          "observed_presence": 1.0
+        },
+        {
+          "lower": 0.7000000000000001,
+          "n": 1,
+          "mean_score": 0.704652726650238,
+          "observed_presence": 1.0
+        }
+      ],
+      "meaning": "occupancy calibration on two development AOIs; not event correctness or arbitrary-shift guarantee"
+    },
+    "smoothing": {
+      "scale": 0.6661457285332957,
+      "bias": -0.9033046635464704,
+      "n": 123312,
+      "success": true,
+      "brier": 0.10171271860599518,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "n": 59107,
+          "mean_score": 0.048338282853364944,
+          "observed_presence": 0.05879168212413788
+        },
+        {
+          "lower": 0.1,
+          "n": 35375,
+          "mean_score": 0.14437919855117798,
+          "observed_presence": 0.11607067286968231
+        },
+        {
+          "lower": 0.2,
+          "n": 15661,
+          "mean_score": 0.24230560660362244,
+          "observed_presence": 0.2118000090122223
+        },
+        {
+          "lower": 0.30000000000000004,
+          "n": 7067,
+          "mean_score": 0.3441011905670166,
+          "observed_presence": 0.3489457964897156
+        },
+        {
+          "lower": 0.4,
+          "n": 3452,
+          "mean_score": 0.44445085525512695,
+          "observed_presence": 0.5159327983856201
+        },
+        {
+          "lower": 0.5,
+          "n": 1824,
+          "mean_score": 0.5432690382003784,
+          "observed_presence": 0.7456140518188477
+        },
+        {
+          "lower": 0.6000000000000001,
+          "n": 696,
+          "mean_score": 0.6409586071968079,
+          "observed_presence": 0.8721264600753784
+        },
+        {
+          "lower": 0.7000000000000001,
+          "n": 117,
+          "mean_score": 0.7274202108383179,
+          "observed_presence": 0.9487179517745972
+        },
+        {
+          "lower": 0.8,
+          "n": 13,
+          "mean_score": 0.8387380838394165,
+          "observed_presence": 1.0
+        }
+      ],
+      "meaning": "occupancy calibration on two development AOIs; not event correctness or arbitrary-shift guarantee"
+    },
+    "hmm": {
+      "scale": 0.31844905542866014,
+      "bias": -0.5536293385258035,
+      "n": 123312,
+      "success": true,
+      "brier": 0.0968642458319664,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "n": 77485,
+          "mean_score": 0.0651988536119461,
+          "observed_presence": 0.06830999255180359
+        },
+        {
+          "lower": 0.1,
+          "n": 25742,
+          "mean_score": 0.14115284383296967,
+          "observed_presence": 0.1281951665878296
+        },
+        {
+          "lower": 0.2,
+          "n": 7561,
+          "mean_score": 0.24198955297470093,
+          "observed_presence": 0.2448088824748993
+        },
+        {
+          "lower": 0.30000000000000004,
+          "n": 3597,
+          "mean_score": 0.34717774391174316,
+          "observed_presence": 0.37336668372154236
+        },
+        {
+          "lower": 0.4,
+          "n": 2461,
+          "mean_score": 0.44491663575172424,
+          "observed_presence": 0.4441283941268921
+        },
+        {
+          "lower": 0.5,
+          "n": 1820,
+          "mean_score": 0.5495936274528503,
+          "observed_presence": 0.5384615659713745
+        },
+        {
+          "lower": 0.6000000000000001,
+          "n": 1682,
+          "mean_score": 0.6508301496505737,
+          "observed_presence": 0.6111771464347839
+        },
+        {
+          "lower": 0.7000000000000001,
+          "n": 2041,
+          "mean_score": 0.752217710018158,
+          "observed_presence": 0.7496325373649597
+        },
+        {
+          "lower": 0.8,
+          "n": 923,
+          "mean_score": 0.8239606022834778,
+          "observed_presence": 0.886240541934967
+        }
+      ],
+      "meaning": "occupancy calibration on two development AOIs; not event correctness or arbitrary-shift guarantee"
+    },
+    "watch_lstm": {
+      "scale": 0.5395971196166189,
+      "bias": -1.2293711306897102,
+      "n": 123312,
+      "success": true,
+      "brier": 0.10780498385429382,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "n": 48487,
+          "mean_score": 0.06285647302865982,
+          "observed_presence": 0.08338317275047302
+        },
+        {
+          "lower": 0.1,
+          "n": 53214,
+          "mean_score": 0.14083826541900635,
+          "observed_presence": 0.09134814143180847
+        },
+        {
+          "lower": 0.2,
+          "n": 12826,
+          "mean_score": 0.23674708604812622,
+          "observed_presence": 0.28613752126693726
+        },
+        {
+          "lower": 0.30000000000000004,
+          "n": 4932,
+          "mean_score": 0.34433266520500183,
+          "observed_presence": 0.5196675062179565
+        },
+        {
+          "lower": 0.4,
+          "n": 2238,
+          "mean_score": 0.44253280758857727,
+          "observed_presence": 0.5714924335479736
+        },
+        {
+          "lower": 0.5,
+          "n": 864,
+          "mean_score": 0.5416907668113708,
+          "observed_presence": 0.5254629850387573
+        },
+        {
+          "lower": 0.6000000000000001,
+          "n": 404,
+          "mean_score": 0.6453630924224854,
+          "observed_presence": 0.42574256658554077
+        },
+        {
+          "lower": 0.7000000000000001,
+          "n": 241,
+          "mean_score": 0.7458556294441223,
+          "observed_presence": 0.5145228505134583
+        },
+        {
+          "lower": 0.8,
+          "n": 99,
+          "mean_score": 0.8457663655281067,
+          "observed_presence": 0.6363636255264282
+        },
+        {
+          "lower": 0.9,
+          "n": 7,
+          "mean_score": 0.9072206616401672,
+          "observed_presence": 1.0
+        }
+      ],
+      "meaning": "occupancy calibration on two development AOIs; not event correctness or arbitrary-shift guarantee"
+    },
+    "sn7_retrospective": {
+      "scale": 0.9521218972703708,
+      "bias": -0.5564648371895086,
+      "n": 123312,
+      "success": true,
+      "brier": 0.09660510718822479,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "n": 71778,
+          "mean_score": 0.04751639813184738,
+          "observed_presence": 0.0508790984749794
+        },
+        {
+          "lower": 0.1,
+          "n": 22137,
+          "mean_score": 0.14128853380680084,
+          "observed_presence": 0.15467317402362823
+        },
+        {
+          "lower": 0.2,
+          "n": 12192,
+          "mean_score": 0.2462868094444275,
+          "observed_presence": 0.19685038924217224
+        },
+        {
+          "lower": 0.30000000000000004,
+          "n": 8405,
+          "mean_score": 0.34441515803337097,
+          "observed_presence": 0.2870910167694092
+        },
+        {
+          "lower": 0.4,
+          "n": 3519,
+          "mean_score": 0.44934341311454773,
+          "observed_presence": 0.43194088339805603
+        },
+        {
+          "lower": 0.5,
+          "n": 2670,
+          "mean_score": 0.5463365912437439,
+          "observed_presence": 0.6089887619018555
+        },
+        {
+          "lower": 0.6000000000000001,
+          "n": 1764,
+          "mean_score": 0.6464146971702576,
+          "observed_presence": 0.8117913603782654
+        },
+        {
+          "lower": 0.7000000000000001,
+          "n": 760,
+          "mean_score": 0.7393338084220886,
+          "observed_presence": 0.8973684310913086
+        },
+        {
+          "lower": 0.8,
+          "n": 87,
+          "mean_score": 0.8244759440422058,
+          "observed_presence": 1.0
+        }
+      ],
+      "meaning": "occupancy calibration on two development AOIs; not event correctness or arbitrary-shift guarantee"
+    },
+    "no_quality": {
+      "scale": 0.7633688840032026,
+      "bias": -1.2870414779145907,
+      "n": 123312,
+      "success": true,
+      "brier": 0.1034519150853157,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "n": 57329,
+          "mean_score": 0.05634695291519165,
+          "observed_presence": 0.06188839673995972
+        },
+        {
+          "lower": 0.1,
+          "n": 42095,
+          "mean_score": 0.1414131224155426,
+          "observed_presence": 0.11497802287340164
+        },
+        {
+          "lower": 0.2,
+          "n": 13533,
+          "mean_score": 0.23995369672775269,
+          "observed_presence": 0.267494261264801
+        },
+        {
+          "lower": 0.30000000000000004,
+          "n": 4270,
+          "mean_score": 0.34170979261398315,
+          "observed_presence": 0.4065573811531067
+        },
+        {
+          "lower": 0.4,
+          "n": 2110,
+          "mean_score": 0.44642484188079834,
+          "observed_presence": 0.4796208441257477
+        },
+        {
+          "lower": 0.5,
+          "n": 1803,
+          "mean_score": 0.5530670285224915,
+          "observed_presence": 0.5978924036026001
+        },
+        {
+          "lower": 0.6000000000000001,
+          "n": 1749,
+          "mean_score": 0.6456996202468872,
+          "observed_presence": 0.6672384142875671
+        },
+        {
+          "lower": 0.7000000000000001,
+          "n": 418,
+          "mean_score": 0.7315521836280823,
+          "observed_presence": 0.559808611869812
+        },
+        {
+          "lower": 0.8,
+          "n": 5,
+          "mean_score": 0.8055798411369324,
+          "observed_presence": 0.20000000298023224
+        }
+      ],
+      "meaning": "occupancy calibration on two development AOIs; not event correctness or arbitrary-shift guarantee"
+    },
+    "observation": {
+      "scale": 0.7155756199670472,
+      "bias": -1.455511682206605,
+      "n": 123312,
+      "success": true,
+      "brier": 0.1023101806640625,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "n": 55324,
+          "mean_score": 0.05331673100590706,
+          "observed_presence": 0.056557733565568924
+        },
+        {
+          "lower": 0.1,
+          "n": 45901,
+          "mean_score": 0.14143642783164978,
+          "observed_presence": 0.11964880675077438
+        },
+        {
+          "lower": 0.2,
+          "n": 11572,
+          "mean_score": 0.23909536004066467,
+          "observed_presence": 0.2762703001499176
+        },
+        {
+          "lower": 0.30000000000000004,
+          "n": 3840,
+          "mean_score": 0.3443622291088104,
+          "observed_presence": 0.4065104126930237
+        },
+        {
+          "lower": 0.4,
+          "n": 2283,
+          "mean_score": 0.44673222303390503,
+          "observed_presence": 0.4927726686000824
+        },
+        {
+          "lower": 0.5,
+          "n": 1951,
+          "mean_score": 0.5487179756164551,
+          "observed_presence": 0.5776525139808655
+        },
+        {
+          "lower": 0.6000000000000001,
+          "n": 1685,
+          "mean_score": 0.6481540203094482,
+          "observed_presence": 0.6646884083747864
+        },
+        {
+          "lower": 0.7000000000000001,
+          "n": 724,
+          "mean_score": 0.7354515194892883,
+          "observed_presence": 0.639502763748169
+        },
+        {
+          "lower": 0.8,
+          "n": 32,
+          "mean_score": 0.8164544105529785,
+          "observed_presence": 0.6875
+        }
+      ],
+      "meaning": "occupancy calibration on two development AOIs; not event correctness or arbitrary-shift guarantee"
+    }
+  },
+  "decoders": {
+    "pairwise": {
+      "threshold": 0.55,
+      "confirmations": 1,
+      "minimum_dwell_days": 0,
+      "revision_window_days": 100,
+      "maximum_gap_days": 190,
+      "timing_padding_days": 61
+    },
+    "spatial_tracking": {
+      "threshold": 0.65,
+      "confirmations": 2,
+      "minimum_dwell_days": 20,
+      "revision_window_days": 100,
+      "maximum_gap_days": 190,
+      "timing_padding_days": 0
+    },
+    "ted": {
+      "threshold": 0.55,
+      "confirmations": 2,
+      "minimum_dwell_days": 20,
+      "revision_window_days": 100,
+      "maximum_gap_days": 190,
+      "timing_padding_days": 61
+    },
+    "smoothing": {
+      "threshold": 0.55,
+      "confirmations": 2,
+      "minimum_dwell_days": 20,
+      "revision_window_days": 100,
+      "maximum_gap_days": 190,
+      "timing_padding_days": 92
+    },
+    "hmm": {
+      "threshold": 0.65,
+      "confirmations": 2,
+      "minimum_dwell_days": 20,
+      "revision_window_days": 100,
+      "maximum_gap_days": 190,
+      "timing_padding_days": 61
+    },
+    "watch_lstm": {
+      "threshold": 0.55,
+      "confirmations": 2,
+      "minimum_dwell_days": 20,
+      "revision_window_days": 100,
+      "maximum_gap_days": 190,
+      "timing_padding_days": 31
+    },
+    "sn7_retrospective": {
+      "threshold": 0.65,
+      "confirmations": 2,
+      "minimum_dwell_days": 20,
+      "revision_window_days": 100,
+      "maximum_gap_days": 190,
+      "timing_padding_days": 92
+    },
+    "no_quality": {
+      "threshold": 0.55,
+      "confirmations": 2,
+      "minimum_dwell_days": 20,
+      "revision_window_days": 100,
+      "maximum_gap_days": 190,
+      "timing_padding_days": 61
+    },
+    "observation": {
+      "threshold": 0.55,
+      "confirmations": 2,
+      "minimum_dwell_days": 20,
+      "revision_window_days": 100,
+      "maximum_gap_days": 190,
+      "timing_padding_days": 62
+    }
+  },
+  "decoder": {
+    "threshold": 0.55,
+    "confirmations": 2,
+    "minimum_dwell_days": 20,
+    "revision_window_days": 100,
+    "maximum_gap_days": 190,
+    "timing_padding_days": 62
+  },
+  "selection": {
+    "pairwise": {
+      "candidate_settings": [
+        {
+          "threshold": 0.55,
+          "objective": 0.018051958245035714,
+          "macro_event_f1": 0.018051958245035714
+        },
+        {
+          "threshold": 0.65,
+          "objective": 0.016868648063423322,
+          "macro_event_f1": 0.016868648063423322
+        },
+        {
+          "threshold": 0.75,
+          "objective": 0.007936507936507936,
+          "macro_event_f1": 0.013012650068487631
+        },
+        {
+          "threshold": 0.85,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        }
+      ],
+      "selected_development_reports": [
+        {
+          "region_id": "L15-0632E-0892N_2528_4620_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 2,
+            "fp": 60,
+            "fn": 122,
+            "predictions": 62,
+            "targets": 124,
+            "precision": 0.03225806451612903,
+            "recall": 0.016129032258064516,
+            "f1": 0.021505376344086023
+          },
+          "spatial_object": {
+            "tp": 4,
+            "fp": 58,
+            "fn": 120,
+            "predictions": 62,
+            "targets": 124,
+            "precision": 0.06451612903225806,
+            "recall": 0.03225806451612903,
+            "f1": 0.043010752688172046
+          },
+          "within_62_days": {
+            "tp": 2,
+            "fp": 60,
+            "fn": 122,
+            "predictions": 62,
+            "targets": 124,
+            "precision": 0.03225806451612903,
+            "recall": 0.016129032258064516,
+            "f1": 0.021505376344086023
+          },
+          "final_retained": {
+            "tp": 1,
+            "fp": 19,
+            "fn": 123,
+            "predictions": 20,
+            "targets": 124,
+            "precision": 0.05,
+            "recall": 0.008064516129032258,
+            "f1": 0.013888888888888888
+          },
+          "ever_confirmed_events": 62,
+          "final_retained_events": 20,
+          "candidate_event_ids": 104,
+          "proposed_event_ids": 104,
+          "revision_rows": 250,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 84,
+          "confirmed_then_retracted_event_ids": 42,
+          "confirmed_retraction_rate": 0.6774193548387096,
+          "false_confirmed_then_retracted_events": 41,
+          "matched_confirmed_then_retracted_events": 1,
+          "positive_detection_delay_building_months": 1.9383983572895278,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1491.9383983572895
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2031.9383983572895
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 7431.93839835729
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 2,
+            "mean": 0.6000000069405499,
+            "median": 0.6000000069405499,
+            "p90": 0.6799999178873921
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 2,
+            "mean": 29.5,
+            "median": 29.5,
+            "p90": 53.1
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 0,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 2,
+            "mean": 29.5,
+            "median": 29.5,
+            "p90": 53.1
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 2,
+            "mean": 90.99998842592592,
+            "median": 90.99998842592592,
+            "p90": 114.99998842592592
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 2,
+            "expanded_interval_contains_label_interval": 0.5,
+            "raw_interval_contains_label_interval": 0.5,
+            "raw_interval_overlaps_label_interval": 1.0,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 2,
+              "mean": 22.5,
+              "median": 22.5,
+              "p90": 40.5
+            },
+            "raw_interval_width_days": {
+              "n": 2,
+              "mean": 75.49998842592592,
+              "median": 75.49998842592592,
+              "p90": 87.09998842592591
+            },
+            "expanded_interval_width_days": {
+              "n": 2,
+              "mean": 75.49998842592592,
+              "median": 75.49998842592592,
+              "p90": 87.09998842592591
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 20.323969571256637,
+            "calendar_observed_years": 2.0835036568053336,
+            "source_valid_area_km2_years": 42.34506492251353,
+            "model_usable_area_km2_years": 42.34506492251353,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 1.4169301690714826,
+          "false_confirmed_alerts_per_model_usable_km2_year": 1.4169301690714826,
+          "truth_events_by_class": {
+            "building_addition": 124,
+            "building_removal": 0
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        },
+        {
+          "region_id": "L15-1389E-1284N_5557_3054_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 2,
+            "fp": 78,
+            "fn": 192,
+            "predictions": 80,
+            "targets": 194,
+            "precision": 0.025,
+            "recall": 0.010309278350515464,
+            "f1": 0.014598540145985401
+          },
+          "spatial_object": {
+            "tp": 4,
+            "fp": 76,
+            "fn": 190,
+            "predictions": 80,
+            "targets": 194,
+            "precision": 0.05,
+            "recall": 0.020618556701030927,
+            "f1": 0.029197080291970802
+          },
+          "within_62_days": {
+            "tp": 2,
+            "fp": 78,
+            "fn": 192,
+            "predictions": 80,
+            "targets": 194,
+            "precision": 0.025,
+            "recall": 0.010309278350515464,
+            "f1": 0.014598540145985401
+          },
+          "final_retained": {
+            "tp": 1,
+            "fp": 31,
+            "fn": 193,
+            "predictions": 32,
+            "targets": 194,
+            "precision": 0.03125,
+            "recall": 0.005154639175257732,
+            "f1": 0.008849557522123894
+          },
+          "ever_confirmed_events": 80,
+          "final_retained_events": 32,
+          "candidate_event_ids": 128,
+          "proposed_event_ids": 128,
+          "revision_rows": 304,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 96,
+          "confirmed_then_retracted_event_ids": 48,
+          "confirmed_retraction_rate": 0.6,
+          "false_confirmed_then_retracted_events": 47,
+          "matched_confirmed_then_retracted_events": 1,
+          "positive_detection_delay_building_months": 2.9897330595482545,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2240.989733059548
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2942.989733059548
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 9962.989733059549
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 2,
+            "mean": 0.502192880490881,
+            "median": 0.502192880490881,
+            "p90": 0.5671052427843001
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 2,
+            "mean": 45.5,
+            "median": 45.5,
+            "p90": 57.9
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 0,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 2,
+            "mean": 45.5,
+            "median": 45.5,
+            "p90": 57.9
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 2,
+            "mean": 106.49998842592592,
+            "median": 106.49998842592592,
+            "p90": 118.89998842592593
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 2,
+            "expanded_interval_contains_label_interval": 0.5,
+            "raw_interval_contains_label_interval": 0.5,
+            "raw_interval_overlaps_label_interval": 0.5,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 2,
+              "mean": 38.0,
+              "median": 38.0,
+              "p90": 56.4
+            },
+            "raw_interval_width_days": {
+              "n": 2,
+              "mean": 75.99998842592592,
+              "median": 75.99998842592592,
+              "p90": 87.99998842592592
+            },
+            "expanded_interval_width_days": {
+              "n": 2,
+              "mean": 75.99998842592592,
+              "median": 75.99998842592592,
+              "p90": 87.99998842592592
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 13.388986238109588,
+            "calendar_observed_years": 1.9986303140923258,
+            "source_valid_area_km2_years": 26.759633770450794,
+            "model_usable_area_km2_years": 26.759633770450794,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 2.9148380979014425,
+          "false_confirmed_alerts_per_model_usable_km2_year": 2.9148380979014425,
+          "truth_events_by_class": {
+            "building_addition": 184,
+            "building_removal": 10
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        }
+      ],
+      "objective": "mean regional F1 within62days; retrospective uses ordinary eventF1"
+    },
+    "spatial_tracking": {
+      "candidate_settings": [
+        {
+          "threshold": 0.55,
+          "objective": 0.004464285714285714,
+          "macro_event_f1": 0.011607142857142858
+        },
+        {
+          "threshold": 0.65,
+          "objective": 0.005050505050505051,
+          "macro_event_f1": 0.005050505050505051
+        },
+        {
+          "threshold": 0.75,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        },
+        {
+          "threshold": 0.85,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        }
+      ],
+      "selected_development_reports": [
+        {
+          "region_id": "L15-0632E-0892N_2528_4620_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 124,
+            "predictions": 1,
+            "targets": 124,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "spatial_object": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 124,
+            "predictions": 1,
+            "targets": 124,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "within_62_days": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 124,
+            "predictions": 1,
+            "targets": 124,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "final_retained": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 124,
+            "predictions": 1,
+            "targets": 124,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ever_confirmed_events": 1,
+          "final_retained_events": 1,
+          "candidate_event_ids": 9,
+          "proposed_event_ids": 9,
+          "revision_rows": 16,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 6,
+          "confirmed_then_retracted_event_ids": 0,
+          "confirmed_retraction_rate": 0.0,
+          "false_confirmed_then_retracted_events": 0,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 0,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1241
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1250
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1340
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 0,
+            "mean": null,
+            "median": null,
+            "p90": null
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 0,
+            "mean": null,
+            "median": null,
+            "p90": null
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 0,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 0,
+            "mean": null,
+            "median": null,
+            "p90": null
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 0,
+            "mean": null,
+            "median": null,
+            "p90": null
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 0,
+            "expanded_interval_contains_label_interval": null,
+            "raw_interval_contains_label_interval": null,
+            "raw_interval_overlaps_label_interval": null,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 0,
+              "mean": null,
+              "median": null,
+              "p90": null
+            },
+            "raw_interval_width_days": {
+              "n": 0,
+              "mean": null,
+              "median": null,
+              "p90": null
+            },
+            "expanded_interval_width_days": {
+              "n": 0,
+              "mean": null,
+              "median": null,
+              "p90": null
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 20.323969571256637,
+            "calendar_observed_years": 2.0835036568053336,
+            "source_valid_area_km2_years": 42.34506492251353,
+            "model_usable_area_km2_years": 42.34506492251353,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 0.02361550281785804,
+          "false_confirmed_alerts_per_model_usable_km2_year": 0.02361550281785804,
+          "truth_events_by_class": {
+            "building_addition": 124,
+            "building_removal": 0
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        },
+        {
+          "region_id": "L15-1389E-1284N_5557_3054_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 1,
+            "fp": 3,
+            "fn": 193,
+            "predictions": 4,
+            "targets": 194,
+            "precision": 0.25,
+            "recall": 0.005154639175257732,
+            "f1": 0.010101010101010102
+          },
+          "spatial_object": {
+            "tp": 1,
+            "fp": 3,
+            "fn": 193,
+            "predictions": 4,
+            "targets": 194,
+            "precision": 0.25,
+            "recall": 0.005154639175257732,
+            "f1": 0.010101010101010102
+          },
+          "within_62_days": {
+            "tp": 1,
+            "fp": 3,
+            "fn": 193,
+            "predictions": 4,
+            "targets": 194,
+            "precision": 0.25,
+            "recall": 0.005154639175257732,
+            "f1": 0.010101010101010102
+          },
+          "final_retained": {
+            "tp": 1,
+            "fp": 3,
+            "fn": 193,
+            "predictions": 4,
+            "targets": 194,
+            "precision": 0.25,
+            "recall": 0.005154639175257732,
+            "f1": 0.010101010101010102
+          },
+          "ever_confirmed_events": 4,
+          "final_retained_events": 4,
+          "candidate_event_ids": 15,
+          "proposed_event_ids": 15,
+          "revision_rows": 26,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 7,
+          "confirmed_then_retracted_event_ids": 0,
+          "confirmed_retraction_rate": 0.0,
+          "false_confirmed_then_retracted_events": 0,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 2.004106776180698,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1935.0041067761806
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1962.0041067761806
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2232.004106776181
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 1,
+            "mean": 0.42105242762410694,
+            "median": 0.42105242762410694,
+            "p90": 0.42105242762410694
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 1,
+            "mean": 61.0,
+            "median": 61.0,
+            "p90": 61.0
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 0,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 1,
+            "mean": 61.0,
+            "median": 61.0,
+            "p90": 61.0
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 1,
+            "mean": 121.99998842592592,
+            "median": 121.99998842592592,
+            "p90": 121.99998842592592
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 1,
+            "expanded_interval_contains_label_interval": 1.0,
+            "raw_interval_contains_label_interval": 1.0,
+            "raw_interval_overlaps_label_interval": 1.0,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 1,
+              "mean": 15.0,
+              "median": 15.0,
+              "p90": 15.0
+            },
+            "raw_interval_width_days": {
+              "n": 1,
+              "mean": 90.99998842592592,
+              "median": 90.99998842592592,
+              "p90": 90.99998842592592
+            },
+            "expanded_interval_width_days": {
+              "n": 1,
+              "mean": 90.99998842592592,
+              "median": 90.99998842592592,
+              "p90": 90.99998842592592
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 13.388986238109588,
+            "calendar_observed_years": 1.9986303140923258,
+            "source_valid_area_km2_years": 26.759633770450794,
+            "model_usable_area_km2_years": 26.759633770450794,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 0.11210915761159394,
+          "false_confirmed_alerts_per_model_usable_km2_year": 0.11210915761159394,
+          "truth_events_by_class": {
+            "building_addition": 184,
+            "building_removal": 10
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        }
+      ],
+      "objective": "mean regional F1 within62days; retrospective uses ordinary eventF1"
+    },
+    "ted": {
+      "candidate_settings": [
+        {
+          "threshold": 0.55,
+          "objective": 0.0049261083743842365,
+          "macro_event_f1": 0.009852216748768473
+        },
+        {
+          "threshold": 0.65,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        },
+        {
+          "threshold": 0.75,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        },
+        {
+          "threshold": 0.85,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        }
+      ],
+      "selected_development_reports": [
+        {
+          "region_id": "L15-0632E-0892N_2528_4620_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 124,
+            "predictions": 0,
+            "targets": 124,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "spatial_object": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 124,
+            "predictions": 0,
+            "targets": 124,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "within_62_days": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 124,
+            "predictions": 0,
+            "targets": 124,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "final_retained": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 124,
+            "predictions": 0,
+            "targets": 124,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ever_confirmed_events": 0,
+          "final_retained_events": 0,
+          "candidate_event_ids": 3,
+          "proposed_event_ids": 3,
+          "revision_rows": 6,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": null,
+          "retracted_event_ids": 3,
+          "confirmed_then_retracted_event_ids": 0,
+          "confirmed_retraction_rate": null,
+          "false_confirmed_then_retracted_events": 0,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 0,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1240
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1240
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1240
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 0,
+            "mean": null,
+            "median": null,
+            "p90": null
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 0,
+            "mean": null,
+            "median": null,
+            "p90": null
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 0,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 0,
+            "mean": null,
+            "median": null,
+            "p90": null
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 0,
+            "mean": null,
+            "median": null,
+            "p90": null
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 0,
+            "expanded_interval_contains_label_interval": null,
+            "raw_interval_contains_label_interval": null,
+            "raw_interval_overlaps_label_interval": null,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 0,
+              "mean": null,
+              "median": null,
+              "p90": null
+            },
+            "raw_interval_width_days": {
+              "n": 0,
+              "mean": null,
+              "median": null,
+              "p90": null
+            },
+            "expanded_interval_width_days": {
+              "n": 0,
+              "mean": null,
+              "median": null,
+              "p90": null
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 20.323969571256637,
+            "calendar_observed_years": 2.0835036568053336,
+            "source_valid_area_km2_years": 42.34506492251353,
+            "model_usable_area_km2_years": 42.34506492251353,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 0.0,
+          "false_confirmed_alerts_per_model_usable_km2_year": 0.0,
+          "truth_events_by_class": {
+            "building_addition": 124,
+            "building_removal": 0
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        },
+        {
+          "region_id": "L15-1389E-1284N_5557_3054_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 2,
+            "fp": 7,
+            "fn": 192,
+            "predictions": 9,
+            "targets": 194,
+            "precision": 0.2222222222222222,
+            "recall": 0.010309278350515464,
+            "f1": 0.019704433497536946
+          },
+          "spatial_object": {
+            "tp": 2,
+            "fp": 7,
+            "fn": 192,
+            "predictions": 9,
+            "targets": 194,
+            "precision": 0.2222222222222222,
+            "recall": 0.010309278350515464,
+            "f1": 0.019704433497536946
+          },
+          "within_62_days": {
+            "tp": 1,
+            "fp": 8,
+            "fn": 193,
+            "predictions": 9,
+            "targets": 194,
+            "precision": 0.1111111111111111,
+            "recall": 0.005154639175257732,
+            "f1": 0.009852216748768473
+          },
+          "final_retained": {
+            "tp": 2,
+            "fp": 4,
+            "fn": 192,
+            "predictions": 6,
+            "targets": 194,
+            "precision": 0.3333333333333333,
+            "recall": 0.010309278350515464,
+            "f1": 0.02
+          },
+          "ever_confirmed_events": 9,
+          "final_retained_events": 6,
+          "candidate_event_ids": 18,
+          "proposed_event_ids": 18,
+          "revision_rows": 39,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 12,
+          "confirmed_then_retracted_event_ids": 3,
+          "confirmed_retraction_rate": 0.3333333333333333,
+          "false_confirmed_then_retracted_events": 3,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 5.026694045174538,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1947.0266940451745
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2010.0266940451745
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2640.0266940451747
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 2,
+            "mean": 0.502192880490881,
+            "median": 0.502192880490881,
+            "p90": 0.5671052427843001
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 2,
+            "mean": 76.5,
+            "median": 76.5,
+            "p90": 88.9
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 1,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 2,
+            "mean": 76.5,
+            "median": 76.5,
+            "p90": 88.9
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 2,
+            "mean": 137.49998842592592,
+            "median": 137.49998842592592,
+            "p90": 149.89998842592593
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 2,
+            "expanded_interval_contains_label_interval": 0.0,
+            "raw_interval_contains_label_interval": 0.0,
+            "raw_interval_overlaps_label_interval": 0.5,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 2,
+              "mean": 45.5,
+              "median": 45.5,
+              "p90": 57.9
+            },
+            "raw_interval_width_days": {
+              "n": 2,
+              "mean": 60.99998842592593,
+              "median": 60.99998842592593,
+              "p90": 60.99998842592593
+            },
+            "expanded_interval_width_days": {
+              "n": 2,
+              "mean": 60.99998842592593,
+              "median": 60.99998842592593,
+              "p90": 60.99998842592593
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 13.388986238109588,
+            "calendar_observed_years": 1.9986303140923258,
+            "source_valid_area_km2_years": 26.759633770450794,
+            "model_usable_area_km2_years": 26.759633770450794,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 0.26158803442705253,
+          "false_confirmed_alerts_per_model_usable_km2_year": 0.26158803442705253,
+          "truth_events_by_class": {
+            "building_addition": 184,
+            "building_removal": 10
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        }
+      ],
+      "objective": "mean regional F1 within62days; retrospective uses ordinary eventF1"
+    },
+    "smoothing": {
+      "candidate_settings": [
+        {
+          "threshold": 0.55,
+          "objective": 0.001226993865030675,
+          "macro_event_f1": 0.017794573398267028
+        },
+        {
+          "threshold": 0.65,
+          "objective": 0.0,
+          "macro_event_f1": 0.004329004329004329
+        },
+        {
+          "threshold": 0.75,
+          "objective": 0.0,
+          "macro_event_f1": 0.00510204081632653
+        },
+        {
+          "threshold": 0.85,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        }
+      ],
+      "selected_development_reports": [
+        {
+          "region_id": "L15-0632E-0892N_2528_4620_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 4,
+            "fp": 687,
+            "fn": 120,
+            "predictions": 691,
+            "targets": 124,
+            "precision": 0.005788712011577424,
+            "recall": 0.03225806451612903,
+            "f1": 0.0098159509202454
+          },
+          "spatial_object": {
+            "tp": 12,
+            "fp": 679,
+            "fn": 112,
+            "predictions": 691,
+            "targets": 124,
+            "precision": 0.017366136034732273,
+            "recall": 0.0967741935483871,
+            "f1": 0.029447852760736196
+          },
+          "within_62_days": {
+            "tp": 1,
+            "fp": 690,
+            "fn": 123,
+            "predictions": 691,
+            "targets": 124,
+            "precision": 0.001447178002894356,
+            "recall": 0.008064516129032258,
+            "f1": 0.00245398773006135
+          },
+          "final_retained": {
+            "tp": 3,
+            "fp": 581,
+            "fn": 121,
+            "predictions": 584,
+            "targets": 124,
+            "precision": 0.005136986301369863,
+            "recall": 0.024193548387096774,
+            "f1": 0.00847457627118644
+          },
+          "ever_confirmed_events": 691,
+          "final_retained_events": 584,
+          "candidate_event_ids": 1006,
+          "proposed_event_ids": 1006,
+          "revision_rows": 2086,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 389,
+          "confirmed_then_retracted_event_ids": 107,
+          "confirmed_retraction_rate": 0.1548480463096961,
+          "false_confirmed_then_retracted_events": 106,
+          "matched_confirmed_then_retracted_events": 1,
+          "positive_detection_delay_building_months": 12.944558521560575,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2434.944558521561
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 8617.944558521562
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 70447.94455852156
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 4,
+            "mean": 0.6244949078639174,
+            "median": 0.6000000069405499,
+            "p90": 0.8322222013126745
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 4,
+            "mean": 98.5,
+            "median": 105.0,
+            "p90": 122.1
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 3,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 4,
+            "mean": 98.5,
+            "median": 105.0,
+            "p90": 122.1
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 4,
+            "mean": 159.74998842592592,
+            "median": 166.49998842592592,
+            "p90": 183.39998842592593
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 4,
+            "expanded_interval_contains_label_interval": 0.25,
+            "raw_interval_contains_label_interval": 0.25,
+            "raw_interval_overlaps_label_interval": 0.5,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 4,
+              "mean": 53.5,
+              "median": 61.0,
+              "p90": 76.2
+            },
+            "raw_interval_width_days": {
+              "n": 4,
+              "mean": 91.24998842592592,
+              "median": 91.99998842592592,
+              "p90": 91.99998842592592
+            },
+            "expanded_interval_width_days": {
+              "n": 4,
+              "mean": 91.24998842592592,
+              "median": 91.99998842592592,
+              "p90": 91.99998842592592
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 20.323969571256637,
+            "calendar_observed_years": 2.0835036568053336,
+            "source_valid_area_km2_years": 42.34506492251353,
+            "model_usable_area_km2_years": 42.34506492251353,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 16.223850435868474,
+          "false_confirmed_alerts_per_model_usable_km2_year": 16.223850435868474,
+          "truth_events_by_class": {
+            "building_addition": 124,
+            "building_removal": 0
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        },
+        {
+          "region_id": "L15-1389E-1284N_5557_3054_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 5,
+            "fp": 189,
+            "fn": 189,
+            "predictions": 194,
+            "targets": 194,
+            "precision": 0.02577319587628866,
+            "recall": 0.02577319587628866,
+            "f1": 0.02577319587628866
+          },
+          "spatial_object": {
+            "tp": 11,
+            "fp": 183,
+            "fn": 183,
+            "predictions": 194,
+            "targets": 194,
+            "precision": 0.05670103092783505,
+            "recall": 0.05670103092783505,
+            "f1": 0.05670103092783505
+          },
+          "within_62_days": {
+            "tp": 0,
+            "fp": 194,
+            "fn": 194,
+            "predictions": 194,
+            "targets": 194,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "final_retained": {
+            "tp": 5,
+            "fp": 143,
+            "fn": 189,
+            "predictions": 148,
+            "targets": 194,
+            "precision": 0.033783783783783786,
+            "recall": 0.02577319587628866,
+            "f1": 0.029239766081871343
+          },
+          "ever_confirmed_events": 194,
+          "final_retained_events": 148,
+          "candidate_event_ids": 337,
+          "proposed_event_ids": 337,
+          "revision_rows": 692,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 161,
+          "confirmed_then_retracted_event_ids": 46,
+          "confirmed_retraction_rate": 0.23711340206185566,
+          "false_confirmed_then_retracted_events": 46,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 18.069815195071868,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2327.069815195072
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 4028.069815195072
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 21038.06981519507
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 5,
+            "mean": 0.5041818361908842,
+            "median": 0.5522382937179362,
+            "p90": 0.5785712031162371
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 5,
+            "mean": 110.0,
+            "median": 121.0,
+            "p90": 122.6
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 5,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 5,
+            "mean": 110.0,
+            "median": 121.0,
+            "p90": 122.6
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 5,
+            "mean": 170.99998842592592,
+            "median": 181.99998842592592,
+            "p90": 183.59998842592591
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 5,
+            "expanded_interval_contains_label_interval": 0.0,
+            "raw_interval_contains_label_interval": 0.0,
+            "raw_interval_overlaps_label_interval": 0.2,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 5,
+              "mean": 70.1,
+              "median": 75.5,
+              "p90": 85.8
+            },
+            "raw_interval_width_days": {
+              "n": 5,
+              "mean": 79.19998842592592,
+              "median": 89.99998842592592,
+              "p90": 91.99998842592592
+            },
+            "expanded_interval_width_days": {
+              "n": 5,
+              "mean": 79.19998842592592,
+              "median": 89.99998842592592,
+              "p90": 91.99998842592592
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 13.388986238109588,
+            "calendar_observed_years": 1.9986303140923258,
+            "source_valid_area_km2_years": 26.759633770450794,
+            "model_usable_area_km2_years": 26.759633770450794,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 7.062876929530418,
+          "false_confirmed_alerts_per_model_usable_km2_year": 7.062876929530418,
+          "truth_events_by_class": {
+            "building_addition": 184,
+            "building_removal": 10
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        }
+      ],
+      "objective": "mean regional F1 within62days; retrospective uses ordinary eventF1"
+    },
+    "hmm": {
+      "candidate_settings": [
+        {
+          "threshold": 0.55,
+          "objective": 0.00200206299919105,
+          "macro_event_f1": 0.019330902950724697
+        },
+        {
+          "threshold": 0.65,
+          "objective": 0.0033084222455491666,
+          "macro_event_f1": 0.022451313707365222
+        },
+        {
+          "threshold": 0.75,
+          "objective": 0.003257328990228013,
+          "macro_event_f1": 0.019738764379321913
+        },
+        {
+          "threshold": 0.85,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        }
+      ],
+      "selected_development_reports": [
+        {
+          "region_id": "L15-0632E-0892N_2528_4620_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 8,
+            "fp": 637,
+            "fn": 116,
+            "predictions": 645,
+            "targets": 124,
+            "precision": 0.012403100775193798,
+            "recall": 0.06451612903225806,
+            "f1": 0.02080624187256177
+          },
+          "spatial_object": {
+            "tp": 17,
+            "fp": 628,
+            "fn": 107,
+            "predictions": 645,
+            "targets": 124,
+            "precision": 0.02635658914728682,
+            "recall": 0.13709677419354838,
+            "f1": 0.044213263979193757
+          },
+          "within_62_days": {
+            "tp": 1,
+            "fp": 644,
+            "fn": 123,
+            "predictions": 645,
+            "targets": 124,
+            "precision": 0.0015503875968992248,
+            "recall": 0.008064516129032258,
+            "f1": 0.002600780234070221
+          },
+          "final_retained": {
+            "tp": 8,
+            "fp": 613,
+            "fn": 116,
+            "predictions": 621,
+            "targets": 124,
+            "precision": 0.01288244766505636,
+            "recall": 0.06451612903225806,
+            "f1": 0.021476510067114093
+          },
+          "ever_confirmed_events": 645,
+          "final_retained_events": 621,
+          "candidate_event_ids": 883,
+          "proposed_event_ids": 883,
+          "revision_rows": 1755,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 227,
+          "confirmed_then_retracted_event_ids": 24,
+          "confirmed_retraction_rate": 0.037209302325581395,
+          "false_confirmed_then_retracted_events": 24,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 29.864476386036962,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1946.864476386037
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 7679.864476386037
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 65009.864476386036
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 8,
+            "mean": 0.5357593392742277,
+            "median": 0.5357142994206726,
+            "p90": 0.7566665980620619
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 8,
+            "mean": 113.625,
+            "median": 120.0,
+            "p90": 132.0
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 7,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 8,
+            "mean": 113.625,
+            "median": 120.0,
+            "p90": 132.0
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 8,
+            "mean": 174.74998842592592,
+            "median": 181.99998842592592,
+            "p90": 192.99998842592592
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 8,
+            "expanded_interval_contains_label_interval": 0.125,
+            "raw_interval_contains_label_interval": 0.125,
+            "raw_interval_overlaps_label_interval": 0.75,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 8,
+              "mean": 57.0625,
+              "median": 60.5,
+              "p90": 75.8
+            },
+            "raw_interval_width_days": {
+              "n": 8,
+              "mean": 105.99998842592592,
+              "median": 105.99998842592592,
+              "p90": 120.89998842592593
+            },
+            "expanded_interval_width_days": {
+              "n": 8,
+              "mean": 105.99998842592592,
+              "median": 105.99998842592592,
+              "p90": 120.89998842592593
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 20.323969571256637,
+            "calendar_observed_years": 2.0835036568053336,
+            "source_valid_area_km2_years": 42.34506492251353,
+            "model_usable_area_km2_years": 42.34506492251353,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 15.043075294975573,
+          "false_confirmed_alerts_per_model_usable_km2_year": 15.043075294975573,
+          "truth_events_by_class": {
+            "building_addition": 124,
+            "building_removal": 0
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        },
+        {
+          "region_id": "L15-1389E-1284N_5557_3054_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 6,
+            "fp": 298,
+            "fn": 188,
+            "predictions": 304,
+            "targets": 194,
+            "precision": 0.019736842105263157,
+            "recall": 0.030927835051546393,
+            "f1": 0.024096385542168676
+          },
+          "spatial_object": {
+            "tp": 19,
+            "fp": 285,
+            "fn": 175,
+            "predictions": 304,
+            "targets": 194,
+            "precision": 0.0625,
+            "recall": 0.0979381443298969,
+            "f1": 0.07630522088353414
+          },
+          "within_62_days": {
+            "tp": 1,
+            "fp": 303,
+            "fn": 193,
+            "predictions": 304,
+            "targets": 194,
+            "precision": 0.003289473684210526,
+            "recall": 0.005154639175257732,
+            "f1": 0.004016064257028112
+          },
+          "final_retained": {
+            "tp": 6,
+            "fp": 280,
+            "fn": 188,
+            "predictions": 286,
+            "targets": 194,
+            "precision": 0.02097902097902098,
+            "recall": 0.030927835051546393,
+            "f1": 0.025
+          },
+          "ever_confirmed_events": 304,
+          "final_retained_events": 286,
+          "candidate_event_ids": 416,
+          "proposed_event_ids": 416,
+          "revision_rows": 813,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 93,
+          "confirmed_then_retracted_event_ids": 18,
+          "confirmed_retraction_rate": 0.05921052631578947,
+          "false_confirmed_then_retracted_events": 18,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 20.993839835728952,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2288.993839835729
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 4970.993839835729
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 31790.99383983573
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 6,
+            "mean": 0.47570704003862896,
+            "median": 0.4866453606710216,
+            "p90": 0.5773806705558826
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 6,
+            "mean": 106.5,
+            "median": 120.5,
+            "p90": 122.5
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 5,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 6,
+            "mean": 106.5,
+            "median": 120.5,
+            "p90": 122.5
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 6,
+            "mean": 167.49998842592592,
+            "median": 181.49998842592592,
+            "p90": 183.49998842592592
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 6,
+            "expanded_interval_contains_label_interval": 0.16666666666666666,
+            "raw_interval_contains_label_interval": 0.16666666666666666,
+            "raw_interval_overlaps_label_interval": 0.6666666666666666,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 6,
+              "mean": 55.833333333333336,
+              "median": 60.75,
+              "p90": 76.5
+            },
+            "raw_interval_width_days": {
+              "n": 6,
+              "mean": 101.66665509259259,
+              "median": 91.99998842592592,
+              "p90": 121.49998842592592
+            },
+            "expanded_interval_width_days": {
+              "n": 6,
+              "mean": 101.66665509259259,
+              "median": 91.99998842592592,
+              "p90": 121.49998842592592
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 13.388986238109588,
+            "calendar_observed_years": 1.9986303140923258,
+            "source_valid_area_km2_years": 26.759633770450794,
+            "model_usable_area_km2_years": 26.759633770450794,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 11.136176322751664,
+          "false_confirmed_alerts_per_model_usable_km2_year": 11.136176322751664,
+          "truth_events_by_class": {
+            "building_addition": 184,
+            "building_removal": 10
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        }
+      ],
+      "objective": "mean regional F1 within62days; retrospective uses ordinary eventF1"
+    },
+    "watch_lstm": {
+      "candidate_settings": [
+        {
+          "threshold": 0.55,
+          "objective": 0.06019353287654766,
+          "macro_event_f1": 0.09063589373722802
+        },
+        {
+          "threshold": 0.65,
+          "objective": 0.010661272245154589,
+          "macro_event_f1": 0.06825947896448976
+        },
+        {
+          "threshold": 0.75,
+          "objective": 0.0,
+          "macro_event_f1": 0.019513574660633484
+        },
+        {
+          "threshold": 0.85,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        }
+      ],
+      "selected_development_reports": [
+        {
+          "region_id": "L15-0632E-0892N_2528_4620_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 8,
+            "fp": 104,
+            "fn": 116,
+            "predictions": 112,
+            "targets": 124,
+            "precision": 0.07142857142857142,
+            "recall": 0.06451612903225806,
+            "f1": 0.06779661016949153
+          },
+          "spatial_object": {
+            "tp": 10,
+            "fp": 102,
+            "fn": 114,
+            "predictions": 112,
+            "targets": 124,
+            "precision": 0.08928571428571429,
+            "recall": 0.08064516129032258,
+            "f1": 0.0847457627118644
+          },
+          "within_62_days": {
+            "tp": 5,
+            "fp": 107,
+            "fn": 119,
+            "predictions": 112,
+            "targets": 124,
+            "precision": 0.044642857142857144,
+            "recall": 0.04032258064516129,
+            "f1": 0.0423728813559322
+          },
+          "final_retained": {
+            "tp": 8,
+            "fp": 100,
+            "fn": 116,
+            "predictions": 108,
+            "targets": 124,
+            "precision": 0.07407407407407407,
+            "recall": 0.06451612903225806,
+            "f1": 0.06896551724137931
+          },
+          "ever_confirmed_events": 112,
+          "final_retained_events": 108,
+          "candidate_event_ids": 142,
+          "proposed_event_ids": 142,
+          "revision_rows": 276,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 22,
+          "confirmed_then_retracted_event_ids": 4,
+          "confirmed_retraction_rate": 0.03571428571428571,
+          "false_confirmed_then_retracted_events": 4,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 19.975359342915812,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1303.975359342916
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2239.975359342916
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 11599.975359342916
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 8,
+            "mean": 0.42935062857858886,
+            "median": 0.44222217260381297,
+            "p90": 0.5516665989987833
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 8,
+            "mean": 76.0,
+            "median": 61.5,
+            "p90": 122.3
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 3,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 8,
+            "mean": 76.0,
+            "median": 61.5,
+            "p90": 122.3
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 8,
+            "mean": 136.99998842592592,
+            "median": 122.49998842592592,
+            "p90": 183.99998842592592
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 8,
+            "expanded_interval_contains_label_interval": 0.25,
+            "raw_interval_contains_label_interval": 0.25,
+            "raw_interval_overlaps_label_interval": 0.75,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 8,
+              "mean": 38.0625,
+              "median": 30.75,
+              "p90": 76.5
+            },
+            "raw_interval_width_days": {
+              "n": 8,
+              "mean": 75.87498842592592,
+              "median": 75.49998842592592,
+              "p90": 91.29998842592592
+            },
+            "expanded_interval_width_days": {
+              "n": 8,
+              "mean": 75.87498842592592,
+              "median": 75.49998842592592,
+              "p90": 91.29998842592592
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 20.323969571256637,
+            "calendar_observed_years": 2.0835036568053336,
+            "source_valid_area_km2_years": 42.34506492251353,
+            "model_usable_area_km2_years": 42.34506492251353,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 2.4560122930572366,
+          "false_confirmed_alerts_per_model_usable_km2_year": 2.4560122930572366,
+          "truth_events_by_class": {
+            "building_addition": 124,
+            "building_removal": 0
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        },
+        {
+          "region_id": "L15-1389E-1284N_5557_3054_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 16,
+            "fp": 72,
+            "fn": 178,
+            "predictions": 88,
+            "targets": 194,
+            "precision": 0.18181818181818182,
+            "recall": 0.08247422680412371,
+            "f1": 0.11347517730496454
+          },
+          "spatial_object": {
+            "tp": 19,
+            "fp": 69,
+            "fn": 175,
+            "predictions": 88,
+            "targets": 194,
+            "precision": 0.2159090909090909,
+            "recall": 0.0979381443298969,
+            "f1": 0.1347517730496454
+          },
+          "within_62_days": {
+            "tp": 11,
+            "fp": 77,
+            "fn": 183,
+            "predictions": 88,
+            "targets": 194,
+            "precision": 0.125,
+            "recall": 0.05670103092783505,
+            "f1": 0.07801418439716312
+          },
+          "final_retained": {
+            "tp": 16,
+            "fp": 69,
+            "fn": 178,
+            "predictions": 85,
+            "targets": 194,
+            "precision": 0.18823529411764706,
+            "recall": 0.08247422680412371,
+            "f1": 0.11469534050179211
+          },
+          "ever_confirmed_events": 88,
+          "final_retained_events": 85,
+          "candidate_event_ids": 112,
+          "proposed_event_ids": 112,
+          "revision_rows": 218,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 18,
+          "confirmed_then_retracted_event_ids": 3,
+          "confirmed_retraction_rate": 0.03409090909090909,
+          "false_confirmed_then_retracted_events": 3,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 35.15400410677618,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1902.1540041067763
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2550.154004106776
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 9030.154004106776
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 16,
+            "mean": 0.46728120697547354,
+            "median": 0.4907407496068569,
+            "p90": 0.6043478121168322
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 16,
+            "mean": 66.875,
+            "median": 61.5,
+            "p90": 92.0
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 5,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 16,
+            "mean": 66.875,
+            "median": 61.5,
+            "p90": 92.0
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 16,
+            "mean": 127.87498842592592,
+            "median": 122.49998842592592,
+            "p90": 152.99998842592592
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 16,
+            "expanded_interval_contains_label_interval": 0.5625,
+            "raw_interval_contains_label_interval": 0.5625,
+            "raw_interval_overlaps_label_interval": 1.0,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 16,
+              "mean": 26.8125,
+              "median": 22.75,
+              "p90": 45.5
+            },
+            "raw_interval_width_days": {
+              "n": 16,
+              "mean": 87.99998842592592,
+              "median": 91.99998842592592,
+              "p90": 91.99998842592592
+            },
+            "expanded_interval_width_days": {
+              "n": 16,
+              "mean": 87.99998842592592,
+              "median": 91.99998842592592,
+              "p90": 91.99998842592592
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 13.388986238109588,
+            "calendar_observed_years": 1.9986303140923258,
+            "source_valid_area_km2_years": 26.759633770450794,
+            "model_usable_area_km2_years": 26.759633770450794,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 2.6906197826782545,
+          "false_confirmed_alerts_per_model_usable_km2_year": 2.6906197826782545,
+          "truth_events_by_class": {
+            "building_addition": 184,
+            "building_removal": 10
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        }
+      ],
+      "objective": "mean regional F1 within62days; retrospective uses ordinary eventF1"
+    },
+    "sn7_retrospective": {
+      "candidate_settings": [
+        {
+          "threshold": 0.55,
+          "objective": 0.0258874466716787,
+          "macro_event_f1": 0.0258874466716787
+        },
+        {
+          "threshold": 0.65,
+          "objective": 0.03044165819496216,
+          "macro_event_f1": 0.03044165819496216
+        },
+        {
+          "threshold": 0.75,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        },
+        {
+          "threshold": 0.85,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        }
+      ],
+      "selected_development_reports": [
+        {
+          "region_id": "L15-0632E-0892N_2528_4620_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 4,
+            "fp": 184,
+            "fn": 120,
+            "predictions": 188,
+            "targets": 124,
+            "precision": 0.02127659574468085,
+            "recall": 0.03225806451612903,
+            "f1": 0.02564102564102564
+          },
+          "spatial_object": {
+            "tp": 4,
+            "fp": 184,
+            "fn": 120,
+            "predictions": 188,
+            "targets": 124,
+            "precision": 0.02127659574468085,
+            "recall": 0.03225806451612903,
+            "f1": 0.02564102564102564
+          },
+          "within_62_days": {
+            "tp": 0,
+            "fp": 188,
+            "fn": 124,
+            "predictions": 188,
+            "targets": 124,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "final_retained": {
+            "tp": 4,
+            "fp": 174,
+            "fn": 120,
+            "predictions": 178,
+            "targets": 124,
+            "precision": 0.02247191011235955,
+            "recall": 0.03225806451612903,
+            "f1": 0.026490066225165563
+          },
+          "ever_confirmed_events": 188,
+          "final_retained_events": 178,
+          "candidate_event_ids": 507,
+          "proposed_event_ids": 507,
+          "revision_rows": 978,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 283,
+          "confirmed_then_retracted_event_ids": 10,
+          "confirmed_retraction_rate": 0.05319148936170213,
+          "false_confirmed_then_retracted_events": 10,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 73.16632443531827,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1507.1663244353183
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 3163.166324435318
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 19723.16632443532
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 4,
+            "mean": 0.45515726491204234,
+            "median": 0.4353145554725275,
+            "p90": 0.6284614460732076
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 4,
+            "mean": 556.75,
+            "median": 564.5,
+            "p90": 662.0
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 4,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 4,
+            "mean": 556.75,
+            "median": 564.5,
+            "p90": 662.0
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 4,
+            "mean": 617.249988425926,
+            "median": 625.499988425926,
+            "p90": 721.599988425926
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 4,
+            "expanded_interval_contains_label_interval": 0.5,
+            "raw_interval_contains_label_interval": 0.5,
+            "raw_interval_overlaps_label_interval": 0.75,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 4,
+              "mean": 38.0,
+              "median": 30.0,
+              "p90": 77.75000000000001
+            },
+            "raw_interval_width_days": {
+              "n": 4,
+              "mean": 75.49998842592592,
+              "median": 75.49998842592592,
+              "p90": 89.99998842592592
+            },
+            "expanded_interval_width_days": {
+              "n": 4,
+              "mean": 75.49998842592592,
+              "median": 75.49998842592592,
+              "p90": 89.99998842592592
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 20.323969571256637,
+            "calendar_observed_years": 2.0835036568053336,
+            "source_valid_area_km2_years": 42.34506492251353,
+            "model_usable_area_km2_years": 42.34506492251353,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 4.3452525184858795,
+          "false_confirmed_alerts_per_model_usable_km2_year": 4.3452525184858795,
+          "truth_events_by_class": {
+            "building_addition": 124,
+            "building_removal": 0
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        },
+        {
+          "region_id": "L15-1389E-1284N_5557_3054_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 4,
+            "fp": 29,
+            "fn": 190,
+            "predictions": 33,
+            "targets": 194,
+            "precision": 0.12121212121212122,
+            "recall": 0.020618556701030927,
+            "f1": 0.03524229074889868
+          },
+          "spatial_object": {
+            "tp": 4,
+            "fp": 29,
+            "fn": 190,
+            "predictions": 33,
+            "targets": 194,
+            "precision": 0.12121212121212122,
+            "recall": 0.020618556701030927,
+            "f1": 0.03524229074889868
+          },
+          "within_62_days": {
+            "tp": 0,
+            "fp": 33,
+            "fn": 194,
+            "predictions": 33,
+            "targets": 194,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "final_retained": {
+            "tp": 4,
+            "fp": 27,
+            "fn": 190,
+            "predictions": 31,
+            "targets": 194,
+            "precision": 0.12903225806451613,
+            "recall": 0.020618556701030927,
+            "f1": 0.035555555555555556
+          },
+          "ever_confirmed_events": 33,
+          "final_retained_events": 31,
+          "candidate_event_ids": 61,
+          "proposed_event_ids": 61,
+          "revision_rows": 115,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 21,
+          "confirmed_then_retracted_event_ids": 2,
+          "confirmed_retraction_rate": 0.06060606060606061,
+          "false_confirmed_then_retracted_events": 2,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 62.09445585215606,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2001.094455852156
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2262.094455852156
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 4872.094455852156
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 4,
+            "mean": 0.44008441641144364,
+            "median": 0.4069547730623597,
+            "p90": 0.5263153337151094
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 4,
+            "mean": 472.5,
+            "median": 472.5,
+            "p90": 509.0
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 4,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 4,
+            "mean": 472.5,
+            "median": 472.5,
+            "p90": 509.0
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 4,
+            "mean": 533.749988425926,
+            "median": 533.499988425926,
+            "p90": 570.699988425926
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 4,
+            "expanded_interval_contains_label_interval": 1.0,
+            "raw_interval_contains_label_interval": 1.0,
+            "raw_interval_overlaps_label_interval": 1.0,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 4,
+              "mean": 19.0,
+              "median": 15.25,
+              "p90": 36.50000000000001
+            },
+            "raw_interval_width_days": {
+              "n": 4,
+              "mean": 114.74998842592592,
+              "median": 122.49998842592592,
+              "p90": 152.99998842592592
+            },
+            "expanded_interval_width_days": {
+              "n": 4,
+              "mean": 114.74998842592592,
+              "median": 122.49998842592592,
+              "p90": 152.99998842592592
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 13.388986238109588,
+            "calendar_observed_years": 1.9986303140923258,
+            "source_valid_area_km2_years": 26.759633770450794,
+            "model_usable_area_km2_years": 26.759633770450794,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 1.0837218569120748,
+          "false_confirmed_alerts_per_model_usable_km2_year": 1.0837218569120748,
+          "truth_events_by_class": {
+            "building_addition": 184,
+            "building_removal": 10
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        }
+      ],
+      "objective": "mean regional F1 within62days; retrospective uses ordinary eventF1"
+    },
+    "no_quality": {
+      "candidate_settings": [
+        {
+          "threshold": 0.55,
+          "objective": 0.010937170567151593,
+          "macro_event_f1": 0.05100938224752266
+        },
+        {
+          "threshold": 0.65,
+          "objective": 0.0,
+          "macro_event_f1": 0.020933197348291688
+        },
+        {
+          "threshold": 0.75,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        },
+        {
+          "threshold": 0.85,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        }
+      ],
+      "selected_development_reports": [
+        {
+          "region_id": "L15-0632E-0892N_2528_4620_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 10,
+            "fp": 424,
+            "fn": 114,
+            "predictions": 434,
+            "targets": 124,
+            "precision": 0.02304147465437788,
+            "recall": 0.08064516129032258,
+            "f1": 0.035842293906810034
+          },
+          "spatial_object": {
+            "tp": 19,
+            "fp": 415,
+            "fn": 105,
+            "predictions": 434,
+            "targets": 124,
+            "precision": 0.04377880184331797,
+            "recall": 0.1532258064516129,
+            "f1": 0.06810035842293907
+          },
+          "within_62_days": {
+            "tp": 2,
+            "fp": 432,
+            "fn": 122,
+            "predictions": 434,
+            "targets": 124,
+            "precision": 0.004608294930875576,
+            "recall": 0.016129032258064516,
+            "f1": 0.007168458781362007
+          },
+          "final_retained": {
+            "tp": 10,
+            "fp": 422,
+            "fn": 114,
+            "predictions": 432,
+            "targets": 124,
+            "precision": 0.023148148148148147,
+            "recall": 0.08064516129032258,
+            "f1": 0.03597122302158273
+          },
+          "ever_confirmed_events": 434,
+          "final_retained_events": 432,
+          "candidate_event_ids": 521,
+          "proposed_event_ids": 521,
+          "revision_rows": 1013,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 58,
+          "confirmed_then_retracted_event_ids": 2,
+          "confirmed_retraction_rate": 0.004608294930875576,
+          "false_confirmed_then_retracted_events": 2,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 29.897330595482543,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1603.8973305954826
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 5419.897330595482
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 43579.897330595486
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 10,
+            "mean": 0.5085281188231876,
+            "median": 0.5416665919349053,
+            "p90": 0.5792857627402588
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 10,
+            "mean": 91.0,
+            "median": 91.0,
+            "p90": 122.0
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 8,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 10,
+            "mean": 91.0,
+            "median": 91.0,
+            "p90": 122.0
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 10,
+            "mean": 151.59998842592591,
+            "median": 150.99998842592592,
+            "p90": 181.09998842592591
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 10,
+            "expanded_interval_contains_label_interval": 0.1,
+            "raw_interval_contains_label_interval": 0.1,
+            "raw_interval_overlaps_label_interval": 0.6,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 10,
+              "mean": 49.75,
+              "median": 52.75,
+              "p90": 75.05
+            },
+            "raw_interval_width_days": {
+              "n": 10,
+              "mean": 81.69998842592592,
+              "median": 89.99998842592592,
+              "p90": 94.7999884259259
+            },
+            "expanded_interval_width_days": {
+              "n": 10,
+              "mean": 81.69998842592592,
+              "median": 89.99998842592592,
+              "p90": 94.7999884259259
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 20.323969571256637,
+            "calendar_observed_years": 2.0835036568053336,
+            "source_valid_area_km2_years": 42.34506492251353,
+            "model_usable_area_km2_years": 42.34506492251353,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 10.01297319477181,
+          "false_confirmed_alerts_per_model_usable_km2_year": 10.01297319477181,
+          "truth_events_by_class": {
+            "building_addition": 124,
+            "building_removal": 0
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        },
+        {
+          "region_id": "L15-1389E-1284N_5557_3054_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 9,
+            "fp": 69,
+            "fn": 185,
+            "predictions": 78,
+            "targets": 194,
+            "precision": 0.11538461538461539,
+            "recall": 0.04639175257731959,
+            "f1": 0.0661764705882353
+          },
+          "spatial_object": {
+            "tp": 23,
+            "fp": 55,
+            "fn": 171,
+            "predictions": 78,
+            "targets": 194,
+            "precision": 0.2948717948717949,
+            "recall": 0.11855670103092783,
+            "f1": 0.16911764705882354
+          },
+          "within_62_days": {
+            "tp": 2,
+            "fp": 76,
+            "fn": 192,
+            "predictions": 78,
+            "targets": 194,
+            "precision": 0.02564102564102564,
+            "recall": 0.010309278350515464,
+            "f1": 0.014705882352941176
+          },
+          "final_retained": {
+            "tp": 9,
+            "fp": 68,
+            "fn": 185,
+            "predictions": 77,
+            "targets": 194,
+            "precision": 0.11688311688311688,
+            "recall": 0.04639175257731959,
+            "f1": 0.06642066420664207
+          },
+          "ever_confirmed_events": 78,
+          "final_retained_events": 77,
+          "candidate_event_ids": 100,
+          "proposed_event_ids": 100,
+          "revision_rows": 190,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 12,
+          "confirmed_then_retracted_event_ids": 1,
+          "confirmed_retraction_rate": 0.01282051282051282,
+          "false_confirmed_then_retracted_events": 1,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 29.963039014373717,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1953.9630390143736
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2574.963039014374
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 8784.963039014374
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 9,
+            "mean": 0.4596916081064284,
+            "median": 0.4333332959317694,
+            "p90": 0.6166860263524683
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 9,
+            "mean": 101.33333333333333,
+            "median": 120.0,
+            "p90": 123.0
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 7,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 9,
+            "mean": 101.33333333333333,
+            "median": 120.0,
+            "p90": 123.0
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 9,
+            "mean": 162.33332175925926,
+            "median": 180.99998842592592,
+            "p90": 183.99998842592592
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 9,
+            "expanded_interval_contains_label_interval": 0.1111111111111111,
+            "raw_interval_contains_label_interval": 0.1111111111111111,
+            "raw_interval_overlaps_label_interval": 0.2222222222222222,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 9,
+              "mean": 60.888888888888886,
+              "median": 75.5,
+              "p90": 76.5
+            },
+            "raw_interval_width_days": {
+              "n": 9,
+              "mean": 81.22221064814815,
+              "median": 89.99998842592592,
+              "p90": 91.99998842592592
+            },
+            "expanded_interval_width_days": {
+              "n": 9,
+              "mean": 81.22221064814815,
+              "median": 89.99998842592592,
+              "p90": 91.99998842592592
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 13.388986238109588,
+            "calendar_observed_years": 1.9986303140923258,
+            "source_valid_area_km2_years": 26.759633770450794,
+            "model_usable_area_km2_years": 26.759633770450794,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 2.5785106250666607,
+          "false_confirmed_alerts_per_model_usable_km2_year": 2.5785106250666607,
+          "truth_events_by_class": {
+            "building_addition": 184,
+            "building_removal": 10
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        }
+      ],
+      "objective": "mean regional F1 within62days; retrospective uses ordinary eventF1"
+    },
+    "observation": {
+      "candidate_settings": [
+        {
+          "threshold": 0.55,
+          "objective": 0.010615711252653927,
+          "macro_event_f1": 0.023274946921443735
+        },
+        {
+          "threshold": 0.65,
+          "objective": 0.0,
+          "macro_event_f1": 0.012658227848101266
+        },
+        {
+          "threshold": 0.75,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        },
+        {
+          "threshold": 0.85,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        }
+      ],
+      "selected_development_reports": [
+        {
+          "region_id": "L15-0632E-0892N_2528_4620_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 9,
+            "fp": 338,
+            "fn": 115,
+            "predictions": 347,
+            "targets": 124,
+            "precision": 0.025936599423631124,
+            "recall": 0.07258064516129033,
+            "f1": 0.03821656050955414
+          },
+          "spatial_object": {
+            "tp": 16,
+            "fp": 331,
+            "fn": 108,
+            "predictions": 347,
+            "targets": 124,
+            "precision": 0.04610951008645533,
+            "recall": 0.12903225806451613,
+            "f1": 0.06794055201698514
+          },
+          "within_62_days": {
+            "tp": 5,
+            "fp": 342,
+            "fn": 119,
+            "predictions": 347,
+            "targets": 124,
+            "precision": 0.01440922190201729,
+            "recall": 0.04032258064516129,
+            "f1": 0.021231422505307854
+          },
+          "final_retained": {
+            "tp": 9,
+            "fp": 338,
+            "fn": 115,
+            "predictions": 347,
+            "targets": 124,
+            "precision": 0.025936599423631124,
+            "recall": 0.07258064516129033,
+            "f1": 0.03821656050955414
+          },
+          "ever_confirmed_events": 347,
+          "final_retained_events": 347,
+          "candidate_event_ids": 414,
+          "proposed_event_ids": 414,
+          "revision_rows": 821,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 60,
+          "confirmed_then_retracted_event_ids": 0,
+          "confirmed_retraction_rate": 0.0,
+          "false_confirmed_then_retracted_events": 0,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 22.965092402464066,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1510.965092402464
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 4552.9650924024645
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 34972.96509240246
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 9,
+            "mean": 0.5115279757338578,
+            "median": 0.5499998832761335,
+            "p90": 0.5904762075153467
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 9,
+            "mean": 77.66666666666667,
+            "median": 62.0,
+            "p90": 120.4
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 4,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 9,
+            "mean": 77.66666666666667,
+            "median": 62.0,
+            "p90": 120.4
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 9,
+            "mean": 138.7777662037037,
+            "median": 122.99998842592592,
+            "p90": 182.1999884259259
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 9,
+            "expanded_interval_contains_label_interval": 0.2222222222222222,
+            "raw_interval_contains_label_interval": 0.2222222222222222,
+            "raw_interval_overlaps_label_interval": 0.8888888888888888,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 9,
+              "mean": 35.666666666666664,
+              "median": 31.0,
+              "p90": 63.900000000000006
+            },
+            "raw_interval_width_days": {
+              "n": 9,
+              "mean": 84.22221064814815,
+              "median": 88.99998842592592,
+              "p90": 120.59998842592591
+            },
+            "expanded_interval_width_days": {
+              "n": 9,
+              "mean": 84.22221064814815,
+              "median": 88.99998842592592,
+              "p90": 120.59998842592591
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 20.323969571256637,
+            "calendar_observed_years": 2.0835036568053336,
+            "source_valid_area_km2_years": 42.34506492251353,
+            "model_usable_area_km2_years": 42.34506492251353,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 7.982039952436018,
+          "false_confirmed_alerts_per_model_usable_km2_year": 7.982039952436018,
+          "truth_events_by_class": {
+            "building_addition": 124,
+            "building_removal": 0
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        },
+        {
+          "region_id": "L15-1389E-1284N_5557_3054_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 1,
+            "fp": 45,
+            "fn": 193,
+            "predictions": 46,
+            "targets": 194,
+            "precision": 0.021739130434782608,
+            "recall": 0.005154639175257732,
+            "f1": 0.008333333333333333
+          },
+          "spatial_object": {
+            "tp": 6,
+            "fp": 40,
+            "fn": 188,
+            "predictions": 46,
+            "targets": 194,
+            "precision": 0.13043478260869565,
+            "recall": 0.030927835051546393,
+            "f1": 0.05
+          },
+          "within_62_days": {
+            "tp": 0,
+            "fp": 46,
+            "fn": 194,
+            "predictions": 46,
+            "targets": 194,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "final_retained": {
+            "tp": 1,
+            "fp": 45,
+            "fn": 193,
+            "predictions": 46,
+            "targets": 194,
+            "precision": 0.021739130434782608,
+            "recall": 0.005154639175257732,
+            "f1": 0.008333333333333333
+          },
+          "ever_confirmed_events": 46,
+          "final_retained_events": 46,
+          "candidate_event_ids": 55,
+          "proposed_event_ids": 55,
+          "revision_rows": 105,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 4,
+          "confirmed_then_retracted_event_ids": 0,
+          "confirmed_retraction_rate": 0.0,
+          "false_confirmed_then_retracted_events": 0,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 3.02258726899384,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1978.022587268994
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2383.022587268994
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 6433.022587268993
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 1,
+            "mean": 0.42105242762410694,
+            "median": 0.42105242762410694,
+            "p90": 0.42105242762410694
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 1,
+            "mean": 92.0,
+            "median": 92.0,
+            "p90": 92.0
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 1,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 1,
+            "mean": 92.0,
+            "median": 92.0,
+            "p90": 92.0
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 1,
+            "mean": 152.99998842592592,
+            "median": 152.99998842592592,
+            "p90": 152.99998842592592
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 1,
+            "expanded_interval_contains_label_interval": 0.0,
+            "raw_interval_contains_label_interval": 0.0,
+            "raw_interval_overlaps_label_interval": 1.0,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 1,
+              "mean": 45.5,
+              "median": 45.5,
+              "p90": 45.5
+            },
+            "raw_interval_width_days": {
+              "n": 1,
+              "mean": 91.99998842592592,
+              "median": 91.99998842592592,
+              "p90": 91.99998842592592
+            },
+            "expanded_interval_width_days": {
+              "n": 1,
+              "mean": 91.99998842592592,
+              "median": 91.99998842592592,
+              "p90": 91.99998842592592
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 13.388986238109588,
+            "calendar_observed_years": 1.9986303140923258,
+            "source_valid_area_km2_years": 26.759633770450794,
+            "model_usable_area_km2_years": 26.759633770450794,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 1.681637364173909,
+          "false_confirmed_alerts_per_model_usable_km2_year": 1.681637364173909,
+          "truth_events_by_class": {
+            "building_addition": 184,
+            "building_removal": 10
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        }
+      ],
+      "objective": "mean regional F1 within62days; retrospective uses ordinary eventF1"
+    },
+    "proposal_tracking": {
+      "candidate_settings": [
+        {
+          "threshold": 0.55,
+          "objective": 0.035368080028132555,
+          "macro_event_f1": 0.03737776181604603
+        }
+      ],
+      "selected_development_reports": [
+        {
+          "region_id": "L15-0632E-0892N_2528_4620_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 41,
+            "fp": 3423,
+            "fn": 83,
+            "predictions": 3464,
+            "targets": 124,
+            "precision": 0.011836027713625866,
+            "recall": 0.33064516129032256,
+            "f1": 0.022853957636566332
+          },
+          "spatial_object": {
+            "tp": 50,
+            "fp": 3414,
+            "fn": 74,
+            "predictions": 3464,
+            "targets": 124,
+            "precision": 0.014434180138568129,
+            "recall": 0.4032258064516129,
+            "f1": 0.027870680044593088
+          },
+          "within_62_days": {
+            "tp": 37,
+            "fp": 3427,
+            "fn": 87,
+            "predictions": 3464,
+            "targets": 124,
+            "precision": 0.010681293302540416,
+            "recall": 0.29838709677419356,
+            "f1": 0.020624303232998884
+          },
+          "final_retained": {
+            "tp": 37,
+            "fp": 2331,
+            "fn": 87,
+            "predictions": 2368,
+            "targets": 124,
+            "precision": 0.015625,
+            "recall": 0.29838709677419356,
+            "f1": 0.02969502407704655
+          },
+          "ever_confirmed_events": 3464,
+          "final_retained_events": 2368,
+          "candidate_event_ids": 9666,
+          "proposed_event_ids": 9666,
+          "revision_rows": 20083,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 6953,
+          "confirmed_then_retracted_event_ids": 1096,
+          "confirmed_retraction_rate": 0.3163972286374134,
+          "false_confirmed_then_retracted_events": 1092,
+          "matched_confirmed_then_retracted_events": 4,
+          "positive_detection_delay_building_months": 53.91375770020534,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 9786.913757700206
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 40593.913757700204
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 348663.9137577002
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 41,
+            "mean": 0.46710458695288937,
+            "median": 0.4444444370480388,
+            "p90": 0.6500000460764509
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 41,
+            "mean": 38.5609756097561,
+            "median": 31.0,
+            "p90": 61.0
+          },
+          "matched_early_alerts": 2,
+          "matched_late_over_62_days": 4,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 41,
+            "mean": 38.5609756097561,
+            "median": 31.0,
+            "p90": 61.0
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 41,
+            "mean": 99.43901281616984,
+            "median": 91.99998842592592,
+            "p90": 122.99998842592592
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 41,
+            "expanded_interval_contains_label_interval": 0.7560975609756098,
+            "raw_interval_contains_label_interval": 0.7560975609756098,
+            "raw_interval_overlaps_label_interval": 0.8780487804878049,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 41,
+              "mean": 13.28048780487805,
+              "median": 0.0,
+              "p90": 60.0
+            },
+            "raw_interval_width_days": {
+              "n": 41,
+              "mean": 65.14632988934056,
+              "median": 60.99998842592593,
+              "p90": 89.99998842592592
+            },
+            "expanded_interval_width_days": {
+              "n": 41,
+              "mean": 65.14632988934056,
+              "median": 60.99998842592593,
+              "p90": 89.99998842592592
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 20.323969571256637,
+            "calendar_observed_years": 2.0835036568053336,
+            "source_valid_area_km2_years": 42.34506492251353,
+            "model_usable_area_km2_years": 42.34506492251353,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 80.83586614552807,
+          "false_confirmed_alerts_per_model_usable_km2_year": 80.83586614552807,
+          "truth_events_by_class": {
+            "building_addition": 124,
+            "building_removal": 0
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        },
+        {
+          "region_id": "L15-1389E-1284N_5557_3054_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 58,
+            "fp": 1983,
+            "fn": 136,
+            "predictions": 2041,
+            "targets": 194,
+            "precision": 0.028417442430181284,
+            "recall": 0.29896907216494845,
+            "f1": 0.05190156599552573
+          },
+          "spatial_object": {
+            "tp": 70,
+            "fp": 1971,
+            "fn": 124,
+            "predictions": 2041,
+            "targets": 194,
+            "precision": 0.034296913277805,
+            "recall": 0.36082474226804123,
+            "f1": 0.06263982102908278
+          },
+          "within_62_days": {
+            "tp": 56,
+            "fp": 1985,
+            "fn": 138,
+            "predictions": 2041,
+            "targets": 194,
+            "precision": 0.027437530622243998,
+            "recall": 0.28865979381443296,
+            "f1": 0.05011185682326622
+          },
+          "final_retained": {
+            "tp": 53,
+            "fp": 1487,
+            "fn": 141,
+            "predictions": 1540,
+            "targets": 194,
+            "precision": 0.03441558441558441,
+            "recall": 0.27319587628865977,
+            "f1": 0.06113033448673587
+          },
+          "ever_confirmed_events": 2041,
+          "final_retained_events": 1540,
+          "candidate_event_ids": 4933,
+          "proposed_event_ids": 4933,
+          "revision_rows": 10139,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 3165,
+          "confirmed_then_retracted_event_ids": 501,
+          "confirmed_retraction_rate": 0.24546790788829007,
+          "false_confirmed_then_retracted_events": 496,
+          "matched_confirmed_then_retracted_events": 5,
+          "positive_detection_delay_building_months": 65.24845995893223,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 5913.248459958932
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 23760.248459958933
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 202230.24845995894
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 58,
+            "mean": 0.5117994902735261,
+            "median": 0.5201282592054082,
+            "p90": 0.6946153025292172
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 58,
+            "mean": 33.189655172413794,
+            "median": 31.0,
+            "p90": 61.0
+          },
+          "matched_early_alerts": 2,
+          "matched_late_over_62_days": 2,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 58,
+            "mean": 33.189655172413794,
+            "median": 31.0,
+            "p90": 61.0
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 58,
+            "mean": 94.24136773627076,
+            "median": 91.99998842592592,
+            "p90": 121.99998842592592
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 58,
+            "expanded_interval_contains_label_interval": 0.6206896551724138,
+            "raw_interval_contains_label_interval": 0.6206896551724138,
+            "raw_interval_overlaps_label_interval": 0.9655172413793104,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 58,
+              "mean": 13.379310344827585,
+              "median": 0.0,
+              "p90": 31.0
+            },
+            "raw_interval_width_days": {
+              "n": 58,
+              "mean": 62.67240221902938,
+              "median": 60.99998842592593,
+              "p90": 61.99998842592593
+            },
+            "expanded_interval_width_days": {
+              "n": 58,
+              "mean": 62.67240221902938,
+              "median": 60.99998842592593,
+              "p90": 61.99998842592593
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 13.388986238109588,
+            "calendar_observed_years": 1.9986303140923258,
+            "source_valid_area_km2_years": 26.759633770450794,
+            "model_usable_area_km2_years": 26.759633770450794,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 74.1041531812636,
+          "false_confirmed_alerts_per_model_usable_km2_year": 74.1041531812636,
+          "truth_events_by_class": {
+            "building_addition": 184,
+            "building_removal": 10
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        }
+      ],
+      "objective": "mean regional F1 within62days"
+    },
+    "observation_gate": {
+      "candidate_settings": [
+        {
+          "threshold": 0.02,
+          "objective": 0.05285316739061233,
+          "macro_event_f1": 0.057386812893420826
+        },
+        {
+          "threshold": 0.05,
+          "objective": 0.07489278228397889,
+          "macro_event_f1": 0.08652816224004167
+        },
+        {
+          "threshold": 0.1,
+          "objective": 0.09039004149377594,
+          "macro_event_f1": 0.11498755186721991
+        },
+        {
+          "threshold": 0.2,
+          "objective": 0.011548143486469478,
+          "macro_event_f1": 0.04011957205789805
+        },
+        {
+          "threshold": 0.35,
+          "objective": 0.008,
+          "macro_event_f1": 0.008
+        },
+        {
+          "threshold": 0.5,
+          "objective": 0.0,
+          "macro_event_f1": 0.0
+        }
+      ],
+      "selected_development_reports": [
+        {
+          "region_id": "L15-0632E-0892N_2528_4620_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 20,
+            "fp": 97,
+            "fn": 104,
+            "predictions": 117,
+            "targets": 124,
+            "precision": 0.17094017094017094,
+            "recall": 0.16129032258064516,
+            "f1": 0.16597510373443983
+          },
+          "spatial_object": {
+            "tp": 20,
+            "fp": 97,
+            "fn": 104,
+            "predictions": 117,
+            "targets": 124,
+            "precision": 0.17094017094017094,
+            "recall": 0.16129032258064516,
+            "f1": 0.16597510373443983
+          },
+          "within_62_days": {
+            "tp": 16,
+            "fp": 101,
+            "fn": 108,
+            "predictions": 117,
+            "targets": 124,
+            "precision": 0.13675213675213677,
+            "recall": 0.12903225806451613,
+            "f1": 0.13278008298755187
+          },
+          "final_retained": {
+            "tp": 20,
+            "fp": 77,
+            "fn": 104,
+            "predictions": 97,
+            "targets": 124,
+            "precision": 0.20618556701030927,
+            "recall": 0.16129032258064516,
+            "f1": 0.18099547511312217
+          },
+          "ever_confirmed_events": 117,
+          "final_retained_events": 97,
+          "candidate_event_ids": 9666,
+          "proposed_event_ids": 9666,
+          "revision_rows": 44468,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 6953,
+          "confirmed_then_retracted_event_ids": 20,
+          "confirmed_retraction_rate": 0.17094017094017094,
+          "false_confirmed_then_retracted_events": 20,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 36.238193018480494,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 1273.2381930184804
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2146.23819301848
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 10876.23819301848
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 20,
+            "mean": 0.5448303218974393,
+            "median": 0.5477272552354151,
+            "p90": 0.7027271689770751
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 20,
+            "mean": 55.15,
+            "median": 31.0,
+            "p90": 92.0
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 4,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 20,
+            "mean": 55.15,
+            "median": 31.0,
+            "p90": 92.0
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 20,
+            "mean": 116.04998842592593,
+            "median": 91.99998842592592,
+            "p90": 152.99998842592592
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 20,
+            "expanded_interval_contains_label_interval": 0.9,
+            "raw_interval_contains_label_interval": 0.9,
+            "raw_interval_overlaps_label_interval": 0.95,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 20,
+              "mean": 5.275,
+              "median": 0.0,
+              "p90": 16.550000000000022
+            },
+            "raw_interval_width_days": {
+              "n": 20,
+              "mean": 62.24998842592593,
+              "median": 60.99998842592593,
+              "p90": 61.99998842592593
+            },
+            "expanded_interval_width_days": {
+              "n": 20,
+              "mean": 62.24998842592593,
+              "median": 60.99998842592593,
+              "p90": 61.99998842592593
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 20.323969571256637,
+            "calendar_observed_years": 2.0835036568053336,
+            "source_valid_area_km2_years": 42.34506492251353,
+            "model_usable_area_km2_years": 42.34506492251353,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 2.29070377333223,
+          "false_confirmed_alerts_per_model_usable_km2_year": 2.29070377333223,
+          "truth_events_by_class": {
+            "building_addition": 124,
+            "building_removal": 0
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        },
+        {
+          "region_id": "L15-1389E-1284N_5557_3054_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 12,
+            "fp": 169,
+            "fn": 182,
+            "predictions": 181,
+            "targets": 194,
+            "precision": 0.06629834254143646,
+            "recall": 0.061855670103092786,
+            "f1": 0.064
+          },
+          "spatial_object": {
+            "tp": 13,
+            "fp": 168,
+            "fn": 181,
+            "predictions": 181,
+            "targets": 194,
+            "precision": 0.0718232044198895,
+            "recall": 0.06701030927835051,
+            "f1": 0.06933333333333333
+          },
+          "within_62_days": {
+            "tp": 9,
+            "fp": 172,
+            "fn": 185,
+            "predictions": 181,
+            "targets": 194,
+            "precision": 0.049723756906077346,
+            "recall": 0.04639175257731959,
+            "f1": 0.048
+          },
+          "final_retained": {
+            "tp": 10,
+            "fp": 142,
+            "fn": 184,
+            "predictions": 152,
+            "targets": 194,
+            "precision": 0.06578947368421052,
+            "recall": 0.05154639175257732,
+            "f1": 0.057803468208092484
+          },
+          "ever_confirmed_events": 181,
+          "final_retained_events": 152,
+          "candidate_event_ids": 4933,
+          "proposed_event_ids": 4933,
+          "revision_rows": 23909,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 3165,
+          "confirmed_then_retracted_event_ids": 29,
+          "confirmed_retraction_rate": 0.16022099447513813,
+          "false_confirmed_then_retracted_events": 27,
+          "matched_confirmed_then_retracted_events": 2,
+          "positive_detection_delay_building_months": 25.100616016427104,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2159.100616016427
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 3680.100616016427
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 18890.10061601643
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 12,
+            "mean": 0.48855282646234804,
+            "median": 0.5097400155295262,
+            "p90": 0.6462832275158765
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 12,
+            "mean": 63.666666666666664,
+            "median": 61.0,
+            "p90": 119.00000000000001
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 4,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 12,
+            "mean": 63.666666666666664,
+            "median": 61.0,
+            "p90": 119.00000000000001
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 12,
+            "mean": 124.83332175925926,
+            "median": 121.99998842592592,
+            "p90": 180.89998842592593
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 12,
+            "expanded_interval_contains_label_interval": 0.75,
+            "raw_interval_contains_label_interval": 0.75,
+            "raw_interval_overlaps_label_interval": 1.0,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 12,
+              "mean": 7.75,
+              "median": 0.0,
+              "p90": 31.0
+            },
+            "raw_interval_width_days": {
+              "n": 12,
+              "mean": 61.1666550925926,
+              "median": 60.99998842592593,
+              "p90": 61.899988425925926
+            },
+            "expanded_interval_width_days": {
+              "n": 12,
+              "mean": 61.1666550925926,
+              "median": 60.99998842592593,
+              "p90": 61.899988425925926
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 13.388986238109588,
+            "calendar_observed_years": 1.9986303140923258,
+            "source_valid_area_km2_years": 26.759633770450794,
+            "model_usable_area_km2_years": 26.759633770450794,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 6.315482545453126,
+          "false_confirmed_alerts_per_model_usable_km2_year": 6.315482545453126,
+          "truth_events_by_class": {
+            "building_addition": 184,
+            "building_removal": 10
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        }
+      ],
+      "objective": "mean regional F1 within62days"
+    },
+    "gate_no_quality": {
+      "candidate_settings": [
+        {
+          "threshold": 0.02,
+          "objective": 0.060016567552177,
+          "macro_event_f1": 0.06640952249612783
+        },
+        {
+          "threshold": 0.05,
+          "objective": 0.08623037639493096,
+          "macro_event_f1": 0.11148414349662696
+        },
+        {
+          "threshold": 0.1,
+          "objective": 0.07197497256689457,
+          "macro_event_f1": 0.13659576264033088
+        },
+        {
+          "threshold": 0.2,
+          "objective": 0.041008103914018046,
+          "macro_event_f1": 0.12667394677855048
+        },
+        {
+          "threshold": 0.35,
+          "objective": 0.004739336492890996,
+          "macro_event_f1": 0.08770734597156399
+        },
+        {
+          "threshold": 0.5,
+          "objective": 0.0,
+          "macro_event_f1": 0.03997617806893471
+        }
+      ],
+      "selected_development_reports": [
+        {
+          "region_id": "L15-0632E-0892N_2528_4620_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 35,
+            "fp": 861,
+            "fn": 89,
+            "predictions": 896,
+            "targets": 124,
+            "precision": 0.0390625,
+            "recall": 0.28225806451612906,
+            "f1": 0.06862745098039216
+          },
+          "spatial_object": {
+            "tp": 43,
+            "fp": 853,
+            "fn": 81,
+            "predictions": 896,
+            "targets": 124,
+            "precision": 0.04799107142857143,
+            "recall": 0.3467741935483871,
+            "f1": 0.08431372549019608
+          },
+          "within_62_days": {
+            "tp": 24,
+            "fp": 872,
+            "fn": 100,
+            "predictions": 896,
+            "targets": 124,
+            "precision": 0.026785714285714284,
+            "recall": 0.1935483870967742,
+            "f1": 0.047058823529411764
+          },
+          "final_retained": {
+            "tp": 35,
+            "fp": 729,
+            "fn": 89,
+            "predictions": 764,
+            "targets": 124,
+            "precision": 0.04581151832460733,
+            "recall": 0.28225806451612906,
+            "f1": 0.07882882882882883
+          },
+          "ever_confirmed_events": 896,
+          "final_retained_events": 764,
+          "candidate_event_ids": 9666,
+          "proposed_event_ids": 9666,
+          "revision_rows": 39293,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 6953,
+          "confirmed_then_retracted_event_ids": 132,
+          "confirmed_retraction_rate": 0.14732142857142858,
+          "false_confirmed_then_retracted_events": 132,
+          "matched_confirmed_then_retracted_events": 0,
+          "positive_detection_delay_building_months": 106.02053388090349,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2517.0205338809037
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 10266.020533880903
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 87756.0205338809
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 35,
+            "mean": 0.4728599294136884,
+            "median": 0.461538397121119,
+            "p90": 0.6600000243565018
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 35,
+            "mean": 92.2,
+            "median": 31.0,
+            "p90": 244.6
+          },
+          "matched_early_alerts": 0,
+          "matched_late_over_62_days": 11,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 35,
+            "mean": 92.2,
+            "median": 31.0,
+            "p90": 244.6
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 35,
+            "mean": 153.11427414021168,
+            "median": 91.99998842592592,
+            "p90": 303.99998842592595
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 35,
+            "expanded_interval_contains_label_interval": 0.8285714285714286,
+            "raw_interval_contains_label_interval": 0.8285714285714286,
+            "raw_interval_overlaps_label_interval": 0.9142857142857143,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 35,
+              "mean": 10.357142857142858,
+              "median": 0.0,
+              "p90": 30.5
+            },
+            "raw_interval_width_days": {
+              "n": 35,
+              "mean": 65.85713128306878,
+              "median": 60.99998842592593,
+              "p90": 91.19998842592592
+            },
+            "expanded_interval_width_days": {
+              "n": 35,
+              "mean": 65.85713128306878,
+              "median": 60.99998842592593,
+              "p90": 91.19998842592592
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 20.323969571256637,
+            "calendar_observed_years": 2.0835036568053336,
+            "source_valid_area_km2_years": 42.34506492251353,
+            "model_usable_area_km2_years": 42.34506492251353,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 20.332947926175773,
+          "false_confirmed_alerts_per_model_usable_km2_year": 20.332947926175773,
+          "truth_events_by_class": {
+            "building_addition": 124,
+            "building_removal": 0
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        },
+        {
+          "region_id": "L15-1389E-1284N_5557_3054_13",
+          "truth_protocols": [
+            "physical_coverage_v2"
+          ],
+          "matching": {
+            "iou_threshold": 0.25,
+            "first_support_tolerance_days": 93,
+            "one_to_one": true,
+            "geometry_area": "WGS84 geodesic",
+            "first_support": "unexpanded interval upper; monthly observation proxy"
+          },
+          "event": {
+            "tp": 48,
+            "fp": 380,
+            "fn": 146,
+            "predictions": 428,
+            "targets": 194,
+            "precision": 0.11214953271028037,
+            "recall": 0.24742268041237114,
+            "f1": 0.15434083601286175
+          },
+          "spatial_object": {
+            "tp": 52,
+            "fp": 376,
+            "fn": 142,
+            "predictions": 428,
+            "targets": 194,
+            "precision": 0.12149532710280374,
+            "recall": 0.26804123711340205,
+            "f1": 0.16720257234726688
+          },
+          "within_62_days": {
+            "tp": 39,
+            "fp": 389,
+            "fn": 155,
+            "predictions": 428,
+            "targets": 194,
+            "precision": 0.0911214953271028,
+            "recall": 0.20103092783505155,
+            "f1": 0.12540192926045016
+          },
+          "final_retained": {
+            "tp": 45,
+            "fp": 339,
+            "fn": 149,
+            "predictions": 384,
+            "targets": 194,
+            "precision": 0.1171875,
+            "recall": 0.23195876288659795,
+            "f1": 0.15570934256055363
+          },
+          "ever_confirmed_events": 428,
+          "final_retained_events": 384,
+          "candidate_event_ids": 4933,
+          "proposed_event_ids": 4933,
+          "revision_rows": 22812,
+          "duplicate_confirmed_events": 0,
+          "duplicate_rate": 0.0,
+          "retracted_event_ids": 3165,
+          "confirmed_then_retracted_event_ids": 44,
+          "confirmed_retraction_rate": 0.102803738317757,
+          "false_confirmed_then_retracted_events": 41,
+          "matched_confirmed_then_retracted_events": 3,
+          "positive_detection_delay_building_months": 95.01437371663245,
+          "analyst_cost_sensitivity": [
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 1,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 2155.0143737166327
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 10,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 5575.014373716633
+            },
+            {
+              "units": "illustrative dimensionless work units, not measured currency or user preferences",
+              "false_alert_weight": 100,
+              "miss_weight": 10,
+              "delay_building_month_weight": 1,
+              "correction_weight": 5,
+              "total": 39775.01437371663
+            }
+          ],
+          "matched_footprint_iou": {
+            "n": 48,
+            "mean": 0.5314058578373985,
+            "median": 0.5313723173723092,
+            "p90": 0.7017648035432922
+          },
+          "detection_delay_from_label_first_support_end_days": {
+            "n": 48,
+            "mean": 58.979166666666664,
+            "median": 31.0,
+            "p90": 120.60000000000001
+          },
+          "matched_early_alerts": 2,
+          "matched_late_over_62_days": 9,
+          "delay_relative_to_label_interval_lower_bound_days": {
+            "n": 48,
+            "mean": 58.979166666666664,
+            "median": 31.0,
+            "p90": 120.60000000000001
+          },
+          "delay_relative_to_label_interval_upper_bound_days": {
+            "n": 48,
+            "mean": 120.04165509259262,
+            "median": 91.99998842592592,
+            "p90": 180.99998842592592
+          },
+          "timing": {
+            "target": "monthly observation-supported visibility interval; physical date unknown",
+            "matched_targets": 48,
+            "expanded_interval_contains_label_interval": 0.6041666666666666,
+            "raw_interval_contains_label_interval": 0.6041666666666666,
+            "raw_interval_overlaps_label_interval": 0.9583333333333334,
+            "raw_midpoint_absolute_error_days_interval_proxy": {
+              "n": 48,
+              "mean": 14.270833333333334,
+              "median": 0.0,
+              "p90": 31.0
+            },
+            "raw_interval_width_days": {
+              "n": 48,
+              "mean": 63.02082175925926,
+              "median": 60.99998842592593,
+              "p90": 61.99998842592593
+            },
+            "expanded_interval_width_days": {
+              "n": 48,
+              "mean": 63.02082175925926,
+              "median": 60.99998842592593,
+              "p90": 61.99998842592593
+            },
+            "is_physical_date_coverage": false
+          },
+          "exposure": {
+            "geodesic_area_km2": 13.388986238109588,
+            "calendar_observed_years": 1.9986303140923258,
+            "source_valid_area_km2_years": 26.759633770450794,
+            "model_usable_area_km2_years": 26.759633770450794,
+            "registration_rejected_frames": 0,
+            "valid_area_fraction_method": "source-valid pixel fraction on a compact native AOI"
+          },
+          "false_confirmed_alerts_per_source_valid_km2_year": 14.200493297468567,
+          "false_confirmed_alerts_per_model_usable_km2_year": 14.200493297468567,
+          "truth_events_by_class": {
+            "building_addition": 184,
+            "building_removal": 10
+          },
+          "limits": [
+            "Native rasterized matched IDs omit labels without any rasterized pixel.",
+            "First label geometry and future label identity are evaluation-only references.",
+            "Source-valid reference coverage establishes observable absence; masked months are unknown.",
+            "Registration-rejected frames remain in the source-observed truth denominator.",
+            "Delay assumes retrospective month-end availability; original publication lag is unknown.",
+            "Timing containment measures label-interval support, not physical event-date coverage."
+          ]
+        }
+      ],
+      "objective": "mean regional F1 within62days"
+    }
+  },
+  "timing_calibration": {
+    "pairwise": {
+      "target_empirical_containment": 0.9,
+      "matched_development_events": 4,
+      "padding_days": 61,
+      "interpretation": "empirical censored-label endpoint padding, not guaranteed physical-date coverage under geographic shift"
+    },
+    "spatial_tracking": {
+      "target_empirical_containment": 0.9,
+      "matched_development_events": 1,
+      "padding_days": 0,
+      "interpretation": "empirical censored-label endpoint padding, not guaranteed physical-date coverage under geographic shift"
+    },
+    "ted": {
+      "target_empirical_containment": 0.9,
+      "matched_development_events": 2,
+      "padding_days": 61,
+      "interpretation": "empirical censored-label endpoint padding, not guaranteed physical-date coverage under geographic shift"
+    },
+    "smoothing": {
+      "target_empirical_containment": 0.9,
+      "matched_development_events": 9,
+      "padding_days": 92,
+      "interpretation": "empirical censored-label endpoint padding, not guaranteed physical-date coverage under geographic shift"
+    },
+    "hmm": {
+      "target_empirical_containment": 0.9,
+      "matched_development_events": 14,
+      "padding_days": 61,
+      "interpretation": "empirical censored-label endpoint padding, not guaranteed physical-date coverage under geographic shift"
+    },
+    "watch_lstm": {
+      "target_empirical_containment": 0.9,
+      "matched_development_events": 24,
+      "padding_days": 31,
+      "interpretation": "empirical censored-label endpoint padding, not guaranteed physical-date coverage under geographic shift"
+    },
+    "sn7_retrospective": {
+      "target_empirical_containment": 0.9,
+      "matched_development_events": 8,
+      "padding_days": 92,
+      "interpretation": "empirical censored-label endpoint padding, not guaranteed physical-date coverage under geographic shift"
+    },
+    "no_quality": {
+      "target_empirical_containment": 0.9,
+      "matched_development_events": 19,
+      "padding_days": 61,
+      "interpretation": "empirical censored-label endpoint padding, not guaranteed physical-date coverage under geographic shift"
+    },
+    "observation": {
+      "target_empirical_containment": 0.9,
+      "matched_development_events": 10,
+      "padding_days": 62,
+      "interpretation": "empirical censored-label endpoint padding, not guaranteed physical-date coverage under geographic shift"
+    },
+    "proposal_tracking": {
+      "target_empirical_containment": 0.9,
+      "matched_development_events": 99,
+      "padding_days": 31,
+      "interpretation": "empirical censored-label endpoint padding; no geographic-shift guarantee"
+    },
+    "observation_gate": {
+      "target_empirical_containment": 0.9,
+      "matched_development_events": 32,
+      "padding_days": 31,
+      "interpretation": "empirical censored-label endpoint padding; no geographic-shift guarantee"
+    },
+    "gate_no_quality": {
+      "target_empirical_containment": 0.9,
+      "matched_development_events": 83,
+      "padding_days": 31,
+      "interpretation": "empirical censored-label endpoint padding; no geographic-shift guarantee"
+    }
+  },
+  "confirmation_untouched": true,
+  "matched_detection_horizon_days": 62,
+  "weights_sha256": "11af3e5e4e105795f4c74d00887afc786b906e786cb2c2c5afb4c085a5115295",
+  "spatial_weights_sha256": "7ab95679a2009918dbab62fca64244476df519080cb8c0d376c00d1494983886",
+  "config_sha256": "71dfe56a1ff2e7d6cb75547e2bc81b02a1ca6b96f8ffed61367fc8ebbc7899b3"
+}

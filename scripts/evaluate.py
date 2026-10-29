@@ -7,7 +7,6 @@ manifest is supplied. This script never fits models, thresholds or calibration.
 from __future__ import annotations
 
 import argparse
-from dataclasses import asdict
 from datetime import datetime, timezone
 import json
 from pathlib import Path
@@ -16,9 +15,13 @@ import time
 import numpy as np
 
 from terradelta.data import sha256
-from terradelta.decoder import DecoderConfig, decode_events
-from terradelta.evaluation import evaluate_events, ground_truth_events, summarize_regions
-from terradelta.pipeline import method_scores
+from terradelta.evaluation import (
+    evaluate_events,
+    ground_truth_events,
+    ground_truth_audit,
+    summarize_regions,
+)
+from terradelta.pipeline import method_events
 from terradelta.protocol import validate_experiment
 
 DEFAULT_METHODS = [
@@ -31,6 +34,9 @@ DEFAULT_METHODS = [
     "observation",
     "no_quality",
     "watch_lstm",
+    "proposal_tracking",
+    "observation_gate",
+    "gate_no_quality",
 ]
 
 
@@ -39,6 +45,7 @@ def main() -> None:
     parser.add_argument("--features-root", type=Path, required=True)
     parser.add_argument("--cache-root", type=Path, required=True)
     parser.add_argument("--weights", type=Path, required=True)
+    parser.add_argument("--event-gate-weights", type=Path)
     parser.add_argument("--spatial-weights", type=Path, required=True)
     parser.add_argument("--calibration", type=Path, required=True)
     parser.add_argument("--config", type=Path, required=True)
@@ -60,6 +67,7 @@ def main() -> None:
             cache_root=args.cache_root,
             regions=config["confirmation"],
             temporal_weights=args.weights,
+            event_gate_weights=args.event_gate_weights,
             spatial_weights=args.spatial_weights,
             calibration=args.calibration,
             config=args.config,
@@ -68,7 +76,6 @@ def main() -> None:
         else None
     )
     calibration = json.loads(args.calibration.read_text())
-    occupancy_calibration = calibration.get("occupancy", calibration.get("calibration", {}))
     # All confirmation access begins below this point, after immutable hash checks.
     per_method = {method: {} for method in args.methods}
     args.output.mkdir(parents=True, exist_ok=True)
@@ -77,6 +84,9 @@ def main() -> None:
         "regions": config[args.split],
         "methods": args.methods,
         "temporal_weights_sha256": sha256(args.weights),
+        "event_gate_weights_sha256": sha256(args.event_gate_weights)
+        if args.event_gate_weights
+        else None,
         "calibration_sha256": sha256(args.calibration),
         "config_sha256": sha256(args.config),
         "evaluation_sha256": sha256(
@@ -96,6 +106,10 @@ def main() -> None:
             raise ValueError("region identities disagree with split selection")
         metadata["candidate_geometries"] = info["geometries"]
         truth = ground_truth_events(cache)
+        audit = ground_truth_audit(cache)
+        (args.output / f"{region}-truth-audit.json").write_text(
+            json.dumps(audit, indent=2, allow_nan=False) + "\n"
+        )
         provenance["regions_inputs"][region] = {
             "features_sha256": sha256(features / "features.npz"),
             "sites_sha256": sha256(features / "sites.json"),
@@ -105,28 +119,22 @@ def main() -> None:
         }
         for method in args.methods:
             started = time.perf_counter()
-            scores = method_scores(
+            events = method_events(
                 feature_data["x"],
-                feature_data["usable"],
-                method,
-                args.weights,
-                occupancy_calibration,
-            )
-            settings = DecoderConfig(
-                **calibration.get("decoders", {}).get(method, calibration.get("decoder", {}))
-            )
-            events = decode_events(
-                scores,
                 feature_data["usable"],
                 feature_data["births"],
                 info,
-                settings,
+                method,
+                temporal_weights=args.weights,
+                calibration=calibration,
+                event_gate_weights=args.event_gate_weights,
                 model_revision=f"evaluation:{sha256(args.weights)[:12]}:{method}",
-                retrospective=method == "sn7_retrospective",
             )
             result = evaluate_events(events, truth, metadata)
             result["runtime_seconds_temporal_decode_evaluation"] = time.perf_counter() - started
-            result["decoder"] = asdict(settings)
+            result["decoder"] = calibration.get("event_gates", {}).get(
+                method, calibration.get("decoders", {}).get(method, {})
+            )
             result["method"] = method
             per_method[method][region] = result
             folder = args.output / method

@@ -92,13 +92,20 @@ def test_learned_methods_causal_and_skip_unknown():
     torch.set_num_threads(1)
     x = torch.rand(2, 8, 17)
     good = torch.ones(2, 8, dtype=torch.bool)
-    for model in [ObservationTransition(), WatchLSTM()]:
+    for model in [
+        ObservationTransition(),
+        ObservationTransition(spatial_residual=False),
+        WatchLSTM(),
+    ]:
+        if isinstance(model, ObservationTransition):
+            torch.nn.init.normal_(model.head.weight, std=0.2)
         model.eval()
         with torch.inference_mode():
             full = model(x, good)
             prefix = model(x[:, :4], good[:, :4])
         torch.testing.assert_close(full[:, :4], prefix, atol=1e-6, rtol=1e-5)
     model = ObservationTransition().eval()
+    torch.nn.init.normal_(model.head.weight, std=0.2)
     good[:, 3:6] = False
     with torch.inference_mode():
         out = model(x, good)

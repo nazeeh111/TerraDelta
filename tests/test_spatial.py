@@ -72,12 +72,50 @@ def test_inference_rejects_ambiguous_band_contract():
         predict_scene(PointwiseModel(), np.zeros((3, 10, 10), dtype=np.float32))
 
 
-def test_unet_context_tiles_match_single_scene_on_pooling_grid():
+@pytest.mark.parametrize("input_scale", [1, 2])
+def test_unet_context_tiles_match_single_scene_on_pooling_grid(input_scale):
     torch.set_num_threads(2)
     torch.manual_seed(49)
-    model = BuildingUNet(base_channels=2).eval()
+    model = BuildingUNet(base_channels=2, input_scale=input_scale).eval()
     rgb = np.random.default_rng(5).integers(0, 256, (3, 149, 173), dtype=np.uint8)
     with torch.no_grad():
         expected = model(torch.from_numpy(rgb.astype(np.float32) / 255)[None]).sigmoid()[0].numpy()
     tiled = predict_scene(model, rgb, tile_size=64)
     np.testing.assert_allclose(tiled, expected, rtol=1e-5, atol=2e-6)
+
+
+def test_scaled_native_probabilities_are_arithmetic_cell_means(monkeypatch):
+    model = BuildingUNet(base_channels=2, input_scale=2)
+    cells = torch.tensor([[[[0.1, 0.3, 0.2, 0.6], [0.5, 0.7, 0.4, 0.8]],
+                           [[0.9, 0.7, 0.8, 0.4], [0.5, 0.3, 0.6, 0.2]]]])
+    captured = []
+
+    def synthetic_grid(image):
+        captured.append(image.detach())
+        return torch.logit(cells)
+
+    monkeypatch.setattr(model, "_forward_model_grid", synthetic_grid)
+    image = torch.tensor([[[[0., 1.]], [[0., 1.]], [[0., 1.]]]])
+    probabilities = model(image).sigmoid()
+    torch.testing.assert_close(probabilities, torch.tensor([[[[0.4, 0.5]], [[0.6, 0.5]]]]))
+    assert captured[0].shape == (1, 3, 2, 4)
+    torch.testing.assert_close(captured[0][0, 0, 0], torch.tensor([0., 0.25, 0.75, 1.]))
+
+
+def test_scaled_checkpoint_and_changed_input(tmp_path):
+    torch.set_num_threads(2)
+    torch.manual_seed(73)
+    model = BuildingUNet(base_channels=2, input_scale=2).eval()
+    path = tmp_path / "scaled.pt"
+    torch.save({"format": "terradelta-spatial-v2",
+                "architecture": {"base_channels": 2, "input_scale": 2},
+                "state_dict": model.state_dict()}, path)
+    loaded = load_model(path)
+    assert loaded.input_scale == 2
+    rng = np.random.default_rng(81)
+    image = rng.integers(0, 256, (3, 31, 39), dtype=np.uint8)
+    a = predict_scene(loaded, image, tile_size=32)
+    b = predict_scene(loaded, np.zeros_like(image), tile_size=32)
+    assert a.shape == (2, 31, 39)
+    assert np.isfinite(a).all() and a.min() >= 0 and a.max() <= 1
+    assert np.max(np.abs(a - b)) > 1e-7

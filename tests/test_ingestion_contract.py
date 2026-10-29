@@ -5,6 +5,7 @@ import pytest
 import rasterio
 from rasterio.transform import from_origin
 from scipy.ndimage import gaussian_filter, shift
+from rasterio.enums import ColorInterp
 
 from terradelta.data import ingest_region, sequence_registration
 from terradelta.pipeline import prefix_frames
@@ -50,6 +51,10 @@ def test_empty_labels_and_clouds_do_not_create_observed_background(tmp_path):
     assert not np.load(cache / "valid.npy").any()
     assert not metadata["frames"][0]["registration"]["usable"]
     assert metadata["frames"][0]["empty_label_collection"]
+    assert metadata["frames"][0]["uri"].startswith("file://")
+    assert metadata["frames"][0]["license"] is None
+    with pytest.raises(ValueError, match="new/empty"):
+        ingest_region(root, cache, labels=True)
 
 
 def test_roundoff_is_allowed_but_a_pixel_grid_shift_is_rejected(tmp_path):
@@ -60,6 +65,21 @@ def test_roundoff_is_allowed_but_a_pixel_grid_shift_is_rejected(tmp_path):
     write_source(root, 3, transform=from_origin(4, 200, 4, 4))
     with pytest.raises(ValueError, match="Incompatible grids"):
         ingest_region(root, tmp_path / "different")
+
+
+def test_fourth_spectral_band_cannot_be_mistaken_for_validity(tmp_path):
+    root = tmp_path / "area"
+    write_source(root, 1)
+    image = next((root / "images_masked").glob("*.tif"))
+    with rasterio.open(image, "r+") as ds:
+        ds.colorinterp = (
+            ColorInterp.red,
+            ColorInterp.green,
+            ColorInterp.blue,
+            ColorInterp.undefined,
+        )
+    with pytest.raises(ValueError, match="alpha band roles"):
+        ingest_region(root, tmp_path / "cache")
 
 
 def test_cumulative_small_shifts_cannot_become_event_support():

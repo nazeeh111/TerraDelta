@@ -18,9 +18,10 @@ class ObservationTransition(nn.Module):
     enforces dwell and abstention. Neither this class nor the decoder predicts causes.
     """
 
-    def __init__(self, no_quality: bool = False):
+    def __init__(self, no_quality: bool = False, spatial_residual: bool = True):
         super().__init__()
         self.no_quality = no_quality
+        self.spatial_residual = spatial_residual
         self.cell = nn.GRUCell(len(FEATURE_NAMES), 32)
         self.head = nn.Linear(32, 2)
         nn.init.zeros_(self.head.weight)
@@ -40,7 +41,10 @@ class ObservationTransition(nn.Module):
             emission = self.head(hidden)
             # Residual spatial log odds protect a meaningful simple baseline.
             spatial = x[:, t, 0].clamp(0.01, 0.99)
-            emission = torch.stack((emission[:, 0] + torch.logit(spatial), emission[:, 1]), dim=1)
+            if self.spatial_residual:
+                emission = torch.stack(
+                    (emission[:, 0] + torch.logit(spatial), emission[:, 1]), dim=1
+                )
             previous = torch.where(observed, emission, previous)
             outputs.append(previous)
         return torch.stack(outputs, dim=1)
@@ -79,11 +83,11 @@ class WatchLSTM(nn.Module):
         return torch.cat((occupancy, torch.zeros_like(occupancy)), dim=-1)
 
 
-def make_temporal(kind: str) -> nn.Module:
+def make_temporal(kind: str, *, spatial_residual: bool = True) -> nn.Module:
     if kind == "observation":
-        return ObservationTransition()
+        return ObservationTransition(spatial_residual=spatial_residual)
     if kind == "no_quality":
-        return ObservationTransition(no_quality=True)
+        return ObservationTransition(no_quality=True, spatial_residual=spatial_residual)
     if kind == "watch_lstm":
         return WatchLSTM()
     raise ValueError(f"Unknown temporal model {kind}")
@@ -108,7 +112,9 @@ def load_temporal(path: Path, kind: str = "observation") -> nn.Module:
     state = torch.load(path, map_location="cpu", weights_only=True)
     if state.get("format") != "terradelta-temporal-v1":
         raise ValueError("Unsupported temporal checkpoint format")
-    model = make_temporal(kind)
+    model = make_temporal(
+        kind, spatial_residual=state.get("model_config", {}).get("spatial_residual", True)
+    )
     model.load_state_dict(state["models"][kind])
     return model.eval()
 

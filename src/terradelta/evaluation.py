@@ -63,15 +63,22 @@ def _join_parts(parts: list[dict]) -> dict:
     return {"type": "MultiPolygon", "coordinates": polygons}
 
 
-def ground_truth_events(cache: str | Path) -> list[dict[str, Any]]:
-    """Find persistent transitions of stable source IDs on their first footprints.
+def ground_truth_events(
+    cache: str | Path, *, protocol: str = "physical_coverage_v2", diagnostics: dict | None = None
+) -> list[dict[str, Any]]:
+    """Find persistent geometric presence changes on source-ID reference footprints.
 
     Two usable observations establish a new state; masked months do not count as
     absence or reset pending support. Initial inventory is not an addition.
+    Physical-coverage v2 tests ANY building label, requiring >=80% coverage for
+    presence and <=20% for absence. The middle range is unknown. The preserved
+    matched_id_v1 audit instead tests membership of a particular source ID.
     Observability requires >=80% source-valid coverage of the first label
     footprint. Model registration rejection does not remove a truth event.
     Reference pixel pooling is sparse/vectorized, not one full raster scan per ID.
     """
+    if protocol not in {"physical_coverage_v2", "matched_id_v1"}:
+        raise ValueError("Unknown truth protocol")
     cache = Path(cache)
     metadata = json.loads((cache / "metadata.json").read_text())
     instances = np.load(cache / "instances.npy", mmap_mode="r")
@@ -85,6 +92,22 @@ def ground_truth_events(cache: str | Path) -> list[dict[str, Any]]:
         raise ValueError("source IDs must be nonnegative; zero is background")
     max_id = int(instances.max())
     if max_id == 0:
+        if diagnostics is not None:
+            diagnostics.update(
+                {
+                    "reference_count": 0,
+                    "total_reference_frames": 0,
+                    "source_valid_reference_frames": 0,
+                    "source_unusable_reference_frames": 0,
+                    "ambiguous_coverage_reference_frames": 0,
+                    "initial_inventory_references": 0,
+                    "initial_absent_references": 0,
+                    "no_usable_state_references": 0,
+                    "right_censored_pending_references": 0,
+                    "zero_event_references": 0,
+                    "references": [],
+                }
+            )
         return []
     height, width = instances.shape[1:]
     n_pixels = height * width
@@ -120,23 +143,41 @@ def ground_truth_events(cache: str | Path) -> list[dict[str, Any]]:
     reference_area = np.asarray(reference.sum(axis=1)).ravel()
     object_ids = np.flatnonzero(reference_area > 0)
     observed = np.zeros((len(frames), max_id + 1), dtype=bool)
+    source_observed = np.zeros_like(observed)
     present = np.zeros_like(observed)
+    building_fractions = np.zeros((len(frames), max_id + 1), dtype="float32")
     for t, (labels, good) in enumerate(zip(instances, valid)):
         coverage = np.asarray(reference @ np.asarray(good, dtype=np.float32).ravel()).ravel()
         observed[t] = coverage >= 0.8 * np.maximum(reference_area, 1)
-        counts = np.bincount(np.asarray(labels)[np.asarray(good, dtype=bool)], minlength=max_id + 1)
-        present[t] = counts > 0
+        source_observed[t] = observed[t]
+        covered = np.asarray(
+            reference @ ((np.asarray(labels) > 0) & good).astype("float32").ravel()
+        ).ravel()
+        fraction = covered / np.maximum(coverage, 1)
+        building_fractions[t] = fraction
+        if protocol == "matched_id_v1":
+            counts = np.bincount(
+                np.asarray(labels)[np.asarray(good, dtype=bool)], minlength=max_id + 1
+            )
+            present[t] = counts > 0
+        else:
+            present[t] = fraction >= 0.8
+            observed[t] &= (fraction >= 0.8) | (fraction <= 0.2)
     events: list[dict[str, Any]] = []
+    reference_diagnostics = []
     for object_id in object_ids:
         stable = None
         stable_at = None
         pending_at = None
         count = 0
         geometry = _join_parts(geometry_parts[int(object_id)])
+        initial_state = None
+        before_count = len(events)
         for t in np.flatnonzero(observed[:, object_id]):
             state = bool(present[t, object_id])
             if stable is None:
                 stable, stable_at = state, int(t)
+                initial_state = state
                 continue
             if state == stable:
                 stable_at = int(t)
@@ -164,11 +205,155 @@ def ground_truth_events(cache: str | Path) -> list[dict[str, Any]]:
                     "confirmation_index": int(t),
                     "reference_geometry": "first rasterized footprint of matched source ID; evaluation only",
                     "timing_target": "interval-censored monthly visibility; physical date unknown",
+                    "truth_protocol": protocol,
+                    "any_building_coverage_before": float(building_fractions[stable_at, object_id]),
+                    "any_building_coverage_first_support": float(
+                        building_fractions[pending_at, object_id]
+                    ),
+                    "any_building_coverage_confirmation": float(
+                        building_fractions[int(t), object_id]
+                    ),
                 }
             )
             stable, stable_at = state, int(t)
             pending_at, count = None, 0
-    return sorted(events, key=lambda event: (event["first_support"], event["object_id"]))
+        source_count = int(source_observed[:, object_id].sum())
+        ambiguous = int(
+            (
+                source_observed[:, object_id]
+                & (building_fractions[:, object_id] > 0.2)
+                & (building_fractions[:, object_id] < 0.8)
+            ).sum()
+        )
+        reference_diagnostics.append(
+            {
+                "object_id": int(object_id) - 1,
+                "source_valid_frames": source_count,
+                "source_unusable_frames": len(frames) - source_count,
+                "ambiguous_coverage_frames": ambiguous,
+                "initial_state": initial_state,
+                "usable_state_frames": int(observed[:, object_id].sum()),
+                "right_censored_pending_support": int(count) if pending_at is not None else 0,
+                "events_before_reference_dedup": len(events) - before_count,
+            }
+        )
+    if diagnostics is not None:
+        diagnostics.update(
+            {
+                "reference_count": len(object_ids),
+                "total_reference_frames": len(frames) * len(object_ids),
+                "source_valid_reference_frames": sum(
+                    d["source_valid_frames"] for d in reference_diagnostics
+                ),
+                "source_unusable_reference_frames": sum(
+                    d["source_unusable_frames"] for d in reference_diagnostics
+                ),
+                "ambiguous_coverage_reference_frames": sum(
+                    d["ambiguous_coverage_frames"] for d in reference_diagnostics
+                ),
+                "initial_inventory_references": sum(
+                    d["initial_state"] is True for d in reference_diagnostics
+                ),
+                "initial_absent_references": sum(
+                    d["initial_state"] is False for d in reference_diagnostics
+                ),
+                "no_usable_state_references": sum(
+                    d["initial_state"] is None for d in reference_diagnostics
+                ),
+                "right_censored_pending_references": sum(
+                    d["right_censored_pending_support"] > 0 for d in reference_diagnostics
+                ),
+                "zero_event_references": sum(
+                    d["events_before_reference_dedup"] == 0 for d in reference_diagnostics
+                ),
+                "references": reference_diagnostics,
+            }
+        )
+    ordered = sorted(events, key=lambda event: (event["first_support"], event["object_id"]))
+    if protocol == "matched_id_v1" or not ordered:
+        return ordered
+    # Multiple postprocessed IDs can describe the same physical footprint history.
+    # Merge only strongly overlapping, same-class, near-simultaneous references;
+    # retain every reference identity in the audit, never silently double-count it.
+    return deduplicate_physical_references(ordered)
+
+
+def deduplicate_physical_references(events: list[dict]) -> list[dict]:
+    ordered = sorted(events, key=lambda event: (event["first_support"], event["object_id"]))
+    groups = []
+    for event in ordered:
+        geometry = shape(event["geometry"])
+        placed = False
+        for group in groups:
+            if all(
+                event["change_class"] == member["change_class"]
+                and abs(
+                    (_date(event["first_support"]) - _date(member["first_support"])).total_seconds()
+                )
+                <= 62 * _DAY
+                and geometry.intersects(shape(member["geometry"]))
+                and geometry_iou(geometry, shape(member["geometry"])) >= 0.5
+                for member in group
+            ):
+                group.append(event)
+                placed = True
+                break
+        if not placed:
+            groups.append([event])
+    result = []
+    for group in groups:
+        representative = dict(group[0])
+        representative["reference_truth_ids"] = [event["truth_id"] for event in group]
+        representative["reference_members"] = [dict(event) for event in group]
+        result.append(representative)
+    return result
+
+
+def ground_truth_audit(cache: str | Path) -> dict:
+    """Keep ID transitions visible alongside the geometric-occupancy target.
+
+    Identity-only changes are not verified physical footprint changes. This audit
+    records all legacy targets, including coverage conflicts and shifted support.
+    """
+    legacy = ground_truth_events(cache, protocol="matched_id_v1")
+    diagnostics = {}
+    physical = ground_truth_events(cache, protocol="physical_coverage_v2", diagnostics=diagnostics)
+
+    def public(event):
+        return {k: v for k, v in event.items() if k != "geometry"}
+
+    return {
+        "primary_protocol": "physical_coverage_v2",
+        "observation_and_exclusion_counts": diagnostics,
+        "deduplication": "deterministic all-member IoU>=.5 and first-support time span<=62days; all member geometry/timing retained",
+        "presence_min_fraction": 0.8,
+        "absence_max_fraction": 0.2,
+        "minimum_source_valid_fraction": 0.8,
+        "ambiguous_middle_coverage": "unknown, cannot update label state",
+        "legacy_id_event_count": len(legacy),
+        "physical_coverage_event_count": len(physical),
+        "merged_duplicate_reference_events": sum(
+            len(e.get("reference_truth_ids", [e["truth_id"]])) - 1 for e in physical
+        ),
+        "identity_presence_conflicts": sum(
+            (
+                e["change_class"] == "building_removal"
+                and min(
+                    e["any_building_coverage_first_support"],
+                    e["any_building_coverage_confirmation"],
+                )
+                >= 0.8
+            )
+            or (
+                e["change_class"] == "building_addition"
+                and e["any_building_coverage_before"] >= 0.8
+            )
+            for e in legacy
+        ),
+        "legacy_id_events": [public(e) for e in legacy],
+        "physical_coverage_events": [public(e) for e in physical],
+        "scope": "Label-derived geometric presence; not independent physical event dates or causal/legal evidence",
+    }
 
 
 def first_confirmed_indices(events: list[EventRevision]) -> list[int]:
@@ -424,6 +609,7 @@ def evaluate_events(events: list[EventRevision], truth: list[dict], metadata: di
     false_alerts = len(first_indices) - len(matched)
     report = {
         "region_id": metadata["region_id"],
+        "truth_protocols": sorted({event.get("truth_protocol", "unspecified") for event in truth}),
         "matching": {
             "iou_threshold": 0.25,
             "first_support_tolerance_days": 93,

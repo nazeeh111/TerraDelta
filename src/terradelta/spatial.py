@@ -18,13 +18,20 @@ class _DoubleConv(nn.Sequential):
 
 
 class BuildingUNet(nn.Module):
-    """Three downsampling levels; outputs footprint and instance-boundary logits."""
+    """Three downsampling levels; returns native-grid footprint/boundary logits.
 
-    def __init__(self, base_channels: int = 16):
+    Optional 2x interpolation is an internal model operation, not increased
+    physical image resolution. Source pixels, targets and output grids stay native.
+    """
+
+    def __init__(self, base_channels: int = 16, input_scale: int = 1):
         super().__init__()
         if base_channels < 1:
             raise ValueError("base_channels must be positive")
+        if input_scale not in (1, 2):
+            raise ValueError("input_scale must be 1 or 2")
         self.base_channels = base_channels
+        self.input_scale = int(input_scale)
         self.encoders = nn.ModuleList([
             _DoubleConv(3, base_channels),
             _DoubleConv(base_channels, base_channels * 2),
@@ -46,6 +53,18 @@ class BuildingUNet(nn.Module):
     def forward(self, rgb: torch.Tensor) -> torch.Tensor:
         if rgb.ndim != 4 or rgb.shape[1] != 3:
             raise ValueError("expected RGB tensor [batch,3,height,width]")
+        if self.input_scale == 1:
+            return self._forward_model_grid(rgb)
+        model_input = F.interpolate(rgb, scale_factor=2, mode="bilinear", align_corners=False)
+        high_logits = self._forward_model_grid(model_input)
+        # A native pixel contains exactly four interpolated model-grid cells.
+        # Aggregate probabilities, not logits, then expose equivalent finite
+        # logits so the existing native-mask loss/API retains its contract.
+        probabilities = F.avg_pool2d(high_logits.sigmoid(), kernel_size=2, stride=2)
+        epsilon = torch.finfo(probabilities.dtype).eps
+        return torch.logit(probabilities.clamp(epsilon, 1 - epsilon))
+
+    def _forward_model_grid(self, rgb: torch.Tensor) -> torch.Tensor:
         height, width = rgb.shape[-2:]
         rgb = F.pad(rgb, (0, (-width) % 8, 0, (-height) % 8), mode="replicate")
         skips = []
@@ -92,9 +111,12 @@ def masked_segmentation_loss(
 def load_model(weights: str | Path, device: str = "cpu") -> BuildingUNet:
     """Load our tensor-only checkpoint with its explicit architecture metadata."""
     checkpoint = torch.load(weights, map_location="cpu", weights_only=True)
-    if checkpoint.get("format") != "terradelta-spatial-v1":
+    if checkpoint.get("format") not in {"terradelta-spatial-v1", "terradelta-spatial-v2"}:
         raise ValueError("unsupported spatial checkpoint format")
-    model = BuildingUNet(base_channels=int(checkpoint["architecture"]["base_channels"]))
+    model = BuildingUNet(
+        base_channels=int(checkpoint["architecture"]["base_channels"]),
+        input_scale=checkpoint["architecture"].get("input_scale", 1),
+    )
     model.load_state_dict(checkpoint["state_dict"], strict=True)
     return model.to(device).eval()
 
@@ -117,9 +139,10 @@ def predict_scene(
 ) -> np.ndarray:
     """Predict two native-grid probability rasters with overlapping contextual tiles.
 
-    Image pixels are never resized. Each tile gets a 64-pixel context halo where
-    available, aligned to the model's eight-pixel pooling grid. Only its core is
-    accumulated, with a smooth positive blend window.
+    The source/output pixel grid is unchanged. A checkpoint may enable internal
+    model interpolation; this adds no observations or physical resolution. Each
+    tile gets a 64-native-pixel context halo aligned to the model's pooling grid.
+    Only its native-grid core is accumulated with a positive blend window.
     No validity mask is inferred from color; callers must retain their real mask.
     """
     if rgb.ndim != 3 or rgb.shape[0] != 3 or rgb.dtype != np.uint8:

@@ -37,6 +37,18 @@ FEATURE_NAMES = [
 QUALITY_COLUMNS = [3, 4, 5, 12, 13, 15, 16]
 
 
+def validate_feature_protocol(directory: Path, *, supervision: bool | None = None) -> dict:
+    info = json.loads((Path(directory) / "sites.json").read_text())
+    if info.get("feature_protocol") != "calendar_quality_v2":
+        raise ValueError("Feature protocol mismatch; regenerate the versioned feature cache")
+    expected = "physical_coverage_80_20_v2" if supervision else None
+    if supervision is not None and info.get("supervision_protocol") != expected:
+        raise ValueError(
+            "Supervision protocol mismatch; cached label semantics do not match this experiment"
+        )
+    return info
+
+
 def footprint_instances(
     probability: np.ndarray, valid: np.ndarray, threshold: float = 0.45, min_pixels: int = 3
 ) -> np.ndarray:
@@ -180,8 +192,12 @@ def labels_for_sites(
     for labels, good in zip(instances, valid):
         overlap = ndimage.sum((labels > 0) & good, sites, ids)
         area = ndimage.sum(good, sites, ids)
-        y.append(overlap / np.maximum(area, 1) >= 0.25)
-        supervised.append(area / ndimage.sum(np.ones_like(good), sites, ids) >= 0.8)
+        fraction = overlap / np.maximum(area, 1)
+        y.append(fraction >= 0.8)
+        supervised.append(
+            (area / ndimage.sum(np.ones_like(good), sites, ids) >= 0.8)
+            & ((fraction <= 0.2) | (fraction >= 0.8))
+        )
     return np.array(y, dtype="float32").T, np.array(supervised, bool).T
 
 
@@ -227,6 +243,8 @@ def prepare_features(
     info = {
         "region_id": meta["region_id"],
         "feature_names": FEATURE_NAMES,
+        "feature_protocol": "calendar_quality_v2",
+        "supervision_protocol": "physical_coverage_80_20_v2" if labels else None,
         "probability_sha256": sha256(Path(probability_file)),
         "candidate_threshold": threshold,
         "geometry_crs": "EPSG:4326",

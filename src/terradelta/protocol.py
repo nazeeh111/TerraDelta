@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 
 from .data import sha256
+from .features import validate_feature_protocol
 
 PROTOCOL_FILES = [
     "pyproject.toml",
@@ -16,6 +17,7 @@ PROTOCOL_FILES = [
     "src/terradelta/spatial.py",
     "src/terradelta/features.py",
     "src/terradelta/temporal.py",
+    "src/terradelta/event_gate.py",
     "src/terradelta/decoder.py",
     "src/terradelta/pipeline.py",
     "src/terradelta/evaluation.py",
@@ -26,12 +28,15 @@ PROTOCOL_FILES = [
     "src/terradelta/protocol.py",
     "scripts/train_spatial.py",
     "scripts/train_temporal.py",
+    "scripts/train_event_gate.py",
     "scripts/calibrate.py",
     "scripts/evaluate.py",
+    "scripts/evaluate_gate_calibration.py",
     "scripts/predict_all.py",
     "scripts/rebuild_features.py",
     "scripts/check_online_invariance.py",
     "scripts/stress_and_calibration.py",
+    "scripts/export_rasters.py",
 ]
 
 
@@ -52,6 +57,7 @@ def experiment_boundary(
     spatial_weights: Path,
     calibration: Path,
     config: Path,
+    event_gate_weights: Path | None = None,
 ) -> dict:
     """Hash bytes without interpreting confirmation labels/outcomes.
 
@@ -59,11 +65,14 @@ def experiment_boundary(
     probability provenance are bound in sites.json plus explicit checkpoint hashes.
     Host-local image paths are excluded from semantic metadata hashing.
     """
+    settings = json.loads(config.read_text())
+    if settings.get("event_gate") and event_gate_weights is None:
+        raise ValueError("Event-gate experiment requires frozen gate weights")
     inputs = {}
     for region in regions:
         feature = features_root / region
         cache = cache_root / region
-        info = json.loads((feature / "sites.json").read_text())
+        info = validate_feature_protocol(feature, supervision=False)
         metadata = json.loads((cache / "metadata.json").read_text())
         if info.get("region_id") != region or metadata.get("region_id") != region:
             raise ValueError(f"Frozen region identities disagree: {region}")
@@ -82,7 +91,8 @@ def experiment_boundary(
             "probability_sha256": info["probability_sha256"],
         }
     return {
-        "format": "terradelta-full-freeze-v2",
+        "format": "terradelta-full-freeze-v3",
+        "event_gate_weights_sha256": sha256(event_gate_weights) if event_gate_weights else None,
         "temporal_weights_sha256": sha256(temporal_weights),
         "spatial_weights_sha256": sha256(spatial_weights),
         "calibration_sha256": sha256(calibration),

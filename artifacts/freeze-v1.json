@@ -1,0 +1,71 @@
+{
+  "format": "terradelta-full-freeze-v2",
+  "temporal_weights_sha256": "0f5f52965a186e69aed63cb016e1c5f7257cfdaea0695cf11c21b56bc47ef5ae",
+  "spatial_weights_sha256": "d5e9551959461959f56de1901793e4ed009a7be7014cf156cc1fcfd2ec0c032d",
+  "calibration_sha256": "30b7ab0ac63b32297e1b4d2b8368025b639ed13dd92f79904f00dc4eec7da2dc",
+  "config_sha256": "a59744513498539647b62a6f483a231b9a1e2dad03e0f26112e9f3871beeb2a4",
+  "confirmation_regions": [
+    "L15-0457E-1135N_1831_3648_13",
+    "L15-1049E-1370N_4196_2710_13",
+    "L15-1848E-0793N_7394_5018_13"
+  ],
+  "region_inputs": {
+    "L15-0457E-1135N_1831_3648_13": {
+      "features_sha256": "da140645337de726d3e7b15aaaa477004675af422c8df694bbbc5ff2c7b8cae6",
+      "sites_sha256": "1865b0845a36fd5036021fff6e7bf42ff3fe3983c93bc5a6b0e712429e219627",
+      "sites_raster_sha256": "5e732c98bdcc13baa36ccf578995919c28cc8534df6f0bb710361bb06ccbdd44",
+      "metadata_semantic_sha256": "d3778cba1bd418e2c1cc38d4b2261e5b684df425452c507e45ebe5e8acb4eeb1",
+      "rgb_sha256": "2ebb1aac02076969bac0bd30effba3227c013c23ddcdbaf8af9e0c492b0e6c3d",
+      "valid_sha256": "2b684a8f57a33d7995d7536a580b1e20cea5bc065622b1d83133877f5108fed2",
+      "truth_instances_sha256": "ba1f1c8042357321a724186846f6a716a64c3d23855244ab2b50fbda73a5552f",
+      "probability_sha256": "ad6018c4bdd3bf41958e0a1da363347edd42c3ebe66d6057632e8b2013746d10"
+    },
+    "L15-1049E-1370N_4196_2710_13": {
+      "features_sha256": "bea2368aeb519f4668e1c3c782f3bdd220b86a406863d1612535c49965edead5",
+      "sites_sha256": "b028a7f5d80332038f844eeaf773bbed319e87ba5586df4238854dbe27e59674",
+      "sites_raster_sha256": "1832ce4cef23da13bc65807064ab44021e80e9a4fc3b5d0fc987029ba94c5134",
+      "metadata_semantic_sha256": "46aa1fee04e52766de3fa70ae11ce5f7c30091f01fd182ed2a29c5595b5ff2f5",
+      "rgb_sha256": "b3cc45e40954d959307fbbc3fc45fa6fccb7d1de0aa3d0c5eb6fad8601f5ebd9",
+      "valid_sha256": "463403c08af4925234bf0376d659c86f5a0803ea291b30dcb14f11f29c444634",
+      "truth_instances_sha256": "bdbdd5631034a9ede5e0c48b057231c708863f253e0d9f5eb2b59cdbee90e33e",
+      "probability_sha256": "20326220178ac2ca4c3e240bbfcc01544f680e99d736cf68b34ddfdb195224ae"
+    },
+    "L15-1848E-0793N_7394_5018_13": {
+      "features_sha256": "482919931833a3ac0572c4969c58ac9c65e78633366b8180bd287bd670ea56fb",
+      "sites_sha256": "86d4524d548398913d616f9146b6e17fce29162855f7a13e7aa5dc9823fd67f8",
+      "sites_raster_sha256": "f9c0be7ac27565ec21e828d9a57f6313614ff3fe7e147d9604f825166149040a",
+      "metadata_semantic_sha256": "37bb3e1ce8d59b387c43cbe46f94e8b3e744f48e3cefeb0037124bbef36aa1c1",
+      "rgb_sha256": "282dddb00cc0208a1b71eb6e33e98085fff2060d131c7aa02ca725b9a4b9f1cb",
+      "valid_sha256": "b1f435c787d945130f34eeda511f056c011dfac73b84161d164869ecade58578",
+      "truth_instances_sha256": "d967bc8a0622dd9fce8597bceb99a971084ec3c88a5b73dd8407e70da6b438d8",
+      "probability_sha256": "7f5e96ba086bc573c6d0caef45c893718d9e60f9035350670f21a7710fdc31b6"
+    }
+  },
+  "protocol_sources": {
+    "pyproject.toml": "7fdb9505d72ffa37b18ab3fba2a3243e53311574c56cd3e328cee425f693b5f2",
+    "uv.lock": "80f6fa8523172487e2955878a33a043c84362da5ff711d3803a3b293080c606a",
+    "src/terradelta/acquire.py": "6eb0794cc0677315ac039cebec1faf0bcd03c9f544d6989eef76dd04cd71bf69",
+    "src/terradelta/data.py": "59760fb4dda0cd0fd4fcd15234ea7d713fed840e45b2c1c232b30e110a9939f3",
+    "src/terradelta/spatial.py": "ce4a6aedb17aa9fd713dafc670a27b5a1b63bbab602fa88ba459abe5ee1a0430",
+    "src/terradelta/features.py": "4ec59820deed9f45783eeec78b9ad0dd7bf241742b96b7d12f99b8d84402457c",
+    "src/terradelta/temporal.py": "3c1740a062aa6bcdcba4cd0cb2d51eea52ea0faf454cbd1d0b0d5d3b3d9c451a",
+    "src/terradelta/decoder.py": "1c759a8ece7881ec277deac81ee2385d9ea72485da91e1989122333453634662",
+    "src/terradelta/pipeline.py": "767e1430258e9336ce476bad7ea24a6c626061a32a0cb0087875e1656015e4fe",
+    "src/terradelta/evaluation.py": "d6d16d5a6a815f03562fe9d9890bc99bb441164abed43651d34c7e736b26e0c0",
+    "src/terradelta/schema.py": "9500c25425e546e7a895c9e2e4bbe333e1ef7c93b0eec0fa330aefa98339ebb1",
+    "src/terradelta/store.py": "cb7fcfabdbf354236b898adfd72be230c38e4e94be99b14c5b83f1962700c58b",
+    "src/terradelta/service.py": "b8a2e0212793fa914b0c646cbc0b9a0b018df8424a1a6319c828e891a2a5d058",
+    "src/terradelta/cli.py": "7431542c4a14df8180ba429e92ba1a64b010a18fb7e3cabd41abfe2d6840af32",
+    "src/terradelta/protocol.py": "2d84712c4f77cb6d01478f48a813dbe3616e4cf2c17f38840205a953bcc6320e",
+    "scripts/train_spatial.py": "756d35209058b48d1618fe1e39150deb43822dce878b2c3b418416ac9dce1f54",
+    "scripts/train_temporal.py": "6fd57c1faa7b283942b10df5e75e1910eebc9e0a8aa4a315e7b9888b318f80e3",
+    "scripts/calibrate.py": "edc0ca4c2b4f01c9127a035cebbb4262b581b3caf3a68ee884909f67ba52394b",
+    "scripts/evaluate.py": "155c2b6fcef97ca84d0de8b60b5adeeaf58267d275b36862543b2df2c55071e3",
+    "scripts/predict_all.py": "d722b1c839a9bfcd6905bb229148db93b41cd8778bf033e5abbe257582d96d63",
+    "scripts/rebuild_features.py": "dfcc3113b592c3632ee268ffb64b7168e91698f818617b0d1cf4dad0b67b2265",
+    "scripts/check_online_invariance.py": "5523b092077d7f38655ec6d36fd62d262c2f03f508cb7bc0f6f8bf76ac22d794",
+    "scripts/stress_and_calibration.py": "9c50239493c0ad03a5063d0955b310f1a239264de3806dfb6e4272836a28b031"
+  },
+  "frozen_at": "2026-10-29T06:25:26.431156+00:00",
+  "policy": "No model, threshold, data, decoder or metric tuning after confirmation scoring."
+}

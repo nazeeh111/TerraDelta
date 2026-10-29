@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>TerraDelta · Change history</title>
+  <link rel="stylesheet" href="/web/style.css">
+  <script src="/web/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to observation workspace</a>
+  <header class="app-header">
+    <a href="/" class="wordmark" aria-label="TerraDelta home"><span class="brand-symbol" aria-hidden="true">▱</span>TerraDelta<span class="brand-divider" aria-hidden="true"></span><span class="workspace-name">Change history</span></a>
+    <nav aria-label="Resources"><button class="text-button" id="import-open" type="button">Import imagery</button><a href="/docs" target="_blank" rel="noopener">API docs <span aria-hidden="true">↗</span></a><span class="research-label">RESEARCH MODEL</span></nav>
+  </header>
+  <main class="app-layout" id="workspace">
+    <aside class="query-rail" aria-labelledby="query-title">
+      <div class="rail-heading"><span class="eyebrow">OBSERVATION WORKSPACE</span><h1 id="query-title">Inspect a change.</h1><p>Query a supported history, then follow an event back to its observations.</p></div>
+      <form id="query-form">
+        <fieldset id="query-fields" disabled>
+          <legend class="sr-only">History query</legend>
+          <div class="field"><label for="region">Study area</label><select id="region" name="region_id"><option value="">Loading available areas…</option></select><p id="region-location" class="field-help">Complete imagery extent</p></div>
+          <div class="field"><span class="field-label" id="dates-label">Change observation interval</span><div class="date-fields" role="group" aria-labelledby="dates-label"><label for="start">From<input type="date" id="start" name="start" required></label><label for="end">Through<input type="date" id="end" name="end" required></label></div><p class="field-help">Returns events whose timing support overlaps these dates.</p></div>
+          <details class="advanced-query"><summary>Refine area or replay a snapshot</summary><div class="field"><label for="bbox">Bounding box</label><input id="bbox" type="text" inputmode="decimal" placeholder="west, south, east, north" aria-describedby="bbox-help"><p id="bbox-help" class="field-help">Longitude/latitude. Leave blank for the complete study area.</p></div><div class="field"><label for="as-of">Saved snapshot time</label><input id="as-of" type="text" placeholder="ISO timestamp with timezone" aria-describedby="asof-help"><p id="asof-help" class="field-help">Paste a returned snapshot time to replay the same recorded answer.</p></div></details>
+          <label class="check-field"><input type="checkbox" id="include-retracted" checked>Include retracted events</label>
+          <button type="submit" class="primary-button" id="query-button">Query history <span aria-hidden="true">→</span></button>
+        </fieldset>
+      </form>
+      <div id="query-feedback" class="query-feedback" role="status" aria-live="polite">Connecting to the local dataset…</div>
+      <div class="export-group" aria-labelledby="export-title"><h2 id="export-title">Take the history with you</h2><p>Geometry, revisions and source identities.</p><a id="export-geojson" class="secondary-button disabled-link" aria-disabled="true">GeoJSON <span aria-hidden="true">↓</span></a><a id="export-parquet" class="secondary-button disabled-link" aria-disabled="true">GeoParquet <span aria-hidden="true">↓</span></a></div>
+      <div class="rail-footnote"><span class="tiny-square" aria-hidden="true"></span><p>Imagery and derived data: SpaceNet Partners, CC BY-SA 4.0. <a href="https://spacenet.ai/sn7-challenge/" target="_blank" rel="noopener">Source dataset ↗</a></p></div>
+    </aside>
+    <section class="observation-panel" aria-labelledby="observation-title">
+      <div class="panel-title"><div><span class="eyebrow">SUPPORTING IMAGERY</span><h2 id="observation-title">Complete study area</h2></div><span class="extent-chip" id="extent-chip">Native image grid</span></div>
+      <div class="observation-controls"><div class="month-control"><label for="frame">Observation month</label><select id="frame" disabled><option>Waiting for imagery</option></select></div><label class="check-field overlay-toggle"><input id="show-overlay" type="checkbox" checked>Event geometries</label></div>
+      <div class="scene-shell" id="scene-shell">
+        <div class="scene-empty" id="scene-empty"><span aria-hidden="true">▱</span><p>Select an available area to inspect its actual satellite imagery.</p></div>
+        <div class="scene" id="scene" hidden><img id="scene-image" alt="" draggable="false"><canvas id="event-overlay" aria-hidden="true"></canvas></div>
+        <div class="image-loading" id="image-loading" hidden>Loading source observation…</div>
+        <div class="scene-corner scene-north" aria-hidden="true">N ↑</div><div class="scene-corner scene-extent" id="image-dimensions">Full extent</div>
+      </div>
+      <div class="scene-caption"><div id="observation-status"><span class="status-dot neutral"></span><span>No observation selected</span></div><a id="source-link" class="source-link disabled-link" aria-disabled="true" target="_blank" rel="noopener">Original GeoTIFF ↗</a></div>
+      <div class="legend" aria-label="Event states and exclusions"><span><i class="legend-stroke confirmed"></i>Model confirmed</span><span><i class="legend-stroke proposed"></i>Proposed</span><span><i class="legend-stroke reviewed"></i>Reviewed</span><span><i class="legend-stroke retracted"></i>Retracted</span><span><i class="legend-mask"></i>Unusable imagery</span></div>
+      <p class="observation-note">The image shows one monthly mosaic. Event outlines describe supported changes across the query period; they do not imply that a building already existed in the selected month.</p>
+      <details class="source-metadata"><summary>Observation provenance &amp; quality</summary><dl id="source-metadata"><dt>Source</dt><dd>Choose an observation.</dd></dl></details>
+    </section>
+    <aside class="history-panel" aria-labelledby="history-title">
+      <div class="panel-title"><div><span class="eyebrow">QUERY RESULTS</span><h2 id="history-title">Event history</h2></div><span class="count-chip" id="event-count">—</span></div>
+      <div class="history-actions"><label for="state-filter" class="sr-only">Filter event states</label><select id="state-filter"><option value="all">All event states</option><option value="confirmed_by_model">Model confirmed</option><option value="proposed">Proposed</option><option value="reviewed">Reviewed</option><option value="retracted">Retracted</option></select><button type="button" class="text-button" id="clear-selection" hidden>Clear selection</button></div>
+      <div id="event-list" class="event-list" aria-label="Returned events"><div class="empty-state"><span aria-hidden="true">↳</span><h3>Evidence will appear here.</h3><p>Choose an area and dates to query the recorded history.</p></div></div>
+      <section id="event-detail" class="event-detail" aria-labelledby="event-detail-title" hidden></section>
+      <details class="snapshot-details"><summary>Query snapshot</summary><p id="snapshot-status">No history query has completed.</p><button class="secondary-button" id="copy-snapshot" type="button" disabled>Copy snapshot time</button><p id="snapshot-copy-feedback" class="field-help" role="status"></p></details>
+    </aside>
+  </main>
+  <footer class="limitations"><strong>Read the evidence within its limits.</strong><span>Monthly mosaics support intervals, not exact construction dates. Publication dates are unknown, so availability is assumed at month end. A model classification establishes neither legal evidence nor a cause of change.</span><details id="model-limits"><summary>Model &amp; coverage limits</summary><p id="model-revision">Model metadata is loading.</p><ul id="limits-list"></ul></details></footer>
+  <dialog id="import-dialog" aria-labelledby="import-title"><div class="dialog-header"><span class="eyebrow">LOCAL DATA INGESTION</span><button type="button" class="icon-button" id="import-close" aria-label="Close import instructions">×</button></div><h2 id="import-title">Bring permitted imagery.</h2><p>Import a native-grid SpaceNet 7 sequence with the local CLI, then compute its event history before opening this workspace.</p><pre><code>terradelta ingest REGION_DIR --output CACHE_DIR
+terradelta run --help</code></pre><p>Use georeferenced RGB/alpha GeoTIFFs with source dates and explicit validity masks. Keep the original coordinate system and source identities. Differing grids require explicit reprojection before ingestion.</p><p class="field-help">The interface reads the configured local dataset. It does not send your files to a remote service.</p><a href="/docs" target="_blank" rel="noopener">Inspect the installed API ↗</a></dialog>
+</body>
+</html>

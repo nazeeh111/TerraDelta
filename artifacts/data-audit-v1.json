@@ -1,0 +1,127 @@
+{
+  "regions": {
+    "L15-0331E-1257N_1327_3160_13": {
+      "split": "train",
+      "bbox": [
+        -121.6845703125,
+        37.96155714945135,
+        -121.6406250000061,
+        37.9961626797281
+      ],
+      "months": 25,
+      "valid_fraction_min": 1.0,
+      "registration_rejected": 0
+    },
+    "L15-0506E-1204N_2027_3374_13": {
+      "split": "train",
+      "bbox": [
+        -90.92285156250001,
+        30.18312184220076,
+        -90.87890625000614,
+        30.221101852485972
+      ],
+      "months": 24,
+      "valid_fraction_min": 0.905797004699707,
+      "registration_rejected": 0
+    },
+    "L15-0924E-1108N_3699_3757_13": {
+      "split": "train",
+      "bbox": [
+        -17.4462890625,
+        14.689881366624665,
+        -17.4023437500061,
+        14.732386081418454
+      ],
+      "months": 23,
+      "valid_fraction_min": 0.6251125335693359,
+      "registration_rejected": 0
+    },
+    "L15-1276E-1107N_5105_3761_13": {
+      "split": "train",
+      "bbox": [
+        44.34082031249999,
+        14.519780046331975,
+        44.38476562499389,
+        14.56231770191483
+      ],
+      "months": 25,
+      "valid_fraction_min": 1.0,
+      "registration_rejected": 0
+    },
+    "L15-1669E-1153N_6678_3579_13": {
+      "split": "train",
+      "bbox": [
+        113.46679687499997,
+        22.105998799756215,
+        113.51074218749388,
+        22.146707780012616
+      ],
+      "months": 18,
+      "valid_fraction_min": 0.3382682800292969,
+      "registration_rejected": 0
+    },
+    "L15-0632E-0892N_2528_4620_13": {
+      "split": "development",
+      "bbox": [
+        -68.90625,
+        -22.47195450773359,
+        -68.86234760285032,
+        -22.43134015636062
+      ],
+      "months": 25,
+      "valid_fraction_min": 1.0,
+      "registration_rejected": 0
+    },
+    "L15-1389E-1284N_5557_3054_13": {
+      "split": "development",
+      "bbox": [
+        64.2041015625,
+        41.541477666794854,
+        64.24804687499389,
+        41.57436130598913
+      ],
+      "months": 24,
+      "valid_fraction_min": 1.0,
+      "registration_rejected": 0
+    },
+    "L15-0457E-1135N_1831_3648_13": {
+      "split": "confirmation",
+      "bbox": [
+        -99.53613281249997,
+        19.26970580754977,
+        -99.49218750000608,
+        19.31114335506463
+      ],
+      "months": 24,
+      "valid_fraction_min": 0.0,
+      "registration_rejected": 7
+    },
+    "L15-1049E-1370N_4196_2710_13": {
+      "split": "confirmation",
+      "bbox": [
+        4.394531249999999,
+        51.862923913606224,
+        4.4384765624938955,
+        51.890053935216926
+      ],
+      "months": 25,
+      "valid_fraction_min": 0.9030838012695312,
+      "registration_rejected": 0
+    },
+    "L15-1848E-0793N_7394_5018_13": {
+      "split": "confirmation",
+      "bbox": [
+        144.931640625,
+        -37.54457732085098,
+        144.97558593749386,
+        -37.50972584293751
+      ],
+      "months": 25,
+      "valid_fraction_min": 0.0,
+      "registration_rejected": 15
+    }
+  },
+  "total_files": 714,
+  "total_bytes": 1361753089,
+  "minimum_train_to_heldout_center_distance_km": 1488.6550081243054
+}

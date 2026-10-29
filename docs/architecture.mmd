@@ -1,0 +1,19 @@
+flowchart LR
+  A[Permitted monthly RGBA imagery] --> B[Native grid and source identity validation]
+  M[Alpha and source UDM masks] --> B
+  B --> C[Image-only anchored registration QA]
+  C --> D[Compact trained footprint and boundary U-Net]
+  D --> E[Causal candidate birth and fixed site geometry]
+  C --> F[Validity, elapsed time and seasonal reference]
+  E --> G[Observation-conditioned temporal emissions]
+  F --> G
+  G --> H[Abstention and persistence decoder]
+  H --> I[Append-only DuckDB revisions]
+  I --> J[Area, interval and historical snapshot API]
+  J --> K[Analyst evidence workbench]
+  J --> L[GeoJSON and GeoParquet consumer]
+  D --> R[Source-linked native GeoTIFFs]
+  T[Training and development labels only] -. supervised learning .-> D
+  T -. supervised learning .-> G
+  Q[Geographically held-out labels] -. frozen evaluation only .-> V[Event, delay, timing and false-alert metrics]
+  H --> V

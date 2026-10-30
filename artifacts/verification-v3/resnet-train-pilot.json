@@ -1,0 +1,31 @@
+{
+  "pilot_only": true,
+  "optimizer_steps": 1,
+  "device": "mps",
+  "loss": 1.8024239540100098,
+  "valid_pixels": 65498,
+  "step_seconds": 36.65204091600026,
+  "encoder_and_batchnorm_unchanged": true,
+  "train_regions": [
+    "L15-0331E-1257N_1327_3160_13",
+    "L15-0506E-1204N_2027_3374_13",
+    "L15-0924E-1108N_3699_3757_13",
+    "L15-1276E-1107N_5105_3761_13",
+    "L15-1669E-1153N_6678_3579_13",
+    "L15-1669E-1160N_6678_3548_13",
+    "L15-1335E-1166N_5342_3524_13",
+    "L15-0487E-1246N_1950_3207_13",
+    "L15-1298E-1322N_5193_2903_13"
+  ],
+  "config_sha256": "59433571ca28a99b635fb699362e0e1a91d958c2dd403a3f69e9156fdd6ed881",
+  "backbone_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+  "total_parameters": 12461330,
+  "trainable_parameters": 1284818,
+  "source_sha256": {
+    "scripts/train_spatial_pretrained.py": "734224bf530f78cdde70c51e18bc4f07508d693b6d5dfddcc1ec9c9ed1a65479",
+    "scripts/train_spatial.py": "787158065edc05b89b0affa7a56d50b3ee5428fa6f52a6955661c14b58189b28",
+    "src/terradelta/pretrained_spatial.py": "2bec25499465baa64fc9606f283c1debcef3d1f20ff88ecf0847b1d68c0d3021",
+    "src/terradelta/spatial.py": "9a855209ac02a6eda14cf51ade292b21b7fed11ffe8be7963ed9eeb3a1fa0f2e"
+  },
+  "not_a_checkpoint": "pilot decoder update is discarded; full fit starts from seed"
+}

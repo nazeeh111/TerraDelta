@@ -1,0 +1,392 @@
+{
+  "status": "selected first-image headers verified only; no assessment of clouds or labels",
+  "regions": [
+    {
+      "region_id": "L15-1172E-1306N_4688_2967_13",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-1172E-1306N_4688_2967_13/images_masked/global_monthly_2018_01_mosaic_L15-1172E-1306N_4688_2967_13.tif",
+      "shape": [
+        1024,
+        1024
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint8",
+        "uint8",
+        "uint8",
+        "uint8"
+      ],
+      "crs": "EPSG:3857",
+      "transform": [
+        4.77731426716,
+        0.0,
+        2896046.127668758,
+        0.0,
+        -4.77731426716,
+        5523033.915773696
+      ],
+      "native_bounds": [
+        2896046.127668758,
+        5518141.945964124,
+        2900938.0974783297,
+        5523033.915773696
+      ],
+      "wgs84_bounds": [
+        26.015625,
+        44.3395652481015,
+        26.059570312493896,
+        44.37098696297172
+      ],
+      "center_lon_lat": [
+        26.037597656246948,
+        44.35527610553661
+      ],
+      "tile_center_difference_m": 0.23402436537977522,
+      "source_pixels_read": false,
+      "label_content_read": false
+    },
+    {
+      "region_id": "L15-1204E-1204N_4819_3372_13",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-1204E-1204N_4819_3372_13/images_masked/global_monthly_2018_01_mosaic_L15-1204E-1204N_4819_3372_13.tif",
+      "shape": [
+        1023,
+        1023
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint8",
+        "uint8",
+        "uint8",
+        "uint8"
+      ],
+      "crs": "EPSG:3857",
+      "transform": [
+        4.77731426716,
+        0.0,
+        3536894.1728116754,
+        0.0,
+        -4.77731426716,
+        3541786.142621925
+      ],
+      "native_bounds": [
+        3536894.1728116754,
+        3536898.9501266205,
+        3541781.36530698,
+        3541786.142621925
+      ],
+      "wgs84_bounds": [
+        31.772460937499996,
+        30.25910427158752,
+        31.81636333464966,
+        30.29701788337204
+      ],
+      "center_lon_lat": [
+        31.79441213607483,
+        30.27806107747978
+      ],
+      "tile_center_difference_m": 2.773031529996733,
+      "source_pixels_read": false,
+      "label_content_read": false
+    },
+    {
+      "region_id": "L15-0358E-1220N_1433_3310_13",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0358E-1220N_1433_3310_13/images_masked/global_monthly_2018_02_mosaic_L15-0358E-1220N_1433_3310_13.tif",
+      "shape": [
+        1024,
+        1024
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint8",
+        "uint8",
+        "uint8",
+        "uint8"
+      ],
+      "crs": "EPSG:3857",
+      "transform": [
+        4.77731426716,
+        0.0,
+        -13027315.604699157,
+        0.0,
+        -4.77731426716,
+        3845088.270857503
+      ],
+      "native_bounds": [
+        -13027315.604699157,
+        3840196.3010479314,
+        -13022423.634889586,
+        3845088.270857503
+      ],
+      "wgs84_bounds": [
+        -117.02636718749999,
+        32.583849325661724,
+        -116.9824218750061,
+        32.6208701831811
+      ],
+      "center_lon_lat": [
+        -117.00439453125304,
+        32.602359754421414
+      ],
+      "tile_center_difference_m": 0.2120797641972353,
+      "source_pixels_read": false,
+      "label_content_read": false
+    },
+    {
+      "region_id": "L15-1716E-1211N_6864_3345_13",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-1716E-1211N_6864_3345_13/images_masked/global_monthly_2018_01_mosaic_L15-1716E-1211N_6864_3345_13.tif",
+      "shape": [
+        1024,
+        1024
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint8",
+        "uint8",
+        "uint8",
+        "uint8"
+      ],
+      "crs": "EPSG:3857",
+      "transform": [
+        4.77731426716,
+        0.0,
+        13540972.434775542,
+        0.0,
+        -4.77731426716,
+        3673869.3274987075
+      ],
+      "native_bounds": [
+        13540972.434775542,
+        3668977.3576891357,
+        13545864.404585114,
+        3673869.3274987075
+      ],
+      "wgs84_bounds": [
+        121.640625,
+        31.27855085895171,
+        121.68457031249389,
+        31.31610138349561
+      ],
+      "center_lon_lat": [
+        121.66259765624694,
+        31.297326121223662
+      ],
+      "tile_center_difference_m": 0.20735550551404755,
+      "source_pixels_read": false,
+      "label_content_read": false
+    },
+    {
+      "region_id": "L15-0614E-0946N_2459_4406_13",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0614E-0946N_2459_4406_13/images_masked/global_monthly_2018_03_mosaic_L15-0614E-0946N_2459_4406_13.tif",
+      "shape": [
+        1024,
+        1024
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint8",
+        "uint8",
+        "uint8",
+        "uint8"
+      ],
+      "crs": "EPSG:3857",
+      "transform": [
+        4.77731426716,
+        0.0,
+        -8008154.579381345,
+        0.0,
+        -4.77731426716,
+        -1516510.641177898
+      ],
+      "native_bounds": [
+        -8008154.579381345,
+        -1521402.6109874698,
+        -8003262.609571773,
+        -1516510.641177898
+      ],
+      "wgs84_bounds": [
+        -71.9384765625,
+        -13.539200668924899,
+        -71.8945312500061,
+        -13.496472765758977
+      ],
+      "center_lon_lat": [
+        -71.91650390625304,
+        -13.517836717341938
+      ],
+      "tile_center_difference_m": 0.10593837592138533,
+      "source_pixels_read": false,
+      "label_content_read": false
+    },
+    {
+      "region_id": "L15-1669E-1160N_6678_3548_13",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-1669E-1160N_6678_3548_13/images_masked/global_monthly_2017_07_mosaic_L15-1669E-1160N_6678_3548_13.tif",
+      "shape": [
+        1024,
+        1024
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint8",
+        "uint8",
+        "uint8",
+        "uint8"
+      ],
+      "crs": "EPSG:3857",
+      "transform": [
+        4.77731426716,
+        0.0,
+        12631066.04832075,
+        0.0,
+        -4.77731426716,
+        2680799.455651626
+      ],
+      "native_bounds": [
+        12631066.04832075,
+        2675907.4858420542,
+        12635958.018130321,
+        2680799.455651626
+      ],
+      "wgs84_bounds": [
+        113.46679685929695,
+        23.36242859039553,
+        113.51074217179084,
+        23.402764902389947
+      ],
+      "center_lon_lat": [
+        113.4887695155439,
+        23.38259674639274
+      ],
+      "tile_center_difference_m": 0.17031644511214936,
+      "source_pixels_read": false,
+      "label_content_read": false
+    },
+    {
+      "region_id": "L15-1335E-1166N_5342_3524_13",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-1335E-1166N_5342_3524_13/images_masked/global_monthly_2018_01_mosaic_L15-1335E-1166N_5342_3524_13.tif",
+      "shape": [
+        1023,
+        1024
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint8",
+        "uint8",
+        "uint8",
+        "uint8"
+      ],
+      "crs": "EPSG:3857",
+      "transform": [
+        4.77731426716,
+        0.0,
+        6095394.383573095,
+        0.0,
+        -4.77731426716,
+        2798206.7314637303
+      ],
+      "native_bounds": [
+        6095394.383573095,
+        2793319.5389684257,
+        6100286.3533826675,
+        2798206.7314637303
+      ],
+      "wgs84_bounds": [
+        54.755859375,
+        24.327115644853333,
+        54.799804687493896,
+        24.367113562651237
+      ],
+      "center_lon_lat": [
+        54.777832031246945,
+        24.347114603752285
+      ],
+      "tile_center_difference_m": 1.9904095400776858,
+      "source_pixels_read": false,
+      "label_content_read": false
+    },
+    {
+      "region_id": "L15-0487E-1246N_1950_3207_13",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0487E-1246N_1950_3207_13/images_masked/global_monthly_2018_01_mosaic_L15-0487E-1246N_1950_3207_13.tif",
+      "shape": [
+        1024,
+        1024
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint8",
+        "uint8",
+        "uint8",
+        "uint8"
+      ],
+      "crs": "EPSG:3857",
+      "transform": [
+        4.77731426716,
+        0.0,
+        -10498167.212799247,
+        0.0,
+        -4.77731426716,
+        4348961.161313388
+      ],
+      "native_bounds": [
+        -10498167.212799247,
+        4344069.191503815,
+        -10493275.242989676,
+        4348961.161313388
+      ],
+      "wgs84_bounds": [
+        -94.306640625,
+        36.31512514748542,
+        -94.26269531250611,
+        36.35052700542763
+      ],
+      "center_lon_lat": [
+        -94.28466796875306,
+        36.33282607645653
+      ],
+      "tile_center_difference_m": 0.223142397242908,
+      "source_pixels_read": false,
+      "label_content_read": false
+    },
+    {
+      "region_id": "L15-1298E-1322N_5193_2903_13",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-1298E-1322N_5193_2903_13/images_masked/global_monthly_2018_01_mosaic_L15-1298E-1322N_5193_2903_13.tif",
+      "shape": [
+        1024,
+        1024
+      ],
+      "count": 4,
+      "dtypes": [
+        "uint8",
+        "uint8",
+        "uint8",
+        "uint8"
+      ],
+      "crs": "EPSG:3857",
+      "transform": [
+        4.77731426716,
+        0.0,
+        5366490.881845654,
+        0.0,
+        -4.77731426716,
+        5836119.983629777
+      ],
+      "native_bounds": [
+        5366490.881845654,
+        5831228.013820205,
+        5371382.851655226,
+        5836119.983629777
+      ],
+      "wgs84_bounds": [
+        48.20800781249999,
+        46.3165841818264,
+        48.251953124993896,
+        46.346927610556754
+      ],
+      "center_lon_lat": [
+        48.229980468746945,
+        46.33175589619158
+      ],
+      "tile_center_difference_m": 0.2339120286672284,
+      "source_pixels_read": false,
+      "label_content_read": false
+    }
+  ]
+}

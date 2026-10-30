@@ -1,4 +1,5 @@
 """Compact native-resolution RGB building segmentation, trained without external weights."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -12,8 +13,10 @@ from torch.nn import functional as F
 class _DoubleConv(nn.Sequential):
     def __init__(self, inputs: int, outputs: int):
         super().__init__(
-            nn.Conv2d(inputs, outputs, 3, padding=1), nn.ReLU(inplace=True),
-            nn.Conv2d(outputs, outputs, 3, padding=1), nn.ReLU(inplace=True),
+            nn.Conv2d(inputs, outputs, 3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(outputs, outputs, 3, padding=1),
+            nn.ReLU(inplace=True),
         )
 
 
@@ -32,22 +35,28 @@ class BuildingUNet(nn.Module):
             raise ValueError("input_scale must be 1 or 2")
         self.base_channels = base_channels
         self.input_scale = int(input_scale)
-        self.encoders = nn.ModuleList([
-            _DoubleConv(3, base_channels),
-            _DoubleConv(base_channels, base_channels * 2),
-            _DoubleConv(base_channels * 2, base_channels * 4),
-        ])
+        self.encoders = nn.ModuleList(
+            [
+                _DoubleConv(3, base_channels),
+                _DoubleConv(base_channels, base_channels * 2),
+                _DoubleConv(base_channels * 2, base_channels * 4),
+            ]
+        )
         self.bottleneck = _DoubleConv(base_channels * 4, base_channels * 8)
-        self.ups = nn.ModuleList([
-            nn.ConvTranspose2d(base_channels * 8, base_channels * 4, 2, stride=2),
-            nn.ConvTranspose2d(base_channels * 4, base_channels * 2, 2, stride=2),
-            nn.ConvTranspose2d(base_channels * 2, base_channels, 2, stride=2),
-        ])
-        self.decoders = nn.ModuleList([
-            _DoubleConv(base_channels * 8, base_channels * 4),
-            _DoubleConv(base_channels * 4, base_channels * 2),
-            _DoubleConv(base_channels * 2, base_channels),
-        ])
+        self.ups = nn.ModuleList(
+            [
+                nn.ConvTranspose2d(base_channels * 8, base_channels * 4, 2, stride=2),
+                nn.ConvTranspose2d(base_channels * 4, base_channels * 2, 2, stride=2),
+                nn.ConvTranspose2d(base_channels * 2, base_channels, 2, stride=2),
+            ]
+        )
+        self.decoders = nn.ModuleList(
+            [
+                _DoubleConv(base_channels * 8, base_channels * 4),
+                _DoubleConv(base_channels * 4, base_channels * 2),
+                _DoubleConv(base_channels * 2, base_channels),
+            ]
+        )
         self.head = nn.Conv2d(base_channels, 2, 1)
 
     def forward(self, rgb: torch.Tensor) -> torch.Tensor:
@@ -95,22 +104,28 @@ def masked_segmentation_loss(
     if not bool(torch.any(valid)):
         return logits.sum() * 0.0
     weight = None if positive_weights is None else positive_weights.reshape(2, 1, 1)
-    bce = F.binary_cross_entropy_with_logits(
-        logits, target, reduction="none", pos_weight=weight
-    )
+    bce = F.binary_cross_entropy_with_logits(logits, target, reduction="none", pos_weight=weight)
     bce = (bce * mask).sum() / mask.sum()
     probability = torch.sigmoid(logits) * mask
     truth = target * mask
     axes = (0, 2, 3)
-    dice = (2 * (probability * truth).sum(axes) + 1) / (
-        probability.sum(axes) + truth.sum(axes) + 1
-    )
+    dice = (2 * (probability * truth).sum(axes) + 1) / (probability.sum(axes) + truth.sum(axes) + 1)
     return bce + (1 - dice).mean()
 
 
-def load_model(weights: str | Path, device: str = "cpu") -> BuildingUNet:
+def load_model(
+    weights: str | Path, device: str = "cpu", *, backbone_weights: str | Path | None = None
+) -> nn.Module:
     """Load our tensor-only checkpoint with its explicit architecture metadata."""
     checkpoint = torch.load(weights, map_location="cpu", weights_only=True)
+    if checkpoint.get("format") == "terradelta-pretrained-spatial-v1":
+        if backbone_weights is None:
+            raise ValueError("This decoder requires the separate SHA-checked --backbone-weights")
+        from .pretrained_spatial import load_model as load_pretrained
+
+        return load_pretrained(weights, backbone_path=backbone_weights, device=device)
+    if backbone_weights is not None:
+        raise ValueError("Backbone weights apply only to pretrained decoder checkpoints")
     if checkpoint.get("format") not in {"terradelta-spatial-v1", "terradelta-spatial-v2"}:
         raise ValueError("unsupported spatial checkpoint format")
     model = BuildingUNet(
@@ -163,7 +178,7 @@ def predict_scene(
             patch = np.ascontiguousarray(rgb[:, y0:y1, x0:x1], dtype=np.float32) / 255
             tensor = torch.from_numpy(patch)[None].to(device)
             pred = model(tensor).sigmoid()[0].cpu().numpy()
-            pred = pred[:, top - y0:bottom - y0, left - x0:right - x0]
+            pred = pred[:, top - y0 : bottom - y0, left - x0 : right - x0]
             y_window = np.maximum(np.hanning(bottom - top), 0.05)
             x_window = np.maximum(np.hanning(right - left), 0.05)
             blend = (y_window[:, None] * x_window[None, :]).astype(np.float32)

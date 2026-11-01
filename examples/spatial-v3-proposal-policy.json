@@ -1,0 +1,35 @@
+{
+  "version": "terradelta-source-bound-raw-policy-v1",
+  "purpose": "Raw spatial proposal replay for software/integration checks. No empirical confidence calibration or event-accuracy claim. Not an experiment-wide calibration and cannot replace the full confirmation freeze.",
+  "spatial_weights_sha256": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+  "spatial_provenance": {
+    "candidate_threshold": 0.55,
+    "spatial_backbone_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "spatial_inference": {
+      "context_halo_native_pixels": 64,
+      "implementation_sha256": {
+        "pretrained_spatial.py": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503",
+        "spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff"
+      },
+      "internal_input_scale": 2,
+      "native_alignment": 16,
+      "tile_size": 128
+    },
+    "spatial_weights_sha256": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d"
+  },
+  "event_gates": {
+    "proposal_tracking": {
+      "timing_padding_days": 0
+    }
+  },
+  "decoders": {
+    "proposal_tracking": {
+      "threshold": 0.55,
+      "confirmations": 2,
+      "minimum_dwell_days": 20,
+      "revision_window_days": 100,
+      "maximum_gap_days": 190,
+      "timing_padding_days": 0
+    }
+  }
+}

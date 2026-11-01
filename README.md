@@ -62,12 +62,20 @@ decoder. Its nine training, four development and three fresh confirmation region
 are declared in [experiment-v8](configs/experiment-v8.json). Development selected
 128-pixel tiles and a 0.55 candidate threshold, with object F1 **0.2826** on the
 predeclared eight development scenes. Native sequence predictions and new temporal
-fits are complete; global development calibration and confirmation remain. The new study also includes a
+fits, global development calibration and the
+[independently audited freeze](artifacts/verification-v3/confirmation-boundary-v3.md)
+are complete. **Fresh confirmation remains deliberately unscored** while
+development-only checks address weak proposal coverage and false-alert burden.
+The new study also includes a
 [frozen neural embedding-distance comparator](docs/embedding-distance.md), with
 its protocol fixed before real descriptor extraction and performance selection.
 Its [independent review](artifacts/verification-v3/embedding-review-v1.md) records
 the newborn-site correction and strict source/input guards.
 No fresh confirmation event result is claimed.
+All 73 fresh-region native rasters passed
+[grid, mask, value and provenance checks](artifacts/verification-v3/native-products-v3.md).
+All 12 online methods passed exact prefix/future-edit checks across those regions.
+These label-free checks establish data and temporal contracts, not accuracy.
 The retained spatial checkpoint has an explicit
 [fit recovery audit](artifacts/verification-v3/spatial-v3-fit-audit.md): the
 4,000-step loop completed and selected step 3,600, but a final source-integrity
@@ -93,6 +101,11 @@ SpaceNet workflow. [Data and artifact terms](DATA_LICENSE.md) apply.
 The released snapshot's [independent install](artifacts/verification-v3/public-install-v1.json) and
 [real API/consumer check](artifacts/verification-v3/public-api-v1.json) used an
 anonymous public clone and fresh public image/mask bytes, with no private cache.
+The current development package also completed
+[independent public-only raw computation](artifacts/verification-v3/public-proposals-v020.json)
+on two versus three native observations, using newly downloaded official backbone
+weights. Those runs verify changed-input execution and readable raster/vector
+outputs; they do not evaluate the learned gate or establish event correctness.
 
 ## Replay the complete research history
 

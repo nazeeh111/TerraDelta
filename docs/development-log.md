@@ -112,6 +112,37 @@ After development, version-2 calibration and the full freeze preceded untouched
 three-region confirmation scoring. The [result](results-v2.md) is negative, with
 poor transfer, severe missed-event counts and no overall quality-input benefit.
 The complete record includes matched-delay results, timing, burden, stress and
-independent wheel/API checks. Public release and remote verification remain
-pending. A further scientific revision requires fresh geographic confirmation
+independent wheel/API checks. The verified public research release preserves this
+negative result. A further scientific revision requires fresh geographic confirmation
 data; no successful future model is promised.
+
+## Fresh study prepared, confirmation unscored
+
+The separate V8 comparison declares nine TRAIN, four DEV and three fresh
+confirmation regions. New fits and global DEV calibration are complete. The
+[boundary audit](../artifacts/verification-v3/confirmation-boundary-v3.md) verifies
+the exact models, source, inputs, operating points and label-free online checks.
+The [publication manifest](../artifacts/verification-v3/preparation-v3.json)
+identifies original receipt hashes and derived public copies. The fresh cohort
+has not been scored. Development work continues because accuracy is inadequate.
+
+On all four DEV regions and all 2,798 physical truth events, fixed candidates
+cover only 803 events by the common 62-day deadline, even before requiring a
+correct class, time or one-to-one match. Actual observed shapes available by
+that deadline could geometrically cover at most 1,340 events. These optimistic
+coverage bounds are not attained recall.
+
+Three bounded task-only alternatives were stopped without incorporation:
+
+| Check | Outcome |
+|---|---|
+| Causal shape revision, four predeclared policies | Best macro event F1@62 rose from 0.04501 to 0.05121, but pooled precision remained 2.68% (522 matches, 18,940 false alerts). |
+| Causal pixel consensus, three predeclared policies | Best macro F1@62 was 0.05601, with only 269 matches and 7,788 false alerts. It lost 288 raw matched events and gained 63. |
+| Fixed-weight halo 0/32/64 on the original eight DEV scenes | Mean object F1 was 0.28052/0.28102/0.28257. Smaller context did not repair object quality. |
+
+The first two checks use the same raw decoder, zero timing padding and unchanged
+physical truth/matching. They do not establish improvement over the learned gate.
+The halo check is per-image object scoring, not event scoring. No confirmation
+labels or metrics were used in these alternatives, and none changes the frozen
+baseline. Full task-local plans, outputs, ledgers, source/input hashes and failed
+observer guards are retained; no new scientific success is claimed.

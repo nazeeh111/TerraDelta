@@ -1,0 +1,320 @@
+{
+  "checks": {
+    "L15-1172E-1306N_4688_2967_13": {
+      "prefix_observations": 12,
+      "prefix_sites": 3283,
+      "full_sites": 3952,
+      "methods": {
+        "pairwise": {
+          "passed": true,
+          "prefix_revisions": 2417,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "spatial_tracking": {
+          "passed": true,
+          "prefix_revisions": 1412,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "ted": {
+          "passed": true,
+          "prefix_revisions": 340,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "smoothing": {
+          "passed": true,
+          "prefix_revisions": 236,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "hmm": {
+          "passed": true,
+          "prefix_revisions": 345,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "watch_lstm": {
+          "passed": true,
+          "prefix_revisions": 31,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "no_quality": {
+          "passed": true,
+          "prefix_revisions": 948,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "observation": {
+          "passed": true,
+          "prefix_revisions": 839,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "proposal_tracking": {
+          "passed": true,
+          "prefix_revisions": 10205,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "observation_gate": {
+          "passed": true,
+          "prefix_revisions": 19859,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "gate_no_quality": {
+          "passed": true,
+          "prefix_revisions": 19744,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "embedding_distance": {
+          "passed": true,
+          "prefix_revisions": 123,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": true
+        }
+      },
+      "features_sha256": "0699178a4387d8b6f967bdc5e3dd82602127fe817fecdf3004a19c8cee72656f"
+    },
+    "L15-1204E-1204N_4819_3372_13": {
+      "prefix_observations": 12,
+      "prefix_sites": 2637,
+      "full_sites": 4229,
+      "methods": {
+        "pairwise": {
+          "passed": true,
+          "prefix_revisions": 2964,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "spatial_tracking": {
+          "passed": true,
+          "prefix_revisions": 1996,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "ted": {
+          "passed": true,
+          "prefix_revisions": 591,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "smoothing": {
+          "passed": true,
+          "prefix_revisions": 469,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "hmm": {
+          "passed": true,
+          "prefix_revisions": 499,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "watch_lstm": {
+          "passed": true,
+          "prefix_revisions": 329,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "no_quality": {
+          "passed": true,
+          "prefix_revisions": 745,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "observation": {
+          "passed": true,
+          "prefix_revisions": 689,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "proposal_tracking": {
+          "passed": true,
+          "prefix_revisions": 8700,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "observation_gate": {
+          "passed": true,
+          "prefix_revisions": 15148,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "gate_no_quality": {
+          "passed": true,
+          "prefix_revisions": 15723,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "embedding_distance": {
+          "passed": true,
+          "prefix_revisions": 136,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": true
+        }
+      },
+      "features_sha256": "7b4593a918b6fe45dc4fe518970e8905fd51459c848bab1dcd841d8f08d48541"
+    },
+    "L15-0358E-1220N_1433_3310_13": {
+      "prefix_observations": 12,
+      "prefix_sites": 5068,
+      "full_sites": 6836,
+      "methods": {
+        "pairwise": {
+          "passed": true,
+          "prefix_revisions": 3885,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "spatial_tracking": {
+          "passed": true,
+          "prefix_revisions": 2219,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "ted": {
+          "passed": true,
+          "prefix_revisions": 427,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "smoothing": {
+          "passed": true,
+          "prefix_revisions": 602,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "hmm": {
+          "passed": true,
+          "prefix_revisions": 1390,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "watch_lstm": {
+          "passed": true,
+          "prefix_revisions": 360,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "no_quality": {
+          "passed": true,
+          "prefix_revisions": 953,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "observation": {
+          "passed": true,
+          "prefix_revisions": 1169,
+          "occupancy_score_prefix_checked": true,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "proposal_tracking": {
+          "passed": true,
+          "prefix_revisions": 17464,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "observation_gate": {
+          "passed": true,
+          "prefix_revisions": 29856,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "gate_no_quality": {
+          "passed": true,
+          "prefix_revisions": 30509,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": false
+        },
+        "embedding_distance": {
+          "passed": true,
+          "prefix_revisions": 157,
+          "occupancy_score_prefix_checked": false,
+          "event_prefix_checked": true,
+          "future_feature_and_mask_edits_checked": true,
+          "neural_descriptor_prefix_and_future_edits_checked": true
+        }
+      },
+      "features_sha256": "85236b5cdd9def9c05fc8473f7d1a1ec4391c118c70e58f80ac8675304ce5993"
+    }
+  },
+  "labels_read": false,
+  "event_gate_weights_sha256": "1ff0cc2e7d2cfc2555c14d86f08a448441c8f82ff0bf3b3038127088dd4ea266",
+  "scope": "Real native-image candidate/feature prefix; trained temporal occupancy and event-gate revision prefixes; synthetic future feature and availability edits. Spatial CNN is frame independent.",
+  "transaction_clock": "Fixed shared origin: complete revisions including record_time must agree."
+}

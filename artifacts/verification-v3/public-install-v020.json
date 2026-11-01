@@ -1,0 +1,107 @@
+{
+  "status": "ready_waiting_for_public_calibration",
+  "source_commit": "72b8f1e810ede7655ab4f63954546cf0a4cdbe70",
+  "package_version": "0.2.0.dev1",
+  "root": "PUBLIC_INSTALL",
+  "source": "PUBLIC_INSTALL/source",
+  "package_root": "PUBLIC_INSTALL/source/.venv/lib/python3.12/site-packages/terradelta",
+  "dependency_cache": "PUBLIC_INSTALL/fresh-dependency-cache",
+  "install_seconds": 26.464328000030946,
+  "official_backbone": {
+    "uri": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+    "path": "PUBLIC_INSTALL/official-backbone/resnet18-f37072fd.pth",
+    "sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "bytes": 46830571
+  },
+  "ui_archive": {
+    "name": "terradelta-research-v2-mexico-ui-inputs.zip",
+    "sha256": "245ac2068ce091311b1521d92e575418488f1c47eb1f10df0bcfd4b39ab85155",
+    "bytes": 52064000,
+    "download_path": "PUBLIC_RELEASE_DOWNLOADS/terradelta-research-v2-mexico-ui-inputs.zip"
+  },
+  "input_cache": "PUBLIC_INSTALL/public-inputs/terradelta-v2/cache/L15-0457E-1135N_1831_3648_13",
+  "cache_shape_RGB": [
+    24,
+    3,
+    1023,
+    1024
+  ],
+  "cache_shape_valid": [
+    24,
+    1023,
+    1024
+  ],
+  "cache_dtype_RGB": "uint8",
+  "cache_dtype_valid": "bool",
+  "crs": "EPSG:3857",
+  "bbox": [
+    -99.53613281249997,
+    19.26970580754977,
+    -99.49218750000608,
+    19.31114335506463
+  ],
+  "registration_protocol": "anchor_and_all_accepted_offsets_v2",
+  "prefix_sources": [
+    {
+      "source_id": "sn7:global_monthly_2018_01_mosaic_L15-0457E-1135N_1831_3648_13",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_01_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "sha256": "e49e5931ac8654100669cc4ade518b8f91d5ccb81b2386ae6bd5b746e4595514",
+      "acquisition_start": "2018-01-01T00:00:00+00:00",
+      "acquisition_end": "2018-01-31T23:59:59+00:00",
+      "available_at": "2018-01-31T23:59:59+00:00",
+      "published_at": null
+    },
+    {
+      "source_id": "sn7:global_monthly_2018_02_mosaic_L15-0457E-1135N_1831_3648_13",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_02_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "sha256": "03ed0821fe956bb1c0834e129aafb86080735ed0bb0cc6ea7106e538365e33df",
+      "acquisition_start": "2018-02-01T00:00:00+00:00",
+      "acquisition_end": "2018-02-28T23:59:59+00:00",
+      "available_at": "2018-02-28T23:59:59+00:00",
+      "published_at": null
+    },
+    {
+      "source_id": "sn7:global_monthly_2018_03_mosaic_L15-0457E-1135N_1831_3648_13",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_03_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "sha256": "bfeb4fa584a522c4216002607891707c03369d01e8fed5120abb3fe9451b47bc",
+      "acquisition_start": "2018-03-01T00:00:00+00:00",
+      "acquisition_end": "2018-03-31T23:59:59+00:00",
+      "available_at": "2018-03-31T23:59:59+00:00",
+      "published_at": null
+    }
+  ],
+  "input_cache_sha256": {
+    "metadata.json": "14ac8c05b28874a3a1a9c9f9d8a26ec8ea0e4cfa181c664dcd09a09816ab23a1",
+    "rgb.npy": "2ebb1aac02076969bac0bd30effba3227c013c23ddcdbaf8af9e0c492b0e6c3d",
+    "valid.npy": "2b684a8f57a33d7995d7536a580b1e20cea5bc065622b1d83133877f5108fed2"
+  },
+  "all_UI_zip_members_byte_equal": true,
+  "source_worktree_clean": true,
+  "public_new_model_files": {
+    "event-gate-v2.pt": {
+      "sha256": "1ff0cc2e7d2cfc2555c14d86f08a448441c8f82ff0bf3b3038127088dd4ea266",
+      "bytes": 77561
+    },
+    "spatial-v3.pt": {
+      "sha256": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+      "bytes": 5167015
+    },
+    "temporal-v3.pt": {
+      "sha256": "f9eb05e197436f53cae8d4af25f479264cd5ca3c414a09d52bf1efa9c15b827f",
+      "bytes": 1216279
+    }
+  },
+  "versions": {
+    "numpy": "2.2.6",
+    "torch": "2.9.1",
+    "torchvision": "0.24.1",
+    "rasterio": "1.4.3",
+    "duckdb": "1.4.3",
+    "terradelta-history": "0.2.0.dev1"
+  },
+  "no_inference_executed": true,
+  "no_MPS_used": true,
+  "no_private_models_data_cache_or_ground_truth_used": true,
+  "old_replay_preserved": true,
+  "pending": "Parent must supply final publicly available calibration-v3.json and execution brief before any compute."
+}

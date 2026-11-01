@@ -1,0 +1,70 @@
+{
+  "format": "terradelta-v8-preparation-publication-v1",
+  "status": "prepared_confirmation_unscored",
+  "source_commit": "cfe2d6985efc7cd26de4ea7e179941c19c7ebfc2",
+  "confirmation_outcomes_interpreted": false,
+  "scope": "Calibration, frozen boundary, online invariance, native products and independently installed public raw computation; not detector accuracy or a successful new held-out study.",
+  "source_fingerprints": {
+    "artifacts/calibration-v3-base.json": "318bdea59d5c85af38b31cd293532f52d826eb02d3a647f1c7800180e8875487",
+    "artifacts/calibration-v3.json": "24c69214030c75ebfd849b3e42f95103f74b1808c11d82458f4cbc22754fa41a",
+    "artifacts/freeze-v3.json": "a61666000acd1737c914a8b508db7d9822f4bba008610aa4cbec0be258903e70"
+  },
+  "public_evidence": [
+    {
+      "path": "artifacts/verification-v3/confirmation-boundary-v3.json",
+      "original_task_receipt_sha256": "e196d01a2be31530d239d8174d8d984b5b931d6108e1a1fba9310be201dfc002",
+      "public_copy_sha256": "c04b230ce38f7aad3e597079dcda7131bcf909188470e13aecafe2ec60908992",
+      "path_prefixes_replaced": true
+    },
+    {
+      "path": "artifacts/verification-v3/confirmation-boundary-v3.md",
+      "original_task_receipt_sha256": "bb8083aff60d792ae7a99c0ac0e60d91167ccba3e73d7f7183874e236ea5c526",
+      "public_copy_sha256": "bb8083aff60d792ae7a99c0ac0e60d91167ccba3e73d7f7183874e236ea5c526",
+      "path_prefixes_replaced": false
+    },
+    {
+      "path": "artifacts/verification-v3/native-products-v3.json",
+      "original_task_receipt_sha256": "04d6f4312d8b2985c9bf365ba612822b4756219c8b5f27159dd163beb094703e",
+      "public_copy_sha256": "f582f860d1a2c5619d9e0ad6bc0540663ec9885e26f3323686e28894d2d52868",
+      "path_prefixes_replaced": true
+    },
+    {
+      "path": "artifacts/verification-v3/native-products-v3.md",
+      "original_task_receipt_sha256": "2eda7be52573d344cab9e178a2d74ece5ced247e68a9429d7709e75e25791f89",
+      "public_copy_sha256": "2eda7be52573d344cab9e178a2d74ece5ced247e68a9429d7709e75e25791f89",
+      "path_prefixes_replaced": false
+    },
+    {
+      "path": "artifacts/verification-v3/online-invariance-v3.json",
+      "original_task_receipt_sha256": "6a6fa9aa455733fef1e35f55a52f587898db00198092c7da9489c68ed43a1f87",
+      "public_copy_sha256": "6a6fa9aa455733fef1e35f55a52f587898db00198092c7da9489c68ed43a1f87",
+      "path_prefixes_replaced": false
+    },
+    {
+      "path": "artifacts/verification-v3/frozen-source-recovery-v3.json",
+      "original_task_receipt_sha256": "7ab1950bdbe9dc9895f77274e53a855ec1f9f964bedf2f763c2c1e4a811b974c",
+      "public_copy_sha256": "7ab1950bdbe9dc9895f77274e53a855ec1f9f964bedf2f763c2c1e4a811b974c",
+      "path_prefixes_replaced": false
+    },
+    {
+      "path": "artifacts/verification-v3/public-install-v020.json",
+      "original_task_receipt_sha256": "bbbf250c6bc3967f1a98a96b1aaf440bcad74ac48b3106b76d4274017bb8e7aa",
+      "public_copy_sha256": "76bdf17abfc6a99637c3a6ba05a3f951a13277c09a87e0eb12e4d49f1302cf36",
+      "path_prefixes_replaced": true
+    },
+    {
+      "path": "artifacts/verification-v3/public-proposals-v020.json",
+      "original_task_receipt_sha256": "76b662aa6b272e0f3b89515d7fc7529106ca190c49d7e5d8c85e8ce0e7cb87cf",
+      "public_copy_sha256": "efbe9aa7ccaab899a50997f6429976fffe31957d01d02d2090d2ac5c214c753f",
+      "path_prefixes_replaced": true
+    }
+  ],
+  "path_replacements": [
+    "TASK",
+    "REPOSITORY",
+    "PUBLIC_INSTALL",
+    "PUBLIC_COMPUTE",
+    "PUBLIC_RELEASE_DOWNLOADS"
+  ],
+  "copy_note": "Derived public copies replace local absolute path prefixes only. Original receipt hashes identify retained task-local originals; transformed-copy hashes are distinct. The public-install receipt is a historical precompute preparation snapshot; the public-proposals receipt separately records subsequent executed raw computation."
+}

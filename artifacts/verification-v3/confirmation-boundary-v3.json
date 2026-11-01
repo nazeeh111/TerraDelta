@@ -1,0 +1,418 @@
+{
+  "status": "passed_no_boundary_defect_found",
+  "checked_at": "2026-11-01T11:13:51.563866+00:00",
+  "artifacts_sha256": {
+    "artifacts/calibration-v3-base.json": "318bdea59d5c85af38b31cd293532f52d826eb02d3a647f1c7800180e8875487",
+    "artifacts/calibration-v3.json": "24c69214030c75ebfd849b3e42f95103f74b1808c11d82458f4cbc22754fa41a",
+    "artifacts/freeze-v3.json": "a61666000acd1737c914a8b508db7d9822f4bba008610aa4cbec0be258903e70",
+    "artifacts/temporal-v3.pt": "f9eb05e197436f53cae8d4af25f479264cd5ca3c414a09d52bf1efa9c15b827f",
+    "artifacts/event-gate-v2.pt": "1ff0cc2e7d2cfc2555c14d86f08a448441c8f82ff0bf3b3038127088dd4ea266",
+    "artifacts/spatial-v3.pt": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+    "configs/experiment-v8.json": "ed4204738e8a0079453d7469e64ed869dbf089dc2b78c0500004697d01d87bd9",
+    "configs/experiment-v7.json": "bb0e9f7c1e41ad21d2183b6a3de0962825ede5f82dcb38a26f83cb798e0ac973",
+    "confirmation-preparation-v3.json": "6af00c0052ee9364a17af36eafb90a538491bffdb0a94ba76476b21c77710460",
+    "online-invariance-v3.json": "6a6fa9aa455733fef1e35f55a52f587898db00198092c7da9489c68ed43a1f87"
+  },
+  "regions": {
+    "train": [
+      "L15-0331E-1257N_1327_3160_13",
+      "L15-0506E-1204N_2027_3374_13",
+      "L15-0924E-1108N_3699_3757_13",
+      "L15-1276E-1107N_5105_3761_13",
+      "L15-1669E-1153N_6678_3579_13",
+      "L15-1669E-1160N_6678_3548_13",
+      "L15-1335E-1166N_5342_3524_13",
+      "L15-0487E-1246N_1950_3207_13",
+      "L15-1298E-1322N_5193_2903_13"
+    ],
+    "development": [
+      "L15-0632E-0892N_2528_4620_13",
+      "L15-1389E-1284N_5557_3054_13",
+      "L15-1716E-1211N_6864_3345_13",
+      "L15-0614E-0946N_2459_4406_13"
+    ],
+    "confirmation": [
+      "L15-1172E-1306N_4688_2967_13",
+      "L15-1204E-1204N_4819_3372_13",
+      "L15-0358E-1220N_1433_3310_13"
+    ]
+  },
+  "held_out_disjoint": true,
+  "audit_only_excluded": true,
+  "global_points": {
+    "pairwise": {
+      "event_gate_retention_threshold": null,
+      "decoder": {
+        "threshold": 0.55,
+        "confirmations": 1,
+        "minimum_dwell_days": 0,
+        "revision_window_days": 100,
+        "maximum_gap_days": 190,
+        "timing_padding_days": 61
+      },
+      "distance_threshold": null,
+      "candidate_count": 4,
+      "selected_global_recorded_winner": true,
+      "selected_report_regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ]
+    },
+    "spatial_tracking": {
+      "event_gate_retention_threshold": null,
+      "decoder": {
+        "threshold": 0.55,
+        "confirmations": 2,
+        "minimum_dwell_days": 20,
+        "revision_window_days": 100,
+        "maximum_gap_days": 190,
+        "timing_padding_days": 61
+      },
+      "distance_threshold": null,
+      "candidate_count": 4,
+      "selected_global_recorded_winner": true,
+      "selected_report_regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ]
+    },
+    "smoothing": {
+      "event_gate_retention_threshold": null,
+      "decoder": {
+        "threshold": 0.65,
+        "confirmations": 2,
+        "minimum_dwell_days": 20,
+        "revision_window_days": 100,
+        "maximum_gap_days": 190,
+        "timing_padding_days": 61
+      },
+      "distance_threshold": null,
+      "candidate_count": 4,
+      "selected_global_recorded_winner": true,
+      "selected_report_regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ]
+    },
+    "hmm": {
+      "event_gate_retention_threshold": null,
+      "decoder": {
+        "threshold": 0.65,
+        "confirmations": 2,
+        "minimum_dwell_days": 20,
+        "revision_window_days": 100,
+        "maximum_gap_days": 190,
+        "timing_padding_days": 31
+      },
+      "distance_threshold": null,
+      "candidate_count": 4,
+      "selected_global_recorded_winner": true,
+      "selected_report_regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ]
+    },
+    "sn7_retrospective": {
+      "event_gate_retention_threshold": null,
+      "decoder": {
+        "threshold": 0.65,
+        "confirmations": 2,
+        "minimum_dwell_days": 20,
+        "revision_window_days": 100,
+        "maximum_gap_days": 190,
+        "timing_padding_days": 31
+      },
+      "distance_threshold": null,
+      "candidate_count": 4,
+      "selected_global_recorded_winner": true,
+      "selected_report_regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ]
+    },
+    "ted": {
+      "event_gate_retention_threshold": null,
+      "decoder": {
+        "threshold": 0.55,
+        "confirmations": 2,
+        "minimum_dwell_days": 20,
+        "revision_window_days": 100,
+        "maximum_gap_days": 190,
+        "timing_padding_days": 62
+      },
+      "distance_threshold": null,
+      "candidate_count": 4,
+      "selected_global_recorded_winner": true,
+      "selected_report_regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ]
+    },
+    "observation": {
+      "event_gate_retention_threshold": null,
+      "decoder": {
+        "threshold": 0.55,
+        "confirmations": 2,
+        "minimum_dwell_days": 20,
+        "revision_window_days": 100,
+        "maximum_gap_days": 190,
+        "timing_padding_days": 61
+      },
+      "distance_threshold": null,
+      "candidate_count": 4,
+      "selected_global_recorded_winner": true,
+      "selected_report_regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ]
+    },
+    "no_quality": {
+      "event_gate_retention_threshold": null,
+      "decoder": {
+        "threshold": 0.55,
+        "confirmations": 2,
+        "minimum_dwell_days": 20,
+        "revision_window_days": 100,
+        "maximum_gap_days": 190,
+        "timing_padding_days": 61
+      },
+      "distance_threshold": null,
+      "candidate_count": 4,
+      "selected_global_recorded_winner": true,
+      "selected_report_regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ]
+    },
+    "watch_lstm": {
+      "event_gate_retention_threshold": null,
+      "decoder": {
+        "threshold": 0.65,
+        "confirmations": 2,
+        "minimum_dwell_days": 20,
+        "revision_window_days": 100,
+        "maximum_gap_days": 190,
+        "timing_padding_days": 31
+      },
+      "distance_threshold": null,
+      "candidate_count": 4,
+      "selected_global_recorded_winner": true,
+      "selected_report_regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ]
+    },
+    "observation_gate": {
+      "event_gate_retention_threshold": 0.2,
+      "decoder": {
+        "threshold": 0.55,
+        "confirmations": 2,
+        "minimum_dwell_days": 20,
+        "revision_window_days": 100,
+        "maximum_gap_days": 190,
+        "timing_padding_days": 31
+      },
+      "distance_threshold": null,
+      "candidate_count": 6,
+      "selected_global_recorded_winner": true,
+      "selected_report_regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ]
+    },
+    "gate_no_quality": {
+      "event_gate_retention_threshold": 0.2,
+      "decoder": {
+        "threshold": 0.55,
+        "confirmations": 2,
+        "minimum_dwell_days": 20,
+        "revision_window_days": 100,
+        "maximum_gap_days": 190,
+        "timing_padding_days": 31
+      },
+      "distance_threshold": null,
+      "candidate_count": 6,
+      "selected_global_recorded_winner": true,
+      "selected_report_regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ]
+    },
+    "proposal_tracking": {
+      "event_gate_retention_threshold": null,
+      "decoder": {
+        "threshold": 0.55,
+        "confirmations": 2,
+        "minimum_dwell_days": 20,
+        "revision_window_days": 100,
+        "maximum_gap_days": 190,
+        "timing_padding_days": 61
+      },
+      "distance_threshold": null,
+      "candidate_count": 1,
+      "selected_global_recorded_winner": true,
+      "selected_report_regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ]
+    },
+    "embedding_distance": {
+      "event_gate_retention_threshold": null,
+      "decoder": {
+        "threshold": 0.55,
+        "confirmations": 2,
+        "minimum_dwell_days": 20,
+        "revision_window_days": 100,
+        "maximum_gap_days": 190,
+        "timing_padding_days": 61
+      },
+      "distance_threshold": 0.1,
+      "candidate_count": 28,
+      "selected_global_recorded_winner": true,
+      "selected_report_regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ]
+    }
+  },
+  "all13_methods_global_DEV_only": true,
+  "all13_parameters_valid": true,
+  "base12_parameters_preserved_exactly": true,
+  "actual_model_headers_and_config_composition_match": true,
+  "actual_TRAIN_DEV_spatial_temporal_gate_input_hash_receipts_match": true,
+  "actual_head_numerical_source_hashes_match": true,
+  "spatial_fit_recovery_receipt_and_official_backbone_match": true,
+  "actual_frozen_boundary_validates": true,
+  "boundary_validation_seconds": 1.662372500053607,
+  "confirmation_truth_files_hashed_only": [
+    "TASK/cache-v3/L15-1172E-1306N_4688_2967_13/instances.npy",
+    "TASK/cache-v3/L15-1204E-1204N_4819_3372_13/instances.npy",
+    "TASK/cache-v3/L15-0358E-1220N_1433_3310_13/instances.npy"
+  ],
+  "annotation_array_load_attempts": [],
+  "ground_truth_events_called": false,
+  "actual_probability_files_match": true,
+  "embedding_CPU_source_config_manifests_match_all7_regions": true,
+  "source_sha256": {
+    "pyproject.toml": "dc960720f35c1ffebf75ba1b484318f167f08fc5940207aa4d3fc4b42de6eabe",
+    "uv.lock": "12473c0ceafbe0b51b3dc65d6696ef2b0f4ac51e3cbd4fcce5c3b3d1e57f0084",
+    "src/terradelta/__init__.py": "122cfc2362b7097e61c368cc22fbea64d0249791a871300660071629616ef725",
+    "src/terradelta/acquire.py": "6eb0794cc0677315ac039cebec1faf0bcd03c9f544d6989eef76dd04cd71bf69",
+    "src/terradelta/data.py": "0e1fa709eb635191101ce1b9e2e669bb3ea04e50d3a1ac51cabdf0de489d02ea",
+    "src/terradelta/spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff",
+    "src/terradelta/pretrained_spatial.py": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503",
+    "src/terradelta/features.py": "c8495e7664659e1916157e8de76f8389f5c02e302967e108d6f4be3f4b29731d",
+    "src/terradelta/temporal.py": "534cc05ca713d9d3f66d8ee8a64f3efe0ff2f01be0a02a31a8abdce047fd2159",
+    "src/terradelta/event_gate.py": "0b6b38054ac84c813adcf0eb5ed7b775d6f0b2470c60247a949e1fef38c8df8b",
+    "src/terradelta/contracts.py": "7da8a05ed2f7cb8fdeb3e4b13d90ee272dd7b2b96d624842754f465ed1b50308",
+    "src/terradelta/decoder.py": "716eac715ec0e38396bd6bf7f36170e4b72d98bcf5a18b3c9096889ec215fe4e",
+    "src/terradelta/pipeline.py": "57ef8e5a73f50e85fc068c4bb2a04dcda87a0cbc36330864857c534c26cbfaf0",
+    "src/terradelta/evaluation.py": "66fd8b765a9d4dc552efefc4b4728858e0370b40808946ae1573121b4d2b3c7b",
+    "src/terradelta/schema.py": "9500c25425e546e7a895c9e2e4bbe333e1ef7c93b0eec0fa330aefa98339ebb1",
+    "src/terradelta/store.py": "53a148128938a1d7b425332f3ae7bdcc872c42d253cba17b37ae97f4815af43d",
+    "src/terradelta/service.py": "f64197cc2e453d2878fb7e155fb34998ae50551064c113dd015c7bc0938f9ea9",
+    "src/terradelta/cli.py": "bfedff5a3f40ef55eba095b9ac8acb9cc07bbbea34d91bef7c45737a0983ec91",
+    "src/terradelta/protocol.py": "59b8aac7d3a124e14f01e05cf6012983654abe4f94e1ad3428b7c28ad477b36b",
+    "scripts/train_spatial.py": "787158065edc05b89b0affa7a56d50b3ee5428fa6f52a6955661c14b58189b28",
+    "scripts/train_spatial_pretrained.py": "734224bf530f78cdde70c51e18bc4f07508d693b6d5dfddcc1ec9c9ed1a65479",
+    "scripts/select_spatial_inference.py": "217bdc0150aacdf36027ff4fa51c4c9bdf077e2f4158566675da702a6f1ae24f",
+    "scripts/train_temporal.py": "2d20a781982e20c60999c9c35c9c75d74b52ab894133629749ce077a89b66068",
+    "scripts/train_event_gate.py": "eded8c52ba7be4d36fa43cd96e94df83f844adf3c093a166c256adac4adb8b93",
+    "scripts/calibrate.py": "9c13c87e4e4edb052e82f038eff4e1b5b592eed9c27ddc94ff722f956d383f19",
+    "scripts/evaluate.py": "69112772e7b7620f63bfb8be07eebd9ad28bae8aa43711c60f062966ccc1ed55",
+    "scripts/evaluate_gate_calibration.py": "3e269c8c5fa3ed2a1b03a155e76ca7ae0180c2c2101a3ce24b78b2689c8b5394",
+    "scripts/predict_all.py": "b9bcc9ccb80116e78ad39a047acaf64e4af457ecc921ac30caced2e2a8b0450f",
+    "scripts/rebuild_features.py": "dfcc3113b592c3632ee268ffb64b7168e91698f818617b0d1cf4dad0b67b2265",
+    "scripts/check_online_invariance.py": "2f3a8112407e5dd70ee86e97e4e394676bb9e01cb2d878eb32ec351a76479f18",
+    "scripts/stress_and_calibration.py": "1911944b1fb98877f6e720c75ed7e442a1868aa157d93d78370564bb22871189",
+    "scripts/export_rasters.py": "b0d21afe998acd47b07b720cf8f9a7c7ed0e79594ffdddbd6c8b697b91b93835",
+    "src/terradelta/embeddings.py": "3a05e90a3bab8c80cd4d831376226222de4ce494c50e986868c6ab26c4170e6f",
+    "scripts/extract_embeddings.py": "35bbf61197d25709fefbd519e6a6c12300e0155a22e387e5dcb24f38f09210ba",
+    "scripts/calibrate_embedding.py": "55412d39cdf4e327adc1c13cb366ee988dcf503dd8f448b11a7574d1659d1fb5"
+  },
+  "invariance_evidence": {
+    "methods": [
+      "embedding_distance",
+      "gate_no_quality",
+      "hmm",
+      "no_quality",
+      "observation",
+      "observation_gate",
+      "pairwise",
+      "proposal_tracking",
+      "smoothing",
+      "spatial_tracking",
+      "ted",
+      "watch_lstm"
+    ],
+    "regions": [
+      "L15-1172E-1306N_4688_2967_13",
+      "L15-1204E-1204N_4819_3372_13",
+      "L15-0358E-1220N_1433_3310_13"
+    ],
+    "region_method_checks": 36,
+    "all_nonvacuous": true,
+    "cutoff_observations": 12,
+    "real_neural_descriptor_boundary_frames_per_region": 2,
+    "all_earlier_records_including_clock_and_revision_identity_compared": true,
+    "source_and_receipt_identity_held": true,
+    "retrospective_method_excluded_correctly": true,
+    "receipt_lacks_standalone_temporal_and_calibration_hashes_but_preparation_paths_and_preexisting_mtimes_match_actual_frozen_immutable_artifacts": true
+  },
+  "availability_semantics": "All actual confirmation metadata uses explicit retrospective_month_end; publication times unknown, no live-warning claim",
+  "scope": {
+    "confirmation_annotations_interpreted": false,
+    "confirmation_performance_computed": false,
+    "MPS_used": false,
+    "source_data_config_model_edits": false,
+    "Git_public_actions": false,
+    "no_confirmation_scoring_authorized_or_launched": true
+  },
+  "elapsed_seconds": 5.473485875001643,
+  "review_status": "actual_frozen_boundary_clear_remains_unscored",
+  "open_findings": [],
+  "actual_model_metadata_sha256": {
+    "temporal-v3.json": "0888d04f4a16010b51a2a6483341ac29df4e75f416c104cdd8934d3502324670",
+    "event-gate-v2.json": "ec59d54a4ae96b1889c549861a68a598f3e46b1f3fc625935e6011d7cf3243be",
+    "event-gate-v2.examples.npz": "9e47f8e8a6dcd69e1548c9b1de7695050cf6256a5b375414c92fa6fbfef20da0"
+  },
+  "limits": [
+    "This is an audit of the exact V8 preparation, not permission to score; V8 remains unscored under the parent hold.",
+    "No confirmation annotation array or outcome metric was interpreted; prepared truth bytes were hashed only for the required boundary checks.",
+    "The existing real invariance run was audited, not rerun for another555seconds; it covers a12-observation prefix in each held-out region and first/last-prefix actual neural frames, not every possible cutoff.",
+    "The invariance JSON alone carries feature/gate hashes; source-held preparation commands, immutable artifact fingerprints and pre-run modification times tie its other inputs to this frozen preparation.",
+    "All acquisition publication timestamps are unknown and use explicit retrospective_month_end; no live availability warning or exact physical event-date claim is supported.",
+    "The retained spatial checkpoint carries its prior documented terminal source-guard failure/recovery receipt; that receipt and unchanged checkpoint/backbone bytes were checked, not rewritten.",
+    "No accuracy, superiority, calibration coverage or analyst-readiness result follows from a valid boundary. The task-only DEV geometry prototype is separate and was not inspected or changed."
+  ],
+  "evidence_sha256": {
+    "audit.py": "89db82e14ea8ba9101fb79a4513c64ce66d8c0f6766bb67668724c1bf69a1700",
+    "check-results.json": "a9c9f9340bef30f9f7c04918552a57c0b03a8c9caded663ff50fea1cc5727953"
+  }
+}

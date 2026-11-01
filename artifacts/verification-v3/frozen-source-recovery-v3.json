@@ -1,0 +1,14 @@
+{
+  "format": "terradelta-frozen-source-recovery-v1",
+  "git_commit": "cfe2d6985efc7cd26de4ea7e179941c19c7ebfc2",
+  "archive_sha256": "db641f3f29c80adb1514391b5b579ff0c46e49b2c7633350662751bc5d491887",
+  "copied_postcommit_artifacts": {
+    "calibration-v3-base.json": "318bdea59d5c85af38b31cd293532f52d826eb02d3a647f1c7800180e8875487",
+    "calibration-v3.json": "24c69214030c75ebfd849b3e42f95103f74b1808c11d82458f4cbc22754fa41a",
+    "freeze-v3.json": "a61666000acd1737c914a8b508db7d9822f4bba008610aa4cbec0be258903e70"
+  },
+  "status": "passed",
+  "confirmation_outcomes_interpreted": false,
+  "validation_seconds": 3.4692295829881914,
+  "independent_restored_source_import": true
+}

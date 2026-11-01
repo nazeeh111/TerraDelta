@@ -1,0 +1,178 @@
+{
+  "status": "passed",
+  "source_commit": "cfe2d6985efc7cd26de4ea7e179941c19c7ebfc2",
+  "policy_sha256": "e342dedf7ea09b57720ad9b35486dedafe471d0e387df7539acab728db3e72ed",
+  "kind": "RAW source-bound proposal policy, not learned calibration or empirical accuracy evidence",
+  "device": "cpu",
+  "torch_threads": 2,
+  "runs": [
+    {
+      "observations": 2,
+      "end": "2018-02-28T23:59:59+00:00",
+      "output": "PUBLIC_COMPUTE/prefix-2",
+      "wall_seconds": 202.52153625001665,
+      "spatial_seconds": 157.01024604198756,
+      "probability_file_sha256": "761dbf53bbcd88bdf15851df51f1acef9970451ebfcdc7ef704e22dcc27171ab",
+      "rasters": [
+        {
+          "index": 0,
+          "file": "global_monthly_2018_01_mosaic_L15-0457E-1135N_1831_3648_13_probability.tif",
+          "sha256": "9fd703a193028667131d9692f8270ee7ecf48f5810c6864097251178ef42d3d5",
+          "source_id": "sn7:global_monthly_2018_01_mosaic_L15-0457E-1135N_1831_3648_13",
+          "original_TIFF_sha256": "e49e5931ac8654100669cc4ade518b8f91d5ccb81b2386ae6bd5b746e4595514",
+          "cache_RGB_pixels_sha256": "04ba43e948da47e91cde5c8ec1415eaceb20ff01a66177295db120d919bc2bdf",
+          "probability_array_sha256": "830d51fdf0e256477de6b668ae475efd76e6b2b23dd9c9f07b5ab40719f709ec",
+          "native_grid_CRS_mask_nodata_values_match": true,
+          "valid_fraction": 1.0,
+          "invalid_pixels": 0,
+          "invalid_value_check_exercised": false,
+          "probability_min": 9.062487151823007e-06,
+          "probability_max": 0.9998086094856262
+        },
+        {
+          "index": 1,
+          "file": "global_monthly_2018_02_mosaic_L15-0457E-1135N_1831_3648_13_probability.tif",
+          "sha256": "547c8d1e1a16113931e0b74620cf375aadbb346ec5aaa1ab5859f29cb4551e83",
+          "source_id": "sn7:global_monthly_2018_02_mosaic_L15-0457E-1135N_1831_3648_13",
+          "original_TIFF_sha256": "03ed0821fe956bb1c0834e129aafb86080735ed0bb0cc6ea7106e538365e33df",
+          "cache_RGB_pixels_sha256": "086778f4bfac1c1e3b0b900b43f8486c72d36bae2ba323c4c47fc6a50b569117",
+          "probability_array_sha256": "c64500d9e1d4fd59935398e12bdd2b0220afa0adcddb6d103241f67322020a3d",
+          "native_grid_CRS_mask_nodata_values_match": true,
+          "valid_fraction": 1.0,
+          "invalid_pixels": 0,
+          "invalid_value_check_exercised": false,
+          "probability_min": 4.713073849416105e-06,
+          "probability_max": 0.9999236464500427
+        }
+      ],
+      "prefix_arrays_and_metadata_exact": true,
+      "candidates": 4954,
+      "features_shape": [
+        4954,
+        2,
+        17
+      ],
+      "usable_site_observations": 9908,
+      "no_supervision_file_or_fields": true,
+      "revisions": 1093,
+      "latest_event_IDs": 1093,
+      "revision_states": {
+        "proposed": 1093
+      },
+      "latest_states": {
+        "proposed": 1093
+      },
+      "change_classes": {
+        "building_removal": 413,
+        "building_addition": 680
+      },
+      "independent_GeoJSON_GeoParquet_rows": 1093,
+      "model_revision": "spatial:7c35a3f04ef9;proposal-v1;processing:1a3e8cda0495e3a83f30b95e32c34bc029fe8e662f0363468f1284ef151df25a"
+    },
+    {
+      "observations": 3,
+      "end": "2018-03-31T23:59:59+00:00",
+      "output": "PUBLIC_COMPUTE/prefix-3",
+      "wall_seconds": 295.2660540830111,
+      "spatial_seconds": 278.18844112503575,
+      "probability_file_sha256": "39053f03b408551699c74f3f91c856da17333cf317edd8ec712fc7d5e6b4e580",
+      "rasters": [
+        {
+          "index": 0,
+          "file": "global_monthly_2018_01_mosaic_L15-0457E-1135N_1831_3648_13_probability.tif",
+          "sha256": "9fd703a193028667131d9692f8270ee7ecf48f5810c6864097251178ef42d3d5",
+          "source_id": "sn7:global_monthly_2018_01_mosaic_L15-0457E-1135N_1831_3648_13",
+          "original_TIFF_sha256": "e49e5931ac8654100669cc4ade518b8f91d5ccb81b2386ae6bd5b746e4595514",
+          "cache_RGB_pixels_sha256": "04ba43e948da47e91cde5c8ec1415eaceb20ff01a66177295db120d919bc2bdf",
+          "probability_array_sha256": "830d51fdf0e256477de6b668ae475efd76e6b2b23dd9c9f07b5ab40719f709ec",
+          "native_grid_CRS_mask_nodata_values_match": true,
+          "valid_fraction": 1.0,
+          "invalid_pixels": 0,
+          "invalid_value_check_exercised": false,
+          "probability_min": 9.062487151823007e-06,
+          "probability_max": 0.9998086094856262
+        },
+        {
+          "index": 1,
+          "file": "global_monthly_2018_02_mosaic_L15-0457E-1135N_1831_3648_13_probability.tif",
+          "sha256": "547c8d1e1a16113931e0b74620cf375aadbb346ec5aaa1ab5859f29cb4551e83",
+          "source_id": "sn7:global_monthly_2018_02_mosaic_L15-0457E-1135N_1831_3648_13",
+          "original_TIFF_sha256": "03ed0821fe956bb1c0834e129aafb86080735ed0bb0cc6ea7106e538365e33df",
+          "cache_RGB_pixels_sha256": "086778f4bfac1c1e3b0b900b43f8486c72d36bae2ba323c4c47fc6a50b569117",
+          "probability_array_sha256": "c64500d9e1d4fd59935398e12bdd2b0220afa0adcddb6d103241f67322020a3d",
+          "native_grid_CRS_mask_nodata_values_match": true,
+          "valid_fraction": 1.0,
+          "invalid_pixels": 0,
+          "invalid_value_check_exercised": false,
+          "probability_min": 4.713073849416105e-06,
+          "probability_max": 0.9999236464500427
+        },
+        {
+          "index": 2,
+          "file": "global_monthly_2018_03_mosaic_L15-0457E-1135N_1831_3648_13_probability.tif",
+          "sha256": "2a112044b3ba2b34c1152780a2d58d661c5e3dbd84d7818744be4532e600ada1",
+          "source_id": "sn7:global_monthly_2018_03_mosaic_L15-0457E-1135N_1831_3648_13",
+          "original_TIFF_sha256": "bfeb4fa584a522c4216002607891707c03369d01e8fed5120abb3fe9451b47bc",
+          "cache_RGB_pixels_sha256": "d2a805d75f5698d51d6f6bfaa6ace3db010877b6bfda623e6b9d8fa3c69ec601",
+          "probability_array_sha256": "bda647a991f8a0a60c820ebf6c83bb49325da9d75f56cba7fdce2b34dbbb78dd",
+          "native_grid_CRS_mask_nodata_values_match": true,
+          "valid_fraction": 1.0,
+          "invalid_pixels": 0,
+          "invalid_value_check_exercised": false,
+          "probability_min": 5.406876425695373e-06,
+          "probability_max": 0.9998197555541992
+        }
+      ],
+      "prefix_arrays_and_metadata_exact": true,
+      "candidates": 5347,
+      "features_shape": [
+        5347,
+        3,
+        17
+      ],
+      "usable_site_observations": 16041,
+      "no_supervision_file_or_fields": true,
+      "revisions": 2880,
+      "latest_event_IDs": 1915,
+      "revision_states": {
+        "proposed": 1915,
+        "retracted": 356,
+        "confirmed_by_model": 609
+      },
+      "latest_states": {
+        "retracted": 356,
+        "confirmed_by_model": 609,
+        "proposed": 950
+      },
+      "change_classes": {
+        "building_removal": 859,
+        "building_addition": 1056
+      },
+      "independent_GeoJSON_GeoParquet_rows": 1915,
+      "model_revision": "spatial:7c35a3f04ef9;proposal-v1;processing:1a3e8cda0495e3a83f30b95e32c34bc029fe8e662f0363468f1284ef151df25a"
+    }
+  ],
+  "shared_first_two_probability_frames_bit_identical": true,
+  "third_source_and_probability_pixels_differ_from_second": true,
+  "all_input_and_installed_package_bytes_unchanged": true,
+  "features_retained_for_later_public_event_gate_reconstruct": true,
+  "no_MPS_GT_private_inputs_or_learned_head_used": true,
+  "limits": "Raw software/integration run. No empirical calibration, learned-method result, physical cause, accuracy or goal-completion claim.",
+  "raw_two_to_three_observation_behavior": {
+    "shared_event_ids": 1093,
+    "prior_proposed_latest_states_with_third_observation": {
+      "retracted": 356,
+      "proposed": 128,
+      "confirmed_by_model": 609
+    },
+    "new_event_ids_with_third_observation": 822,
+    "geometry_and_change_class_of_all_existing_ids_preserved": true,
+    "interpretation": "Raw persistence/proposal state changes only. No learned compatibility gate or accuracy claim."
+  },
+  "all_first_three_sources_fully_valid": true,
+  "invalid_pixel_nodata_limit": "All3actualpublicsourceframes are100%valid. NaN nodata declaration/internal shared masks checked, but invalid-pixel payload checks are not exercised by this prefix.",
+  "independent_raster_reader": "Rasterio/GDAL against raw GeoTIFF files without importing TerraDelta writer",
+  "independent_vector_readers": "GeoPandas/pyogrio and GeoPandas/PyArrow",
+  "artifact_storage_bytes": 160402754,
+  "public_diff_from_installed_source": "35\t0\texamples/spatial-v3-proposal-policy.json\n"
+}

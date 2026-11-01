@@ -106,6 +106,12 @@ The current development package also completed
 on two versus three native observations, using newly downloaded official backbone
 weights. Those runs verify changed-input execution and readable raster/vector
 outputs; they do not evaluate the learned gate or establish event correctness.
+The subsequent [installed learned-gate/API replay](artifacts/verification-v3/public-learned-v020.json)
+preserved all 1,093 earlier records after a real append and independently verified
+280 changed-area/date export records. On that three-observation prefix the main
+gate confirmed **zero** events; its no-quality ablation confirmed one. Proposed
+and retracted records remain explicitly labeled. This is integration evidence,
+not a geographic accuracy result.
 
 ## Replay the complete research history
 

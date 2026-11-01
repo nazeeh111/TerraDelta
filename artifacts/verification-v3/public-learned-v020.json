@@ -1,0 +1,242 @@
+{
+  "format": "terradelta-independent-public-learned-replay-v020-v1",
+  "status": "passed",
+  "public_commit": "feda8cd665de3fed5da3794b8d14f91e4ee9ae6b",
+  "installed_package_version": "0.2.0.dev1",
+  "installed_pipeline_origin": "PUBLIC_INSTALL/source/.venv/lib/python3.12/site-packages/terradelta/pipeline.py",
+  "all_installed_module_and_public_source_byte_guards": {
+    "__init__.py": true,
+    "acquire.py": true,
+    "cli.py": true,
+    "contracts.py": true,
+    "data.py": true,
+    "decoder.py": true,
+    "embeddings.py": true,
+    "evaluation.py": true,
+    "event_gate.py": true,
+    "features.py": true,
+    "pipeline.py": true,
+    "pretrained_spatial.py": true,
+    "protocol.py": true,
+    "schema.py": true,
+    "service.py": true,
+    "spatial.py": true,
+    "store.py": true,
+    "temporal.py": true,
+    "web/app.js": true,
+    "web/index.html": true,
+    "web/style.css": true
+  },
+  "calibration_sha256": "24c69214030c75ebfd849b3e42f95103f74b1808c11d82458f4cbc22754fa41a",
+  "event_gate_weights_sha256": "1ff0cc2e7d2cfc2555c14d86f08a448441c8f82ff0bf3b3038127088dd4ea266",
+  "spatial_weights_sha256": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+  "actual_input_model_calibration_feature_cache_byte_guards": {
+    "PUBLIC_INSTALL/source/artifacts/calibration-v3.json": true,
+    "PUBLIC_INSTALL/source/artifacts/event-gate-v2.pt": true,
+    "PUBLIC_INSTALL/source/artifacts/spatial-v3.pt": true,
+    "PUBLIC_RAW_COMPUTE/prefix-2/features/features.npz": true,
+    "PUBLIC_RAW_COMPUTE/prefix-2/features/sites.npy": true,
+    "PUBLIC_RAW_COMPUTE/prefix-2/features/sites.json": true,
+    "PUBLIC_RAW_COMPUTE/prefix-2/prefix-cache/valid.npy": true,
+    "PUBLIC_RAW_COMPUTE/prefix-2/prefix-cache/metadata.json": true,
+    "PUBLIC_RAW_COMPUTE/prefix-2/prefix-cache/rgb.npy": true,
+    "PUBLIC_RAW_COMPUTE/prefix-3/features/features.npz": true,
+    "PUBLIC_RAW_COMPUTE/prefix-3/features/sites.npy": true,
+    "PUBLIC_RAW_COMPUTE/prefix-3/features/sites.json": true,
+    "PUBLIC_RAW_COMPUTE/prefix-3/prefix-cache/valid.npy": true,
+    "PUBLIC_RAW_COMPUTE/prefix-3/prefix-cache/metadata.json": true,
+    "PUBLIC_RAW_COMPUTE/prefix-3/prefix-cache/rgb.npy": true
+  },
+  "cpu_threads": 2,
+  "reconstruction_function": "installed terradelta.pipeline.reconstruct(feature_dir, output=newdir, method=kind, event_gate_weights=publicWeights, calibration_path=publicCalibration)",
+  "normal_reconstruct_runs": [
+    {
+      "method": "observation_gate",
+      "observations": 2,
+      "seconds": 2.3182133749942295,
+      "revisions": 1093,
+      "latest_ids": 1093,
+      "latest_states": {
+        "proposed": 1093
+      },
+      "model_revision": "event-gate:1ff0cc2e7d2cfc2555c14d86f08a448441c8f82ff0bf3b3038127088dd4ea266;observation_gate;processing:6efd7c89820a3fc250bad56c81dc8855cc907d4a55a5bfc1d15023d045021a35",
+      "output": "PUBLIC_LEARNED_COMPUTE/normal-observation_gate-2"
+    },
+    {
+      "method": "observation_gate",
+      "observations": 3,
+      "seconds": 2.053631583985407,
+      "revisions": 2880,
+      "latest_ids": 1915,
+      "latest_states": {
+        "retracted": 356,
+        "proposed": 1559
+      },
+      "model_revision": "event-gate:1ff0cc2e7d2cfc2555c14d86f08a448441c8f82ff0bf3b3038127088dd4ea266;observation_gate;processing:6efd7c89820a3fc250bad56c81dc8855cc907d4a55a5bfc1d15023d045021a35",
+      "output": "PUBLIC_LEARNED_COMPUTE/normal-observation_gate-3"
+    },
+    {
+      "method": "gate_no_quality",
+      "observations": 2,
+      "seconds": 0.9581121249939315,
+      "revisions": 1093,
+      "latest_ids": 1093,
+      "latest_states": {
+        "proposed": 1093
+      },
+      "model_revision": "event-gate:1ff0cc2e7d2cfc2555c14d86f08a448441c8f82ff0bf3b3038127088dd4ea266;gate_no_quality;processing:398bcd053c64214a371dde25fd59f2a6188a37cea096897beb884b6b156a4e86",
+      "output": "PUBLIC_LEARNED_COMPUTE/normal-gate_no_quality-2"
+    },
+    {
+      "method": "gate_no_quality",
+      "observations": 3,
+      "seconds": 2.010369374998845,
+      "revisions": 2880,
+      "latest_ids": 1915,
+      "latest_states": {
+        "retracted": 356,
+        "proposed": 1558,
+        "confirmed_by_model": 1
+      },
+      "model_revision": "event-gate:1ff0cc2e7d2cfc2555c14d86f08a448441c8f82ff0bf3b3038127088dd4ea266;gate_no_quality;processing:398bcd053c64214a371dde25fd59f2a6188a37cea096897beb884b6b156a4e86",
+      "output": "PUBLIC_LEARNED_COMPUTE/normal-gate_no_quality-3"
+    }
+  ],
+  "common_transaction_origin": "2026-11-01T12:16:22.245502+00:00",
+  "exact_incremental_public_API": {
+    "observation_gate": {
+      "prefix2_revisions": 1093,
+      "prefix3_revisions": 2880,
+      "prior_records_exact_prefix": true,
+      "same_transaction_origin": "2026-11-01T12:16:22.245502+00:00",
+      "output": "PUBLIC_LEARNED_COMPUTE/incremental-observation_gate",
+      "appended_prefix2": 1093,
+      "appended_extension": 1787,
+      "snapshot2": "2026-11-01T12:16:22.246594+00:00",
+      "snapshot3": "2026-11-01T12:16:22.248381+00:00",
+      "exact_historical_snapshot_preserved": true,
+      "latest_states": {
+        "proposed": 1559,
+        "retracted": 356
+      },
+      "latest_ids": 1915
+    },
+    "gate_no_quality": {
+      "prefix2_revisions": 1093,
+      "prefix3_revisions": 2880,
+      "prior_records_exact_prefix": true,
+      "same_transaction_origin": "2026-11-01T12:16:22.245502+00:00",
+      "output": "PUBLIC_LEARNED_COMPUTE/incremental-gate_no_quality",
+      "appended_prefix2": 1093,
+      "appended_extension": 1787,
+      "snapshot2": "2026-11-01T12:16:22.246594+00:00",
+      "snapshot3": "2026-11-01T12:16:22.248381+00:00",
+      "exact_historical_snapshot_preserved": true,
+      "latest_states": {
+        "proposed": 1558,
+        "retracted": 356,
+        "confirmed_by_model": 1
+      },
+      "latest_ids": 1915
+    }
+  },
+  "incremental_implementation": "Installed public method_events(...record_origin=common_origin); public EventStore.append_many(prefix2), snapshot_time/query, append_many(extension), query(as_of=prefix2snapshot). Every earlier EventRevision and snapshot payload retained exactly.",
+  "clock_limitation": "reconstruct() uses separate wall-clock transaction origins; its outputs are separate runs, not incremental. Exact incremental evidence above uses public method_events(record_origin=commonOrigin) and public EventStore API.",
+  "HTTP": {
+    "url": "http://127.0.0.1:59748",
+    "server_session_id": 12124,
+    "server_pid": 96595,
+    "cache_root": "PUBLIC_LEARNED_COMPUTE/api-cache",
+    "run_root": "PUBLIC_LEARNED_COMPUTE/incremental-observation_gate",
+    "server_left_running": true,
+    "health": {
+      "status": "ok",
+      "version": "0.2.0.dev1",
+      "regions": 1
+    },
+    "catalog_frames": 3,
+    "future_index3_returns404": true,
+    "all_3_native_RGB_alpha_and_source_hashes_exact": true,
+    "queries": [
+      {
+        "name": "full",
+        "state": "proposed",
+        "events": 1559,
+        "all_ids_match_independent_JSONL_filter": true
+      },
+      {
+        "name": "changed",
+        "state": "proposed",
+        "events": 280,
+        "all_ids_match_independent_JSONL_filter": true
+      },
+      {
+        "name": "retracted",
+        "state": "retracted",
+        "events": 356,
+        "all_ids_match_independent_JSONL_filter": true
+      },
+      {
+        "name": "confirmed",
+        "state": "confirmed_by_model",
+        "events": 0,
+        "all_ids_match_independent_JSONL_filter": true
+      },
+      {
+        "name": "preperiod",
+        "state": "proposed",
+        "events": 0,
+        "all_ids_match_independent_JSONL_filter": true
+      },
+      {
+        "name": "outside",
+        "state": "proposed",
+        "events": 0,
+        "all_ids_match_independent_JSONL_filter": true
+      }
+    ],
+    "historical_exact_API_payloads": 1093,
+    "current_exact_API_payloads": 1915,
+    "historical_snapshot_unchanged": true,
+    "selected_history_event": "td-0056e168b9dc48c1d509",
+    "selected_history_transition": "proposed at2-observation snapshot -> retracted at3-observation snapshot",
+    "changed_GeoJSON_GeoParquet_rows": 280,
+    "changed_exports_CRS": "EPSG:4326"
+  },
+  "separate_stdlib_consumer": {
+    "status": "passed",
+    "consumer": "independent Python standard library urllib/json only",
+    "url": "http://127.0.0.1:59748/api/events?region_id=L15-0457E-1135N_1831_3648_13&bbox=-99.53613281249997%2C19.2904245813072%2C-99.51416015625303%2C19.31114335506463&start=2018-02-01T00%3A00%3A00Z&end=2018-02-28T23%3A59%3A59Z&state=proposed&as_of=2026-11-01T12%3A16%3A22.248381%2B00%3A00",
+    "events": 280,
+    "response_sha256": "c86ab4fbfb8eca2e409f3f1c665bd4f23b95023a707d2ece4f9af2f895d9ab76",
+    "all_expected_ids_match": true,
+    "no_TerraDelta_modules_imported": true
+  },
+  "matching3frame_cache_byte_guards": {
+    "metadata.json": true,
+    "rgb.npy": true,
+    "valid.npy": true
+  },
+  "no_spatial_inference_repeated": true,
+  "no_task_private_models_data_calibration_runtime_imports_or_ground_truth": true,
+  "fresh_confirmation_entirely_outside_scope_and_unscored": true,
+  "old_v010_server_and_environment_untouched": true,
+  "output_storage_bytes": 164997238,
+  "limits": [
+    "Mexico is public audit-only imagery; physical accuracy is unknown. No fresh confirmation outcome or overall success claim.",
+    "Observation_gate emits ZERO confirmed events on this three-observation prefix. No-quality emits ONE; proposed/retracted requests are explicitly labeled and thresholds unchanged.",
+    "Normal reconstruct outputs use separate wall clocks. Controlled public-API common-origin replay is separately identified, with actual append operations and HTTP snapshots.",
+    "All3sourceframes are fully valid, so this does not test an invalid-pixel payload case.",
+    "No visual/UI review attempted while Mac visual tools are locked."
+  ],
+  "publication": {
+    "original_task_receipt_sha256": "ba91802453b9a2f1c9752179ff926f1fcbd090f9720773fde565d1dc58314f86",
+    "copy_transformation": "Local absolute path prefixes replaced in keys and values. Evidence values and original source/artifact identities retained. This is a derived public copy, not byte-identical to the original receipt.",
+    "path_replacement_labels": [
+      "PUBLIC_INSTALL",
+      "PUBLIC_RAW_COMPUTE",
+      "PUBLIC_LEARNED_COMPUTE"
+    ],
+    "loopback_note": "Recorded loopback URLs identify the executed local test; they are not public deployments."
+  }
+}

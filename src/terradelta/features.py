@@ -80,7 +80,12 @@ def footprint_instances(
     reject[0] = False
     objects[reject[objects]] = 0
     # Consecutive IDs make later vectorized pooling bounded by actual candidate count.
-    return np.unique(objects, return_inverse=True)[1].reshape(objects.shape).astype("int32")
+    labels, inverse = np.unique(objects, return_inverse=True)
+    # A fully foreground scene has no zero label to reserve the background ID.
+    # Keep every actual component positive in that case as well.
+    if labels[0] != 0:
+        inverse += 1
+    return inverse.reshape(objects.shape).astype("int32")
 
 
 def candidate_sites(

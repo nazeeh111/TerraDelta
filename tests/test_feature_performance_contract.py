@@ -89,6 +89,47 @@ def test_local_component_seeds_accept_noncontiguous_input():
                                   legacy_instances(probability, valid))
 
 
+@pytest.mark.parametrize("boundary_probability", [0.0, 0.98])
+def test_entirely_foreground_raster_keeps_its_first_component(boundary_probability):
+    probability = np.ones((2, 1, 3), dtype="float32")
+    probability[1] = boundary_probability
+    valid = np.ones((1, 3), dtype=bool)
+
+    actual = features.footprint_instances(probability, valid)
+
+    np.testing.assert_array_equal(actual, np.ones((1, 3), dtype="int32"))
+
+
+def test_entirely_foreground_raster_keeps_multiple_watershed_components():
+    probability = np.ones((2, 2, 6), dtype="float32")
+    probability[1] = 0
+    probability[1, :, 2:4] = 1
+    valid = np.ones((2, 6), dtype=bool)
+
+    actual = features.footprint_instances(probability, valid)
+
+    assert (actual > 0).all()
+    np.testing.assert_array_equal(np.unique(actual), [1, 2])
+    assert np.bincount(actual.ravel())[1:].min() >= 3
+
+
+def test_entirely_foreground_initial_inventory_keeps_its_causal_site():
+    probability = np.zeros((3, 2, 1, 3), dtype="float32")
+    probability[0, 0] = 1
+    valid = np.ones((3, 1, 3), dtype=bool)
+    usable = np.ones(3, dtype=bool)
+
+    sites, births = features.candidate_sites(probability, valid, usable)
+    prefix_sites, prefix_births = features.candidate_sites(
+        probability[:1], valid[:1], usable[:1]
+    )
+
+    np.testing.assert_array_equal(sites, np.ones((1, 3), dtype="int32"))
+    np.testing.assert_array_equal(births, [0])
+    np.testing.assert_array_equal(sites, prefix_sites)
+    np.testing.assert_array_equal(births, prefix_births)
+
+
 def test_candidate_births_features_and_future_prefix_remain_exact(monkeypatch):
     probability, validity = component_case("nested_and_seeded")
     probabilities = np.repeat(probability[None], 6, axis=0)

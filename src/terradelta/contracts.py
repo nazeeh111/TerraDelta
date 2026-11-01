@@ -11,6 +11,54 @@ TEMPORAL_METHODS = {"observation", "no_quality", "watch_lstm"}
 LEARNED_GATE_METHODS = {"observation_gate", "gate_no_quality"}
 
 
+def head_training_config_sha256(config_path, settings=None):
+    """Resolve a bounded comparison-only amendment without relabeling fitted heads.
+
+    Both head trainers ignore the embedding block. Every other configuration
+    field, including unknown future fields, must match the actual training file.
+    Data-byte identity remains recorded separately in the actual fit receipts.
+    """
+    config_path = Path(config_path)
+    settings = json.loads(config_path.read_text()) if settings is None else settings
+    reference = settings.get("head_training_config")
+    if reference is None:
+        return sha256(config_path)
+    if (not isinstance(reference, dict) or set(reference) != {"path", "sha256"}
+            or not isinstance(reference["path"], str)
+            or Path(reference["path"]).name != reference["path"]
+            or Path(reference["path"]).suffix != ".json"):
+        raise ValueError("Head training config must be an explicitly hashed sibling JSON file")
+    training_path = config_path.with_name(reference["path"])
+    if (training_path.resolve() == config_path.resolve()
+            or sha256(training_path) != reference["sha256"]):
+        raise ValueError("Head training config reference changed or refers to itself")
+    training = json.loads(training_path.read_text())
+    if "head_training_config" in training:
+        raise ValueError("Chained head-training configuration references are unsupported")
+    comparison_only = {
+        "version", "embedding_baseline", "embedding_baseline_declared_at",
+        "embedding_amendment", "head_training_config",
+    }
+    def canonical(value):
+        return json.dumps({k: v for k, v in value.items() if k not in comparison_only},
+                          sort_keys=True, separators=(",", ":"), allow_nan=False)
+
+    if canonical(settings) != canonical(training):
+        raise ValueError("Comparison amendment changed the actual head training configuration")
+    return reference["sha256"]
+
+
+def preflight_probability_files(features_root, predictions_root, regions):
+    """Bind actual diagnostic raster arrays before any truth is opened or hashed."""
+    from .features import validate_feature_protocol
+
+    for region in regions:
+        info = validate_feature_protocol(Path(features_root) / region, supervision=False)
+        path = Path(predictions_root) / region / "probabilities.npy"
+        if sha256(path) != info.get("probability_sha256"):
+            raise ValueError(f"Diagnostic probability bytes differ from frozen features: {region}")
+
+
 def study_binding(config):
     from .event_gate import validate_spatial_provenance
 
@@ -171,7 +219,7 @@ def assert_calibration(info, calibration, *, method=None, temporal_weights=None,
         if relevant and path is not None and (key in calibration or require_bound or versioned):
             if calibration.get(key) != sha256(path):
                 raise ValueError(f"calibration {key} differs from selected head")
-    if versioned or require_bound:
+    if versioned or require_bound or method == "embedding_distance":
         preflight_calibration_operations(calibration, method)
 
 
@@ -182,7 +230,21 @@ def preflight_calibration_operations(calibration, method=None):
     def finite_number(value):
         return type(value) in (int, float) and math.isfinite(value)
 
-    for selected in (METHODS if method is None else (method,)):
+    selected_methods = METHODS if method is None else (method,)
+    if method is None and "embedding_distance" in calibration:
+        selected_methods = (*selected_methods, "embedding_distance")
+    for selected in selected_methods:
+        if selected == "embedding_distance":
+            from .embeddings import descriptor_plan
+
+            params = calibration.get("embedding_distance", {})
+            plan = descriptor_plan()
+            if (params.get("descriptor") != plan
+                    or not finite_number(params.get("distance_threshold"))
+                    or params["distance_threshold"] not in plan["distance_threshold_grid"]
+                    or type(params.get("reference_lookback")) is not int
+                    or params.get("reference_lookback") != plan["reference_lookback"]):
+                raise ValueError("invalid neural embedding operating point or descriptor")
         if selected in {"proposal_tracking", *LEARNED_GATE_METHODS}:
             params = calibration.get("event_gates", {}).get(selected)
             if not isinstance(params, dict):

@@ -54,11 +54,31 @@ def main() -> None:
         "--split", choices=["train", "development", "confirmation"], default="development"
     )
     parser.add_argument("--freeze-manifest", type=Path)
-    parser.add_argument("--methods", nargs="+", default=DEFAULT_METHODS)
+    parser.add_argument("--embedding-root", type=Path)
+    parser.add_argument("--methods", nargs="+")
     args = parser.parse_args()
     if args.output.exists() and any(args.output.iterdir()):
         raise ValueError("evaluation output must be new/empty; preserve earlier runs")
     config = json.loads(args.config.read_text())
+    args.methods = args.methods or [
+        *DEFAULT_METHODS, *(["embedding_distance"] if config.get("embedding_baseline") else []),
+    ]
+    from terradelta.pipeline import METHODS, OPTIONAL_METHODS
+
+    if any(method not in (*METHODS, *OPTIONAL_METHODS) for method in args.methods):
+        raise ValueError("Unknown comparison method")
+    embedding_data = {}
+    if "embedding_distance" in args.methods:
+        from terradelta.embeddings import load_embedding_data
+
+        if args.embedding_root is None or config.get("embedding_baseline") is None:
+            raise ValueError("Embedding comparison requires its source-bound sidecars and config")
+        for region in config[args.split]:
+            embedding_data[region] = load_embedding_data(
+                args.embedding_root / region, feature_dir=args.features_root / region,
+                cache_dir=args.cache_root / region, expected_plan=config["embedding_baseline"],
+                expected_config_sha256=sha256(args.config),
+            )
     freeze = (
         validate_experiment(
             args.freeze_manifest,
@@ -71,6 +91,7 @@ def main() -> None:
             spatial_weights=args.spatial_weights,
             calibration=args.calibration,
             config=args.config,
+            embedding_root=args.embedding_root,
         )
         if args.split == "confirmation"
         else None
@@ -129,6 +150,7 @@ def main() -> None:
                 calibration=calibration,
                 event_gate_weights=args.event_gate_weights,
                 model_revision=f"evaluation:{sha256(args.weights)[:12]}:{method}",
+                embedding_data=embedding_data.get(region) if method == "embedding_distance" else None,
             )
             result = evaluate_events(events, truth, metadata)
             result["runtime_seconds_temporal_decode_evaluation"] = time.perf_counter() - started

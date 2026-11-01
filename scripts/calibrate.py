@@ -54,8 +54,13 @@ def main():
     if args.output.exists():
         raise ValueError("Calibration output exists; use a new versioned path")
     config = json.loads(args.config.read_text())
+    if config.get("embedding_baseline") and not args.skip_freeze:
+        raise ValueError(
+            "Use --skip-freeze, then calibrate_embedding.py and freeze the complete comparison"
+        )
     from terradelta.contracts import (
-        preflight_heads, preflight_manifests, preflight_spatial_checkpoint, study_binding,
+        head_training_config_sha256, preflight_heads, preflight_manifests,
+        preflight_spatial_checkpoint, study_binding,
     )
 
     binding = study_binding(config)
@@ -69,7 +74,7 @@ def main():
         preflight_heads(
             binding, temporal_weights=args.weights, event_gate_weights=args.event_gate_weights,
             temporal_kinds=("observation", "no_quality", "watch_lstm"), require_bound=True,
-            config_sha256=sha256(args.config),
+            config_sha256=head_training_config_sha256(args.config, config),
         )
     development = []
     for aoi in config["development"]:
@@ -273,6 +278,7 @@ def main():
         "spatial_weights_sha256": sha256(args.spatial_weights),
         "spatial_provenance": config.get("event_gate", {}).get("spatial_provenance"),
         "config_sha256": sha256(args.config),
+        "head_training_config_sha256": head_training_config_sha256(args.config, config),
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=2, allow_nan=False) + "\n")

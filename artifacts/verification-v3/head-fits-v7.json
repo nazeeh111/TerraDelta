@@ -1,0 +1,357 @@
+{
+  "format": "terradelta-head-fit-verification-v1",
+  "status": "passed",
+  "checked_at": "2026-11-01T10:11:34.370314+00:00",
+  "study_config_sha256": "ed4204738e8a0079453d7469e64ed869dbf089dc2b78c0500004697d01d87bd9",
+  "actual_training_config_sha256": "bb0e9f7c1e41ad21d2183b6a3de0962825ede5f82dcb38a26f83cb798e0ac973",
+  "observer_error": {
+    "type": "KeyError",
+    "message": "config_sha256",
+    "cause": "Task wrapper expected top-level hash for gate metadata; actual format uses training.config_sha256. Both trainer processes completed before this observer failure.",
+    "preserved_partial_receipt_sha256": "b4133ae8d0dd1a5454adeae7b7196babb7820948563da3436220ccac89cb0281",
+    "wrapper_source_sha256": "e26f591bc2f49e1256cdfc58c322928b1530f59469cbe8667495ee3c8e4ad57d",
+    "repair": "Independent metadata/state/source/input verification only; no model or metadata rewrite and no repeated optimization."
+  },
+  "models": {
+    "temporal-v3": {
+      "weights_sha256": "f9eb05e197436f53cae8d4af25f479264cd5ca3c414a09d52bf1efa9c15b827f",
+      "metadata_sha256": "0888d04f4a16010b51a2a6483341ac29df4e75f416c104cdd8934d3502324670",
+      "submodels": {
+        "observation": {
+          "parameters": 4962,
+          "seconds": 190.37763720797375,
+          "selected_development_bce": 0.5184863954782486,
+          "selected_step": 1000,
+          "selection_metric": "geographic_event_f1_at_62d",
+          "selected_development_event_metrics": {
+            "matched_62d_macro_f1": 0.054173298863766726,
+            "ordinary_macro_f1": 0.11064245129999693,
+            "selection_threshold": 0.55,
+            "region_reports": [
+              {
+                "region_id": "L15-0632E-0892N_2528_4620_13",
+                "event": {
+                  "tp": 45,
+                  "fp": 555,
+                  "fn": 79,
+                  "predictions": 600,
+                  "targets": 124,
+                  "precision": 0.075,
+                  "recall": 0.3629032258064516,
+                  "f1": 0.12430939226519337
+                },
+                "within_62_days": {
+                  "tp": 27,
+                  "fp": 573,
+                  "fn": 97,
+                  "predictions": 600,
+                  "targets": 124,
+                  "precision": 0.045,
+                  "recall": 0.21774193548387097,
+                  "f1": 0.07458563535911603
+                }
+              },
+              {
+                "region_id": "L15-1389E-1284N_5557_3054_13",
+                "event": {
+                  "tp": 57,
+                  "fp": 403,
+                  "fn": 137,
+                  "predictions": 460,
+                  "targets": 194,
+                  "precision": 0.12391304347826088,
+                  "recall": 0.29381443298969073,
+                  "f1": 0.1743119266055046
+                },
+                "within_62_days": {
+                  "tp": 24,
+                  "fp": 436,
+                  "fn": 170,
+                  "predictions": 460,
+                  "targets": 194,
+                  "precision": 0.05217391304347826,
+                  "recall": 0.12371134020618557,
+                  "f1": 0.07339449541284404
+                }
+              },
+              {
+                "region_id": "L15-1716E-1211N_6864_3345_13",
+                "event": {
+                  "tp": 46,
+                  "fp": 839,
+                  "fn": 743,
+                  "predictions": 885,
+                  "targets": 789,
+                  "precision": 0.0519774011299435,
+                  "recall": 0.058301647655259824,
+                  "f1": 0.054958183990442055
+                },
+                "within_62_days": {
+                  "tp": 26,
+                  "fp": 859,
+                  "fn": 763,
+                  "predictions": 885,
+                  "targets": 789,
+                  "precision": 0.02937853107344633,
+                  "recall": 0.032953105196451206,
+                  "f1": 0.03106332138590203
+                }
+              },
+              {
+                "region_id": "L15-0614E-0946N_2459_4406_13",
+                "event": {
+                  "tp": 156,
+                  "fp": 1659,
+                  "fn": 1535,
+                  "predictions": 1815,
+                  "targets": 1691,
+                  "precision": 0.0859504132231405,
+                  "recall": 0.09225310467179183,
+                  "f1": 0.0889903023388477
+                },
+                "within_62_days": {
+                  "tp": 66,
+                  "fp": 1749,
+                  "fn": 1625,
+                  "predictions": 1815,
+                  "targets": 1691,
+                  "precision": 0.03636363636363636,
+                  "recall": 0.03903015966883501,
+                  "f1": 0.037649743297204795
+                }
+              }
+            ]
+          }
+        },
+        "no_quality": {
+          "parameters": 4962,
+          "seconds": 169.43192120897584,
+          "selected_development_bce": 0.490392729640007,
+          "selected_step": 2000,
+          "selection_metric": "geographic_event_f1_at_62d",
+          "selected_development_event_metrics": {
+            "matched_62d_macro_f1": 0.08756916397124659,
+            "ordinary_macro_f1": 0.12722395157733749,
+            "selection_threshold": 0.55,
+            "region_reports": [
+              {
+                "region_id": "L15-0632E-0892N_2528_4620_13",
+                "event": {
+                  "tp": 49,
+                  "fp": 653,
+                  "fn": 75,
+                  "predictions": 702,
+                  "targets": 124,
+                  "precision": 0.0698005698005698,
+                  "recall": 0.3951612903225806,
+                  "f1": 0.11864406779661017
+                },
+                "within_62_days": {
+                  "tp": 42,
+                  "fp": 660,
+                  "fn": 82,
+                  "predictions": 702,
+                  "targets": 124,
+                  "precision": 0.05982905982905983,
+                  "recall": 0.3387096774193548,
+                  "f1": 0.1016949152542373
+                }
+              },
+              {
+                "region_id": "L15-1389E-1284N_5557_3054_13",
+                "event": {
+                  "tp": 65,
+                  "fp": 354,
+                  "fn": 129,
+                  "predictions": 419,
+                  "targets": 194,
+                  "precision": 0.15513126491646778,
+                  "recall": 0.33505154639175255,
+                  "f1": 0.21207177814029363
+                },
+                "within_62_days": {
+                  "tp": 44,
+                  "fp": 375,
+                  "fn": 150,
+                  "predictions": 419,
+                  "targets": 194,
+                  "precision": 0.10501193317422435,
+                  "recall": 0.2268041237113402,
+                  "f1": 0.14355628058727568
+                }
+              },
+              {
+                "region_id": "L15-1716E-1211N_6864_3345_13",
+                "event": {
+                  "tp": 42,
+                  "fp": 1054,
+                  "fn": 747,
+                  "predictions": 1096,
+                  "targets": 789,
+                  "precision": 0.03832116788321168,
+                  "recall": 0.053231939163498096,
+                  "f1": 0.04456233421750663
+                },
+                "within_62_days": {
+                  "tp": 32,
+                  "fp": 1064,
+                  "fn": 757,
+                  "predictions": 1096,
+                  "targets": 789,
+                  "precision": 0.029197080291970802,
+                  "recall": 0.04055766793409379,
+                  "f1": 0.03395225464190981
+                }
+              },
+              {
+                "region_id": "L15-0614E-0946N_2459_4406_13",
+                "event": {
+                  "tp": 188,
+                  "fp": 935,
+                  "fn": 1503,
+                  "predictions": 1123,
+                  "targets": 1691,
+                  "precision": 0.1674087266251113,
+                  "recall": 0.11117681845062094,
+                  "f1": 0.13361762615493958
+                },
+                "within_62_days": {
+                  "tp": 100,
+                  "fp": 1023,
+                  "fn": 1591,
+                  "predictions": 1123,
+                  "targets": 1691,
+                  "precision": 0.08904719501335707,
+                  "recall": 0.05913660555884092,
+                  "f1": 0.07107320540156362
+                }
+              }
+            ]
+          }
+        },
+        "watch_lstm": {
+          "parameters": 291329,
+          "seconds": 828.744640082994,
+          "selected_development_bce": 0.484163373708725,
+          "selected_step": 1800,
+          "selection_metric": "geographic_event_f1_at_62d",
+          "selected_development_event_metrics": {
+            "matched_62d_macro_f1": 0.08386713839546982,
+            "ordinary_macro_f1": 0.1518985359616613,
+            "selection_threshold": 0.65,
+            "region_reports": [
+              {
+                "region_id": "L15-0632E-0892N_2528_4620_13",
+                "event": {
+                  "tp": 43,
+                  "fp": 102,
+                  "fn": 81,
+                  "predictions": 145,
+                  "targets": 124,
+                  "precision": 0.296551724137931,
+                  "recall": 0.3467741935483871,
+                  "f1": 0.31970260223048325
+                },
+                "within_62_days": {
+                  "tp": 23,
+                  "fp": 122,
+                  "fn": 101,
+                  "predictions": 145,
+                  "targets": 124,
+                  "precision": 0.15862068965517243,
+                  "recall": 0.18548387096774194,
+                  "f1": 0.17100371747211895
+                }
+              },
+              {
+                "region_id": "L15-1389E-1284N_5557_3054_13",
+                "event": {
+                  "tp": 18,
+                  "fp": 91,
+                  "fn": 176,
+                  "predictions": 109,
+                  "targets": 194,
+                  "precision": 0.1651376146788991,
+                  "recall": 0.09278350515463918,
+                  "f1": 0.1188118811881188
+                },
+                "within_62_days": {
+                  "tp": 10,
+                  "fp": 99,
+                  "fn": 184,
+                  "predictions": 109,
+                  "targets": 194,
+                  "precision": 0.09174311926605505,
+                  "recall": 0.05154639175257732,
+                  "f1": 0.066006600660066
+                }
+              },
+              {
+                "region_id": "L15-1716E-1211N_6864_3345_13",
+                "event": {
+                  "tp": 23,
+                  "fp": 157,
+                  "fn": 766,
+                  "predictions": 180,
+                  "targets": 789,
+                  "precision": 0.12777777777777777,
+                  "recall": 0.029150823827629912,
+                  "f1": 0.047471620227038186
+                },
+                "within_62_days": {
+                  "tp": 18,
+                  "fp": 162,
+                  "fn": 771,
+                  "predictions": 180,
+                  "targets": 789,
+                  "precision": 0.1,
+                  "recall": 0.022813688212927757,
+                  "f1": 0.03715170278637771
+                }
+              },
+              {
+                "region_id": "L15-0614E-0946N_2459_4406_13",
+                "event": {
+                  "tp": 121,
+                  "fp": 178,
+                  "fn": 1570,
+                  "predictions": 299,
+                  "targets": 1691,
+                  "precision": 0.40468227424749165,
+                  "recall": 0.07155529272619751,
+                  "f1": 0.12160804020100502
+                },
+                "within_62_days": {
+                  "tp": 61,
+                  "fp": 238,
+                  "fn": 1630,
+                  "predictions": 299,
+                  "targets": 1691,
+                  "precision": 0.2040133779264214,
+                  "recall": 0.036073329390892965,
+                  "f1": 0.061306532663316586
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "event-gate-v2": {
+      "weights_sha256": "1ff0cc2e7d2cfc2555c14d86f08a448441c8f82ff0bf3b3038127088dd4ea266",
+      "metadata_sha256": "ec59d54a4ae96b1889c549861a68a598f3e46b1f3fc625935e6011d7cf3243be",
+      "steps_per_submodel": 2000,
+      "elapsed_seconds": 184.08703287498793,
+      "examples_sha256": "9e47f8e8a6dcd69e1548c9b1de7695050cf6256a5b375414c92fa6fbfef20da0"
+    }
+  },
+  "actual_numeric_training_sources_unchanged": true,
+  "all_13_train_dev_feature_and_supervision_hashes_match": true,
+  "all_gate_train_dev_observation_and_truth_hashes_match": true,
+  "actual_model_states_finite_and_strictly_loaded": true,
+  "fresh_confirmation_labels_read": false,
+  "public_copy": {
+    "original_sha256": "456ceb61900a527a8203c6e8e04365f661982438a88bace90d681cabf1a46ddc",
+    "local_path_replacement": "Repository, task and user-home path prefixes replaced; source/content hashes unchanged."
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "format": "terradelta-descriptor-cost-v1",
+  "status": "complete_image_only",
+  "roles": {
+    "development": {
+      "complete": true,
+      "regions": [
+        "L15-0632E-0892N_2528_4620_13",
+        "L15-1389E-1284N_5557_3054_13",
+        "L15-1716E-1211N_6864_3345_13",
+        "L15-0614E-0946N_2459_4406_13"
+      ],
+      "config_sha256": "ed4204738e8a0079453d7469e64ed869dbf089dc2b78c0500004697d01d87bd9",
+      "device": "cpu",
+      "encoder_load_seconds": 3.5245610409765504,
+      "total_elapsed_seconds": 245.73944775003474,
+      "process_peak_resident_bytes": 972341248,
+      "array_bytes": 131984706,
+      "npz_bytes": 113678141,
+      "implementation_sha256": {
+        "src/terradelta/embeddings.py": "3a05e90a3bab8c80cd4d831376226222de4ce494c50e986868c6ab26c4170e6f",
+        "scripts/extract_embeddings.py": "35bbf61197d25709fefbd519e6a6c12300e0155a22e387e5dcb24f38f09210ba"
+      }
+    },
+    "confirmation": {
+      "complete": true,
+      "regions": [
+        "L15-1172E-1306N_4688_2967_13",
+        "L15-1204E-1204N_4819_3372_13",
+        "L15-0358E-1220N_1433_3310_13"
+      ],
+      "config_sha256": "ed4204738e8a0079453d7469e64ed869dbf089dc2b78c0500004697d01d87bd9",
+      "device": "cpu",
+      "encoder_load_seconds": 2.482372624974232,
+      "total_elapsed_seconds": 121.7919745000545,
+      "process_peak_resident_bytes": 1009057792,
+      "array_bytes": 95230325,
+      "npz_bytes": 82176655,
+      "implementation_sha256": {
+        "src/terradelta/embeddings.py": "3a05e90a3bab8c80cd4d831376226222de4ce494c50e986868c6ab26c4170e6f",
+        "scripts/extract_embeddings.py": "35bbf61197d25709fefbd519e6a6c12300e0155a22e387e5dcb24f38f09210ba"
+      }
+    }
+  },
+  "total_array_bytes": 227215031,
+  "total_npz_bytes": 195854796,
+  "limits": "Additional frozen encoder/pooling/storage cost only; not event quality or overall goal completion. Per-role peak RSS is process lifetime, not independently reset per region."
+}

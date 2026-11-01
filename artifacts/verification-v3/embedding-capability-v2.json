@@ -1,0 +1,32 @@
+{
+  "format": "embedding-capability-v2-before-AOI",
+  "source_sha256": {
+    "src/terradelta/embeddings.py": "3a05e90a3bab8c80cd4d831376226222de4ce494c50e986868c6ab26c4170e6f",
+    "scripts/extract_embeddings.py": "35bbf61197d25709fefbd519e6a6c12300e0155a22e387e5dcb24f38f09210ba",
+    "tests/test_embeddings.py": "74203516bec8d1b06ae6be8d7b9b5c66321d1257508c8f269b8acf211ead0ac8"
+  },
+  "descriptor_plan_sha256": "4539cdb10e15c70f036579e4b48eb3a671e4ea3e3d81a0492fc607e8db4b63e0",
+  "tests": {
+    "passed": 14,
+    "seconds": 11.44,
+    "ruff": "clean",
+    "log": "embedding-baseline-v2-tests.log",
+    "log_sha256": "d585c2a0ab80b4cc19f889c917cf8b8180108fdbeafbebc210f3959c4ed8f248"
+  },
+  "official_cpu_probe": "embedding-baseline-v2-cpu-probe.json",
+  "old_v1_plan_sha256": "cd68b1a9b03e841b67a56caa167a657101c5df059474c494e89cd6baae8b76df",
+  "v1_source_preserved": {
+    "extract_embeddings.py": "7fbc66adff1b3f9fc3e49ec02cd120cbc3e4748430256e4baebb31afdf98ee50",
+    "test_embeddings.py": "9a1328bf0b3378254971ec22200b02f215782933fe5049ec5d4370a59e09bd5b",
+    "embeddings.py": "1d5f854f74c3f7f4eb3faa2358f98d04365595f3663e301da8dd075ed3dedeb8"
+  },
+  "actual_AOI_data_read": false,
+  "actual_AOI_labels_read": false,
+  "MPS_used": false,
+  "neural_fits": 0,
+  "state": "implemented, pending independent review before any AOI extraction",
+  "public_copy": {
+    "original_sha256": "70842fa52e4c8679e4d91f73c58ba8c03238e8d45fd826109c674a3ae4aa28f4",
+    "local_path_replacement": "Repository, task and user-home path prefixes replaced; source/content hashes unchanged."
+  }
+}

@@ -48,7 +48,10 @@ def main():
     ]:
         parser.add_argument("--" + arg, type=Path, required=True)
     parser.add_argument("--event-gate-weights", type=Path)
-    parser.add_argument("--methods", nargs="+", choices=OCCUPANCY_METHODS + GATE_METHODS)
+    parser.add_argument("--embedding-root", type=Path)
+    parser.add_argument("--backbone-weights", type=Path)
+    parser.add_argument("--methods", nargs="+",
+                        choices=OCCUPANCY_METHODS + GATE_METHODS + ("embedding_distance",))
     args = parser.parse_args()
     methods_to_check = args.methods or list(OCCUPANCY_METHODS) + ["proposal_tracking"] + (
         list(GATE_METHODS[1:]) if args.event_gate_weights else []
@@ -61,6 +64,22 @@ def main():
     if args.output.exists():
         raise ValueError("Invariance output must be new; preserve earlier checks")
     config = json.loads(args.config.read_text())
+    from terradelta.contracts import preflight_probability_files
+
+    preflight_probability_files(
+        args.features_root, args.predictions_root, config["confirmation"],
+    )
+    if args.methods is None and config.get("embedding_baseline"):
+        methods_to_check.append("embedding_distance")
+    encoder = None
+    if "embedding_distance" in methods_to_check:
+        from terradelta.embeddings import FrozenResNet18
+        import torch
+
+        if args.embedding_root is None or args.backbone_weights is None:
+            parser.error("embedding checks require --embedding-root and --backbone-weights")
+        torch.set_num_threads(2)
+        encoder = FrozenResNet18(args.backbone_weights)
     if config.get("event_gate") and not args.event_gate_weights:
         raise ValueError("Event-gate experiment requires --event-gate-weights")
     cal = json.loads(args.calibration.read_text())
@@ -102,6 +121,34 @@ def main():
         )
         np.testing.assert_allclose(x, full["x"][: len(births), :cutoff], atol=1e-6, rtol=1e-6)
         np.testing.assert_array_equal(usable, full["usable"][: len(births), :cutoff])
+        full_embedding = short_embedding = edited_embedding = None
+        if encoder is not None:
+            from terradelta.embeddings import encode_scene, load_embedding_data
+
+            full_embedding = load_embedding_data(
+                args.embedding_root / region_id, feature_dir=feature_dir,
+                cache_dir=args.cache_root / region_id,
+                expected_plan=config["embedding_baseline"],
+                expected_config_sha256=sha256(args.config),
+            )
+            short_embedding = {
+                key: (value[:len(births), :cutoff] if key in ("vectors", "usable", "coverage")
+                      else value[:len(births)] if key == "births" else value)
+                for key, value in full_embedding.items()
+            }
+            # At this prefix's discovered geometries, archive pooling can use
+            # earlier available images. Future undiscovered sites must not alter
+            # any descriptor for sites already known at the prefix boundary.
+            for t in (0, cutoff - 1):
+                vectors, coverage = encode_scene(
+                    encoder, region["rgb"][t], sites, region["valid"][t],
+                    usable[:, t],
+                )
+                np.testing.assert_array_equal(vectors, short_embedding["vectors"][:, t])
+                np.testing.assert_array_equal(coverage, short_embedding["coverage"][:, t])
+            edited_embedding = deepcopy(full_embedding)
+            edited_embedding["vectors"][:, cutoff:] *= -1
+            edited_embedding["usable"][:, cutoff::2] = False
         altered = full["x"].copy()
         altered[:, cutoff:] = np.flip(altered[:, cutoff:], axis=1)
         altered[:, cutoff:, 0] = 1 - altered[:, cutoff:, 0]
@@ -134,9 +181,18 @@ def main():
                 model_revision="prefix-check",
                 record_origin=datetime(2026, 1, 1, tzinfo=timezone.utc),
             )
-            long = method_events(full["x"], full["usable"], full["births"], info, **kwargs)
-            short = method_events(x, usable, births, prefix_info, **kwargs)
-            edited = method_events(altered, altered_usable, full["births"], info, **kwargs)
+            long = method_events(
+                full["x"], full["usable"], full["births"], info, **kwargs,
+                embedding_data=full_embedding if method == "embedding_distance" else None,
+            )
+            short = method_events(
+                x, usable, births, prefix_info, **kwargs,
+                embedding_data=short_embedding if method == "embedding_distance" else None,
+            )
+            edited = method_events(
+                altered, altered_usable, full["births"], info, **kwargs,
+                embedding_data=edited_embedding if method == "embedding_distance" else None,
+            )
             before = historical_revisions(long, last)
             assert before == historical_revisions(short, last), (region_id, method, "prefix")
             assert before == historical_revisions(edited, last), (region_id, method, "future edit")
@@ -146,6 +202,7 @@ def main():
                 "occupancy_score_prefix_checked": method in OCCUPANCY_METHODS,
                 "event_prefix_checked": True,
                 "future_feature_and_mask_edits_checked": True,
+                "neural_descriptor_prefix_and_future_edits_checked": method == "embedding_distance",
             }
         report[region_id] = {
             "prefix_observations": cutoff,

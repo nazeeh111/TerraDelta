@@ -1,10 +1,14 @@
 # Research-release material: draft, not posted
 
-**Publication status:** prepared draft only. Public release, remote CI and
-release-download verification remain pending. Version-2 confirmation is complete
-and negative: failed geographic transfer, not an analyst-ready detector. The
-[full result](results-v2.md) and original artifacts must accompany any eventual
-research release. No announcement or outreach has been sent, and no adoption or
+**Publication status:** the [source](https://github.com/nazeeh111/TerraDelta) and
+[research prerelease](https://github.com/nazeeh111/TerraDelta/releases/tag/v0.1.0-research)
+are public. The release target passed
+[Linux CI](https://github.com/nazeeh111/TerraDelta/actions/runs/41291280215), and all
+17 downloaded assets match their complete-file SHA-256 digests and sizes. Every
+ZIP passes its integrity check. Version-2 confirmation is complete and negative:
+failed geographic transfer, not an analyst-ready detector. The
+[full result](results-v2.md) and original artifacts accompany the release. This
+announcement remains a draft: no outreach has been sent, and no adoption or
 external endorsement is claimed.
 
 ## Short project introduction
@@ -44,10 +48,10 @@ that the alerts are accurate enough for planning or environmental decisions.
 | False alerts and revisions | Quality gate 9.865 false alerts/source-valid km²-year and 131 confirmed IDs later retracted |
 | Stress evidence | [Retained real-data perturbation controls](../artifacts/stress-v2.json), with fixed-candidate and one-frame radiometry limits |
 | Online event-gate invariance | [All three gate/proposal methods pass on all three regions](../artifacts/verification-v2/online-gates-invariance.json); legacy GRU strict numerical confidence limitation remains separate |
-| Independent execution | [Fresh wheel and changed cropped/prefix inputs](../artifacts/verification-v2/independent-install.json), [actual API queries/readback](../artifacts/verification-v2/independent-api.json) and [second consumer](../artifacts/verification-v2/second-consumer.json) |
-| Public repository | Intended namespace `nazeeh111/TerraDelta`; verify public state before sharing |
-| Public CI, clean clone and downloaded release | Pending, separate from local wheel checks |
-| Complete-area demonstration | Pending final current-source video and source/revision walkthrough |
+| Independent execution | [Anonymous public clone and changed public cropped/prefix inputs](../artifacts/verification-v3/public-install-v1.json), [real installed API queries, GIS readback and standard-library consumer](../artifacts/verification-v3/public-api-v1.json) |
+| Public repository | [nazeeh111/TerraDelta](https://github.com/nazeeh111/TerraDelta), public visibility verified |
+| Public CI, clean clone and downloaded release | Release target `b2ed1be` passed Linux CI; all 17 downloaded files verified, with anonymous access to source/release pages and the asset manifest |
+| Complete-area demonstration | [Genuine 28-second replay and editable sources](media-v2/README.md); complete 24-month Mexico area, supporting imagery and an actual correction |
 
 ## Compact research release-note draft
 
@@ -73,12 +77,15 @@ contract; it claims neither that persistence nor the project name is new.
 
 ## Future work and sharing
 
-A new scientific revision needs a declared method/protocol and fresh complete
-geographic confirmation data because version-2 regions have now been examined.
-Feasibility work is ongoing; no positive future score, delivery date or guarantee
-is promised. Preserve both earlier negative versions.
+A new scientific revision declares nine training, four development and three
+fresh confirmation regions because version-2 regions have now been examined.
+Image production and source-bound temporal fitting are underway. A genuine frozen
+neural embedding-distance comparison is specified before fitting and confirmation
+scoring. No fresh confirmation result, delivery date or guarantee is promised.
+Preserve the earlier negative versions.
 
 Keep any eventual announcement relevant to the audience and link the actual
 source, permitted artifacts, executed checks and failed comparison. Do not post
 this draft or contact others without applicable user authorization. The current
-repository/release state must be verified before filling public links.
+repository/release links above have been verified; refresh their state before any
+eventual announcement.

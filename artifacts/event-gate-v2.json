@@ -1,0 +1,733 @@
+{
+  "format": "terradelta-event-gate-v1",
+  "feature_names": [
+    "current:mean_footprint",
+    "current:mean_interior",
+    "current:max_footprint",
+    "current:valid_fraction",
+    "current:registration_pixels_over_two",
+    "current:elapsed_months",
+    "current:season_sin",
+    "current:season_cos",
+    "current:red",
+    "current:green",
+    "current:blue",
+    "current:spatial_delta",
+    "current:seasonal_reference_delta",
+    "current:rgb_delta",
+    "current:log_area",
+    "current:time_since_usable_months",
+    "current:registration_usable",
+    "pre_mean:mean_footprint",
+    "pre_mean:mean_interior",
+    "pre_mean:max_footprint",
+    "pre_mean:valid_fraction",
+    "pre_mean:registration_pixels_over_two",
+    "pre_mean:elapsed_months",
+    "pre_mean:season_sin",
+    "pre_mean:season_cos",
+    "pre_mean:red",
+    "pre_mean:green",
+    "pre_mean:blue",
+    "pre_mean:spatial_delta",
+    "pre_mean:seasonal_reference_delta",
+    "pre_mean:rgb_delta",
+    "pre_mean:log_area",
+    "pre_mean:time_since_usable_months",
+    "pre_mean:registration_usable",
+    "post_mean:mean_footprint",
+    "post_mean:mean_interior",
+    "post_mean:max_footprint",
+    "post_mean:valid_fraction",
+    "post_mean:registration_pixels_over_two",
+    "post_mean:elapsed_months",
+    "post_mean:season_sin",
+    "post_mean:season_cos",
+    "post_mean:red",
+    "post_mean:green",
+    "post_mean:blue",
+    "post_mean:spatial_delta",
+    "post_mean:seasonal_reference_delta",
+    "post_mean:rgb_delta",
+    "post_mean:log_area",
+    "post_mean:time_since_usable_months",
+    "post_mean:registration_usable",
+    "post_std:mean_footprint",
+    "post_std:mean_interior",
+    "post_std:max_footprint",
+    "post_std:valid_fraction",
+    "post_std:registration_pixels_over_two",
+    "post_std:elapsed_months",
+    "post_std:season_sin",
+    "post_std:season_cos",
+    "post_std:red",
+    "post_std:green",
+    "post_std:blue",
+    "post_std:spatial_delta",
+    "post_std:seasonal_reference_delta",
+    "post_std:rgb_delta",
+    "post_std:log_area",
+    "post_std:time_since_usable_months",
+    "post_std:registration_usable",
+    "target_direction",
+    "months_since_first_support",
+    "months_since_before_support",
+    "log_usable_support_count",
+    "pre_window_count_over_three",
+    "post_window_count_over_three",
+    "directional_current_margin",
+    "directional_post_pre_contrast",
+    "post_target_fraction",
+    "log_geometry_area_m2_over_ten"
+  ],
+  "calibration": {
+    "observation_gate": {
+      "scale": 0.4138046834411059,
+      "bias": -2.4142405757397385,
+      "threshold": 0.5,
+      "success": true,
+      "calibration_kind": "positive_slope_platt",
+      "prefix_rows": 64379,
+      "proposal_mass": 19790.0,
+      "event_prevalence": 0.02789287518948964,
+      "brier": 0.022990568789377296,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "rows": 59948,
+          "proposal_weight": 18440.0,
+          "score_mean": 0.016459151355803572,
+          "positive_fraction": 0.014750542299349245
+        },
+        {
+          "lower": 0.1,
+          "rows": 3146,
+          "proposal_weight": 945.0833333333334,
+          "score_mean": 0.13589361014438994,
+          "positive_fraction": 0.1223877964906093
+        },
+        {
+          "lower": 0.2,
+          "rows": 734,
+          "proposal_weight": 227.91666666666666,
+          "score_mean": 0.2435205014684737,
+          "positive_fraction": 0.30237659963436936
+        },
+        {
+          "lower": 0.30000000000000004,
+          "rows": 303,
+          "proposal_weight": 101.25,
+          "score_mean": 0.3412317952501431,
+          "positive_fraction": 0.3925925925925927
+        },
+        {
+          "lower": 0.4,
+          "rows": 122,
+          "proposal_weight": 35.75,
+          "score_mean": 0.4469097262218006,
+          "positive_fraction": 0.7086247086247088
+        },
+        {
+          "lower": 0.5,
+          "rows": 75,
+          "proposal_weight": 23.75,
+          "score_mean": 0.538425582542754,
+          "positive_fraction": 0.7719298245614035
+        },
+        {
+          "lower": 0.6000000000000001,
+          "rows": 41,
+          "proposal_weight": 12.75,
+          "score_mean": 0.6463403183650347,
+          "positive_fraction": 0.7647058823529411
+        },
+        {
+          "lower": 0.7000000000000001,
+          "rows": 10,
+          "proposal_weight": 3.5,
+          "score_mean": 0.7315464261032287,
+          "positive_fraction": 0.6428571428571429
+        }
+      ],
+      "meaning": "event compatibility under frozen one-to-one physical geometry/time matching; not arbitrary-shift or timing-coverage guarantee",
+      "prevalence_weights": "each real DEV proposal totals one across bounded available prefix rows"
+    },
+    "gate_no_quality": {
+      "scale": 0.6898291382259703,
+      "bias": -2.47747674172243,
+      "threshold": 0.5,
+      "success": true,
+      "calibration_kind": "positive_slope_platt",
+      "prefix_rows": 64379,
+      "proposal_mass": 19790.0,
+      "event_prevalence": 0.02789287518948964,
+      "brier": 0.021612742812369603,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "rows": 60213,
+          "proposal_weight": 18512.250000000004,
+          "score_mean": 0.013543056980414246,
+          "positive_fraction": 0.012329673594511745
+        },
+        {
+          "lower": 0.1,
+          "rows": 2262,
+          "proposal_weight": 707.5,
+          "score_mean": 0.13949998951263648,
+          "positive_fraction": 0.1358068315665489
+        },
+        {
+          "lower": 0.2,
+          "rows": 823,
+          "proposal_weight": 253.08333333333334,
+          "score_mean": 0.2432266322648718,
+          "positive_fraction": 0.2518933157721436
+        },
+        {
+          "lower": 0.30000000000000004,
+          "rows": 430,
+          "proposal_weight": 127.16666666666667,
+          "score_mean": 0.344487079083529,
+          "positive_fraction": 0.4521625163827
+        },
+        {
+          "lower": 0.4,
+          "rows": 261,
+          "proposal_weight": 77.75,
+          "score_mean": 0.44647444291130145,
+          "positive_fraction": 0.4426580921757772
+        },
+        {
+          "lower": 0.5,
+          "rows": 160,
+          "proposal_weight": 46.41666666666667,
+          "score_mean": 0.549226769853109,
+          "positive_fraction": 0.5870736086175943
+        },
+        {
+          "lower": 0.6000000000000001,
+          "rows": 113,
+          "proposal_weight": 32.83333333333333,
+          "score_mean": 0.6424083021389047,
+          "positive_fraction": 0.5862944162436549
+        },
+        {
+          "lower": 0.7000000000000001,
+          "rows": 84,
+          "proposal_weight": 23.749999999999996,
+          "score_mean": 0.7491152815651476,
+          "positive_fraction": 0.7859649122807018
+        },
+        {
+          "lower": 0.8,
+          "rows": 25,
+          "proposal_weight": 7.166666666666666,
+          "score_mean": 0.8369147632011147,
+          "positive_fraction": 0.7325581395348837
+        },
+        {
+          "lower": 0.9,
+          "rows": 8,
+          "proposal_weight": 2.083333333333333,
+          "score_mean": 0.933486831188202,
+          "positive_fraction": 0.76
+        }
+      ],
+      "meaning": "event compatibility under frozen one-to-one physical geometry/time matching; not arbitrary-shift or timing-coverage guarantee",
+      "prevalence_weights": "each real DEV proposal totals one across bounded available prefix rows"
+    }
+  },
+  "spatial_weights_sha256": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+  "raw_decoder": {
+    "threshold": 0.55,
+    "confirmations": 2,
+    "minimum_dwell_days": 20,
+    "revision_window_days": 100,
+    "maximum_gap_days": 190,
+    "timing_padding_days": 0
+  },
+  "quality_drop_indices": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    12,
+    13,
+    15,
+    16,
+    20,
+    21,
+    22,
+    23,
+    24,
+    29,
+    30,
+    32,
+    33,
+    37,
+    38,
+    39,
+    40,
+    41,
+    46,
+    47,
+    49,
+    50,
+    54,
+    55,
+    56,
+    57,
+    58,
+    63,
+    64,
+    66,
+    67
+  ],
+  "training": {
+    "steps": 2000,
+    "seed": 2901,
+    "config_sha256": "bb0e9f7c1e41ad21d2183b6a3de0962825ede5f82dcb38a26f83cb798e0ac973",
+    "source_sha256": {
+      "src/terradelta/event_gate.py": "0b6b38054ac84c813adcf0eb5ed7b775d6f0b2470c60247a949e1fef38c8df8b",
+      "scripts/train_event_gate.py": "eded8c52ba7be4d36fa43cd96e94df83f844adf3c093a166c256adac4adb8b93",
+      "src/terradelta/decoder.py": "716eac715ec0e38396bd6bf7f36170e4b72d98bcf5a18b3c9096889ec215fe4e",
+      "src/terradelta/evaluation.py": "66fd8b765a9d4dc552efefc4b4728858e0370b40808946ae1573121b4d2b3c7b",
+      "src/terradelta/features.py": "c8495e7664659e1916157e8de76f8389f5c02e302967e108d6f4be3f4b29731d",
+      "src/terradelta/schema.py": "9500c25425e546e7a895c9e2e4bbe333e1ef7c93b0eec0fa330aefa98339ebb1"
+    },
+    "data_protocol": {
+      "truth_protocol": "physical_coverage_v2",
+      "matching": {
+        "iou_threshold": 0.25,
+        "temporal_tolerance_days": 93,
+        "max_detection_delay_days": null
+      },
+      "later_usable_rows_per_proposal": 3,
+      "labels": "One-to-one match of every raw first confirmation to physical truth, including later retractions; later prefix rows inherit physical-event compatibility",
+      "late_detection": "Compatibility labels are not timely-alert labels; main evaluation must score matched detection horizons separately",
+      "class_balance": "Each training batch draws128 actual positive and128 actual negative prefix rows; conditional sampling gives each proposal total mass1",
+      "calibration": "Unbalanced global DEV proposals with per-proposal unit mass; no region-specific fitting",
+      "checkpoint_selection": "Fixed training budget; final weights, no occupancy/development checkpoint selection",
+      "train": [
+        {
+          "region_id": "L15-0331E-1257N_1327_3160_13",
+          "truth_events": 232,
+          "raw_proposed_ids": 7836,
+          "eligible_proposals": 2995,
+          "positive_proposals": 40,
+          "negative_proposals": 2955,
+          "prefix_rows": 9970,
+          "subsequently_retracted_eligible_proposals": 721,
+          "hashes": {
+            "features_sha256": "b54234355d911695bc64b4add2e48abf54af3c02174aa237f9a8f486d15edf75",
+            "sites_sha256": "dff5cb5572ddcf1e5ef247ba6cba6160aa8c072fba7ba218910bb32e61fbbcff",
+            "instances_sha256": "62ba599063a047a79cf25fc323158f2db82dd15fae98c752c9b206959e72efc1",
+            "valid_sha256": "caf3587866e72e2b62d0b0548428c3f4ed3e49dc9c66c6a18ebf3c22322ed89e",
+            "metadata_semantic_sha256": "11041c139940ce02a8b75329971de9078340460ba32e6dc8d68b313a2606eaf6"
+          }
+        },
+        {
+          "region_id": "L15-0506E-1204N_2027_3374_13",
+          "truth_events": 200,
+          "raw_proposed_ids": 7570,
+          "eligible_proposals": 3013,
+          "positive_proposals": 41,
+          "negative_proposals": 2972,
+          "prefix_rows": 9972,
+          "subsequently_retracted_eligible_proposals": 786,
+          "hashes": {
+            "features_sha256": "adb3b8bc5ccdf8f0ddc091f71923136b0086fa1e9f9da3088e88e83b4ce25fb5",
+            "sites_sha256": "33a853d3c52c53cf112744314ede7a072b4a8a1649d67eaca21397d56a1774ff",
+            "instances_sha256": "04ef8b29df1d1d2f0afe73b425cd6340da79a2c5aee17008df8395519a531b15",
+            "valid_sha256": "15e0b1c5ed8dcde45eb67e7a70f2ef8ef097ffcf4ccfeb330c55143524b95970",
+            "metadata_semantic_sha256": "56c74c1c77bf561dc269b8067929f91b17c8349c186bd3344db68809058e077f"
+          }
+        },
+        {
+          "region_id": "L15-0924E-1108N_3699_3757_13",
+          "truth_events": 192,
+          "raw_proposed_ids": 12083,
+          "eligible_proposals": 5481,
+          "positive_proposals": 12,
+          "negative_proposals": 5469,
+          "prefix_rows": 19126,
+          "subsequently_retracted_eligible_proposals": 904,
+          "hashes": {
+            "features_sha256": "574e35a25b37616233fbfc1a717482adfe50c6462fb4f60787f4e1a1037f15e8",
+            "sites_sha256": "e8e717debe3768fb9848c9f3b9743b424301fc84e91036772df0c9660c261dae",
+            "instances_sha256": "1e4257b41f8f18b261b47788e7ceeedce73b32c521f9ea23e949d9b169ad71a0",
+            "valid_sha256": "0c492d35ce14914e7850a433d4d0d40de23881c503c9aac4154ff41518c1256a",
+            "metadata_semantic_sha256": "c5cc608c396b9b285c4aeb78f896e384ffc944925fd9b7526eac0b729238af64"
+          }
+        },
+        {
+          "region_id": "L15-1276E-1107N_5105_3761_13",
+          "truth_events": 754,
+          "raw_proposed_ids": 7862,
+          "eligible_proposals": 3409,
+          "positive_proposals": 153,
+          "negative_proposals": 3256,
+          "prefix_rows": 10915,
+          "subsequently_retracted_eligible_proposals": 848,
+          "hashes": {
+            "features_sha256": "6225d76774fc23088d8454e76c14fe02ffdb6e5aa9909f8a224d054fa00064d0",
+            "sites_sha256": "2167f0b084c2d17a0c8fe2022d78b65fba457c29cb7e952f4cf078ccdfc1e200",
+            "instances_sha256": "c79654fdd05c6b002ece8dc55036b985fd329fe3c0fe6f0c59dd9f009779b706",
+            "valid_sha256": "eaffef8977329415871561cb32cbefce508f9f5b38b0d9572376e977aad21902",
+            "metadata_semantic_sha256": "6d7fc4d0db12929f9d28fa1c9a603fc4f7e2f04e46419a55e686995f122da003"
+          }
+        },
+        {
+          "region_id": "L15-1669E-1153N_6678_3579_13",
+          "truth_events": 465,
+          "raw_proposed_ids": 3928,
+          "eligible_proposals": 1300,
+          "positive_proposals": 46,
+          "negative_proposals": 1254,
+          "prefix_rows": 4375,
+          "subsequently_retracted_eligible_proposals": 218,
+          "hashes": {
+            "features_sha256": "dcea4b21b761421f97b7a61f9ea6c2943750b1901c6e2b73929251cb3adf1dcd",
+            "sites_sha256": "22fe62f5bc63fe37864d2f17ca6e3dcc4dba5948e011ff309b7cbd4794e0b960",
+            "instances_sha256": "29cfed928f4c712c3d7145d0164d94f28f068aa7ce63ade407f16d4c0dae1289",
+            "valid_sha256": "75085212f787b2cbd059dbc67bcb242f4235affbffa96174202d1939fc955a6d",
+            "metadata_semantic_sha256": "3f75cdbaa39f2162ee305e7cd073a3602ed5ab0fdc5ee5229b8a8fa3f0acab66"
+          }
+        },
+        {
+          "region_id": "L15-1669E-1160N_6678_3548_13",
+          "truth_events": 349,
+          "raw_proposed_ids": 7476,
+          "eligible_proposals": 2710,
+          "positive_proposals": 78,
+          "negative_proposals": 2632,
+          "prefix_rows": 9327,
+          "subsequently_retracted_eligible_proposals": 467,
+          "hashes": {
+            "features_sha256": "0126eb159c74aed6c5b47044edc0416b36720c170a4599748f434c91b733c21b",
+            "sites_sha256": "94b7fa4bf711eff54f6502909228f458a7e0b5ac2587c8927e3ed0b6db2fab3e",
+            "instances_sha256": "928500e5a7a01b7e8ae428c6604a5d746e34f5a4eb4e559b28058f16d9878674",
+            "valid_sha256": "1de9557ff905445e41b84b3695fcf32750428db935b4356ff660157e6cada79d",
+            "metadata_semantic_sha256": "1eed4982a53690d315a3c5bfa8bccddbd59457c15386e856956dbfafce786040"
+          }
+        },
+        {
+          "region_id": "L15-1335E-1166N_5342_3524_13",
+          "truth_events": 653,
+          "raw_proposed_ids": 3343,
+          "eligible_proposals": 1345,
+          "positive_proposals": 207,
+          "negative_proposals": 1138,
+          "prefix_rows": 4291,
+          "subsequently_retracted_eligible_proposals": 231,
+          "hashes": {
+            "features_sha256": "af14a7d6bb794a926d52400cd8e883806bb7a61cc1c4800bf32407b410d62e7f",
+            "sites_sha256": "62f0b1038d59c28e1f0bbc22b142ccd49ad9239f02dbb5058bf5fade96bf7c48",
+            "instances_sha256": "b561c627daf571eb3434cb2935962fa19d5a33cacc4ab0179644aaa0d29d8744",
+            "valid_sha256": "fd54bcbb2c58fe700c16c0ff89ab30b8aa32b5c99f87abeae56bc47107eb3e79",
+            "metadata_semantic_sha256": "2c4e4e3d886420eb6eda7d3f4b8a9bfa6a3bdaf2357d49f2015bede0e01d2f3d"
+          }
+        },
+        {
+          "region_id": "L15-0487E-1246N_1950_3207_13",
+          "truth_events": 183,
+          "raw_proposed_ids": 4126,
+          "eligible_proposals": 1655,
+          "positive_proposals": 21,
+          "negative_proposals": 1634,
+          "prefix_rows": 5495,
+          "subsequently_retracted_eligible_proposals": 418,
+          "hashes": {
+            "features_sha256": "863e49e403404731370dddd262fad19f26eaa8a509a025fa34e6a34adedd5f82",
+            "sites_sha256": "2716241c78ffeff6d5dfcb959cbf123403bd680b0a80280ae9aba2a3f32627cc",
+            "instances_sha256": "fce36a805a5297d63e21e26e8e1efcf345d0831282fa9f017aa18cec48ac8792",
+            "valid_sha256": "fb8836e816b0cce1edfbcec012031e9b20be7876298e4bf964bdb155095a2591",
+            "metadata_semantic_sha256": "d385f3141907ca6be56c7573a880ad58fc4f29d9fb99b5c35416634e536a9fdf"
+          }
+        },
+        {
+          "region_id": "L15-1298E-1322N_5193_2903_13",
+          "truth_events": 515,
+          "raw_proposed_ids": 6887,
+          "eligible_proposals": 2169,
+          "positive_proposals": 121,
+          "negative_proposals": 2048,
+          "prefix_rows": 7066,
+          "subsequently_retracted_eligible_proposals": 639,
+          "hashes": {
+            "features_sha256": "158d0278fbd81de3cb0e508cd3992920f334370a4ecd02dae02bea9d40d32cb6",
+            "sites_sha256": "f6d569ca044f42b0401d3be1b9fd79073857467a1543d8cd2e126dcba42952a6",
+            "instances_sha256": "9e76556da99274b93aa2dfc6c88be70594a2cc8ff83df5bbf48a7e2987fbcbbf",
+            "valid_sha256": "15d6df625fae365c15f91eccaff3cc3ba1c6beedfa5237ce878788ab8bb72f27",
+            "metadata_semantic_sha256": "92ab849e7ee7169e130c88d624e17c06851de0d20ce1aeb3c214cb27aed7a501"
+          }
+        }
+      ],
+      "development": [
+        {
+          "region_id": "L15-0632E-0892N_2528_4620_13",
+          "truth_events": 124,
+          "raw_proposed_ids": 8262,
+          "eligible_proposals": 2908,
+          "positive_proposals": 60,
+          "negative_proposals": 2848,
+          "prefix_rows": 9582,
+          "subsequently_retracted_eligible_proposals": 872,
+          "hashes": {
+            "features_sha256": "f6c772105095ff356875802b84c769bf3b1b2c4b0ddacd2152b4107fefe38f37",
+            "sites_sha256": "baa44099803aacaa75fc327fcad9e4b3aba714a5cdf6d162d56048b01694b02e",
+            "instances_sha256": "fbbfa260dcb4130135b17b2c653f85c6334ef61fd92c8afc746f2ff561df5978",
+            "valid_sha256": "08d3216a52146c4f2a4e62a2c8309118fc9754dbda52e33fe97f284950fa3f71",
+            "metadata_semantic_sha256": "879221768124ef69a4394a41b32e15390b29be33e9105e84e73d971b21fbb2ec"
+          }
+        },
+        {
+          "region_id": "L15-1389E-1284N_5557_3054_13",
+          "truth_events": 194,
+          "raw_proposed_ids": 4630,
+          "eligible_proposals": 2185,
+          "positive_proposals": 75,
+          "negative_proposals": 2110,
+          "prefix_rows": 7330,
+          "subsequently_retracted_eligible_proposals": 430,
+          "hashes": {
+            "features_sha256": "0551a504255f1fa484bf8cdbd84a02c713f796c214452221a423ad8e11d98ec0",
+            "sites_sha256": "b9cad6f91b5baf264b77505224d88d1ddd04942bba4af362d38a29d42a5add33",
+            "instances_sha256": "94a069ce14b4354cffe82a194600c6ab10e51fb279b7c03c13baf55e924a6943",
+            "valid_sha256": "891265bd35de959debc0e2796a120a19c39d00a74fe1b42471d35e14e32bbf49",
+            "metadata_semantic_sha256": "0e233570988b67099c5198750e6960f82682be783042fd6c485bd076134fb6cf"
+          }
+        },
+        {
+          "region_id": "L15-1716E-1211N_6864_3345_13",
+          "truth_events": 789,
+          "raw_proposed_ids": 22842,
+          "eligible_proposals": 7339,
+          "positive_proposals": 105,
+          "negative_proposals": 7234,
+          "prefix_rows": 23149,
+          "subsequently_retracted_eligible_proposals": 2605,
+          "hashes": {
+            "features_sha256": "bc2df5fc7ff49d82e6d51544c65ad51d7d2e2d14948a9084fc87364f1ba07083",
+            "sites_sha256": "3cf0df9ff763b37f7e0c67498fd1ea3cb1b263cd38e99a8d61a1f7547992f960",
+            "instances_sha256": "cb99fc11f245652b01894b4daca80ef1acf07a1d48cfbfcaaa3358fc43557dde",
+            "valid_sha256": "891265bd35de959debc0e2796a120a19c39d00a74fe1b42471d35e14e32bbf49",
+            "metadata_semantic_sha256": "67ac50c8db49f8043a50c32eb5ce04df173b716f54bb89bb1dbd5f3a95a857c8"
+          }
+        },
+        {
+          "region_id": "L15-0614E-0946N_2459_4406_13",
+          "truth_events": 1691,
+          "raw_proposed_ids": 16832,
+          "eligible_proposals": 7358,
+          "positive_proposals": 312,
+          "negative_proposals": 7046,
+          "prefix_rows": 24318,
+          "subsequently_retracted_eligible_proposals": 1705,
+          "hashes": {
+            "features_sha256": "f32acd6b336659f8216aeda88fe45ddc7dc55eee647fe6dd3a0008504aba6771",
+            "sites_sha256": "c19f8965e8d3fff9182b15741d6a910eda2235c4eeb223234991158326ec5a60",
+            "instances_sha256": "6126f2241386a442fd043dada684f01a0f66abb8484295af37e47317b5c34621",
+            "valid_sha256": "aecdd8ed5443996d1347154accd206321bb29726f13a3e117497f5498c67d559",
+            "metadata_semantic_sha256": "4fd8beac655b5a0d57d58ccc1d92752d640bf69ac0b0833c03714e3e28a137d4"
+          }
+        }
+      ]
+    },
+    "trace": {
+      "observation_gate": [
+        {
+          "step": 1,
+          "balanced_train_bce": 0.6971789598464966
+        },
+        {
+          "step": 100,
+          "balanced_train_bce": 0.31679844856262207
+        },
+        {
+          "step": 200,
+          "balanced_train_bce": 0.2974666953086853
+        },
+        {
+          "step": 300,
+          "balanced_train_bce": 0.2356172502040863
+        },
+        {
+          "step": 400,
+          "balanced_train_bce": 0.2147657424211502
+        },
+        {
+          "step": 500,
+          "balanced_train_bce": 0.31162628531455994
+        },
+        {
+          "step": 600,
+          "balanced_train_bce": 0.21353429555892944
+        },
+        {
+          "step": 700,
+          "balanced_train_bce": 0.25113391876220703
+        },
+        {
+          "step": 800,
+          "balanced_train_bce": 0.22193951904773712
+        },
+        {
+          "step": 900,
+          "balanced_train_bce": 0.2124224603176117
+        },
+        {
+          "step": 1000,
+          "balanced_train_bce": 0.26488399505615234
+        },
+        {
+          "step": 1100,
+          "balanced_train_bce": 0.15383702516555786
+        },
+        {
+          "step": 1200,
+          "balanced_train_bce": 0.19384567439556122
+        },
+        {
+          "step": 1300,
+          "balanced_train_bce": 0.2122882902622223
+        },
+        {
+          "step": 1400,
+          "balanced_train_bce": 0.21032187342643738
+        },
+        {
+          "step": 1500,
+          "balanced_train_bce": 0.20353861153125763
+        },
+        {
+          "step": 1600,
+          "balanced_train_bce": 0.17585192620754242
+        },
+        {
+          "step": 1700,
+          "balanced_train_bce": 0.1369827538728714
+        },
+        {
+          "step": 1800,
+          "balanced_train_bce": 0.15610863268375397
+        },
+        {
+          "step": 1900,
+          "balanced_train_bce": 0.1714974045753479
+        },
+        {
+          "step": 2000,
+          "balanced_train_bce": 0.16536684334278107
+        }
+      ],
+      "gate_no_quality": [
+        {
+          "step": 1,
+          "balanced_train_bce": 0.6884921789169312
+        },
+        {
+          "step": 100,
+          "balanced_train_bce": 0.3491758704185486
+        },
+        {
+          "step": 200,
+          "balanced_train_bce": 0.32207825779914856
+        },
+        {
+          "step": 300,
+          "balanced_train_bce": 0.27624183893203735
+        },
+        {
+          "step": 400,
+          "balanced_train_bce": 0.24939587712287903
+        },
+        {
+          "step": 500,
+          "balanced_train_bce": 0.3332981765270233
+        },
+        {
+          "step": 600,
+          "balanced_train_bce": 0.2531108260154724
+        },
+        {
+          "step": 700,
+          "balanced_train_bce": 0.3097628057003021
+        },
+        {
+          "step": 800,
+          "balanced_train_bce": 0.2880045175552368
+        },
+        {
+          "step": 900,
+          "balanced_train_bce": 0.2777647078037262
+        },
+        {
+          "step": 1000,
+          "balanced_train_bce": 0.2850784659385681
+        },
+        {
+          "step": 1100,
+          "balanced_train_bce": 0.2512468099594116
+        },
+        {
+          "step": 1200,
+          "balanced_train_bce": 0.282006174325943
+        },
+        {
+          "step": 1300,
+          "balanced_train_bce": 0.28025001287460327
+        },
+        {
+          "step": 1400,
+          "balanced_train_bce": 0.3103956878185272
+        },
+        {
+          "step": 1500,
+          "balanced_train_bce": 0.2685868740081787
+        },
+        {
+          "step": 1600,
+          "balanced_train_bce": 0.26600217819213867
+        },
+        {
+          "step": 1700,
+          "balanced_train_bce": 0.20434504747390747
+        },
+        {
+          "step": 1800,
+          "balanced_train_bce": 0.20347818732261658
+        },
+        {
+          "step": 1900,
+          "balanced_train_bce": 0.2437571883201599
+        },
+        {
+          "step": 2000,
+          "balanced_train_bce": 0.23050183057785034
+        }
+      ]
+    },
+    "examples_sha256": "9e47f8e8a6dcd69e1548c9b1de7695050cf6256a5b375414c92fa6fbfef20da0"
+  },
+  "spatial_provenance": {
+    "candidate_threshold": 0.55,
+    "spatial_backbone_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "spatial_inference": {
+      "context_halo_native_pixels": 64,
+      "implementation_sha256": {
+        "pretrained_spatial.py": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503",
+        "spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff"
+      },
+      "internal_input_scale": 2,
+      "native_alignment": 16,
+      "tile_size": 128
+    },
+    "spatial_weights_sha256": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d"
+  },
+  "weights_sha256": "1ff0cc2e7d2cfc2555c14d86f08a448441c8f82ff0bf3b3038127088dd4ea266",
+  "elapsed_seconds": 184.08703287498793,
+  "standardizer_sha256": "96b671a0dc927beb4f2b05ff61fa10c5382999c54f7b592ea0a5e8f8a8fd3179"
+}

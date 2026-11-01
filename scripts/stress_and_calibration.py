@@ -8,7 +8,7 @@ import numpy as np
 from scipy.ndimage import shift
 import torch
 
-from terradelta.data import load_region, registration_diagnostic
+from terradelta.data import load_region, registration_diagnostic, sha256
 from terradelta.evaluation import evaluate_events, ground_truth_events
 from terradelta.features import feature_cube, labels_for_sites, validate_feature_protocol
 from terradelta.pipeline import method_events, method_scores
@@ -44,8 +44,8 @@ def reliability(p, y, valid):
     }
 
 
-def dice(probability, truth, valid):
-    predicted = (probability >= 0.45) & valid
+def dice(probability, truth, valid, threshold=.45):
+    predicted = (probability >= threshold) & valid
     target = truth & valid
     return float(2 * (predicted & target).sum() / max(1, predicted.sum() + target.sum()))
 
@@ -67,11 +67,17 @@ def main():
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--event-gate-weights", type=Path)
     parser.add_argument("--backbone-weights", type=Path)
+    parser.add_argument("--embedding-root", type=Path)
     args = parser.parse_args()
     config = json.loads(args.config.read_text())
     cal = json.loads(args.calibration.read_text())
     if config.get("truth_protocol") != "physical_coverage_v2":
         raise ValueError("Stress scoring requires audited physical_coverage_v2 truth")
+    from terradelta.contracts import preflight_probability_files
+
+    preflight_probability_files(
+        args.features_root, args.predictions_root, config["confirmation"],
+    )
     validate_experiment(
         args.freeze_manifest,
         repo=Path(__file__).resolve().parents[1],
@@ -83,6 +89,7 @@ def main():
         calibration=args.calibration,
         config=args.config,
         event_gate_weights=args.event_gate_weights,
+        embedding_root=args.embedding_root,
     )
     if args.output.exists():
         raise ValueError("Stress output must be new")
@@ -102,6 +109,15 @@ def main():
         p = np.load(args.predictions_root / aoi / "probabilities.npy", mmap_mode="r")
         truth = ground_truth_events(args.cache_root / aoi, protocol="physical_coverage_v2")
         y, supervised = labels_for_sites(region["instances"], region["valid"], sites)
+        embedding_data = None
+        if config.get("embedding_baseline"):
+            from terradelta.embeddings import load_embedding_data
+
+            embedding_data = load_embedding_data(
+                args.embedding_root / aoi, feature_dir=root, cache_dir=args.cache_root / aoi,
+                expected_plan=config["embedding_baseline"],
+                expected_config_sha256=sha256(args.config),
+            )
         occupancy = {}
         for method in ["pairwise", "smoothing", "hmm", "watch_lstm", "no_quality", "observation"]:
             scores = method_scores(
@@ -136,14 +152,39 @@ def main():
         ]
         if args.event_gate_weights:
             event_methods.extend(["observation_gate", "gate_no_quality"])
+        if embedding_data is not None:
+            event_methods.append("embedding_distance")
+        # Real, unaltered annual evidence at label-stable candidate sites is a
+        # conditional natural-season control. Labels select this diagnostic only
+        # after freeze and never change candidates, models or operating points.
+        observed = supervised & f["usable"]
+        stable_sites = np.zeros(len(y), bool)
+        for i in range(len(y)):
+            indices = np.flatnonzero(observed[i])
+            if len(indices) >= 12 and np.all(y[i, indices] == y[i, indices[0]]):
+                from datetime import datetime
+
+                dates = [datetime.fromisoformat(info["metadata"]["frames"][int(t)][
+                    "acquisition_end"]) for t in indices]
+                stable_sites[i] = ((dates[-1] - dates[0]).days >= 330
+                                   and len({date.month for date in dates}) == 12)
+        seasonal_usable = observed & stable_sites[:, None]
         controls = {}
         for name, x, usable, target in [
             ("four_missing_observations", cloud_x, cloud_usable, truth),
             ("static_evidence_calendar_control", static_x, f["usable"], []),
             ("all_observations_missing", np.zeros_like(f["x"]), np.zeros_like(f["usable"]), []),
+            ("natural_seasons_label_stable_sites", f["x"], seasonal_usable, []),
         ]:
             controls[name] = {}
             for method in event_methods:
+                sidecar = embedding_data if method == "embedding_distance" else None
+                if sidecar is not None and name == "static_evidence_calendar_control":
+                    sidecar = {**sidecar, "vectors": sidecar["vectors"].copy()}
+                    for i in range(len(sidecar["vectors"])):
+                        good = np.flatnonzero(sidecar["usable"][i])
+                        if len(good):
+                            sidecar["vectors"][i] = sidecar["vectors"][i, good[0]]
                 events = method_events(
                     x,
                     usable,
@@ -154,9 +195,13 @@ def main():
                     calibration=cal,
                     event_gate_weights=args.event_gate_weights,
                     model_revision="frozen-stress:" + method,
+                    embedding_data=sidecar,
                 )
                 if name == "all_observations_missing" and events:
                     raise AssertionError(f"{method} emitted events with no usable observations")
+                if (method == "embedding_distance"
+                        and name == "static_evidence_calendar_control" and events):
+                    raise AssertionError("Embedding comparison changed state on static evidence")
                 if method in {"proposal_tracking", "observation_gate", "gate_no_quality"}:
                     if name == "static_evidence_calendar_control" and events:
                         raise AssertionError(f"{method} changed state on static spatial evidence")
@@ -180,7 +225,8 @@ def main():
         image_controls = {
             "reference_index": index,
             "reference_source": info["metadata"]["frames"][index]["source_id"],
-            "base_footprint_dice": dice(p[index, 0], target, valid),
+            "base_footprint_dice": dice(p[index, 0], target, valid, info["candidate_threshold"]),
+            "binary_footprint_threshold": info["candidate_threshold"],
             "brightness": {},
         }
         for factor in [0.7, 1.3]:
@@ -191,9 +237,10 @@ def main():
                 if info.get("spatial_inference") else 1024,
             )
             image_controls["brightness"][str(factor)] = {
-                "footprint_dice": dice(predicted[0], target, valid),
+                "footprint_dice": dice(predicted[0], target, valid, info["candidate_threshold"]),
                 "changed_binary_pixels_fraction": float(
-                    np.mean(((p[index, 0] >= 0.45) != (predicted[0] >= 0.45))[valid])
+                    np.mean(((p[index, 0] >= info["candidate_threshold"])
+                             != (predicted[0] >= info["candidate_threshold"]))[valid])
                 ),
             }
         shifted = np.stack([shift(band, (0, 3), order=0, mode="nearest") for band in rgb])
@@ -205,6 +252,12 @@ def main():
             "controls": controls,
             "image_controls": image_controls,
             "cloud_gap_frame_indices": [gap_start, gap_end],
+            "natural_season_control": {
+                "candidate_sites": int(stable_sites.sum()),
+                "usable_site_observations": int(seasonal_usable.sum()),
+                "selection": ">=12 supervised usable observations spanning>=330days and all12 calendar months; constant80/20 occupancy labels",
+                "scope": "Unaltered seasonal imagery conditional on these label-stable image-derived sites. Event counts are false alerts under this occupancy definition; area-time rates retain the full AOI denominator and are not a population estimate for all stable land.",
+            },
             "limits": [
                 "Controls are synthetic perturbations of real evidence, never new supporting observations.",
                 "Event-gate methods share the proposal_tracking raw policy and use frozen event-gate calibration, not occupancy calibration.",

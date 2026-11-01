@@ -19,6 +19,7 @@ import numpy as np
 from PIL import Image
 from pydantic import BaseModel, ConfigDict, Field, create_model
 
+from . import __version__
 from .data import load_region
 from .schema import EventRevision, utc_datetime
 from .store import EventStore
@@ -67,7 +68,7 @@ def create_app(cache_root: Path, run_root: Path) -> FastAPI:
     cache_root, run_root = Path(cache_root).resolve(), Path(run_root).resolve()
     app = FastAPI(
         title="TerraDelta event-history API",
-        version="0.1.0",
+        version=__version__,
         description="Monthly observation support and append-only event revisions. Retrospective availability assumption; no exact construction dates.",
     )
     web = Path(__file__).parent / "web"
@@ -100,7 +101,7 @@ def create_app(cache_root: Path, run_root: Path) -> FastAPI:
 
     @app.get("/health")
     def health():
-        return {"status": "ok", "version": "0.1.0", "regions": len(regions)}
+        return {"status": "ok", "version": __version__, "regions": len(regions)}
 
     @app.get("/api/catalog")
     def catalog():

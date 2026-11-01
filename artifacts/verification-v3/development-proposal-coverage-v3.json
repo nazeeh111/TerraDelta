@@ -1,0 +1,872 @@
+{
+  "format": "terradelta-development-proposal-coverage-v3",
+  "complete": true,
+  "development_only": true,
+  "confirmation_data_read": false,
+  "models_executed": false,
+  "MPS_used": false,
+  "CPU_thread_limit": 2,
+  "thread_env": {
+    "OMP_NUM_THREADS": "2",
+    "OPENBLAS_NUM_THREADS": "2",
+    "MKL_NUM_THREADS": "2",
+    "VECLIB_MAXIMUM_THREADS": "2",
+    "NUMEXPR_NUM_THREADS": "2"
+  },
+  "config": "<repository>/configs/experiment-v8.json",
+  "config_sha256": "ed4204738e8a0079453d7469e64ed869dbf089dc2b78c0500004697d01d87bd9",
+  "truth_protocol": "physical_coverage_v2",
+  "geometry_metric": "Any fixed image-derived candidate geometry has geodesic IoU>=0.25 with a truth event geometry; exact existing evaluate_candidate_sites implementation",
+  "geometry_metric_ignores": [
+    "class",
+    "timing",
+    "candidate_birth_feasibility",
+    "confidence",
+    "one_to_one_conflicts"
+  ],
+  "code_sha256": {
+    "src/terradelta/evaluation.py": "66fd8b765a9d4dc552efefc4b4728858e0370b40808946ae1573121b4d2b3c7b",
+    "src/terradelta/contracts.py": "7da8a05ed2f7cb8fdeb3e4b13d90ee272dd7b2b96d624842754f465ed1b50308",
+    "src/terradelta/schema.py": "9500c25425e546e7a895c9e2e4bbe333e1ef7c93b0eec0fa330aefa98339ebb1",
+    "src/terradelta/data.py": "0e1fa709eb635191101ce1b9e2e669bb3ea04e50d3a1ac51cabdf0de489d02ea",
+    "src/terradelta/protocol.py": "bffae3afe773dadf854e9f72ee52d92bd94fb93cafea33875bb5e632bc177df7",
+    "src/terradelta/features.py": "c8495e7664659e1916157e8de76f8389f5c02e302967e108d6f4be3f4b29731d"
+  },
+  "diagnostic_script_sha256": "6b381de457e4324d7ea1b599e02e19052ba5e56871f1daa34f1d67ad2c003556",
+  "regions": {
+    "L15-0632E-0892N_2528_4620_13": {
+      "input_sha256": {
+        "sites_json": "baa44099803aacaa75fc327fcad9e4b3aba714a5cdf6d162d56048b01694b02e",
+        "sites_raster": "c7eb629df431692ddfb9794ba7dffbc6b43719987e12f39fc59172b489bde606",
+        "features_npz": "f6c772105095ff356875802b84c769bf3b1b2c4b0ddacd2152b4107fefe38f37",
+        "cache_metadata_json": "c18b641d36a4e9394ac4a36632d96d3c4e0f9972bf47fe766829ca26f54d5611",
+        "truth_instances_npy": "fbbfa260dcb4130135b17b2c653f85c6334ef61fd92c8afc746f2ff561df5978",
+        "source_valid_npy": "08d3216a52146c4f2a4e62a2c8309118fc9754dbda52e33fe97f284950fa3f71"
+      },
+      "metadata_semantic_sha256": "879221768124ef69a4394a41b32e15390b29be33e9105e84e73d971b21fbb2ec",
+      "candidate_threshold": 0.55,
+      "spatial_provenance": {
+        "spatial_weights_sha256": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+        "spatial_backbone_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+        "spatial_inference": {
+          "tile_size": 128,
+          "context_halo_native_pixels": 64,
+          "native_alignment": 16,
+          "internal_input_scale": 2,
+          "implementation_sha256": {
+            "spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff",
+            "pretrained_spatial.py": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503"
+          }
+        }
+      },
+      "feature_implementation_sha256": "c8495e7664659e1916157e8de76f8389f5c02e302967e108d6f4be3f4b29731d",
+      "coverage": {
+        "sites": 3565,
+        "truth_events_covered_at_iou_025": 83,
+        "truth_events": 124,
+        "coverage": 0.6693548387096774,
+        "site_area_m2": {
+          "n": 3565,
+          "mean": 259.8883778009339,
+          "median": 135.82792382128537,
+          "p90": 485.1201910953969
+        }
+      },
+      "truth_events_by_class": {
+        "building_addition": 124
+      },
+      "uncovered_truth_events": 41,
+      "geometries_canonical_sha256": "e150edbbef1d122185470b470b4256621df2d8719700be5a7201e0d4e196cec2",
+      "derived_truth_canonical_sha256": "dac23f5382e09d547649e16fcabb214dcbb3c97d5afe12404debea7edb70341b",
+      "truth_source_frames": [
+        {
+          "source_id": "sn7:global_monthly_2018_01_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "0028cdc3c62d6640e7239a0435f825bb4818864af46da8a6b576ae9d35275a9f",
+          "label_sha256": "1f11bccdc7b9fa1cd1b838ce8faf1bb8c0de3ba1b91394272a4fad115df21a59",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_02_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "1e56a7055becd0de7f2646bb6c33d9308e52b2c4436f8e738f7f96c08ac7a530",
+          "label_sha256": "32f42bf58f6dccbb3be30cd2e21cef25e9159e164f1ad9ccbba5d75820ba8a75",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_03_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "d31072a5160e63bf64fc058908fa78a5b2697fda3cf8489c966d9db30b80a213",
+          "label_sha256": "19eee0c82ec5f7baa1c4feacb1a6b67b48617f5c38434f80827fc8cd13d7723c",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_04_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "bfc6586c4a96bf3265d40d35badabae8b609a73fa5775f864ad79dbae8f6979f",
+          "label_sha256": "e22e8aa1292da4852797de21d53674e01762e53fd5a6b516ff5f86c3dc148e05",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_05_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "0cf6e74d448d6920b8991250041c9086376be111fd2d7b27c6bc119b41e7ef3b",
+          "label_sha256": "afa8cdee6659f0867ebea5ece7e1d508d791f12a745025d9e5c8cd8cdf9d18d7",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_06_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "bd01e0f4878ea1a2b94dfb4cd09a3a10490499b7f94cdb2eac0edd1cde46b15c",
+          "label_sha256": "05c001b269e9c04ea5ae427f3caca8f66a396f8474d6339a3c758521a08d424e",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_07_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "4aa3c3b62020661d143fd85e85bc99869adab8939b972bcde5c81a4e94b432fb",
+          "label_sha256": "16ae143eabba19cffda5fc86276b49f7c178fcfe7893afd94e6400c83fc1a437",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_08_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "b172d6a0c7e32c2b6c8639d39b1e833c25c3da7b60a111fc3b2b4bce087abdc2",
+          "label_sha256": "8b671b51b0c7951f1f42a43fd2c2af1ee3b7cb347524addad8aa810215a2b98d",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_09_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "386b840ea9bbd993229cc0e7bc3bf14b665a77487941c31c2d683ef5c5c2f725",
+          "label_sha256": "613564e72cee724abb32933d21a74b2798c9bfb72c6dc6ab6a8203619f510767",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_10_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "f30f49a14d0c22ff2a29f8d697fa53fa24c3d782417e28d8dc2c0a3848295053",
+          "label_sha256": "a785fe36262ce0eb15b60a52fa5d602cb135a87f87042f17f6758f3f9d50bd40",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_11_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "4cc3cf45f224716dccda3419ac20179ce9708fd8b9ce4d079b8e41a8d989f57b",
+          "label_sha256": "e46405689e2952f5da454a81d36fdb196cf24621f5fdcc3f69fc3fb9b9be9aec",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_12_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "dbcb204c859c9230bec04cf7dd1acb7741b25c8843499dfdf0ce4de62571277b",
+          "label_sha256": "25537c1227b2650599d717a159750be26438d26c1cf74afe90e7ef065bd62168",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_01_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "3d52a2485922eb1ea142f77c6914c28a3a1388d725a5a24510f01ca2dd3f3afa",
+          "label_sha256": "86f66664b032fd819f283b4df71e4f572c6755d3a38c3ec86ba1ee5d927906de",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_02_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "274bc17ebe9b1917d92cad51aeeda00e63dd528ab0b27332c58db4973c64ba86",
+          "label_sha256": "4821db7e21515994910611293303daacc781adfabd1dd9ce066c6b6eff5635fa",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_03_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "85140f436993966b0596b593879144a1b0a588b70a98b74cb936fde0029eba9f",
+          "label_sha256": "d24e0ceeff41c6e53a182366d352f33ada4d2ad02fe4f00514a70ada166bd4e6",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_04_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "71a7318f76ce23aa6442266e6dde0e38bd64b303bfe16c8921d1a57d306c9207",
+          "label_sha256": "2b169d7b7dfbfc0f796ccac5abc72b44edc61f453bb29c005b80b0c252e6eba4",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_05_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "6b3509acf1f762771509550fae27d8867d4a1489af1dab6ede6fd856c2497e1e",
+          "label_sha256": "ad0026f718c67bc1c3ac0cf06e01b400bf48f58871e17421611d63cd74702fd6",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_06_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "e85fbd0c30b983779ae10475d264608129ac0ca1d4789932138e46cfe462101b",
+          "label_sha256": "b44a8ded2360b48e94f90af636eb34d4d2a8b6e230ae0a3cec31b5c019c818c9",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_07_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "cc6ccefaac499c7d6932276a78aa7caff2b18cd0fe6890314a52a799ed6f152e",
+          "label_sha256": "8f4b0bf4fa522e7fec2c1354c29058cf2e5e2a6515c3da99fc26a1d7f3ac4fa3",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_08_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "55656bd65e419a311987f0be0a7f15c0d806342631a8c9959e3a960799b9ffd4",
+          "label_sha256": "61a91492633900c74e6660a51c52b2a75b353300d2695c49842d69adfc7431e4",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_09_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "04487eb3447b13e66ad6217578fc4a677c12b4226e23ce753492fbb5955a3be8",
+          "label_sha256": "10aed7e0b21a86b8f414c428c844b3636ecd3c5f09a9e22faaad300b8996ed92",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_10_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "085eeb18cc48f4a401bd5bd359d806445e78724837af7de561fec44bf399a29b",
+          "label_sha256": "7d33a93d305bc9a113eec0372dc552024825822723f954c91dacdf19b863e61a",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_11_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "31f328ae97cbb300166f84e4fad182c37c81f1c6e2295dc2d313bfa6e06e6e13",
+          "label_sha256": "b46be68f0d4a4e95ad8915f804aec74afc5266243b85399ec9caae69b6cd9346",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_12_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "92553bd36849ab4644a977f4295db38f1fed2bcb54e4cc37205584adcdf76b0b",
+          "label_sha256": "a96c255088fdc9566e26cc18ef7da3583b1c1a47852346ea60ded6cc3f80bb35",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2020_01_mosaic_L15-0632E-0892N_2528_4620_13",
+          "image_sha256": "071eebf98924ad49de6bbd209f69d1bd0f5a090f9340d16c8b868a2497eff20e",
+          "label_sha256": "802c6a30aadafce39a3e33622dbb8a96009a2acd2c119a4179fa8a7b5b87a313",
+          "label_crs": null
+        }
+      ],
+      "elapsed_seconds": 6.941135792003479
+    },
+    "L15-1389E-1284N_5557_3054_13": {
+      "input_sha256": {
+        "sites_json": "b9cad6f91b5baf264b77505224d88d1ddd04942bba4af362d38a29d42a5add33",
+        "sites_raster": "8f2d75b25ad23cff164361e865e41be9a2e92ccdfede7d5f42e7b4d5718dd09f",
+        "features_npz": "0551a504255f1fa484bf8cdbd84a02c713f796c214452221a423ad8e11d98ec0",
+        "cache_metadata_json": "b2cda4b59b4c0ce0a761d6bcdeacf251791b302924af0ede1ff3950d60fca25e",
+        "truth_instances_npy": "94a069ce14b4354cffe82a194600c6ab10e51fb279b7c03c13baf55e924a6943",
+        "source_valid_npy": "891265bd35de959debc0e2796a120a19c39d00a74fe1b42471d35e14e32bbf49"
+      },
+      "metadata_semantic_sha256": "0e233570988b67099c5198750e6960f82682be783042fd6c485bd076134fb6cf",
+      "candidate_threshold": 0.55,
+      "spatial_provenance": {
+        "spatial_weights_sha256": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+        "spatial_backbone_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+        "spatial_inference": {
+          "tile_size": 128,
+          "context_halo_native_pixels": 64,
+          "native_alignment": 16,
+          "internal_input_scale": 2,
+          "implementation_sha256": {
+            "spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff",
+            "pretrained_spatial.py": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503"
+          }
+        }
+      },
+      "feature_implementation_sha256": "c8495e7664659e1916157e8de76f8389f5c02e302967e108d6f4be3f4b29731d",
+      "coverage": {
+        "sites": 1876,
+        "truth_events_covered_at_iou_025": 107,
+        "truth_events": 194,
+        "coverage": 0.5515463917525774,
+        "site_area_m2": {
+          "n": 1876,
+          "mean": 202.613636837325,
+          "median": 102.10201295651495,
+          "p90": 370.13731749914587
+        }
+      },
+      "truth_events_by_class": {
+        "building_addition": 184,
+        "building_removal": 10
+      },
+      "uncovered_truth_events": 87,
+      "geometries_canonical_sha256": "b2d819a1c445bee86337e06ddb100b5c313cc778a7f410a3896230ec1efea10f",
+      "derived_truth_canonical_sha256": "721b7bf661d3bbe05f9b13b1847291028e945b593036f410fede5ede62c93d29",
+      "truth_source_frames": [
+        {
+          "source_id": "sn7:global_monthly_2018_02_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "7a79e618f6aec4b3e80ebb063addf39e9a54a6ad2f36e96be5266fcf58a78277",
+          "label_sha256": "0207aaff99b7fd8c5f60fb69f93d3f5b041f84ecf59c0e8ea44d7042ada1f28c",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_03_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "a19da256f4771432d5343d03e87e04a4375cb224ad442ef8ff739f193eb33cf0",
+          "label_sha256": "3ff6c83f497036abe6c66f1aaec99e48f7f7c412377b38ce0b0078350e6a9732",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_04_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "0621a1ed20e6fbb53526c652e9855f6c0814829e54c78b8419bf1687d93a1aa7",
+          "label_sha256": "51149c530956e00d09ed687dc43fcef110ee57f3c700f687dba5287c9dcf5163",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_05_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "ab5962c07596832656564b68cdd53ab862c4db2a6b016c67204982ba22742793",
+          "label_sha256": "762ab00abeea9592bacfd91d883bd5d2878a19b39c0fdb07f2ce77edd99a62ec",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_06_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "490108534ca6f1530ff0c01992bbdbc373304bf19ead4ae75e2a047d9399b1e7",
+          "label_sha256": "98fa2b6777c5751dbf8b59ea125185b450ffa17a703361b38013c02a6480ad34",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_07_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "08e1a3b16567515b4a9716f14a75fae674cd952871436a2d87a4439d21243bb1",
+          "label_sha256": "a0824787b91881efd876e36c69a9c8efb823710e70076eaa23d9a3acf1045da6",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_08_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "01042a063989a17d877c154ca5bb34aebab0af735e5c6bc561190664854de20c",
+          "label_sha256": "7268e2068cf941fb32c896615b46075bd6a914b69019e668ad5d1a19c91a7489",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_09_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "69777bdf4c4cb9c90fae28de042e10e0862c53bbef9a27d23e190546a3727875",
+          "label_sha256": "194ade0ed7b1d728907baaef46655277a3b17e1f7f5ef288e89c373531bfc58f",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_10_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "be9fa5bda7c7c450562d4d698749baaff5e623a67a06f2d83ba8a15ebe0129e4",
+          "label_sha256": "e34e10b1bd5c4ada5ee1a623c0626825fe3a9e5ee46892c61fc7cbc4b7e0aa61",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_11_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "1655d36dc7687d5e0ed20591be244694b99d2a449a5cce5f114d31e4061409a3",
+          "label_sha256": "bd06ab84b5e6192bba10dd6e491eb55bbb599704fc2cc5ec358b40b86d7ed4b5",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_12_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "231ed3ac4016663b7d045aa88c37849e9959e0c439b1ff2dff71da25682b3c41",
+          "label_sha256": "97840adb875beda55b8dce8c6d2bf2b744e100d92a577f03fa7d482d4aa94196",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_01_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "61a9594ed6aa1ccbebfb2f13665787f4926df0a420838c7188ef2d50f7d272a5",
+          "label_sha256": "3e56294c9f44758a7d70e24c94ee42a51d1286746a8326ac898602b840663c4d",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_02_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "b10e1864a3da3505a9398b48ba87a11f29043af4637b37f7b4e5c79ddca9e671",
+          "label_sha256": "943d7846a6792b7d4401f0cdf47a0d45be55d6354520b4f7f1d9d49ff22db18c",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_03_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "11857968a9e3ba51d7c95f62fc6603335ef6ca7ea16dd2f4c2d320047efb6db7",
+          "label_sha256": "6bf088809472d3f5f2c3df0efd0dc25da2ccad9c48ac4db94576d58004338788",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_04_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "946ae27277b82fce920e8106274a83b38bb5fecdbf644ac89b3adc217107a8a8",
+          "label_sha256": "5cd53f28e734d5671b361804031f062fbd51d613eb953df54d23912a60818454",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_05_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "5fc66e044b852525640c0f721dd89b507210430888a5aa57b1de154a133366e4",
+          "label_sha256": "edcd2f300750480510712c0139645556d33e9b84bc1b983a42901adbf6a6c408",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_06_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "a31646c3fb6c7419f6404b2bbbd10c9726a5031648df2a26dec3bcc2eebddc07",
+          "label_sha256": "3967e0579c8ce49b0a63ec210a8712141ecce0aadc2757c1086736d950b10bb4",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_07_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "eab9723100121c5d7b56e5ca1aa0c78968709526b6b10f78e8f0f95bbb702873",
+          "label_sha256": "148ff00e2d7974dc4b574f483f069ad81519b70e6288dc66e70dace549352534",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_08_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "9a5a726d75cfbebdd50ee59cc709b0a3e11c90c7d25ed5221e1cfb0f9b47f854",
+          "label_sha256": "83c5ab7c2e65584b9366ff5314fdb4cc0498b9427d7e0dc9b86de232bc7a6701",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_09_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "68561e9152e1fe4b3561f9ea6024955fb0077318eb50b8660e6c3869a848a57b",
+          "label_sha256": "b6d6acb25b298c9eaf65345e2c7c7fbe7d687905bc6f42c679add4a41f5f0be3",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_10_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "cf76404c9780bd299e72774b27e40f9a14607c904ed2313dd9eaec57b41dff2e",
+          "label_sha256": "51a857988c834711ea95bfa69470c0d7eacdad3927ecc807897fd4a6ada7a1c3",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_11_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "647858c20650b8def3b812b51c5a753aeaa9ccbf1f22fd5457c7695453f97064",
+          "label_sha256": "13586b365b333e302ebec99961c1d37781f3a8c872fbfd8c7956c794a40e4f53",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_12_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "f8ae474a4dede95ba0b21e39a208909f8eb1f1b140b619a65a52cd432da59808",
+          "label_sha256": "3c7452efc6f9833d674227256397445b865e8f20375ca0a7e1ebdff414b4c00c",
+          "label_crs": null
+        },
+        {
+          "source_id": "sn7:global_monthly_2020_01_mosaic_L15-1389E-1284N_5557_3054_13",
+          "image_sha256": "27fd98e8f997c4ea9239b861fb0411bff0482c1f93778e472ad0ea2c2fa7d6b3",
+          "label_sha256": "34845a830f1329e32c8ec01a9a8c7d71338c02377abf2e61d9f95d9f1012a424",
+          "label_crs": null
+        }
+      ],
+      "elapsed_seconds": 5.530634249967989
+    },
+    "L15-1716E-1211N_6864_3345_13": {
+      "input_sha256": {
+        "sites_json": "3cf0df9ff763b37f7e0c67498fd1ea3cb1b263cd38e99a8d61a1f7547992f960",
+        "sites_raster": "f11a69d0853b31aeeab6f4bc146dd5876a2b9ef1414436babbc74a60eadd747d",
+        "features_npz": "bc2df5fc7ff49d82e6d51544c65ad51d7d2e2d14948a9084fc87364f1ba07083",
+        "cache_metadata_json": "3512217275ac02e5c3424b84c80441b34ed69da8a7b1b7fe2cf09f6f6ac933b7",
+        "truth_instances_npy": "cb99fc11f245652b01894b4daca80ef1acf07a1d48cfbfcaaa3358fc43557dde",
+        "source_valid_npy": "891265bd35de959debc0e2796a120a19c39d00a74fe1b42471d35e14e32bbf49"
+      },
+      "metadata_semantic_sha256": "67ac50c8db49f8043a50c32eb5ce04df173b716f54bb89bb1dbd5f3a95a857c8",
+      "candidate_threshold": 0.55,
+      "spatial_provenance": {
+        "spatial_weights_sha256": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+        "spatial_backbone_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+        "spatial_inference": {
+          "tile_size": 128,
+          "context_halo_native_pixels": 64,
+          "native_alignment": 16,
+          "internal_input_scale": 2,
+          "implementation_sha256": {
+            "spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff",
+            "pretrained_spatial.py": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503"
+          }
+        }
+      },
+      "feature_implementation_sha256": "c8495e7664659e1916157e8de76f8389f5c02e302967e108d6f4be3f4b29731d",
+      "coverage": {
+        "sites": 9026,
+        "truth_events_covered_at_iou_025": 223,
+        "truth_events": 789,
+        "coverage": 0.2826362484157161,
+        "site_area_m2": {
+          "n": 9026,
+          "mean": 220.8345335265927,
+          "median": 99.70818365551531,
+          "p90": 332.19916436076164
+        }
+      },
+      "truth_events_by_class": {
+        "building_removal": 610,
+        "building_addition": 179
+      },
+      "uncovered_truth_events": 566,
+      "geometries_canonical_sha256": "0d8a77fd5c7e25681503387261a31c8fbbd83509805748f51be69785e592623e",
+      "derived_truth_canonical_sha256": "667f704c40c97f90a837bbff5ad0b43ba266f0e50c9dfaed57f23a39b7fe8a4a",
+      "truth_source_frames": [
+        {
+          "source_id": "sn7:global_monthly_2018_01_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "73926ee5898770d979e442a4d717cd3282935bc284f550419ea81a625ab8c329",
+          "label_sha256": "2b052b8b976cb66a26834b91b2080a540a00fe9365ec458b64beee72a90d9db9",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_02_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "5caa634d5b558be27b0f43a8e2f78daf226f592a056240c99f6aa3ffd1a8d98e",
+          "label_sha256": "2f0e6d3d4ffc496005a601bf69b5185b5feb542b5c9e70810b665ad583ac8e2e",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_03_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "99b9ba9b41888d24bc5e99aee304625d1485dab9769b6d03ec2f8c966cc57278",
+          "label_sha256": "3c825f7e33d0e11c26cd127fef239f34dc0f3433da9d111206785855ec7ffa89",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_04_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "57ea41653d75ca7f96af88e7ab0522f1c74b7228bc617a8c02f5c9802ae25bd3",
+          "label_sha256": "43c1727f97444debd2d9243a014acae172caddc95a5df1d34374e0cc5cbeba4a",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_05_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "6fba19f5610a8855c28de81816d3b99ff9deb6853f0804507a9d63b020b1b915",
+          "label_sha256": "3c6ca5cadb74c75dc0c394e2ac266f0c9e4f76b6c9d114e75dc8e9dd3536d05e",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_06_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "33470d6971b743370782b87399e09e15d4782d5852cb52bb3304a8572663cef5",
+          "label_sha256": "0045ce40ac153698399afb9cff18b442f5ae8d3fa55df060772913438060467a",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_07_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "17e57a3808554726bae45ecdee99fa46bbd4fef17848e3750ffebd8a65b26d5b",
+          "label_sha256": "e56b8745a625f212d411b43caa0dd13694dc10d03a1af42fb44d5e6ba95de083",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_09_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "bab473bca56c10b90bfee0772373d380bad5a533125ff274ae7cedba63a8ae57",
+          "label_sha256": "66e3be38345a7fa1c1cecc94bab74946acd819b35ef168c0ffaec5571f466294",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_10_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "0a637a91b8fce627390c1959b5ef07ea0ef41b740df22038e0c4cf88c62c86fe",
+          "label_sha256": "06210ab5594d60c6841509b9876ada494f9e5e8c7920d1c21379cf2cc1b01a97",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_11_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "e4585ee9322b152111bf80ad53589224f2cbd8f458b8794e7f691ab82a2461a0",
+          "label_sha256": "6da85fe020e35d3d12953c7cf971b3b9783df6952cf1b0ce6a8850aad7cedd92",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_12_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "026bbc3adba9c915a7af1faa302e0de9548aae06521a7bb94bf5fdeca7459c1e",
+          "label_sha256": "8d7708db1eaf043ea50a82bb0d1661a01f7bed4763221ee63673d5bdc61c4f8e",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_01_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "22778b7095c89e96d798eb40a1087c1b5f8e78cfc26f362cf6d7fc4d2308927b",
+          "label_sha256": "1b94ae76a5d064f2fbf9f9bc8b8fc974e67c874161cb594dfe3cd3916899efdc",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_02_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "743d07200067afdc2a73cc56394ea709a983730692008362c8fde0e8bc28e547",
+          "label_sha256": "49eb86710eb02ae887e7ec07567f90bb1a3aa6cf2f1d483b6c5783c010f70338",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_03_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "344efa58c5d65a5d565e800d5ae28f5f306e6f7bfd6180a19efe8ad811cead08",
+          "label_sha256": "fc6c71adf5d822391da9ad2de90b6131fc0b51cdb36cc648b756b71b9f1294b0",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_04_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "d650ddecbe5ddd3249282f63d3dffb43cae81531296180974352352a1f66d177",
+          "label_sha256": "a54766004a3ca34a7841d017fce8ceff7ca323a22d5f69699200c99d9b3fcea9",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_05_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "fcbef49de547da82aa25d6a1a02fd37e8796b3e30856601bcbee8bfa269a28bd",
+          "label_sha256": "2213238bbd524aea4a3b76745ffa919070489c623e605bd4323416f74045224c",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_06_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "21000ba1b8e17c21dd09f4d330da71481f9fdd2c766d9145f8cbbe6b9949c0fc",
+          "label_sha256": "811b75d5181f15b28dbc9b22a60cb545c5301fdf169da47282eb4b005ecd61b8",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_07_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "6c49ca6784e50a4a0906fd97e506ad645490c009d506f4d10eabc86b47f5a05e",
+          "label_sha256": "b6ff66d59c7db686bb93dbbcf291e0f2ffba0b78b135746efc20a796e719e921",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_08_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "b0c82a0c970a0c029b8a35863e896b1969920de0bee8da391d53811d090dd6dd",
+          "label_sha256": "10114acab681a25c43f1a60f0e0447dfbe1879c710cacf00d29879189c94d5a9",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_09_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "4ffd3c3762710c6cad282f47d5ca561941cb9f81282e93f3b8111e3e6329e5a1",
+          "label_sha256": "c04dfb1b7762e7441718c80c060e4913ac1b4d482fc0d5325a379a08e9023934",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_10_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "4336bc9069d9a445c479817d20bb91d037205ba3f10fa7200e0df251ae74fef5",
+          "label_sha256": "2c84d399ad2d54d541f57604ed9add6a6f0fd57a00882e68f28d62e81e3d065c",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_11_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "9cf9eb4db54eab6da184ef96bcd3a0f61f1bd31e5f4c59a23eb548d7caad27a7",
+          "label_sha256": "87b77c6525db1872f835b0f2f7995a2dea2d4a192ec9b6b144f16d8767427aad",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_12_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "bafa79c1d4b55fd740dd89fb3c38a8aed668da43e1f903900c9e95e00da4550f",
+          "label_sha256": "71202af4782297263590dc769a7bb46ebf8ba7484121cf39538c3ff78b613b07",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2020_01_mosaic_L15-1716E-1211N_6864_3345_13",
+          "image_sha256": "21b336d76c96850c529c85cbd3c43faf7b18458df15ba1648415736ab7537d13",
+          "label_sha256": "5fcc70f7393d3b30cd22eef8ea6ddc78264de8ad50b45bfc82bed7af88044b1b",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        }
+      ],
+      "elapsed_seconds": 17.527276457985863
+    },
+    "L15-0614E-0946N_2459_4406_13": {
+      "input_sha256": {
+        "sites_json": "c19f8965e8d3fff9182b15741d6a910eda2235c4eeb223234991158326ec5a60",
+        "sites_raster": "42d4a766ecb7dd6fb822ed836eb159fdcc9fb294e800270288322dd9a0e5b83c",
+        "features_npz": "f32acd6b336659f8216aeda88fe45ddc7dc55eee647fe6dd3a0008504aba6771",
+        "cache_metadata_json": "9338c616ff8c55eb52b3da2c463bd4cf716045f1ee9bf393cd98d4bcc4346212",
+        "truth_instances_npy": "6126f2241386a442fd043dada684f01a0f66abb8484295af37e47317b5c34621",
+        "source_valid_npy": "aecdd8ed5443996d1347154accd206321bb29726f13a3e117497f5498c67d559"
+      },
+      "metadata_semantic_sha256": "4fd8beac655b5a0d57d58ccc1d92752d640bf69ac0b0833c03714e3e28a137d4",
+      "candidate_threshold": 0.55,
+      "spatial_provenance": {
+        "spatial_weights_sha256": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+        "spatial_backbone_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+        "spatial_inference": {
+          "tile_size": 128,
+          "context_halo_native_pixels": 64,
+          "native_alignment": 16,
+          "internal_input_scale": 2,
+          "implementation_sha256": {
+            "spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff",
+            "pretrained_spatial.py": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503"
+          }
+        }
+      },
+      "feature_implementation_sha256": "c8495e7664659e1916157e8de76f8389f5c02e302967e108d6f4be3f4b29731d",
+      "coverage": {
+        "sites": 7361,
+        "truth_events_covered_at_iou_025": 509,
+        "truth_events": 1691,
+        "coverage": 0.3010053222945003,
+        "site_area_m2": {
+          "n": 7361,
+          "mean": 329.3496764216329,
+          "median": 193.00033722817898,
+          "p90": 729.1452580401674
+        }
+      },
+      "truth_events_by_class": {
+        "building_removal": 23,
+        "building_addition": 1668
+      },
+      "uncovered_truth_events": 1182,
+      "geometries_canonical_sha256": "aaa1afe6b1561fdf02b3a60e08844d0d6f7d111de490f621d0f112b2fa8ecf25",
+      "derived_truth_canonical_sha256": "9b1971e9dd67b536ec8a7118194f7bc0fdff392fdf6a6ba900e1ffa4d1df2778",
+      "truth_source_frames": [
+        {
+          "source_id": "sn7:global_monthly_2018_03_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "30523cb022cc5d731d392a14df3fa9bbe457f00398d3f1cdb84e6f361fb01f57",
+          "label_sha256": "fc187765dd41aac59bca3e8bc9c794abc050b1ddbda02078f714c27ded7d3aa0",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_04_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "af355d72df6e759a2925072049f17a1fc39742e605998a82503c9ee7aafb106e",
+          "label_sha256": "75a65467bad76229d209b77e52928933e64e99b3dfb59816d5910b67b9acbd32",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_05_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "5d9294a7674193c6109d30388220949dad7dff2f9b9d72c1d167b10424dbabc8",
+          "label_sha256": "2b69ccd20fc2dd0fe742e2df2ee9e2819d71a3f61f149f108d09ed4f8c779f88",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_06_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "cc02c5ca739146445391f8aeea3ae9fc0ca2f14262003f0e4c80f1e3e533f4f4",
+          "label_sha256": "e989c09947c947e48a017194850f2713018e958e09f5952cf243c37c1fe47fc8",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_07_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "efe17712c86354ffdcff861d63e4625e2d4ff204aebe77eeecba28afdedaa5f5",
+          "label_sha256": "f9fd6f91ce59e6e222796f5dd5ded841febdbfa17d7b5bbb24c83a20bea300e3",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_08_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "2a8995fe5cca1797afb249f0f38c7e4be8852746291c61555bf29612cdcbfcd1",
+          "label_sha256": "ff84a39b5e2f6acc5f3226c91f492eaa4abd298494925367a8c4d59cf2796707",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_09_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "e3ee97edfd0543ad41524c777ce856fffdf5080356f33002f445bee18032131a",
+          "label_sha256": "62c266d14ba9076b899655b24a2d8ac488a9dff5d2f37e4580c5222bab6112a6",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_11_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "c8b0f57290340ab3cad569947ffc76f4ee51aad11a4178785ff759850cfeb237",
+          "label_sha256": "18bb11b290085f89ae2ebd3fbe60a05aa4e9170dcb633adf5ba03a20dda0c860",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2018_12_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "b5e044bbd3c1cb4bdd84237dfad6dd0a42a2b3cdd9ab466b1cfbe9995930475a",
+          "label_sha256": "5af7b8583226782fe4f709950558c38371b2ff06a6a4385149c1f2ec95cae377",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_01_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "c472377108884372662358e313c92f92b7b432e6ce8b8f42e01194579b5bf4be",
+          "label_sha256": "107208c4d2c38150197ab56e00014a185b06ae12a630226d349d27c5936326f5",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_02_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "f71d17afd74fb8469f5c71fce830e3a27ffcf51cbe19c78564f8abbdcf893824",
+          "label_sha256": "75174d4b801b72841f646fee382a5c0f058f2838aca1c7c4d2288e983705d24e",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_03_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "f6595cbad71b7748699751f80322a6d96fc7c4b73066a9c80828818cb4f71b3b",
+          "label_sha256": "9f01b4b1546ddaa0be254dc1758e091dedb8491122659a23f412737112e93628",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_04_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "1d55b67bfbfbb4efb84b71a6c43f5bb3d3aabeeac516ae762fe768904608298d",
+          "label_sha256": "ba3cd9599490aa11433cf0b486abb821556caf54718d5cf0cee06ce716c48811",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_05_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "286a999ef0260598c434a956c84e7a57cfce3927d34d038f0af0e71240c87696",
+          "label_sha256": "627fbb564043eee69cbcb41b300d6aebb63ba26957901d104c0cfcafe2fa81f4",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_06_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "be396fdb65041be3bb830dc81d97132e0b712a4a233b82cfd8c1b4609ac9594d",
+          "label_sha256": "4d08c95afa5d10cb4b3732a83467e092c5c00a56217355cdc06732a41faf00f3",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_07_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "c02b0c5b8b97cc2c6827b52c3e737fcc583cdc6ac2906c252ca6d6bb222be627",
+          "label_sha256": "335fb5f5f98e87f210b3b7281d300b071abf58aa99cd8e59c197e36926c54734",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_08_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "f2ef58433ee078f855ecd6485342f1b00d558970d5faa2e1e37be7bfcfe3c855",
+          "label_sha256": "dfb81dbd64a86baa70dbf4c478b1e3ec64d5a3ecfdb5b71e2e8d46ded7b97ddc",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_09_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "c3575242f0c01bc8b325348347d1244dd18ea2659ebde4bfac66342dd5656164",
+          "label_sha256": "ddf1fdf250a26416581d0f3c9f19fecdcec0c38beddf606b1bb0d90d86be8a9d",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_10_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "14c48ff34c56c54b9a874868b5a54b56b187883a02dee507f55f85c6d5691f0c",
+          "label_sha256": "d4afee3fb0b3dd732e73f167cc3dd04f352d0b798351198d9bf8600865058931",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2019_11_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "8f099a7f461b823e52f039b4050e7992b3d2bbc9ff2945b92885a139e06c5d2b",
+          "label_sha256": "116007fb42abbf9175aa1e7ab33ffb755782af96df5fe0c186ec5646ad82da31",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        },
+        {
+          "source_id": "sn7:global_monthly_2020_01_mosaic_L15-0614E-0946N_2459_4406_13",
+          "image_sha256": "1bc740e54e6230462e884ac6219e59770d4860b82904b94b19f87c620d96807b",
+          "label_sha256": "e91cea373c043cc6946dc13393338148cc89ddb1f83e0cf8b4154ea0f98c7ab4",
+          "label_crs": "urn:ogc:def:crs:EPSG::3857"
+        }
+      ],
+      "elapsed_seconds": 22.348532916978
+    }
+  },
+  "aggregate": {
+    "sites": 21828,
+    "truth_events_covered_at_iou_025": 922,
+    "truth_events": 2798,
+    "uncovered_truth_events": 1876,
+    "pooled_coverage": 0.3295210864903502,
+    "macro_region_coverage": 0.4511357002931178
+  },
+  "execution_status": "qualified_recovery_after_original_broad_source_guard_failed",
+  "original_guard_passed": false,
+  "source_stable": false,
+  "metric_source_and_inputs_stable": true,
+  "config_stable": true,
+  "code_after_sha256": {
+    "src/terradelta/evaluation.py": "66fd8b765a9d4dc552efefc4b4728858e0370b40808946ae1573121b4d2b3c7b",
+    "src/terradelta/contracts.py": "7da8a05ed2f7cb8fdeb3e4b13d90ee272dd7b2b96d624842754f465ed1b50308",
+    "src/terradelta/schema.py": "9500c25425e546e7a895c9e2e4bbe333e1ef7c93b0eec0fa330aefa98339ebb1",
+    "src/terradelta/data.py": "0e1fa709eb635191101ce1b9e2e669bb3ea04e50d3a1ac51cabdf0de489d02ea",
+    "src/terradelta/protocol.py": "59b8aac7d3a124e14f01e05cf6012983654abe4f94e1ad3428b7c28ad477b36b",
+    "src/terradelta/features.py": "c8495e7664659e1916157e8de76f8389f5c02e302967e108d6f4be3f4b29731d"
+  },
+  "changed_sources": {
+    "src/terradelta/protocol.py": {
+      "before": "bffae3afe773dadf854e9f72ee52d92bd94fb93cafea33875bb5e632bc177df7",
+      "after": "59b8aac7d3a124e14f01e05cf6012983654abe4f94e1ad3428b7c28ad477b36b"
+    }
+  },
+  "metric_calculation_seconds": 52.34757941693533,
+  "approximate_logged_execution_seconds": 58.13558220863342,
+  "elapsed_scope": "Per-region elapsed seconds are exact perf_counter measurements including ground_truth_events and evaluate_candidate_sites. Summed metric time excludes setup/hashing; approximate whole-run wall time uses log creation-to-final-write timestamps because the original guard raised before final timer serialization.",
+  "recovery_elapsed_seconds": 0.7433203749824315,
+  "recovery": {
+    "only_delta": "Added src/terradelta/__init__.py to PROTOCOL_FILES; removing that exact line reproduces the originally recorded whole-module SHA256.",
+    "protocol_before_sha256": "bffae3afe773dadf854e9f72ee52d92bd94fb93cafea33875bb5e632bc177df7",
+    "protocol_after_sha256": "59b8aac7d3a124e14f01e05cf6012983654abe4f94e1ad3428b7c28ad477b36b",
+    "before_reconstructed_file": "development-proposal-coverage-v3-protocol-before.py",
+    "semantic_metadata_function_source_identical": true,
+    "semantic_metadata_function_ast_identical": true,
+    "semantic_metadata_function_source_sha256": "bfd7c121563805180917221643f26f58601350481b275e04f486e9754ba2c87b",
+    "function_results": {
+      "L15-0632E-0892N_2528_4620_13": {
+        "before_function_result": "879221768124ef69a4394a41b32e15390b29be33e9105e84e73d971b21fbb2ec",
+        "after_function_result": "879221768124ef69a4394a41b32e15390b29be33e9105e84e73d971b21fbb2ec",
+        "matches_original_record": true
+      },
+      "L15-1389E-1284N_5557_3054_13": {
+        "before_function_result": "0e233570988b67099c5198750e6960f82682be783042fd6c485bd076134fb6cf",
+        "after_function_result": "0e233570988b67099c5198750e6960f82682be783042fd6c485bd076134fb6cf",
+        "matches_original_record": true
+      },
+      "L15-1716E-1211N_6864_3345_13": {
+        "before_function_result": "67ac50c8db49f8043a50c32eb5ce04df173b716f54bb89bb1dbd5f3a95a857c8",
+        "after_function_result": "67ac50c8db49f8043a50c32eb5ce04df173b716f54bb89bb1dbd5f3a95a857c8",
+        "matches_original_record": true
+      },
+      "L15-0614E-0946N_2459_4406_13": {
+        "before_function_result": "4fd8beac655b5a0d57d58ccc1d92752d640bf69ac0b0833c03714e3e28a137d4",
+        "after_function_result": "4fd8beac655b5a0d57d58ccc1d92752d640bf69ac0b0833c03714e3e28a137d4",
+        "matches_original_record": true
+      }
+    },
+    "evaluation_source_unchanged": true,
+    "schema_data_contracts_features_source_unchanged": true,
+    "all_actual_DEV_input_hashes_unchanged": true,
+    "original_failed_log": "development-proposal-coverage-v3.log",
+    "original_failed_log_sha256": "1574daa41d848621db8532ace16e0665016e54eb88e4368274c2c370c93baa0e",
+    "original_partial_results": "development-proposal-coverage-v3.partial.json",
+    "original_partial_sha256": "453a1d00a40d9a17931b17f929b38ffc842a4fed0f7a43bd4d6fbabeafa99fba",
+    "recovery_script_sha256": "e83141455a024c4fb6201ce8195305376db1bf4b9e32938ddab09824c4a59e76"
+  },
+  "interpretation": "Optimistic geometric recall ceiling for these four DEVELOPMENT sequences under the current immutable candidate inventory. Any-site overlap ignores class, timing, candidate birth feasibility, quality rejection and one-to-one conflicts. It is neither precision nor guaranteed attainable event recall. No cross-cohort improvement claim and no authorization to alter candidates, models, thresholds or configs. Original broad source guard failed; its exact ancillary version-list-only delta and unchanged executed metric/input identities are independently qualified here, not relabeled as a passed run.",
+  "public_copy": {
+    "original_sha256": "76afac68645b4917040a3b0564ba6796e7016644ec9fc6b1f40e68eefa95fa92",
+    "local_path_replacement": "Repository, task and user-home path prefixes replaced; source/content hashes unchanged."
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "version": "sn7-fresh-regions-v8-causal-birth-neural-comparison",
+  "seed": 2901,
+  "selection": "Prospectively fixed from complete-sequence public metadata and geography before new label interpretation; never selected on imagery or model outcomes",
+  "frozen_selection_at": "2026-10-29T23:23:44.760178+00:00",
+  "selection_seed_string": "terradelta-resnet-fresh-v1|2901|",
+  "selection_summary_sha256": "93e692ffff5abd3bc862c5f3014532c2ce0e573a7ac210650b26e4c9398b5259",
+  "source_header_audit_sha256": "a513f9e1a0c52d52552630dfcf4abd3c6a32a69b6715c194b72e67337236ebef",
+  "catalog_sha256": "a65aef612fe1d0472cdd0be750fcc76083d6f343dde7871dd13f88c64e31b63e",
+  "train": [
+    "L15-0331E-1257N_1327_3160_13",
+    "L15-0506E-1204N_2027_3374_13",
+    "L15-0924E-1108N_3699_3757_13",
+    "L15-1276E-1107N_5105_3761_13",
+    "L15-1669E-1153N_6678_3579_13",
+    "L15-1669E-1160N_6678_3548_13",
+    "L15-1335E-1166N_5342_3524_13",
+    "L15-0487E-1246N_1950_3207_13",
+    "L15-1298E-1322N_5193_2903_13"
+  ],
+  "development": [
+    "L15-0632E-0892N_2528_4620_13",
+    "L15-1389E-1284N_5557_3054_13",
+    "L15-1716E-1211N_6864_3345_13",
+    "L15-0614E-0946N_2459_4406_13"
+  ],
+  "confirmation": [
+    "L15-1172E-1306N_4688_2967_13",
+    "L15-1204E-1204N_4819_3372_13",
+    "L15-0358E-1220N_1433_3310_13"
+  ],
+  "audit_only": [
+    "L15-0457E-1135N_1831_3648_13",
+    "L15-1049E-1370N_4196_2710_13",
+    "L15-1848E-0793N_7394_5018_13"
+  ],
+  "previous_study": "commit bd33082 / artifacts/freeze-v2.json; failed geographic transfer preserved. Former confirmation regions excluded from new fitting and selection.",
+  "spatial_backbone": {
+    "uri": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+    "sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "bytes": 46830571,
+    "enum": "ResNet18_Weights.IMAGENET1K_V1",
+    "training_data": "ImageNet-2012 classification",
+    "packaging": "Research input; backbone is not included in public decoder checkpoints. Torchvision code BSD does not establish blanket pretrained weight rights."
+  },
+  "resource_limits": {
+    "download_bytes": 3000000000,
+    "spatial_training_steps": 4000,
+    "spatial_wall_seconds": 10800,
+    "patch_size": 128,
+    "development_patch_size": 128,
+    "batch_size": 4,
+    "input_scale": 2,
+    "cpu_threads": 2,
+    "temporal_training_steps": 2000
+  },
+  "planned_source_bytes_existing_plus_new": 2707459630,
+  "new_regions": {
+    "confirmation": [
+      "L15-1172E-1306N_4688_2967_13",
+      "L15-1204E-1204N_4819_3372_13",
+      "L15-0358E-1220N_1433_3310_13"
+    ],
+    "development": [
+      "L15-1716E-1211N_6864_3345_13",
+      "L15-0614E-0946N_2459_4406_13"
+    ],
+    "train": [
+      "L15-1669E-1160N_6678_3548_13",
+      "L15-1335E-1166N_5342_3524_13",
+      "L15-0487E-1246N_1950_3207_13",
+      "L15-1298E-1322N_5193_2903_13"
+    ]
+  },
+  "minimum_train_development_km": 1192.179561723508,
+  "minimum_train_confirmation_km": 731.4345096742912,
+  "minimum_development_confirmation_km": 3103.229838151128,
+  "truth_protocol": "physical_coverage_v2",
+  "occupancy_supervision": "Any-building reference coverage >=80percent present,<=20percent absent;middle unknown;>=80percent source valid",
+  "spatial_selection": "Maximum mean native footprint/boundary Dice on fixed development crops. Report proposal geometry coverage and false positives separately; no fresh-confirmation selection.",
+  "candidate_policy": "Unchanged causal first-birth geometry, no label-assisted candidates or alignment. A better backbone does not establish a better event history.",
+  "candidate_threshold_selection": "If varied, select one threshold globally on DEVELOPMENT only from predeclared0.35,0.45,0.55,0.65 by object geometry F1; retain all results.",
+  "temporal_selection": "event_62d",
+  "temporal_spatial_residual": false,
+  "minimum_temporal_selection_step": 200,
+  "publication_assumption": "retrospective_month_end; original publication timestamps unknown",
+  "confirmation_policy": "Freeze all weights, threshold/calibration, source/data/metric identities before fresh confirmation scoring. No tuning on fresh confirmation results.",
+  "backbone_packaging": "Official backbone is a separate research input and is not redistributed in decoder-only checkpoints. Code BSD is not asserted as a blanket pretrained-weight license.",
+  "spatial_training_config": "configs/experiment-v5.json",
+  "spatial_training_config_sha256": "59433571ca28a99b635fb699362e0e1a91d958c2dd403a3f69e9156fdd6ed881",
+  "spatial_fit_recovery": {
+    "receipt": "artifacts/verification-v3/spatial-v3-fit-audit.json",
+    "sha256": "abe8aebe0fa5a33ab443dd986c5a0aa444fd0e7da4d4adfa87a6ba16122f5e49",
+    "completed_optimizer_steps": 4000,
+    "selected_step": 3600,
+    "termination": "4000-step loop completed; final source guard failed after inference-only disk edits. Independent recovery preserves original checkpoint bytes and metadata."
+  },
+  "candidate_threshold": 0.55,
+  "inference_selection": {
+    "result": "artifacts/verification-v3/spatial-inference-selection.json",
+    "sha256": "45dad45c538e16afa1d284e22a99d615cee9426010f5613e5873a0829f8e0691",
+    "original_prospective_plan_sha256": "bea2f12a117a46693c649abf8653af91658680df4d51c682c8ec49546fd79e68",
+    "execution_plan_sha256": "cb457b6261b2baa21fbb66feb31623b395c3d8aa0bf5c70e53bd3956780db3fc",
+    "grid_predictions_completed": 32,
+    "threshold_rows_completed": 128,
+    "selected_on": "Four DEVELOPMENT regions, two predeclared source-valid scenes per region; no fresh confirmation outcomes",
+    "development_mean_regional_object_f1": 0.28257176401786044
+  },
+  "event_gate": {
+    "truth_ready": true,
+    "truth_source_sha256": "66fd8b765a9d4dc552efefc4b4728858e0370b40808946ae1573121b4d2b3c7b",
+    "supervision_source_sha256": "c8495e7664659e1916157e8de76f8389f5c02e302967e108d6f4be3f4b29731d",
+    "proposal_threshold": 0.55,
+    "confirmations": 2,
+    "minimum_dwell_days": 20,
+    "training_steps": 2000,
+    "spatial_provenance": {
+      "spatial_weights_sha256": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+      "spatial_backbone_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+      "candidate_threshold": 0.55,
+      "spatial_inference": {
+        "tile_size": 128,
+        "context_halo_native_pixels": 64,
+        "native_alignment": 16,
+        "internal_input_scale": 2,
+        "implementation_sha256": {
+          "spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff",
+          "pretrained_spatial.py": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503"
+        }
+      }
+    }
+  },
+  "parent_experiment": {
+    "path": "configs/experiment-v6.json",
+    "sha256": "531999182720a75a09bf394d8bcb4a4a25983a0e345aad925b33bc0eaa73d159",
+    "change": "Add genuine frozen neural embedding-distance comparator before new head fitting, calibration or fresh confirmation outcomes. Splits, source inputs, spatial weights, native inference and candidate policy remain as prospectively fixed."
+  },
+  "embedding_baseline": {
+    "format": "terradelta-frozen-embedding-v2",
+    "backbone_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "backbone_uri": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+    "backbone_enum": "ResNet18_Weights.IMAGENET1K_V1",
+    "layer": "layer1",
+    "dimensions": 64,
+    "native_input_scale": 1,
+    "stride_native_pixels": 4,
+    "receptive_field_native_pixels": 43,
+    "normalization": "RGB/255; ImageNet mean .485,.456,.406 / std .229,.224,.225",
+    "grid": "feature[j,i] centered at native pixel indices [4*j,4*i]",
+    "pooling": "bilinear_at_native_centers_border_clamp; fixed_native_index_chunks32768; source-valid site means",
+    "mask": "birth-independent original feature usability AND >=.8 valid site coverage AND nonzero vector",
+    "site_discovery_history": "At causal discovery, pool that image-derived site over archived prior available images; no future image evidence; shared decoder suppresses all events before birth",
+    "distance": "cosine to renormalized coordinate median of last<=3 usable unit descriptors",
+    "reference_lookback": 3,
+    "distance_threshold_grid": [
+      0.0,
+      0.01,
+      0.025,
+      0.05,
+      0.1,
+      0.2,
+      0.4
+    ],
+    "state_update": "current ordinary spatial probability when distance>=threshold; otherwise hold previous state",
+    "initial_state": "first usable observation initializes from its ordinary spatial probability",
+    "decoder": "existing shared two supporting usable observations /20day dwell /quality abstention",
+    "decoder_threshold_grid": [
+      0.55,
+      0.65,
+      0.75,
+      0.85
+    ],
+    "selection": "one global DEVELOPMENT distance/decoder point; macro event F1 at62day horizon; tie:ordinary macro F1 then lower distance threshold then lower decoder threshold",
+    "confirmation": "no confirmation outcomes until threshold and all source/data/model identities frozen"
+  },
+  "embedding_baseline_declared_at": "2026-11-01T09:52:14.554828+00:00",
+  "head_training_config": {
+    "path": "experiment-v7.json",
+    "sha256": "bb0e9f7c1e41ad21d2183b6a3de0962825ede5f82dcb38a26f83cb798e0ac973"
+  },
+  "embedding_amendment": {
+    "previous_config": "configs/experiment-v7.json",
+    "previous_sha256": "bb0e9f7c1e41ad21d2183b6a3de0962825ede5f82dcb38a26f83cb798e0ac973",
+    "basis": "Independent synthetic newborn-site probe found birth-only embeddings would miss first-appearance additions. Correct before any AOI descriptor extraction or embedding performance selection.",
+    "change": "Pool archived prior source images at image-discovered geometry; shared decoder alone suppresses prebirth events. Native-index pooling chunks preserve earlier-site arithmetic. Same encoder/layer/distance/decoder grids; all head-training inputs and settings unchanged.",
+    "head_identity": "Original head checkpoint headers and actual fit receipts retain experiment-v7 SHA. Study/calibration/freeze retain experiment-v8 SHA plus explicit exact-compatible head-training reference. No artifact metadata rewriting."
+  }
+}

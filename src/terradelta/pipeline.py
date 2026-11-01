@@ -31,6 +31,7 @@ METHODS = (
     *LEARNED_TEMPORAL_METHODS,
     *GATE_METHODS,
 )
+OPTIONAL_METHODS = ("embedding_distance",)
 
 
 def prefix_frames(frames: list[dict], end: str | None) -> list[dict]:
@@ -262,9 +263,17 @@ def _method_decoder(method, calibration, decoder=None):
         if replace(settings, timing_padding_days=0) != RAW_CONFIG:
             raise ValueError("Gate methods must retain the shared raw proposal decoder policy")
         return settings
-    return decoder or DecoderConfig(
+    settings = decoder or DecoderConfig(
         **calibration.get("decoders", {}).get(method, calibration.get("decoder", {}))
     )
+    if method == "embedding_distance":
+        from dataclasses import replace
+
+        if replace(settings, threshold=.65, timing_padding_days=0) != DecoderConfig():
+            raise ValueError("Embedding comparison must retain the shared persistence policy")
+        if settings.threshold not in (.55, .65, .75, .85):
+            raise ValueError("Embedding decoder threshold was not in the declared DEV grid")
+    return settings
 
 
 def _method_revision(info, method, temporal_weights=None, event_gate_weights=None):
@@ -280,12 +289,15 @@ def _method_revision(info, method, temporal_weights=None, event_gate_weights=Non
 
 
 def _processing_revision(
-    base, info, method, calibration, decoder, temporal_weights=None, event_gate_weights=None
+    base, info, method, calibration, decoder, temporal_weights=None, event_gate_weights=None,
+    embedding_data=None,
 ):
     """Bind effective processing parameters even when callers supply a display label."""
     implementation = ["pipeline.py", "decoder.py", "schema.py"]
     if method in GATE_METHODS:
         implementation.append("event_gate.py")
+    if method == "embedding_distance":
+        implementation.append("embeddings.py")
     if method in LEARNED_TEMPORAL_METHODS:
         implementation.append("temporal.py")
         from .temporal import TEMPORAL_NUMERICS
@@ -313,6 +325,15 @@ def _processing_revision(
         if event_gate_weights and method in GATE_METHODS[:2]
         else None,
     }
+    if method == "embedding_distance":
+        manifest = embedding_data["manifest"] if embedding_data is not None else {}
+        # Full-sequence input hashes belong to the experiment freeze. Including
+        # future pixels here would change an earlier online processing identity.
+        payload["embedding_provenance"] = {
+            key: manifest.get(key) for key in (
+                "descriptor", "implementation_sha256", "spatial_provenance",
+            )
+        }
     encoded = json.dumps(payload, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
     return f"{base};processing:{hashlib.sha256(encoded).hexdigest()}"
 
@@ -330,8 +351,9 @@ def method_events(
     decoder: DecoderConfig | None = None,
     model_revision: str | None = None,
     record_origin: datetime | None = None,
+    embedding_data: dict | None = None,
 ) -> list[EventRevision]:
-    """Dispatch all twelve methods to causal histories, without opening truth data.
+    """Dispatch temporal methods and the optional neural distance comparison.
 
     Gate calibration lives under event_gates; occupancy and decoder calibration
     retain their existing keys. Gate models filter raw events rather than expose
@@ -339,7 +361,7 @@ def method_events(
     shared raw candidate decoder policy.
     """
     method = method or ("observation_gate" if event_gate_weights else "observation")
-    if method not in METHODS:
+    if method not in (*METHODS, *OPTIONAL_METHODS):
         raise ValueError(f"Unknown event method: {method}")
     calibration = calibration or {}
     from .contracts import assert_calibration
@@ -353,8 +375,38 @@ def method_events(
         info, method, temporal_weights, event_gate_weights
     )
     revision = _processing_revision(
-        base_revision, info, method, calibration, settings, temporal_weights, event_gate_weights
+        base_revision, info, method, calibration, settings, temporal_weights, event_gate_weights,
+        embedding_data if method == "embedding_distance" else None,
     )
+    if method == "embedding_distance":
+        from .embeddings import distance_gated_scores
+        from .event_gate import assert_spatial_provenance
+
+        if embedding_data is None:
+            raise ValueError("Neural embedding distance requires a validated embedding sidecar")
+        params = calibration.get("embedding_distance", {})
+        manifest = embedding_data["manifest"]
+        if (manifest.get("region_id") != info.get("region_id")
+                or manifest.get("metadata_semantic_sha256") != info.get("metadata_semantic_sha256")):
+            raise ValueError("Embedding region or source metadata differs from current sites")
+        assert_spatial_provenance(info, manifest.get("spatial_provenance"))
+        if manifest.get("descriptor") != params.get("descriptor"):
+            raise ValueError("Embedding descriptor differs from calibration")
+        if manifest.get("config_sha256") != calibration.get("config_sha256"):
+            raise ValueError("Embedding sidecar config differs from calibration")
+        if not np.array_equal(embedding_data["births"], births):
+            raise ValueError("Embedding births differ from current candidate sites")
+        effective = np.asarray(usable, bool) & embedding_data["usable"]
+        scores, effective, _ = distance_gated_scores(
+            features[:, :, 0], embedding_data["vectors"], effective, births,
+            params["distance_threshold"], lookback=params["reference_lookback"],
+        )
+        fit = calibration["occupancy"][method]
+        scores = expit(fit["scale"] * logit(np.clip(scores, 0.001, 0.999)) + fit["bias"])
+        return decode_events(
+            scores, effective, births, info, settings, model_revision=revision,
+            record_origin=record_origin,
+        )
     if method in GATE_METHODS:
         from .event_gate import generate_events
 

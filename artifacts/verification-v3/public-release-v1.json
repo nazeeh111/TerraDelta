@@ -1,0 +1,274 @@
+{
+  "format": "terradelta-public-release-verification-v1",
+  "checked_at": "2026-11-01T09:43:30.441036+00:00",
+  "status": "passed",
+  "downloads": {
+    "format": "terradelta-public-download-verification-v1",
+    "checked_at": "2026-11-01T09:27:08.195761+00:00",
+    "status": "passed",
+    "release_url": "https://github.com/nazeeh111/TerraDelta/releases/tag/v0.1.0-research",
+    "source_commit": "b2ed1be4b12e68968123eb21ae713a9532813686",
+    "source_ci": "https://github.com/nazeeh111/TerraDelta/actions/runs/41291280215",
+    "download_method": "gh release download using existing authentication, followed by independent local complete-file SHA256, size and ZIP CRC checks",
+    "asset_count": 17,
+    "total_bytes": 333570064,
+    "assets": [
+      {
+        "name": "data-SHA256SUMS.txt",
+        "bytes": 807,
+        "sha256": "0776d05ea65f92ec8112d5ff8d264c083ad523d0ad241b3e6ad6f2e4aa1a3e21",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/data-SHA256SUMS.txt",
+        "matches_staged_and_github_digest": true
+      },
+      {
+        "name": "demo-source-SHA256SUMS.txt",
+        "bytes": 201,
+        "sha256": "b6ef9686be767aa19499da6ee9e97023f3609261b8d4c8be858ec10ec6d123c0",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/demo-source-SHA256SUMS.txt",
+        "matches_staged_and_github_digest": true
+      },
+      {
+        "name": "demo-source-verification.json",
+        "bytes": 1470,
+        "sha256": "d3e134371cf8a9f189ea46999708e2eb69be3ab3a6b96e6c677e70267ab60211",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/demo-source-verification.json",
+        "matches_staged_and_github_digest": true
+      },
+      {
+        "name": "manifest.json",
+        "bytes": 4165,
+        "sha256": "a54966c339e52ea0ab31046de55e0c9c0d0ad7248e28a1aaf2dca8ed04f38d7d",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/manifest.json",
+        "matches_staged_and_github_digest": true
+      },
+      {
+        "name": "packaging-verification.json",
+        "bytes": 3704,
+        "sha256": "0847a4197de6997fe21c1479ed62da6f3207de069f43386ae507f07b5b7eba29",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/packaging-verification.json",
+        "matches_staged_and_github_digest": true
+      },
+      {
+        "name": "README.txt",
+        "bytes": 2943,
+        "sha256": "555cce9d6667895b736edae561cb13ee9ca24a93bd4d93676c2028bb83f43d9f",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/README.txt",
+        "matches_staged_and_github_digest": true
+      },
+      {
+        "name": "release-assets.json",
+        "bytes": 3105,
+        "sha256": "0b9d707b86f7fa5926998572df248c262de86e2eab12191640cb4d20b12c4969",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/release-assets.json",
+        "matches_staged_and_github_digest": true
+      },
+      {
+        "name": "SHA256SUMS",
+        "bytes": 1575,
+        "sha256": "49ce1cd69bb1f859d37e86df734b7ee77720410b3b37d9f369bcbbe682b74a64",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/SHA256SUMS",
+        "matches_staged_and_github_digest": true
+      },
+      {
+        "name": "terradelta-data-replay-v2.mp4",
+        "bytes": 2491219,
+        "sha256": "5c350917384cd4952ffc24b7d7a7d885979aad7595264f1ec03e54d076e72939",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/terradelta-data-replay-v2.mp4",
+        "matches_staged_and_github_digest": true
+      },
+      {
+        "name": "terradelta-research-v2-demo-source.zip",
+        "bytes": 41998670,
+        "sha256": "2062577ea4b424f83d56d1ec42626930ebdb2f874fa52e6bc47de8d741024e43",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/terradelta-research-v2-demo-source.zip",
+        "matches_staged_and_github_digest": true,
+        "zip_members": 70,
+        "zip_crc": "passed"
+      },
+      {
+        "name": "terradelta-research-v2-history-australia.zip",
+        "bytes": 3074404,
+        "sha256": "45656960fb1c340ef839bed8c79c4bba26aff3adb7284f65d6878889b9cbe8b0",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/terradelta-research-v2-history-australia.zip",
+        "matches_staged_and_github_digest": true,
+        "zip_members": 11,
+        "zip_crc": "passed"
+      },
+      {
+        "name": "terradelta-research-v2-history-mexico.zip",
+        "bytes": 33626764,
+        "sha256": "25068ce287b5c83414c26666ba922d6745efcbdde050779a2afbf953b1facfab",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/terradelta-research-v2-history-mexico.zip",
+        "matches_staged_and_github_digest": true,
+        "zip_members": 11,
+        "zip_crc": "passed"
+      },
+      {
+        "name": "terradelta-research-v2-history-netherlands.zip",
+        "bytes": 29038216,
+        "sha256": "152acf6db4cb4eac43594aed9c052bd05c3a13021ff3321aca0ec11f0657000c",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/terradelta-research-v2-history-netherlands.zip",
+        "matches_staged_and_github_digest": true,
+        "zip_members": 11,
+        "zip_crc": "passed"
+      },
+      {
+        "name": "terradelta-research-v2-mexico-probabilities.zip",
+        "bytes": 171053211,
+        "sha256": "ecc93c9d3e8838d15363742f4504cfcd25045f6cb8d0ff1f7e6e9f36bcd67cb3",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/terradelta-research-v2-mexico-probabilities.zip",
+        "matches_staged_and_github_digest": true,
+        "zip_members": 31,
+        "zip_crc": "passed"
+      },
+      {
+        "name": "terradelta-research-v2-mexico-ui-inputs.zip",
+        "bytes": 52064000,
+        "sha256": "245ac2068ce091311b1521d92e575418488f1c47eb1f10df0bcfd4b39ab85155",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/terradelta-research-v2-mexico-ui-inputs.zip",
+        "matches_staged_and_github_digest": true,
+        "zip_members": 10,
+        "zip_crc": "passed"
+      },
+      {
+        "name": "terradelta_history-0.1.0-py3-none-any.whl",
+        "bytes": 89047,
+        "sha256": "78ac58eb2db73869c22d6191e3924def4bcfcfe65cc5fbdde01cf71ecb0c055c",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/terradelta_history-0.1.0-py3-none-any.whl",
+        "matches_staged_and_github_digest": true
+      },
+      {
+        "name": "terradelta_history-0.1.0.tar.gz",
+        "bytes": 116563,
+        "sha256": "310a6222628fbaf0715194c66f30d17b87b54bb7ad3cbebc9480c8865a5e07f2",
+        "download_url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/terradelta_history-0.1.0.tar.gz",
+        "matches_staged_and_github_digest": true
+      }
+    ],
+    "limits": [
+      "All 17 assets downloaded with existing GitHub authentication; anonymous source/release HTML and release-assets.json GETs additionally passed.",
+      "Scientific result remains failed geographic transfer; no analyst-readiness claim.",
+      "Complete-region public cold replay passed separately: 74043 revisions,12snapshots,24HTTPsourceframes and16exportrows."
+    ],
+    "anonymous_public_access_checks": [
+      {
+        "url": "https://github.com/nazeeh111/TerraDelta",
+        "status": 200,
+        "bytes": 275524,
+        "sha256": "cfe074dbfbb817cd3672f4e951d817e569670bdef88703bc6d11038a727501f1",
+        "authentication": "none"
+      },
+      {
+        "url": "https://github.com/nazeeh111/TerraDelta/releases/tag/v0.1.0-research",
+        "status": 200,
+        "bytes": 156146,
+        "sha256": "18f7402927540aadb6d1ba1dd3899fd6a5f07bb0e2d598f168143d1f349c9e7b",
+        "authentication": "none"
+      },
+      {
+        "url": "https://github.com/nazeeh111/TerraDelta/releases/download/v0.1.0-research/release-assets.json",
+        "status": 200,
+        "bytes": 3105,
+        "sha256": "0b9d707b86f7fa5926998572df248c262de86e2eab12191640cb4d20b12c4969",
+        "authentication": "none"
+      }
+    ]
+  },
+  "cold_replay": {
+    "format": "terradelta-public-release-cold-replay-v1",
+    "status": "passed",
+    "release_tag": "v0.1.0-research",
+    "executed_package_identity_basis": "All20 installed package files match actual downloaded public wheel byte-for-byte; isolated noneditable site-packages imports.",
+    "wheel_sha256": "78ac58eb2db73869c22d6191e3924def4bcfcfe65cc5fbdde01cf71ecb0c055c",
+    "installed_package_file_count": 20,
+    "installed_package_matches_public_wheel": true,
+    "archives": {
+      "terradelta-research-v2-history-mexico.zip": {
+        "sha256": "25068ce287b5c83414c26666ba922d6745efcbdde050779a2afbf953b1facfab",
+        "bytes": 33626764
+      },
+      "terradelta-research-v2-mexico-ui-inputs.zip": {
+        "sha256": "245ac2068ce091311b1521d92e575418488f1c47eb1f10df0bcfd4b39ab85155",
+        "bytes": 52064000
+      }
+    },
+    "helper_sha256": "3e5be72f410435bf0f6d58ed7e81aa5d690f8104de735d9109d70c04ad8e9dc4",
+    "input_jsonl_sha256": "c4d0d453fbb367c553d2224c147315434ae0bbfdb189cc18c3228c71a28b5ea1",
+    "revisions_restored": 74043,
+    "canonical_revisions_verified": 74043,
+    "every_payload_sha_and_record_time_matches": true,
+    "snapshot_audits": 12,
+    "all_snapshot_audits_match": true,
+    "restore_wall_seconds": 709.155006541987,
+    "helper_elapsed_seconds": 708.0643995839637,
+    "peak_RSS_bytes": 837369856,
+    "database_bytes": 287059968,
+    "database_sha256": "5ddd797d5125e689e1a0c810c9e471713ea8d41cf333141bbd74e8aaf7078c2c",
+    "database_unchanged_after_readonly_HTTP_audit": true,
+    "extracted_inputs_unchanged": {
+      "cache/L15-0457E-1135N_1831_3648_13/metadata.json": true,
+      "cache/L15-0457E-1135N_1831_3648_13/rgb.npy": true,
+      "cache/L15-0457E-1135N_1831_3648_13/valid.npy": true,
+      "tools/restore_history.py": true,
+      "histories/L15-0457E-1135N_1831_3648_13/revisions.jsonl": true
+    },
+    "downloaded_archives_unchanged": {
+      "terradelta-research-v2-history-mexico.zip": true,
+      "terradelta-research-v2-mexico-ui-inputs.zip": true
+    },
+    "restore_command": [
+      "<independently-installed-python>",
+      "-I",
+      "tools/restore_history.py",
+      "histories/L15-0457E-1135N_1831_3648_13/revisions.jsonl",
+      "--output",
+      "demo/run",
+      "--batch-size",
+      "500",
+      "--study-status",
+      "Frozen first study: failed geographic transfer. Not analyst-ready."
+    ],
+    "source_frame_RGB_validity_exact_count": 24,
+    "canonical_API_history_exact": true,
+    "correction_event_id": "td-008e8fad29b65e55d92f",
+    "queries": [
+      {
+        "name": "full",
+        "events": 292,
+        "all_ids_match_independent_JSONL_filter": true
+      },
+      {
+        "name": "changed",
+        "events": 16,
+        "all_ids_match_independent_JSONL_filter": true
+      },
+      {
+        "name": "preperiod",
+        "events": 0,
+        "all_ids_match_independent_JSONL_filter": true
+      },
+      {
+        "name": "outside",
+        "events": 0,
+        "all_ids_match_independent_JSONL_filter": true
+      }
+    ],
+    "HTTP_GeoJSON_GeoParquet_rows": 16,
+    "HTTP_export_CRS": "EPSG:4326",
+    "permission_boundary": "Default sandbox bind denied; same loopback-only action permitted through scoped escalation. Original rejection log retained. HTTP GET similarly denied by sandbox, then same read-only loopback audit permitted via scoped escalation. Both failure logs retained.",
+    "usability_notes": [
+      "No script or CLI defect encountered in the public replay path.",
+      "Actual cold restore709seconds under shared-host load;312seconds in README is a historical measurement, not guaranteed runtime.",
+      "Bundled README.txt is an unchanged local packaging receipt and contains prepublication wording; release body explains remote publication status.",
+      "Downloaded SHA256SUMS covers the complete release; two-archive users should check selected entries or release-assets.json rather than treat absent unrelated files as archive corruption.",
+      "Existing isolated environment includes ML dependencies; this run proves playback used no inference/backbone/GT, not a fresh base-only dependency installation."
+    ],
+    "limits": "Delivery/software-contract evidence only. No scientific accuracy or overall goal-completion claim; no task/private ledger/cache used; no core/docs/git/assets changed.",
+    "release_tag_commit_verified": "b2ed1be4b12e68968123eb21ae713a9532813686"
+  },
+  "source_receipt_sha256": {
+    "verification.json": "f311776450f491bb4d5292a2471131ecb409e480077c15cdcde0502e8953278f",
+    "public-download-verification-v1.json": "6c029f64252d1172c4fbf6a9bdf4bdba31ffbf04cc43af3e9be3711a36e6238b"
+  },
+  "visual_walkthrough": "Prior current-source interface visual checks are separate. New public cold-replay visual walkthrough currently unavailable because the Mac is locked; HTTP checks passed."
+}

@@ -75,6 +75,7 @@ def main():
         "output",
     ]:
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--embedding-root", type=Path)
     args = parser.parse_args()
     config = json.loads(args.config.read_text())
     if config.get("truth_protocol") != "physical_coverage_v2":
@@ -90,6 +91,7 @@ def main():
         event_gate_weights=args.event_gate_weights,
         calibration=args.calibration,
         config=args.config,
+        embedding_root=args.embedding_root,
     )
     if args.output.exists():
         raise ValueError("Output exists; preserve prior results")

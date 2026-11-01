@@ -218,10 +218,13 @@ degenerate and do not establish broad generalization. Undefined resamples are
 excluded per metric and their defined count is disclosed. Complete ordinary and
 difficult regions, exclusions and per-region reports must accompany pooled scores.
 
-## Full confirmation freeze and current commands
+## Full confirmation freeze
 
-The current format is `terradelta-full-freeze-v3`; the study's next artifact is
-named `artifacts/freeze-v2.json`. Format and study-artifact version are distinct.
+The published first physical study uses `terradelta-full-freeze-v3` in
+`artifacts/freeze-v2.json`, reproduced from commit `bd33082`. Format and
+study-artifact version are distinct. The newer source uses v4 for legacy-input
+studies and v5 when the neural descriptor comparison is declared. V5 also binds
+the complete descriptor sidecars and explicit actual head-training config.
 The freeze binds actual spatial, temporal and gate checkpoint hashes, calibration,
 configuration, confirmation-region identities and consequential source files.
 Per-region bindings include `features.npz`, `sites.json`, the `sites.npy` raster,
@@ -238,7 +241,7 @@ outcomes. Confirmation evaluation reconstructs and validates the boundary before
 interpreting its truth. A mutation invalidates the freeze. New results use a new
 declared version; the comparison never fits from confirmation outcomes.
 
-Current controlled-comparison commands use spatial-v2, temporal-v2, event-gate-v1,
+The first study's controlled-comparison commands use spatial-v2, temporal-v2, event-gate-v1,
 calibration-v2 and experiment-v4:
 
 ```sh

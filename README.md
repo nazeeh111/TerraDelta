@@ -47,16 +47,27 @@ alerts reliable. The [full result](docs/results-v2.md) includes every method,
 complete-region results, masks/exclusions, timing, calibration and uncertainty.
 Earlier negative development evidence remains in the
 [development record](docs/development-log.md). The source and
-[Linux CI](https://github.com/nazeeh111/TerraDelta/actions/runs/41289676021)
-are public. Versioned release-download verification is in progress; no
-analyst-ready release is claimed.
+[Linux CI](https://github.com/nazeeh111/TerraDelta/actions/runs/41291280215)
+are public. The [research release](https://github.com/nazeeh111/TerraDelta/releases/tag/v0.1.0-research)
+contains the complete exported histories, source imagery for playback and editable
+demo. All 17 downloaded assets match their sizes and SHA-256 digests; each ZIP
+passes its integrity check. A [cold public replay](artifacts/verification-v3/public-release-v1.json)
+also verifies all revisions, snapshots, source frames and changed-area exports.
+These checks verify delivery and software behavior, not detector accuracy.
+That released snapshot is `v0.1.0-research`; the current development source is
+`0.2.0.dev1` and includes the unfinished scientific revision below.
 
 A separate revision uses a frozen ImageNet ResNet18 encoder with a trained
 decoder. Its nine training, four development and three fresh confirmation regions
-are declared in [experiment-v6](configs/experiment-v6.json). Development selected
+are declared in [experiment-v8](configs/experiment-v8.json). Development selected
 128-pixel tiles and a 0.55 candidate threshold, with object F1 **0.2826** on the
-predeclared eight development scenes. Full sequence production and new temporal
-head fitting are still underway. No fresh confirmation event result is claimed.
+predeclared eight development scenes. Native sequence predictions and new temporal
+fits are complete; global development calibration and confirmation remain. The new study also includes a
+[frozen neural embedding-distance comparator](docs/embedding-distance.md), with
+its protocol fixed before real descriptor extraction and performance selection.
+Its [independent review](artifacts/verification-v3/embedding-review-v1.md) records
+the newborn-site correction and strict source/input guards.
+No fresh confirmation event result is claimed.
 The retained spatial checkpoint has an explicit
 [fit recovery audit](artifacts/verification-v3/spatial-v3-fit-audit.md): the
 4,000-step loop completed and selected step 3,600, but a final source-integrity
@@ -79,7 +90,7 @@ uv run terradelta --help
 
 No imagery account, API key or paid service is required for the bounded public
 SpaceNet workflow. [Data and artifact terms](DATA_LICENSE.md) apply.
-The [independent install](artifacts/verification-v3/public-install-v1.json) and
+The released snapshot's [independent install](artifacts/verification-v3/public-install-v1.json) and
 [real API/consumer check](artifacts/verification-v3/public-api-v1.json) used an
 anonymous public clone and fresh public image/mask bytes, with no private cache.
 
@@ -88,8 +99,25 @@ anonymous public clone and fresh public image/mask bytes, with no private cache.
 The release data packages preserve the complete Mexico area and all 24 monthly
 observations. Playback restores recorded revisions and requires no model or
 separate pretrained backbone. Download the Mexico history and UI-input ZIPs plus
-the checksums from the [research release](https://github.com/nazeeh111/TerraDelta/releases/tag/v0.1.0-research), verify them, then extract both archives
-into the same **new** folder. From its `terradelta-v2` directory:
+`release-assets.json` from the [research release](https://github.com/nazeeh111/TerraDelta/releases/tag/v0.1.0-research).
+From the download folder, verify those two selected files:
+
+```sh
+uv run --project /path/to/TerraDelta python - <<'PY'
+from pathlib import Path
+import hashlib, json
+assets = {x["name"]: x for x in json.loads(Path("release-assets.json").read_text())["assets"]}
+for name in ("terradelta-research-v2-history-mexico.zip", "terradelta-research-v2-mexico-ui-inputs.zip"):
+    path, expected = Path(name), assets[name]
+    with path.open("rb") as stream:
+        digest = hashlib.file_digest(stream, "sha256").hexdigest()
+    if path.stat().st_size != expected["bytes"] or digest != expected["sha256"]:
+        raise SystemExit(f"Verification failed: {name}")
+    print(f"Verified: {name}")
+PY
+```
+
+Extract both archives into the same **new** folder. From its `terradelta-v2` directory:
 
 ```sh
 uv run --project /path/to/TerraDelta python tools/restore_history.py \
@@ -102,8 +130,8 @@ uv run --project /path/to/TerraDelta terradelta serve \
 
 Replace `/path/to/TerraDelta` with the cloned checkout. Restoration validates every
 revision and historical snapshots before publishing a new local ledger. The
-verified full-region restore took **312 seconds**, used **875 MB** peak process
-memory and produced a **286 MB** ledger. Existing outputs are preserved. This
+public cold full-region restore took **709 seconds**, used **837 MB** peak process
+memory and produced a **287 MB** ledger on the shared test host. Existing outputs are preserved. This
 replay demonstrates the history contract and source inspection, with the weak
 detector results visible.
 

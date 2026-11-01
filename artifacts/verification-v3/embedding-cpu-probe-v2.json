@@ -1,0 +1,86 @@
+{
+  "synthetic_only": true,
+  "AOI_data_read": false,
+  "MPS_used": false,
+  "device": "cpu",
+  "cpu_threads": 2,
+  "backbone_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+  "shape": [
+    1023,
+    1024
+  ],
+  "sites": 1024,
+  "sample_chunk_pixels": 32768,
+  "encoder_seconds": 0.7366302500013262,
+  "full_pool_seconds": 1.1402369999559596,
+  "prefix_pool_seconds": 0.9442787499865517,
+  "fixed_chunk_prefix_bitwise_equal": true,
+  "coverage_all_one": true,
+  "newborn_controls": {
+    "0": {
+      "birth_distance": 0.44928377866744995,
+      "states": [
+        "proposed",
+        "confirmed_by_model"
+      ],
+      "indices": [
+        2,
+        3
+      ]
+    },
+    "0.01": {
+      "birth_distance": 0.44928377866744995,
+      "states": [
+        "proposed",
+        "confirmed_by_model"
+      ],
+      "indices": [
+        2,
+        3
+      ]
+    }
+  },
+  "peak_resident_bytes": 895926272,
+  "descriptor": {
+    "format": "terradelta-frozen-embedding-v2",
+    "backbone_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "backbone_uri": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+    "backbone_enum": "ResNet18_Weights.IMAGENET1K_V1",
+    "layer": "layer1",
+    "dimensions": 64,
+    "native_input_scale": 1,
+    "stride_native_pixels": 4,
+    "receptive_field_native_pixels": 43,
+    "normalization": "RGB/255; ImageNet mean .485,.456,.406 / std .229,.224,.225",
+    "grid": "feature[j,i] centered at native pixel indices [4*j,4*i]",
+    "pooling": "bilinear_at_native_centers_border_clamp; fixed_native_index_chunks32768; source-valid site means",
+    "mask": "birth-independent original feature usability AND >=.8 valid site coverage AND nonzero vector",
+    "site_discovery_history": "At causal discovery, pool that image-derived site over archived prior available images; no future image evidence; shared decoder suppresses all events before birth",
+    "distance": "cosine to renormalized coordinate median of last<=3 usable unit descriptors",
+    "reference_lookback": 3,
+    "distance_threshold_grid": [
+      0.0,
+      0.01,
+      0.025,
+      0.05,
+      0.1,
+      0.2,
+      0.4
+    ],
+    "state_update": "current ordinary spatial probability when distance>=threshold; otherwise hold previous state",
+    "initial_state": "first usable observation initializes from its ordinary spatial probability",
+    "decoder": "existing shared two supporting usable observations /20day dwell /quality abstention",
+    "decoder_threshold_grid": [
+      0.55,
+      0.65,
+      0.75,
+      0.85
+    ],
+    "selection": "one global DEVELOPMENT distance/decoder point; macro event F1 at62day horizon; tie:ordinary macro F1 then lower distance threshold then lower decoder threshold",
+    "confirmation": "no confirmation outcomes until threshold and all source/data/model identities frozen"
+  },
+  "public_copy": {
+    "original_sha256": "0e2adc665004f4a266da52110b5af911225ae4d3866a7abece65a1328b234998",
+    "local_path_replacement": "Repository, task and user-home path prefixes replaced; source/content hashes unchanged."
+  }
+}

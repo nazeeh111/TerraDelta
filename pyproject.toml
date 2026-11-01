@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "terradelta-history"
-version = "0.1.0"
+version = "0.2.0.dev1"
 description = "Observation-aware, revisable building-change histories from permitted satellite imagery"
 requires-python = ">=3.11,<3.14"
 license = "MIT"

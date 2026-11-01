@@ -19,7 +19,8 @@ from torch.nn import functional as F
 from terradelta.data import sha256
 from terradelta.event_gate import (
     FORMAT, GATE_FEATURE_NAMES, QUALITY_DROP_INDICES, RAW_CONFIG, EventGate,
-    event_features, raw_proposals, standardize, support_indices,
+    assert_spatial_provenance, event_features, raw_proposals,
+    standardize, support_indices, validate_spatial_provenance,
 )
 from terradelta.evaluation import ground_truth_events, match_events
 from terradelta.features import FEATURE_NAMES, validate_feature_protocol
@@ -36,18 +37,53 @@ SOURCE_FILES = (
 )
 
 
-def collect_region(feature_root, cache_root, region, truth_protocol):
-    """Retractions never define labels: even subsequently retracted IDs are matched."""
-    directory = feature_root / region
-    info = validate_feature_protocol(directory, supervision=True)
+def expected_spatial_provenance(config):
+    """Only the historical v4 configuration may omit the explicit new binding."""
+    gate_config = config.get("event_gate", {})
+    if "spatial_provenance" not in gate_config:
+        if (config.get("version") != "sn7-regions-v4-event-gate"
+                or config.get("spatial_backbone") is not None):
+            raise ValueError("new gate configuration requires explicit spatial_provenance")
+        return None
+    expected = validate_spatial_provenance(gate_config["spatial_provenance"])
+    if (config.get("spatial_backbone") is not None
+            and expected["spatial_backbone_sha256"] != config["spatial_backbone"].get("sha256")):
+        raise ValueError("gate backbone binding differs from study spatial_backbone")
+    return expected
+
+
+def validate_region_provenance(info, region, expected):
     if (info.get("feature_names") != FEATURE_NAMES
             or info.get("feature_protocol") != "calendar_quality_v2"
             or info.get("supervision_protocol") != "physical_coverage_80_20_v2"):
         raise ValueError(f"feature/label protocol guard failed: {region}")
-    if info.get("spatial_weights_sha256") != SPATIAL_V2_SHA256:
-        raise ValueError("event gate requires the frozen native-output spatial-v2 checkpoint")
+    if expected is not None:
+        assert_spatial_provenance(info, expected)
+    elif (info.get("spatial_weights_sha256") != SPATIAL_V2_SHA256
+          or any(info.get(key) is not None for key in ("spatial_backbone_sha256", "spatial_inference"))):
+        raise ValueError("legacy gate requires frozen spatial-v2 without new backbone/inference")
     if info.get("region_id") != region:
         raise ValueError("region identity differs from frozen split")
+
+
+def preflight_spatial_provenance(feature_root, cache_root, regions, expected):
+    """Check EVERY TRAIN/DEV manifest before opening any arrays or truth labels."""
+    if len(regions) != len(set(regions)):
+        raise ValueError("duplicate region in train/development split")
+    for region in regions:
+        info = validate_feature_protocol(feature_root / region, supervision=True)
+        validate_region_provenance(info, region, expected)
+        if info.get("metadata_semantic_sha256") != semantic_metadata_hash(
+            cache_root / region / "metadata.json"
+        ):
+            raise ValueError("feature metadata differs from truth source metadata")
+
+
+def collect_region(feature_root, cache_root, region, truth_protocol, spatial_provenance=None):
+    """Retractions never define labels: even subsequently retracted IDs are matched."""
+    directory = feature_root / region
+    info = validate_feature_protocol(directory, supervision=True)
+    validate_region_provenance(info, region, spatial_provenance)
     cache = cache_root / region
     if info.get("metadata_semantic_sha256") != semantic_metadata_hash(cache / "metadata.json"):
         raise ValueError("feature metadata differs from truth source metadata")
@@ -105,10 +141,10 @@ def collect_region(feature_root, cache_root, region, truth_protocol):
             "regions": np.asarray([region] * len(rows)), "audit": audit}
 
 
-def collect_split(feature_root, cache_root, regions, truth_protocol):
+def collect_split(feature_root, cache_root, regions, truth_protocol, spatial_provenance=None):
     parts = []
     for region in regions:
-        part = collect_region(feature_root, cache_root, region, truth_protocol)
+        part = collect_region(feature_root, cache_root, region, truth_protocol, spatial_provenance)
         print(json.dumps(part["audit"]), flush=True)
         parts.append(part)
     result = {key: np.concatenate([part[key] for part in parts])
@@ -180,6 +216,7 @@ def main():
             or gate_config.get("truth_source_sha256") != source_hashes["src/terradelta/evaluation.py"]
             or gate_config.get("supervision_source_sha256") != source_hashes["src/terradelta/features.py"]):
         raise ValueError("event gate training requires explicit ready/audited frozen truth source hash")
+    spatial_provenance = expected_spatial_provenance(config)
     for key, expected in (("proposal_threshold", RAW_CONFIG.threshold),
                           ("confirmations", RAW_CONFIG.confirmations),
                           ("minimum_dwell_days", RAW_CONFIG.minimum_dwell_days)):
@@ -200,9 +237,13 @@ def main():
     examples_path = args.output.with_suffix(".examples.npz")
     if any(path.exists() for path in (args.output, metadata_path, examples_path)):
         raise ValueError("event gate outputs are immutable; choose a new versioned output path")
+    preflight_spatial_provenance(args.features_root, args.cache_root,
+                                 config["train"] + config["development"], spatial_provenance)
     started = time.monotonic()
-    train = collect_split(args.features_root, args.cache_root, config["train"], truth_protocol)
-    dev = collect_split(args.features_root, args.cache_root, config["development"], truth_protocol)
+    train = collect_split(args.features_root, args.cache_root, config["train"], truth_protocol,
+                          spatial_provenance)
+    dev = collect_split(args.features_root, args.cache_root, config["development"], truth_protocol,
+                        spatial_provenance)
     if len(train["x"]) == 0 or len(dev["x"]) == 0:
         raise ValueError("actual TRAIN and DEV eligible proposals are both required")
     positive, negative = np.flatnonzero(train["y"] == 1), np.flatnonzero(train["y"] == 0)
@@ -267,12 +308,16 @@ def main():
     checkpoint = {
         "format": FORMAT, "feature_names": GATE_FEATURE_NAMES,
         "models": models, "mean": torch.from_numpy(mean), "std": torch.from_numpy(std),
-        "calibration": calibrations, "spatial_weights_sha256": SPATIAL_V2_SHA256,
+        "calibration": calibrations,
+        "spatial_weights_sha256": (spatial_provenance["spatial_weights_sha256"]
+                                   if spatial_provenance is not None else SPATIAL_V2_SHA256),
         "raw_decoder": asdict(RAW_CONFIG), "quality_drop_indices": list(QUALITY_DROP_INDICES),
         "training": {"steps": args.steps, "seed": config["seed"],
                      "config_sha256": config_hash, "source_sha256": source_hashes,
                      "data_protocol": data_protocol, "trace": traces},
     }
+    if spatial_provenance is not None:
+        checkpoint["spatial_provenance"] = spatial_provenance
     args.output.parent.mkdir(parents=True, exist_ok=True)
     # Exclusive creation prevents a late collision from replacing previous bytes.
     with examples_path.open("xb") as stream:

@@ -1,143 +1,262 @@
 # What the evaluation measures
 
-The unit of evaluation is a persistent building-visibility transition in a
-complete geographic region. Training, development and confirmation regions are
-fixed in `configs/experiment-v1.json`. No threshold is fitted separately for a
-confirmation region. Adjacent crops are not treated as independent regions.
+The unit of evaluation is a persistent, label-supported building-footprint
+visibility transition in a complete geographic region. The current study uses
+`configs/experiment-v4.json`; it preserves the five training, two development and
+three confirmation regions originally fixed in experiment-v1. No threshold is
+fitted separately for a confirmation region. Adjacent crops are not independent
+regions. This guide describes inspected source behavior, not measured results.
 
-## Label-supported events
+## Physical-coverage truth and its audit
 
-`ground_truth_events(cache)` reads the native-grid `instances.npy` matched source
-IDs, `valid.npy` source masks and monthly acquisition metadata. It uses each ID's
-first rasterized footprint as an evaluation reference. Those future label
-identities and reference geometries never create model candidates or features.
-Subpixel labels without any rasterized pixel are outside this native-grid
-evaluation. Source IDs and footprints are postprocessed SpaceNet matched labels,
-not independent measurements of exact physical construction dates.
+`ground_truth_events(cache)` defaults to `physical_coverage_v2`. It reads the
+native-grid `instances.npy`, source-valid `valid.npy` and acquisition metadata.
+Each matched source ID's first rasterized footprint supplies an evaluation
+reference geometry. Those future label identities/geometries never create model
+candidates or inference features. Subpixel labels without any rasterized pixel
+are outside this native-grid evaluation. SpaceNet's matched IDs and footprints
+are postprocessed annotation products, not exact physical event-date observations.
 
-A reference site is observable in a month only when at least 80% of its reference
-footprint is source-valid. Two usable observations of an opposite state establish
-a transition. A masked observation is unknown, neither an absence nor a second
-support. One usable opposite-state flicker followed by the original state does
-not establish an event. First usable inventory is baseline, so buildings already
-present at the beginning are not newly detected additions. Existing inventory
-can later have a supported removal. Source-valid events remain in the truth set
-when the model rejects an image for registration quality; that rejection is an
-abstention that can lower recall.
+For each reference footprint and month:
 
-The label interval starts at the **start** of the last confidently opposite-state
+1. At least 80% of the full reference footprint must be source-valid. Otherwise
+   its state is unknown.
+2. Among that source-valid portion, **any building annotation** covering at least
+   80% means present. Coverage at most 20% means absent. Intermediate coverage is
+   unknown and cannot update the label state.
+3. Two usable opposite-state observations establish a persistent transition.
+   Masked or ambiguous observations neither count as absence nor supply a second
+   support. A single opposite-state flicker followed by the stable state is not
+   an event.
+
+Presence is geometric building coverage, not continued membership of one source
+ID. An ID reassignment alone therefore cannot establish demolition or a new
+building. Initial usable inventory is baseline, not an addition. A building
+present initially may later have a supported removal. Source-valid truth events
+remain eligible when the model rejects imagery for registration quality; that
+model abstention can lower recall.
+
+Overlapping source references can describe the same physical transition.
+Deduplication groups only events of the same class whose geometries have
+intersection-over-union (IoU) at least 0.5 **against every group member**, with
+first-support span at most 62 days. It does not grow arbitrary overlap/time
+chains. The first deterministic representative supplies the scored geometry;
+`reference_truth_ids` and `reference_members` retain every member's complete
+identity, geometry and timing. No synthetic union replaces those references.
+
+`ground_truth_audit(cache)` retains the optional `matched_id_v1` identity-based
+comparison alongside the physical protocol. It is an audit, not the primary
+performance target. The audit includes ID/coverage conflicts, duplicate merges,
+legacy and physical events, and observation/exclusion counts for **all**
+references, including references with zero events. Counts distinguish source
+unusable frames, ambiguous coverage, initial inventory/absence, no usable state,
+and pending changes with insufficient later support. An empty label raster has
+an explicit zero-reference audit. These cases must stay visible instead of
+vanishing behind a count of successful events.
+
+The label interval begins at the **start** of the last confidently opposite-state
 month and ends at the **end** of the first supporting-state month. The second
-support establishes persistence but does not move the first supporting month.
-Cloud gaps widen this support. There is no annotation of a precise physical
-event date inside the interval. Label intervals are therefore not ground truth
-for an exact construction or demolition date.
+support establishes persistence without moving that first month. Cloud gaps
+widen support. No precise physical event date is annotated inside the interval.
 
 ## One-to-one event and footprint comparisons
 
 Each event ID contributes its first `confirmed_by_model` or `reviewed` revision
-to the ever-confirmed alert evaluation. Multiple revisions of that ID do not
-become multiple predictions. Predicted/label events are eligible to match when:
+to ever-confirmed alert evaluation. Multiple revisions of the same ID are not
+multiple predictions. A prediction and label are eligible to match when:
 
 1. Their supported change classes agree.
-2. Their footprint intersection-over-union is at least 0.25, measured with WGS84
-   geodesic polygon areas. This relaxed footprint threshold reflects the native
-   resolution and is stated explicitly, not substituted for stricter accuracy.
-3. Their first support month-end proxies differ by at most 93 days.
+2. Footprint IoU is at least 0.25, using WGS84 geodesic polygon areas. This relaxed
+   native-resolution threshold is explicit, not substituted for stricter accuracy.
+3. First-support month-end proxies differ by at most 93 days.
 
-The predicted first support comes from
-`quality.unexpanded_observation_interval[1]`, before timing-calibration padding.
-Expanded intervals cannot manufacture match eligibility. Sparse bipartite
-assignment first maximizes matched event count, then total footprint IoU. Each
-prediction and label can be matched once. Precision is matched/predicted events;
-recall is matched/label events; F1 is their harmonic mean. Empty denominators are
-`null`, not invented perfect or zero performance. Returned `match_events` indices
-refer to the original event-revision list and the original truth list.
+Predicted first support comes from
+`quality.unexpanded_observation_interval[1]`, before timing padding. Expanded
+intervals cannot manufacture match eligibility. Sparse one-to-one assignment
+first maximizes the number of matches, then total footprint IoU. Returned
+`match_events` indices refer to the original revision list and original truth
+list. Precision is matched/predicted events, recall is matched/label events, and
+F1 is their harmonic mean. Empty denominators are `null`, not invented perfect
+or zero scores. Zero-event regions still report their predictions, exposure and
+false-alert burden.
 
-`spatial_object` applies the same class/IoU assignment without the 93-day timing
-limit. It exposes footprint/object detection separately from event timing.
-`matched_footprint_iou` reports IoU among temporal matches. Candidate coverage
-reports the fraction of truth events covered by any image-derived candidate at
-IoU >=0.25, independently of the temporal head. This exposes the upstream recall
-ceiling and candidate count/area rather than presenting conditional head accuracy
-as end-to-end coverage.
+`spatial_object` repeats class/IoU assignment without the 93-day timing limit.
+`matched_footprint_iou` summarizes geometry among temporal matches. Candidate
+coverage reports how many truth events overlap any image-derived site at
+IoU >= 0.25, independently of the temporal model. It exposes the spatial proposal
+recall ceiling and candidate count/area rather than presenting conditional gate
+accuracy as end-to-end coverage.
 
-An unmatched confirmation eligible for a truth event already matched to another
-prediction counts as a duplicate. It remains a false positive. A retraction does
-not erase the alert from ever-confirmed precision or false-alert burden.
-`confirmed_then_retracted_event_ids` records that cost separately.
-`final_retained` evaluates the latest confirmed/reviewed hypotheses after all
-revisions, so retracting a real supported event can lower final recall. Proposed
-candidates are reported but do not count as confirmed alerts.
+An unmatched confirmation eligible for an already matched truth event counts as
+a duplicate and remains a false positive. Retraction cannot erase an earlier
+confirmed alert from precision or false-alert burden.
+`confirmed_then_retracted_event_ids` retains that correction cost.
+`final_retained` evaluates the latest confirmed/reviewed hypotheses; retracting
+a true event can lower final recall. Proposed-only hypotheses are reported as a
+separate review burden and are not confirmed alerts.
 
-## Timing, availability and delay
+## Twelve controlled methods
 
-The public/expanded and raw intervals are evaluated for containing the **entire
-label interval**. Raw interval overlap and raw/expanded widths are also reported.
-These are support-interval diagnostics, not confidence coverage for an unknown
-physical event date. The absolute difference of interval midpoints is explicitly
-named an interval proxy error. It does not establish exact event-time accuracy.
-Timing metrics are conditional on matched events; report event recall alongside
-them so misses cannot disappear from the assessment.
+All methods share native imagery, frozen spatial-v2 probabilities and causal
+image-derived sites. The comparison is controlled adaptation, not replication of
+published full-system scores.
 
-Detection delay uses the first confirmation's `detected_at` minus the label's
-first-support month end. Source publication times are unavailable, so this is a
-retrospective month-end-availability experiment, not a measured live-warning
-latency. Negative delays are retained and counted as early alerts, because
-uncertain monthly timing can produce them. Bounds relative to the full label
-interval are reported separately. A method inspecting the full sequence has its
-actual full-sequence evidence availability and cannot claim an earlier online
-detection.
+| Method key | Role and availability |
+| --- | --- |
+| `pairwise` | Immediate spatial occupancy change, with one support |
+| `spatial_tracking` | Spatial occupancy with ordinary persistent tracking |
+| `smoothing` | Causal temporal smoothing with the shared decoder |
+| `hmm` | Causal two-state hidden Markov filtering |
+| `ted` | Causal temporal embedding distance on shared spatial/RGB features |
+| `sn7_retrospective` | SN7-inspired mean/persistence adaptation using future evidence |
+| `observation` | Learned observation-conditioned GRU occupancy model |
+| `no_quality` | Paired GRU quality/context-covariate ablation |
+| `watch_lstm` | WATCH's unidirectional LSTM architecture adapted to these features/labels |
+| `proposal_tracking` | Shared raw event proposals without learned compatibility filtering |
+| `observation_gate` | Learned available-prefix event-compatibility gate |
+| `gate_no_quality` | Paired event-gate quality/context-covariate ablation |
 
-`within_62_days` repeats the one-to-one assignment with a maximum 62-day delay.
-Its precision denominator includes all ever-confirmed predictions and its recall
-denominator includes all supported label events. Late alerts therefore do not
-earn timely detections. The ordinary matched-event late count is also reported.
-This common horizon allows a fixed-delay comparison; it does not imply that
-methods have identical measured delay distributions. Threshold selection belongs
-only to the development split and must be frozen before confirmation.
+The last three share the same raw proposal policy, candidate identities and
+geometry. Their first proposal uses occupancy threshold 0.55; confirmation
+eligibility requires two usable supports and at least 20 days of dwell.
+Gate calibration does not alter that raw policy. The no-quality gate keeps the
+same hard usability mask, proposal set, examples and training budget. See
+[event-gate.md](event-gate.md) for exact inputs and revision behavior.
 
-## Area-time burden and geographic uncertainty
+The retrospective SN7 method includes full-sequence availability in detection
+time. It cannot claim online latency or prefix invariance. It is not the original
+ten-model EfficientNet-B3 ensemble. WATCH is an architecture/task adaptation,
+not its archaeological-site study. No unmodified CUDA-dependent method is claimed.
 
-The AOI area is measured on the WGS84 ellipsoid from its transformed native grid
-boundary. Observed area-time is that geodesic area multiplied by each month's
-source-valid pixel fraction and acquisition duration, summed in square-kilometre
-years. The pixel fraction approximates valid-area fraction within a compact AOI;
-the denominator is not Web Mercator square metres. A second denominator applies
-registration usability, while the primary denominator retains all source-valid
-observations. Neither counts masked months as observed no change.
+## Timing, availability and detection delay
 
-False confirmed alerts per source-valid km²-year use all unmatched
-ever-confirmed events, including duplicates and later retractions. Proposed-only
-candidates are a separate review burden. Runtime includes temporal scoring,
-decoding and evaluation; spatial prediction runtime must be reported separately
-from its recorded prediction artifact.
+Raw and public expanded intervals are tested for containing the **entire label
+interval**. Raw overlap and raw/expanded widths are also reported. These are
+support-interval diagnostics, not confidence coverage for an unknown physical
+construction date. Absolute interval-midpoint difference is explicitly named an
+interval proxy error. Timing summaries are conditional on matched events, so
+recall must accompany them and misses cannot disappear from the assessment.
 
-Aggregated precision/recall pool counts across complete regions. Bootstrap
-intervals resample complete geographic regions with replacement, never pixels
-or adjacent tiles. With only three confirmation regions, percentile intervals
-are unstable, can be degenerate, and do not establish broad geographic
-generalization. Undefined metric resamples are excluded from that metric's
-percentile and their defined count is disclosed. Ordinary and difficult full
-regions, exclusions and per-region results must accompany pooled scores.
+Detection delay is first-confirmation `detected_at` minus the label's first-support
+month end. Original publication timestamps are unavailable, so this is a
+retrospective month-end-availability experiment, not measured live-warning
+latency. Negative delays are retained as early alerts. Bounds relative to the
+entire label interval are reported separately. Full-sequence methods cannot
+claim detection before their evidence became available.
 
-## Confirmation guard and reproducible comparison
+`within_62_days` repeats one-to-one assignment with maximum detection delay of
+62 days. Its precision denominator includes all ever-confirmed predictions; its
+recall denominator includes all supported label events. Late alerts do not earn
+timely detections. Ordinary matched late counts and measured delay distributions
+remain visible. A common horizon supports comparison but does not make actual
+delay distributions identical. Global thresholds and timing padding are selected
+only on development regions and frozen before confirmation.
 
-`scripts/evaluate.py` reads confirmation features and labels only after validating
-an explicitly supplied freeze manifest containing `frozen_at`,
-`temporal_weights_sha256`, `calibration_sha256` and `config_sha256`. Preserve
-spatial weights, source hashes, data manifests and processing revisions alongside
-those artifacts. The comparison never fits calibration or thresholds.
-Calibration supports `occupancy[method]`, `decoders[method]`, and a fallback
-`decoder`; settings are recorded per method and region.
+## Occupancy and event-compatibility calibration are different
 
-```bash
-python scripts/evaluate.py --features-root work/features --cache-root work/cache \
-  --weights artifacts/temporal-v1.pt --calibration artifacts/calibration-v1.json \
-  --config configs/experiment-v1.json --split development --output work/dev-comparison
+Occupancy calibration estimates building presence on common sites. Its target
+uses the physical 80/20/unknown coverage rules and actual source usability. That
+reliability assessment is not event correctness.
+
+The event gate instead learns compatibility of a raw first-confirmed proposal
+with a physical event under the one-to-one class/IoU/time matching protocol.
+Labels include subsequently retracted proposals; later survival/retraction
+cannot erase or relabel an earlier example. The first eligible prefix plus up
+to three later usable prefixes before observed raw retraction provide at most
+four score rows per proposal. Every raw proposal has **unit total mass** across
+its available prefix rows. Longer histories therefore do not dominate fitting
+or reported calibration.
+
+Training balances actual positive and negative examples. One global positive-slope
+Platt transform is then fitted on the actual development proposal prevalence,
+using those unit-mass weights. No region-specific fitting occurs. Compatibility
+is not a timely-alert label, so detection-delay evaluation remains separate.
+A one-class development set uses an explicitly labeled constant-prevalence
+transform instead of claiming an identifiable discrimination slope.
+
+`scripts/evaluate_gate_calibration.py` performs **no fitting**. After the full
+freeze guard, it scores every held-out raw eligible proposal with the frozen gate
+and development transform, using the same at-most-four-prefix/unit-mass policy.
+It reports row counts, proposal mass, positive prevalence, Brier error, reliability
+bins and expected calibration error separately by region. Brier is mean squared
+score error. The constant-prevalence oracle Brier is a diagnostic using held-out
+prevalence, not a deployable fitted baseline. Empty sets have no Brier/prevalence;
+an empty accumulated calibration error cannot demonstrate calibration. Always
+read denominators alongside error summaries.
+
+These scores condition on the common proposal distribution. They cannot measure
+objects omitted upstream or guarantee calibration under arbitrary geographic
+shift. Event precision/recall, candidate coverage, false-alert burden and timing
+support remain necessary alongside score reliability.
+
+## Area-time burden, costs and geographic uncertainty
+
+AOI area uses the WGS84 ellipsoid and transformed native-grid boundary. Primary
+observed area-time is that area multiplied by each month's source-valid pixel
+fraction and acquisition duration, summed in km²-years. The pixel fraction
+approximates valid-area fraction within a compact AOI; the denominator is not
+Web Mercator square metres. A second denominator also applies model registration
+usability. The primary denominator retains all source-valid observations.
+Neither treats masked months as observed no change.
+
+False confirmed alerts per source-valid km²-year include all unmatched
+ever-confirmed events, duplicates and later retractions. Proposed-only candidates
+are separate review work. Runtime for scoring/decoding/evaluation is separate
+from recorded spatial prediction time; both must be reported.
+
+`analyst_cost_sensitivity` illustrates possible tradeoffs in **dimensionless work
+units**, not currency, measured analyst time or user preferences. It combines
+false-alert weights of 1, 10 or 100, miss weight 10, positive matched detection
+delay weight 1 per building-month, and weight 5 per confirmed-then-retracted ID.
+The same false alert can incur a later correction cost. These assumed weights
+are a sensitivity analysis, not a demonstrated business-value ranking.
+
+Pooled precision/recall aggregate counts across complete regions. Bootstrap
+intervals resample entire geographic regions, never pixels or adjacent tiles.
+With three confirmation regions, percentile intervals are unstable, can be
+degenerate and do not establish broad generalization. Undefined resamples are
+excluded per metric and their defined count is disclosed. Complete ordinary and
+difficult regions, exclusions and per-region reports must accompany pooled scores.
+
+## Full confirmation freeze and current commands
+
+The current format is `terradelta-full-freeze-v3`; the study's next artifact is
+named `artifacts/freeze-v2.json`. Format and study-artifact version are distinct.
+The freeze binds actual spatial, temporal and gate checkpoint hashes, calibration,
+configuration, confirmation-region identities and consequential source files.
+Per-region bindings include `features.npz`, `sites.json`, the `sites.npy` raster,
+semantic acquisition/quality metadata, RGB and source-valid arrays, and truth
+instance arrays. Probability-product hashes and source identities are bound
+through recorded site provenance. Host-local image paths are excluded from the
+semantic metadata hash; scientific metadata is not.
+
+Consequential source bindings include acquisition, ingestion, models, features,
+decoders/gates, schema/store/service/CLI, evaluation, calibration/training,
+stress/invariance/raster scripts, this calibration evaluator, `pyproject.toml`
+and `uv.lock`. Freeze creation hashes prepared truth bytes without interpreting
+outcomes. Confirmation evaluation reconstructs and validates the boundary before
+interpreting its truth. A mutation invalidates the freeze. New results use a new
+declared version; the comparison never fits from confirmation outcomes.
+
+Current controlled-comparison commands use spatial-v2, temporal-v2, event-gate-v1,
+calibration-v2 and experiment-v4:
+
+```sh
+uv run python scripts/evaluate.py --features-root work/study/features \
+  --cache-root work/cache --weights artifacts/temporal-v2.pt \
+  --spatial-weights artifacts/spatial-v2.pt --event-gate-weights artifacts/event-gate-v1.pt \
+  --calibration artifacts/calibration-v2.json --config configs/experiment-v4.json \
+  --split confirmation --freeze-manifest artifacts/freeze-v2.json \
+  --output work/confirmation-v2
+uv run python scripts/evaluate_gate_calibration.py --features-root work/study/features \
+  --cache-root work/cache --weights artifacts/temporal-v2.pt \
+  --spatial-weights artifacts/spatial-v2.pt --event-gate-weights artifacts/event-gate-v1.pt \
+  --calibration artifacts/calibration-v2.json --config configs/experiment-v4.json \
+  --freeze-manifest artifacts/freeze-v2.json --output work/gate-calibration-v2.json
 ```
 
-Use a new output directory for each run. Confirmation additionally requires
-`--split confirmation --freeze-manifest artifacts/freeze-v1.json`. The shared
-candidate/spatial comparison is a controlled local adaptation comparison. It
-does not reproduce the published winner's full ensemble, WATCH's original task,
-or an unmodified CUDA-dependent temporal network.
+Paths must identify the exact prepared data bound by that manifest. Regenerated
+products require their own local freeze as described in [reproduce.md](reproduce.md).
+Use fresh output paths. The [frozen confirmation result](results-v2.md) is now
+available and negative. This guide defines the inspected source protocol; the
+linked result provides measurements, executed verification and remaining limits.

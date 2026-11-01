@@ -1,19 +1,27 @@
 flowchart LR
-  A[Permitted monthly RGBA imagery] --> B[Native grid and source identity validation]
-  M[Alpha and source UDM masks] --> B
-  B --> C[Image-only anchored registration QA]
-  C --> D[Compact trained footprint and boundary U-Net]
-  D --> E[Causal candidate birth and fixed site geometry]
-  C --> F[Validity, elapsed time and seasonal reference]
-  E --> G[Observation-conditioned temporal emissions]
+  A[Permitted monthly RGBA imagery and source UDMs] --> B[Native grid, source hashes and validity]
+  B --> C[Image-only anchor and accepted-reference registration QA]
+  C --> D[482050-parameter footprint and boundary U-Net]
+  D --> E[Causal site birth and fixed image-derived geometry]
+  C --> F[Usability, elapsed time and seasonal reference]
+  E --> G[Shared persistent raw proposals]
   F --> G
-  G --> H[Abstention and persistence decoder]
-  H --> I[Append-only DuckDB revisions]
-  I --> J[Area, interval and historical snapshot API]
-  J --> K[Analyst evidence workbench]
-  J --> L[GeoJSON and GeoParquet consumer]
-  D --> R[Source-linked native GeoTIFFs]
-  T[Training and development labels only] -. supervised learning .-> D
-  T -. supervised learning .-> G
-  Q[Geographically held-out labels] -. frozen evaluation only .-> V[Event, delay, timing and false-alert metrics]
-  H --> V
+  G --> H[78-value available-prefix event features]
+  F --> H
+  H --> I[Learned event compatibility gate]
+  H --> J[Paired no-quality-input gate]
+  G --> K[Ordinary proposal-tracking baseline]
+  I --> L[Proposed, confirmed, reviewed or retracted revisions]
+  J --> L
+  K --> L
+  L --> M[Append-only DuckDB ledger and immutable snapshots]
+  M --> N[Typed area, interval and snapshot API or CLI]
+  N --> O[Complete-area analyst evidence workbench]
+  N --> P[GeoJSON, GeoParquet and independent consumer]
+  D --> R[Native source-linked probability and validity GeoTIFFs]
+  T[Five training regions and two development regions] -. labels and calibration .-> D
+  T -. physical-compatibility supervision .-> I
+  T -. identical examples and budget .-> J
+  Q[Three complete confirmation regions] -. frozen evaluation only .-> V[Event, delay, timing, duplicate and false-alert metrics]
+  L --> V
+  X[Other common-backbone temporal baselines] --> V

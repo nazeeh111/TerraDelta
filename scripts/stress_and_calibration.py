@@ -66,6 +66,7 @@ def main():
         parser.add_argument("--" + arg, type=Path, required=True)
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--event-gate-weights", type=Path)
+    parser.add_argument("--backbone-weights", type=Path)
     args = parser.parse_args()
     config = json.loads(args.config.read_text())
     cal = json.loads(args.calibration.read_text())
@@ -86,7 +87,9 @@ def main():
     if args.output.exists():
         raise ValueError("Stress output must be new")
     torch.set_num_threads(2)
-    spatial = load_model(args.spatial_weights, device=args.device)
+    spatial = load_model(
+        args.spatial_weights, device=args.device, backbone_weights=args.backbone_weights
+    )
     report = {}
     for aoi in config["confirmation"]:
         root = args.features_root / aoi
@@ -101,7 +104,9 @@ def main():
         y, supervised = labels_for_sites(region["instances"], region["valid"], sites)
         occupancy = {}
         for method in ["pairwise", "smoothing", "hmm", "watch_lstm", "no_quality", "observation"]:
-            scores = method_scores(f["x"], f["usable"], method, args.weights, cal["occupancy"])
+            scores = method_scores(
+                f["x"], f["usable"], method, args.weights, cal["occupancy"], spatial_info=info
+            )
             occupancy[method] = reliability(scores, y, supervised & f["usable"])
         # Conditional-on-common-sites controls isolate the temporal method. Proposal
         # recall loss from absent images is NOT measured by this mask perturbation.
@@ -180,7 +185,11 @@ def main():
         }
         for factor in [0.7, 1.3]:
             changed = np.clip(rgb.astype("float32") * factor, 0, 255).astype("uint8")
-            predicted = predict_scene(spatial, changed, device=args.device, tile_size=1024)
+            predicted = predict_scene(
+                spatial, changed, device=args.device,
+                tile_size=info.get("spatial_inference", {}).get("tile_size", 1024)
+                if info.get("spatial_inference") else 1024,
+            )
             image_controls["brightness"][str(factor)] = {
                 "footprint_dice": dice(predicted[0], target, valid),
                 "changed_binary_pixels_fraction": float(

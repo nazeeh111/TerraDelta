@@ -6,111 +6,313 @@ serialize mutations; immutable exported snapshots may have arbitrary readers.
 
 from __future__ import annotations
 
-from datetime import datetime
 import hashlib
 import json
-from pathlib import Path
 import threading
 import uuid
-from typing import Any, Iterable
+from collections.abc import Iterable
+from copy import deepcopy
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Self
 
 import duckdb
 from shapely.geometry import box, shape
 
-from .schema import EventRevision, EventState, utc_datetime
+from .schema import EventRevision, EventState, SourceIdentity, utc_datetime
+
+COMPACT_FORMAT = "terradelta-store-compact-v1"
+_FORMAT_KEY = "_terradelta_store_format"
+_ROW_COLUMNS = "event_id, revision, CAST(record_time AS VARCHAR) AS record_time, payload, sha256"
+
+
+def _canonical_json(value: Any) -> str:
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def _canonical(event: EventRevision) -> str:
-    return json.dumps(
-        event.model_dump(mode="json"), sort_keys=True, separators=(",", ":"), allow_nan=False
-    )
+    return _canonical_json(event.model_dump(mode="json"))
+
+
+def _digest(payload: str) -> str:
+    return hashlib.sha256(payload.encode()).hexdigest()
 
 
 class EventStore:
-    """An append-only ledger; ``as_of`` refers to record time, not imagery date."""
+    """Append-only ledger; ``as_of`` is record time, not imagery date.
 
-    def __init__(self, path: str | Path = ":memory:") -> None:
+    ``compact`` controls new rows only. Existing full-payload rows are never
+    rewritten; either format can coexist and is expanded through the same API.
+    Merely opening an existing ledger creates no tables and performs no writes.
+    """
+
+    def __init__(self, path: str | Path = ":memory:", *, compact: bool = True) -> None:
         self.path = str(path)
+        self.compact = compact
         if self.path != ":memory:":
             Path(self.path).parent.mkdir(parents=True, exist_ok=True)
         self._lock = threading.RLock()
+        self._source_cache: dict[str, SourceIdentity] = {}
         self._db = duckdb.connect(self.path)
-        self._db.execute("""
-            CREATE TABLE IF NOT EXISTS event_revisions (
-              event_id VARCHAR NOT NULL,
-              revision INTEGER NOT NULL,
-              record_time TIMESTAMPTZ NOT NULL,
-              payload VARCHAR NOT NULL,
-              sha256 VARCHAR NOT NULL,
-              PRIMARY KEY (event_id, revision)
-            )
-        """)
+        exists = self._db.execute(
+            "SELECT count(*) FROM information_schema.tables WHERE table_schema='main' "
+            "AND table_name='event_revisions'"
+        ).fetchone()[0]
+        if not exists:
+            self._db.execute("""
+                CREATE TABLE event_revisions (
+                  event_id VARCHAR NOT NULL,
+                  revision INTEGER NOT NULL,
+                  record_time TIMESTAMPTZ NOT NULL,
+                  payload VARCHAR NOT NULL,
+                  sha256 VARCHAR NOT NULL,
+                  PRIMARY KEY (event_id, revision)
+                )
+            """)
 
     def close(self) -> None:
         with self._lock:
+            self._source_cache.clear()
             self._db.close()
 
-    def __enter__(self) -> EventStore:
+    def __enter__(self) -> Self:
         return self
 
-    def __exit__(self, *args: Any) -> None:
+    def __exit__(self, *args: object) -> None:
         self.close()
+
+    def _ensure_compact_tables(self) -> None:
+        # Called only after a nonempty append has passed all ledger checks,
+        # inside its transaction. Never migrate legacy rows on open/read.
+        for table in ("event_sources", "event_geometries"):
+            self._db.execute(
+                f"CREATE TABLE IF NOT EXISTS {table} "
+                "(sha256 VARCHAR PRIMARY KEY, payload VARCHAR NOT NULL)"
+            )
+        self._db.execute(
+            "CREATE TABLE IF NOT EXISTS event_store_formats (format VARCHAR PRIMARY KEY)"
+        )
+        self._db.execute(
+            "INSERT INTO event_store_formats VALUES (?) ON CONFLICT DO NOTHING", [COMPACT_FORMAT]
+        )
+
+    def _reference_payloads(self, table: str, references: set[str]) -> dict[str, str]:
+        if not references:
+            return {}
+        try:
+            rows = self._db.execute(
+                f"SELECT sha256, payload FROM {table} WHERE sha256 IN (SELECT unnest(?))",
+                [list(references)],
+            ).fetchall()
+        except duckdb.CatalogException as exc:
+            raise ValueError(f"missing compact reference table: {table}") from exc
+        result = dict(rows)
+        if set(result) != references:
+            raise ValueError(f"missing compact reference in {table}")
+        if any(_digest(payload) != digest for digest, payload in rows):
+            raise ValueError(f"corrupt compact reference in {table}")
+        return result
+
+    def _decode_rows(self, rows: list[tuple]) -> list[EventRevision]:
+        """Verify stored references and full public canonical hashes on every read.
+
+        Typed immutable sources avoid repeated validation. Their stored payloads
+        are still fetched/hashed each call, so cache warmth never hides a missing
+        or corrupt reference. Geometry and returned sources are independent copies.
+        """
+        documents = [json.loads(row[3]) for row in rows]
+        geometries: set[str] = set()
+        sources: set[str] = set()
+        for document in documents:
+            if _FORMAT_KEY not in document:
+                continue
+            if (
+                document[_FORMAT_KEY] != COMPACT_FORMAT
+                or set(document) != {_FORMAT_KEY, "event", "geometry_ref", "source_refs"}
+                or not isinstance(document["event"], dict)
+                or {"geometry", "sources"} & set(document["event"])
+                or not isinstance(document["geometry_ref"], str)
+                or not isinstance(document["source_refs"], list)
+                or not document["source_refs"]
+                or any(not isinstance(ref, str) for ref in document["source_refs"])
+            ):
+                raise ValueError("unsupported or malformed compact event envelope")
+            geometries.add(document["geometry_ref"])
+            sources.update(document["source_refs"])
+        geometry_payloads = self._reference_payloads("event_geometries", geometries)
+        source_payloads = self._reference_payloads("event_sources", sources)
+        geometry_values = {key: json.loads(value) for key, value in geometry_payloads.items()}
+        if any(
+            _canonical_json(value) != geometry_payloads[key]
+            for key, value in geometry_values.items()
+        ):
+            raise ValueError("noncanonical compact geometry reference")
+        for key, payload in source_payloads.items():
+            if key not in self._source_cache:
+                source = SourceIdentity.model_validate_json(payload)
+                if _canonical_json(source.model_dump(mode="json")) != payload:
+                    raise ValueError("noncanonical compact source reference")
+                self._source_cache[key] = source
+        result = []
+        for row, document in zip(rows, documents):
+            if _FORMAT_KEY in document:
+                document = dict(
+                    document["event"],
+                    geometry=deepcopy(geometry_values[document["geometry_ref"]]),
+                    sources=[
+                        self._source_cache[ref].model_copy() for ref in document["source_refs"]
+                    ],
+                )
+            event = EventRevision.model_validate(document)
+            if _digest(_canonical(event)) != row[4] or (
+                event.event_id,
+                event.revision,
+                event.record_time,
+            ) != (row[0], row[1], utc_datetime(row[2])):
+                raise ValueError("stored EventRevision canonical hash or identity mismatch")
+            result.append(event)
+        return result
 
     def append(self, event: EventRevision | dict[str, Any]) -> bool:
         """Append a revision, or return False for byte-identical canonical replay.
 
         Record times must be strictly later than the ledger's last transaction
-        time. That prevents later writes from altering an earlier ``as_of``
-        snapshot, including when the new write introduces a different event.
+        time, preventing later writes from changing an earlier ``as_of`` snapshot.
         """
-        # Revalidate nested structures, which callers can mutate despite frozen models.
-        event = EventRevision.model_validate(
-            event.model_dump(mode="json") if isinstance(event, EventRevision) else event
-        )
-        payload = _canonical(event)
-        digest = hashlib.sha256(payload.encode()).hexdigest()
+        return bool(self.append_many([event]))
+
+    def append_many(self, events: Iterable[EventRevision | dict[str, Any]]) -> int:
+        """Append in iterable order atomically; return the number of new revisions.
+
+        Exact duplicates are idempotent, including repeats within this batch.
+        Every new row obeys append's consecutive-revision, identity, availability
+        and strictly increasing global-record-time rules. Any failure rolls back
+        the entire batch; existing rows are never rewritten.
+        """
+        # Revalidate nested structures, which callers can mutate despite frozen
+        # models, and detach their mutable dictionaries before any database write.
+        candidates = []
+        for value in events:
+            event = EventRevision.model_validate(
+                value.model_dump(mode="json") if isinstance(value, EventRevision) else value
+            )
+            candidates.append((event, _canonical(event)))
+        if not candidates:
+            return 0
+        ids = list({event.event_id for event, _ in candidates})
         with self._lock:
             self._db.execute("BEGIN TRANSACTION")
             try:
-                found = self._db.execute(
-                    "SELECT payload FROM event_revisions WHERE event_id=? AND revision=?",
-                    [event.event_id, event.revision],
-                ).fetchone()
-                if found:
-                    if found[0] != payload:
-                        raise ValueError("revision already exists with different content")
-                    self._db.execute("COMMIT")
-                    return False
-                previous = self._db.execute(
-                    "SELECT revision, payload FROM event_revisions WHERE event_id=? "
-                    "ORDER BY revision DESC LIMIT 1",
-                    [event.event_id],
-                ).fetchone()
-                expected = previous[0] + 1 if previous else 1
-                if event.revision != expected:
-                    raise ValueError(f"expected revision {expected}, received {event.revision}")
-                if previous:
-                    old = EventRevision.model_validate_json(previous[1])
-                    if old.change_class != event.change_class or old.region_id != event.region_id:
-                        raise ValueError(
-                            "change class and region identity cannot change across revisions"
-                        )
-                    if event.detected_at < old.detected_at:
-                        raise ValueError("detection availability cannot move backwards")
-                not_later = self._db.execute(
-                    "SELECT coalesce(max(record_time) >= ?, false) FROM event_revisions",
-                    [event.record_time],
+                # Preload only exact replay keys and the latest revision for
+                # each relevant ID, in one query, rather than every old payload.
+                stored = self._db.execute(
+                    f"WITH ranked AS (SELECT {_ROW_COLUMNS}, row_number() OVER "
+                    "(PARTITION BY event_id ORDER BY revision DESC) AS rank "
+                    "FROM event_revisions WHERE event_id IN (SELECT unnest(?))) "
+                    f"SELECT {_ROW_COLUMNS} FROM ranked WHERE rank=1 OR "
+                    "(event_id, revision) IN (SELECT unnest(?), unnest(?))",
+                    [
+                        ids,
+                        [event.event_id for event, _ in candidates],
+                        [event.revision for event, _ in candidates],
+                    ],
+                ).fetchall()
+                latest_rows = {}
+                for row in stored:
+                    if row[0] not in latest_rows or row[1] > latest_rows[row[0]][1]:
+                        latest_rows[row[0]] = row
+                old_events = self._decode_rows(stored)
+                known = {
+                    (event.event_id, event.revision): _canonical(event) for event in old_events
+                }
+                latest = {
+                    event.event_id: event
+                    for event in old_events
+                    if event.revision == latest_rows[event.event_id][1]
+                }
+                clock_value = self._db.execute(
+                    "SELECT CAST(max(record_time) AS VARCHAR) FROM event_revisions"
                 ).fetchone()[0]
-                if not_later:
-                    raise ValueError(
-                        "record_time must be later than the ledger's latest record time"
+                clock = utc_datetime(clock_value) if clock_value is not None else None
+                pending = []
+                for event, canonical in candidates:
+                    key = (event.event_id, event.revision)
+                    if key in known:
+                        if known[key] != canonical:
+                            raise ValueError("revision already exists with different content")
+                        continue
+                    old = latest.get(event.event_id)
+                    expected = old.revision + 1 if old else 1
+                    if event.revision != expected:
+                        raise ValueError(f"expected revision {expected}, received {event.revision}")
+                    if old:
+                        if (
+                            old.change_class != event.change_class
+                            or old.region_id != event.region_id
+                        ):
+                            raise ValueError(
+                                "change class and region identity cannot change across revisions"
+                            )
+                        if event.detected_at < old.detected_at:
+                            raise ValueError("detection availability cannot move backwards")
+                    if clock is not None and event.record_time <= clock:
+                        raise ValueError(
+                            "record_time must be later than the ledger's latest record time"
+                        )
+                    pending.append((event, canonical))
+                    known[key] = canonical
+                    latest[event.event_id] = event
+                    clock = event.record_time
+                if self.compact and pending:
+                    self._ensure_compact_tables()
+                source_rows, geometry_rows, rows = {}, {}, []
+                for event, canonical in pending:
+                    digest = _digest(canonical)  # Always the FULL public EventRevision.
+                    payload = canonical
+                    if self.compact:
+                        public = json.loads(canonical)
+                        geometry = _canonical_json(public.pop("geometry"))
+                        geometry_ref = _digest(geometry)
+                        geometry_rows[geometry_ref] = geometry
+                        source_refs = []
+                        for source in public.pop("sources"):
+                            source_payload = _canonical_json(source)
+                            source_ref = _digest(source_payload)
+                            source_rows[source_ref] = source_payload
+                            source_refs.append(source_ref)
+                        payload = _canonical_json(
+                            {
+                                _FORMAT_KEY: COMPACT_FORMAT,
+                                "event": public,
+                                "geometry_ref": geometry_ref,
+                                "source_refs": source_refs,
+                            }
+                        )
+                    rows.append(
+                        (event.event_id, event.revision, event.record_time, payload, digest)
                     )
-                self._db.execute(
-                    "INSERT INTO event_revisions VALUES (?, ?, ?, ?, ?)",
-                    [event.event_id, event.revision, event.record_time, payload, digest],
-                )
+                for table, references in (
+                    ("event_sources", source_rows),
+                    ("event_geometries", geometry_rows),
+                ):
+                    if references:
+                        existing = dict(
+                            self._db.execute(
+                                f"SELECT sha256, payload FROM {table} WHERE sha256 IN (SELECT unnest(?))",
+                                [list(references)],
+                            ).fetchall()
+                        )
+                        if any(existing[key] != references[key] for key in existing):
+                            raise ValueError(f"corrupt/conflicting compact reference in {table}")
+                        additions = [
+                            (key, value) for key, value in references.items() if key not in existing
+                        ]
+                        if additions:
+                            self._db.executemany(f"INSERT INTO {table} VALUES (?, ?)", additions)
+                if rows:
+                    self._db.executemany("INSERT INTO event_revisions VALUES (?, ?, ?, ?, ?)", rows)
                 self._db.execute("COMMIT")
-                return True
+                return len(rows)
             except Exception:
                 self._db.execute("ROLLBACK")
                 raise
@@ -118,9 +320,10 @@ class EventStore:
     def history(self, event_id: str) -> list[EventRevision]:
         with self._lock:
             rows = self._db.execute(
-                "SELECT payload FROM event_revisions WHERE event_id=? ORDER BY revision", [event_id]
+                f"SELECT {_ROW_COLUMNS} FROM event_revisions WHERE event_id=? ORDER BY revision",
+                [event_id],
             ).fetchall()
-        return [EventRevision.model_validate_json(row[0]) for row in rows]
+            return self._decode_rows(rows)
 
     def count_revisions(self) -> int:
         with self._lock:
@@ -177,18 +380,36 @@ class EventStore:
         allowed = {"proposed", "confirmed_by_model", "reviewed", "retracted"}
         if state_filter is not None and not state_filter <= allowed:
             raise ValueError("unknown event state")
+        effective_states = allowed if state_filter is None else state_filter
+        if not include_retracted:
+            effective_states = effective_states - {"retracted"}
+        if not effective_states:
+            return []
         predicate = "WHERE record_time <= ?" if as_of is not None else ""
+        # State filtering MUST follow latest-at-snapshot selection. Filtering
+        # history first would resurrect an older confirmed revision after a
+        # retraction, and expanding all sources first wastes most UI query work.
         sql = (
-            "SELECT payload FROM event_revisions "
+            f"WITH latest AS (SELECT {_ROW_COLUMNS} FROM event_revisions "
             + predicate
-            + " QUALIFY row_number() OVER (PARTITION BY event_id ORDER BY revision DESC)=1 "
-            "ORDER BY event_id"
+            + " QUALIFY row_number() OVER (PARTITION BY event_id ORDER BY revision DESC)=1) "
+            f"SELECT {_ROW_COLUMNS} FROM latest WHERE coalesce("
+            "json_extract_string(payload, '$.event.state'), "
+            "json_extract_string(payload, '$.state')) IN (SELECT unnest(?)) "
         )
+        parameters = ([as_of] if as_of is not None else []) + [sorted(effective_states)]
+        if region_id is not None:
+            sql += (
+                "AND coalesce(json_extract_string(payload, '$.event.region_id'), "
+                "json_extract_string(payload, '$.region_id')) = ? "
+            )
+            parameters.append(region_id)
+        sql += "ORDER BY event_id"
         with self._lock:
-            rows = self._db.execute(sql, [as_of] if as_of is not None else []).fetchall()
+            rows = self._db.execute(sql, parameters).fetchall()
+            events = self._decode_rows(rows)
         result = []
-        for (payload,) in rows:
-            event = EventRevision.model_validate_json(payload)
+        for event in events:
             if region_id is not None and event.region_id != region_id:
                 continue
             if event.state == "retracted" and not include_retracted:

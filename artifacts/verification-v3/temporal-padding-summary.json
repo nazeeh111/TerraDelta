@@ -1,0 +1,31 @@
+{
+  "temporal_numerics": "fixed512-site-batch-v2",
+  "predict_temporal_signature": "(model: 'nn.Module', x: 'np.ndarray', usable: 'np.ndarray', batch_size: 'int' = 512) -> 'np.ndarray'",
+  "nondefault_batch_size_policy": "ValueError; protocol is fixed512, existing repository callers use default",
+  "source_sha256": {
+    "src/terradelta/temporal.py": "743e7c54dbce74c3a61f3b351bce341e1e978eef89f6e63bac6d549923aee1e6",
+    "src/terradelta/pipeline.py": "ffa022107fe515b96ebc98c51cdefa8ccfc588cf5ccfa52f559a46992f3d9a55",
+    "tests/test_temporal_contract.py": "711d5c94178d52a6198ed9f058e8ec314b2306000abc784c48342daf01619388"
+  },
+  "receipt_sha256": "b6a30a0837e38c3272922360b9fdd1365f555db328bd8c85c2d24a81afa2fb69",
+  "receipt_pipeline_matches_current": true,
+  "receipt_temporal_matches_current": true,
+  "real_method_region_checks": 9,
+  "all_exact_prefix_and_future_scores_and_histories": true,
+  "full_sequence_nonconfidence_revision_differences": 0,
+  "full_sequence_revision_field_differences": 1,
+  "max_full_score_delta": 8.344650268554688e-07,
+  "native_prefix_proof_sha256": "571ab88ca1032ffc28d1a7a3e12b6ebe7f449d1b873c7de5e24667664b9b1be1",
+  "seconds": 70.57952470899909,
+  "original_freeze_byte_preserved": true,
+  "original_weights_unchanged": true,
+  "original_calibration_unchanged": true,
+  "original_config_unchanged": true,
+  "labels_read": false,
+  "torch": "2.9.1",
+  "numpy": "2.2.6",
+  "torch_threads_during_validation": 2,
+  "focused_tests": "18 passed in 27.80s",
+  "ruff_targeted": "passed",
+  "git_diff_check": "passed"
+}

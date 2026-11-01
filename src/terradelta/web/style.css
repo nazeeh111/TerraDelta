@@ -141,6 +141,30 @@ button:disabled {
   text-decoration:none
 }
 
+.study-status {
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  align-items:baseline;
+  gap:12px;
+  padding:10px 34px;
+  border-bottom:1px solid #e2cbb7;
+  background:#fbefe2;
+  color:#693c20;
+  font-size:11px;
+  line-height:1.5
+}
+
+.study-status strong {
+  font-size:11px;
+  white-space:nowrap
+}
+
+.study-status p {
+  margin:0
+}
+
 .research-label {
   font-size:9px;
   letter-spacing:1.2px;
@@ -484,7 +508,14 @@ select {
   min-height:300px;
   display:grid;
   place-items:center;
-  overflow:hidden
+  overflow:hidden;
+  align-self:center;
+  width:100%;
+  max-width:100%
+}
+
+.scene-shell.has-image-grid {
+  min-height:0
 }
 
 .scene {
@@ -754,6 +785,40 @@ dd {
   padding:2px 4px 4px 2px
 }
 
+.event-list[hidden] {
+  display:none
+}
+
+.event-pagination {
+  margin-bottom:10px;
+  font-size:11px;
+  font-variant-numeric:tabular-nums
+}
+
+.event-pagination[hidden] {
+  display:none
+}
+
+.event-pagination p {
+  margin:0 0 4px
+}
+
+.event-pagination p:focus-visible {
+  outline:2px solid var(--green);
+  outline-offset:3px
+}
+
+.event-pagination > div {
+  display:flex;
+  justify-content:space-between;
+  gap:12px
+}
+
+.event-pagination button {
+  min-height:36px;
+  font-size:11px
+}
+
 .event-card {
   display:block;
   width:100%;
@@ -864,9 +929,8 @@ dd {
 }
 
 .event-detail {
-  margin-top:22px;
-  border-top:1px solid #cfd8c8;
-  padding-top:18px
+  margin-top:0;
+  padding-top:0
 }
 
 .event-detail[hidden] {
@@ -927,7 +991,7 @@ dd {
 
 .support-grid {
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(auto-fit,minmax(78px,1fr));
   gap:8px
 }
 
@@ -952,13 +1016,62 @@ dd {
   height:auto;
   aspect-ratio:1;
   object-fit:contain;
-  background:repeating-conic-gradient(#d1d9c8 0% 25%,#e9ece4 0% 50%) 50%/10px 10px
+  background:repeating-conic-gradient(#d1d9c8 0% 25%,#e9ece4 0% 50%) 50%/10px 10px;
+  image-rendering:pixelated
+}
+
+.support-image img[hidden] {
+  display:none
 }
 
 .support-image span {
   display:block;
   font-size:9px;
   padding:5px 6px
+}
+
+.support-image .support-role {
+  display:block;
+  font-size:9px;
+  line-height:1.4;
+  padding:6px 6px 0
+}
+
+.support-image .support-kind {
+  font-size:8px;
+  color:var(--muted);
+  padding-top:0
+}
+
+.support-unavailable {
+  color:var(--rust);
+  line-height:1.5
+}
+
+.returned-revision {
+  font-size:9px;
+  color:var(--green);
+  line-height:1.5;
+  margin:3px 0 0
+}
+
+.decision-note {
+  font-size:10px;
+  line-height:1.5;
+  margin:12px 0;
+  color:var(--muted)
+}
+
+.detail-disclosure {
+  margin-top:17px;
+  padding-top:12px;
+  border-top:1px solid var(--line);
+  font-size:10px
+}
+
+.detail-disclosure summary {
+  color:var(--green);
+  font-weight:550
 }
 
 .source-instruction {
@@ -975,9 +1088,19 @@ dd {
 }
 
 .source-list li {
-  margin:5px 0;
+  margin:10px 0;
   font-size:9px;
   overflow-wrap:anywhere
+}
+
+.source-list strong,.source-list a,.source-list code {
+  display:block;
+  margin:3px 0
+}
+
+.source-list code {
+  font-size:8px;
+  color:var(--muted)
 }
 
 .revision-list {
@@ -990,6 +1113,17 @@ dd {
   border-left:2px solid #d2ddc9;
   padding:0 0 13px 11px;
   font-size:9px
+}
+
+.revision-list .returned-history-revision {
+  border-left-color:var(--green)
+}
+
+.revision-list dl {
+  margin:7px 0;
+  font-size:9px;
+  grid-template-columns:82px minmax(0,1fr);
+  gap:4px 6px
 }
 
 .revision-top {
@@ -1144,19 +1278,6 @@ dialog>a {
     padding-left:26px;
     padding-right:26px
   }
-  .scene-shell {
-    max-height:calc(100vh - 310px)
-  }
-  .scene {
-    max-height:calc(100vh - 310px);
-    width:auto;
-    max-width:100%
-  }
-  .scene img {
-    max-height:calc(100vh - 310px);
-    width:auto;
-    max-width:100%
-  }
 }
 
 @media(max-width:1200px) {
@@ -1243,6 +1364,15 @@ dialog>a {
 }
 
 @media(max-width:680px) {
+  .study-status {
+    display:block;
+    padding:10px 18px;
+    font-size:10px
+  }
+  .study-status strong {
+    display:block;
+    margin-bottom:3px
+  }
   .app-header {
     height:63px;
     padding:0 17px

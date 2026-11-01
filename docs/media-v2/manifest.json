@@ -1,0 +1,1037 @@
+{
+  "format": "terradelta-data-replay-v2",
+  "region_id": "L15-0457E-1135N_1831_3648_13",
+  "kind": "edited real-data replay; not a browser recording or live detector",
+  "video": {
+    "width": 1280,
+    "height": 720,
+    "fps": 24,
+    "seconds": 28,
+    "frames": 672,
+    "audio": false
+  },
+  "selection": {
+    "area": "Mexico preselected before outcomes",
+    "event": "lexicographically first ID confirmed then retracted; no accuracy ranking",
+    "event_id": "td-008e8fad29b65e55d92f",
+    "confirmed_revision": 2,
+    "retracted_revision": 3
+  },
+  "history_receipt": {
+    "url": "http://127.0.0.1:54992/api/events/td-008e8fad29b65e55d92f/history",
+    "http_method": "GET",
+    "status": 200,
+    "parameters": {},
+    "response_file": "history.json",
+    "response_sha256": "beaf3b3ed3db81aae4e9d76ebb60e2bb1b2816cfa150449e913b81b9c4799ea6",
+    "feature_count": 0,
+    "snapshot_time": null
+  },
+  "query_receipts": [
+    {
+      "url": "http://127.0.0.1:54992/api/events?region_id=L15-0457E-1135N_1831_3648_13&state=confirmed_by_model&as_of=2026-10-29T23%3A06%3A28.502897%2B00%3A00&bbox=-99.53613281249997%2C19.26970580754977%2C-99.49218750000608%2C19.31114335506463&start=2018-01-01T00%3A00%3A00Z&end=2019-12-31T23%3A59%3A59Z",
+      "http_method": "GET",
+      "status": 200,
+      "parameters": {
+        "region_id": "L15-0457E-1135N_1831_3648_13",
+        "state": "confirmed_by_model",
+        "as_of": "2026-10-29T23:06:28.502897+00:00",
+        "bbox": "-99.53613281249997,19.26970580754977,-99.49218750000608,19.31114335506463",
+        "start": "2018-01-01T00:00:00Z",
+        "end": "2019-12-31T23:59:59Z"
+      },
+      "response_file": "query-full.json",
+      "response_sha256": "04c4f13871f58f5741ef86fa3ee5bb9c74f2bd22cada520d0781da86c950eea4",
+      "feature_count": 292,
+      "snapshot_time": "2026-10-29T23:06:28.502897Z"
+    },
+    {
+      "url": "http://127.0.0.1:54992/api/events?region_id=L15-0457E-1135N_1831_3648_13&state=confirmed_by_model&as_of=2026-10-29T23%3A06%3A28.502897%2B00%3A00&bbox=-99.53613281249997%2C19.2904245813072%2C-99.51416015625303%2C19.31114335506463&start=2019-01-01T00%3A00%3A00Z&end=2019-12-31T23%3A59%3A59Z",
+      "http_method": "GET",
+      "status": 200,
+      "parameters": {
+        "region_id": "L15-0457E-1135N_1831_3648_13",
+        "state": "confirmed_by_model",
+        "as_of": "2026-10-29T23:06:28.502897+00:00",
+        "bbox": "-99.53613281249997,19.2904245813072,-99.51416015625303,19.31114335506463",
+        "start": "2019-01-01T00:00:00Z",
+        "end": "2019-12-31T23:59:59Z"
+      },
+      "response_file": "query-changed.json",
+      "response_sha256": "8340abd9622441f7310d813bb7ae54c239a1b7e5fa2aa9d4bbce5d58a4fb65b8",
+      "feature_count": 16,
+      "snapshot_time": "2026-10-29T23:06:28.502897Z"
+    }
+  ],
+  "retained_answer_receipt": {
+    "url": "http://127.0.0.1:54992/api/events?region_id=L15-0457E-1135N_1831_3648_13&state=confirmed_by_model&as_of=2026-10-29T23%3A06%3A28.439607Z&bbox=-99.53136920929018%2C19.310657344942616%2C-99.53124046325749%2C19.31077884760854",
+    "http_method": "GET",
+    "status": 200,
+    "parameters": {
+      "region_id": "L15-0457E-1135N_1831_3648_13",
+      "state": "confirmed_by_model",
+      "as_of": "2026-10-29T23:06:28.439607Z",
+      "bbox": "-99.53136920929018,19.310657344942616,-99.53124046325749,19.31077884760854"
+    },
+    "response_file": "query-old-answer.json",
+    "response_sha256": "3b71c54ead02244933503393afb605e950965460e4fab290f7d0796297586efe",
+    "feature_count": 1,
+    "snapshot_time": "2026-10-29T23:06:28.439607Z"
+  },
+  "crs": "EPSG:3857",
+  "affine": [
+    4.77731426716,
+    0.0,
+    -11080311.620219147,
+    0.0,
+    -4.77731426716,
+    2191602.4749925723
+  ],
+  "bbox": [
+    -99.53613281249997,
+    19.26970580754977,
+    -99.49218750000608,
+    19.31114335506463
+  ],
+  "native_shape": [
+    1023,
+    1024
+  ],
+  "detail_crop_native_pixels": [
+    64,
+    0,
+    96,
+    96
+  ],
+  "event_polygon_native_pixels": [
+    [
+      [
+        111.00000000046566,
+        9.00000000023283
+      ],
+      [
+        111.00000000046566,
+        12.0
+      ],
+      [
+        114.0,
+        12.0
+      ],
+      [
+        114.0,
+        9.00000000023283
+      ],
+      [
+        111.00000000046566,
+        9.00000000023283
+      ]
+    ]
+  ],
+  "imagery": [
+    {
+      "source_id": "sn7:global_monthly_2018_01_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "e49e5931ac8654100669cc4ade518b8f91d5ccb81b2386ae6bd5b746e4595514",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_01_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2018-01-01T00:00:00+00:00",
+      "acquisition_end": "2018-01-31T23:59:59+00:00",
+      "available_at": "2018-01-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.0,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.0,
+        "phase_error": 0.9999200600948253,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "reference_spread_pixels": 0.0,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2018_02_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "03ed0821fe956bb1c0834e129aafb86080735ed0bb0cc6ea7106e538365e33df",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_02_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2018-02-01T00:00:00+00:00",
+      "acquisition_end": "2018-02-28T23:59:59+00:00",
+      "available_at": "2018-02-28T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.0,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.0,
+        "phase_error": 0.9999803434373983,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            0.0,
+            0.0
+          ],
+          "shift_magnitude_pixels": 0.0,
+          "phase_error": 0.9999803434373983,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.0,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2018_03_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "bfeb4fa584a522c4216002607891707c03369d01e8fed5120abb3fe9451b47bc",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_03_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2018-03-01T00:00:00+00:00",
+      "acquisition_end": "2018-03-31T23:59:59+00:00",
+      "available_at": "2018-03-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.3,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.3,
+        "phase_error": 0.9999824297355294,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            0.2,
+            0.0
+          ],
+          "shift_magnitude_pixels": 0.2,
+          "phase_error": 0.9999845707834397,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.3,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2018_04_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "5b792f831eb8712657b7089b42700a485760b35ae3518a675e905d1934c09d5f",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_04_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2018-04-01T00:00:00+00:00",
+      "acquisition_end": "2018-04-30T23:59:59+00:00",
+      "available_at": "2018-04-30T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          -0.1,
+          -0.1
+        ],
+        "shift_magnitude_pixels": 0.4123105625617661,
+        "phase_error": 0.9999897390192029,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            -0.4,
+            0.0
+          ],
+          "shift_magnitude_pixels": 0.4,
+          "phase_error": 0.999979717731515,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.4123105625617661,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2018_05_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "778940048e9f3464e61004cbe5d373d69327bd878f14920e6995e6a394804790",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_05_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2018-05-01T00:00:00+00:00",
+      "acquisition_end": "2018-05-31T23:59:59+00:00",
+      "available_at": "2018-05-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.0,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.3,
+        "phase_error": 0.999995567640271,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            0.0,
+            0.1
+          ],
+          "shift_magnitude_pixels": 0.1,
+          "phase_error": 0.9999885822448887,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.3,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2018_06_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "5528c19a3514cdddc9ceac6409d4496cde4fd8fc7f009ea8fe4c5bc8902f16dd",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_06_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2018-06-01T00:00:00+00:00",
+      "acquisition_end": "2018-06-30T23:59:59+00:00",
+      "available_at": "2018-06-30T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.0,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.3,
+        "phase_error": 0.999994541913415,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            0.0,
+            0.0
+          ],
+          "shift_magnitude_pixels": 0.0,
+          "phase_error": 0.9999798567021446,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.3,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2018_07_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "97bb19e2abfc8a7124d61787931ece66dd1d481f7cc7c5dfacb7e65eca2c448d",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_07_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2018-07-01T00:00:00+00:00",
+      "acquisition_end": "2018-07-31T23:59:59+00:00",
+      "available_at": "2018-07-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.1,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.223606797749979,
+        "phase_error": 0.9999973176296159,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            0.1,
+            0.0
+          ],
+          "shift_magnitude_pixels": 0.1,
+          "phase_error": 0.9999903039022753,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.223606797749979,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2018_08_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "2183e09a9a0dc101f77f4bcde18eea7f7eac49ea3ba8c0f13df34c236df40ad4",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_08_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2018-08-01T00:00:00+00:00",
+      "acquisition_end": "2018-08-31T23:59:59+00:00",
+      "available_at": "2018-08-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.1,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.223606797749979,
+        "phase_error": 0.9999983611897648,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            0.0,
+            0.0
+          ],
+          "shift_magnitude_pixels": 0.0,
+          "phase_error": 0.999994325830171,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.223606797749979,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2018_09_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "dc4a6f64ac3f0859c5cf0e4375ff48581169062401e816c7b37a951aca14c55b",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_09_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2018-09-01T00:00:00+00:00",
+      "acquisition_end": "2018-09-30T23:59:59+00:00",
+      "available_at": "2018-09-30T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 0.9144882545210166,
+      "registration": {
+        "shift_pixels": [
+          -0.1,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.4,
+        "phase_error": 0.9999964510483931,
+        "support_fraction": 0.8981759378054741,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            -0.1,
+            0.0
+          ],
+          "shift_magnitude_pixels": 0.1,
+          "phase_error": 0.9999900188446871,
+          "support_fraction": 0.8981759378054741,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.4,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2018_10_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "0b6c6a6593d06a08afb2c61c2fa7e618e1659c17d71995b70cda00b9c46e428a",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_10_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2018-10-01T00:00:00+00:00",
+      "acquisition_end": "2018-10-31T23:59:59+00:00",
+      "available_at": "2018-10-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 0.0,
+      "registration": {
+        "shift_pixels": null,
+        "support_fraction": 0.0,
+        "usable": false,
+        "reason": "insufficient_registration_support",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": null,
+          "support_fraction": 0.0,
+          "usable": false,
+          "reason": "insufficient_registration_support"
+        },
+        "reference_spread_pixels": null,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2018_11_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "0158b6b5b153e0086af5e26a56aa98f809c241ff3f694f340b87b656c16d04c2",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_11_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2018-11-01T00:00:00+00:00",
+      "acquisition_end": "2018-11-30T23:59:59+00:00",
+      "available_at": "2018-11-30T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.2,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.316227766016838,
+        "phase_error": 0.999994453152459,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": null,
+          "support_fraction": 0.0,
+          "usable": false,
+          "reason": "insufficient_registration_support"
+        },
+        "reference_spread_pixels": 0.316227766016838,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2018_12_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "400bdfc2a3bd22ebb6b1952a2af3ceeb3e5b33d621a49eb24a49bdfee77f6313",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_12_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2018-12-01T00:00:00+00:00",
+      "acquisition_end": "2018-12-31T23:59:59+00:00",
+      "available_at": "2018-12-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.1,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.223606797749979,
+        "phase_error": 0.9999955862100348,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            -0.1,
+            0.0
+          ],
+          "shift_magnitude_pixels": 0.1,
+          "phase_error": 0.9999944815960736,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.223606797749979,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2019_01_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "79e7fe163337fa690141155a2779c9fdafff8e02eb98f1877de7c96cd4f2d845",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2019_01_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2019-01-01T00:00:00+00:00",
+      "acquisition_end": "2019-01-31T23:59:59+00:00",
+      "available_at": "2019-01-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.2,
+          0.3
+        ],
+        "shift_magnitude_pixels": 0.5,
+        "phase_error": 0.9999922255691591,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            0.1,
+            0.4
+          ],
+          "shift_magnitude_pixels": 0.4123105625617661,
+          "phase_error": 0.9999933994829031,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.5,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2019_02_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "30014da070be6fbe1fa640dfb3ee058b5c6ab42bd7fc2f98446aa3752f4dd969",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2019_02_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2019-02-01T00:00:00+00:00",
+      "acquisition_end": "2019-02-28T23:59:59+00:00",
+      "available_at": "2019-02-28T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.1,
+          0.1
+        ],
+        "shift_magnitude_pixels": 0.28284271247461906,
+        "phase_error": 0.9999918898879352,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            -0.1,
+            -0.2
+          ],
+          "shift_magnitude_pixels": 0.223606797749979,
+          "phase_error": 0.9999870116749583,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.28284271247461906,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2019_03_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "77203b247a37a573cbc74214973e96194e34d136b3ede5a55581a2c4fd1c54ff",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2019_03_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2019-03-01T00:00:00+00:00",
+      "acquisition_end": "2019-03-31T23:59:59+00:00",
+      "available_at": "2019-03-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.0,
+          -0.1
+        ],
+        "shift_magnitude_pixels": 0.447213595499958,
+        "phase_error": 0.9999932870167055,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            -0.1,
+            -0.1
+          ],
+          "shift_magnitude_pixels": 0.14142135623730953,
+          "phase_error": 0.9999884973805488,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.447213595499958,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2019_04_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "82e44452bd7435ba8a4dd4c9bbe0f59f9d1626e5e7df8c6fd570decca48b8138",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2019_04_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2019-04-01T00:00:00+00:00",
+      "acquisition_end": "2019-04-30T23:59:59+00:00",
+      "available_at": "2019-04-30T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          -0.1,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.42426406871192857,
+        "phase_error": 0.9999942772064245,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            -0.1,
+            0.1
+          ],
+          "shift_magnitude_pixels": 0.14142135623730953,
+          "phase_error": 0.999988028318912,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.42426406871192857,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2019_05_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "ee8aeed006bb95fa092bec9835d5fbd231c7737d08b0479ce411611e49da33bb",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2019_05_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2019-05-01T00:00:00+00:00",
+      "acquisition_end": "2019-05-31T23:59:59+00:00",
+      "available_at": "2019-05-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.0,
+          -0.3
+        ],
+        "shift_magnitude_pixels": 0.6324555320336759,
+        "phase_error": 0.9999959430261526,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            0.0,
+            -0.2
+          ],
+          "shift_magnitude_pixels": 0.2,
+          "phase_error": 0.9999854156401727,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.6324555320336759,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2019_06_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "933b7408b52236c7c5debbeafa8e859f4374d425c3cd1a8526a5302fb95b917f",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2019_06_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2019-06-01T00:00:00+00:00",
+      "acquisition_end": "2019-06-30T23:59:59+00:00",
+      "available_at": "2019-06-30T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.1,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.31622776601683794,
+        "phase_error": 0.9999979689687938,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            0.1,
+            0.3
+          ],
+          "shift_magnitude_pixels": 0.31622776601683794,
+          "phase_error": 0.999990873895529,
+          "support_fraction": 0.9883098881964809,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.31622776601683794,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2019_07_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "0b6c6a6593d06a08afb2c61c2fa7e618e1659c17d71995b70cda00b9c46e428a",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2019_07_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2019-07-01T00:00:00+00:00",
+      "acquisition_end": "2019-07-31T23:59:59+00:00",
+      "available_at": "2019-07-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 0.0,
+      "registration": {
+        "shift_pixels": null,
+        "support_fraction": 0.0,
+        "usable": false,
+        "reason": "insufficient_registration_support",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": null,
+          "support_fraction": 0.0,
+          "usable": false,
+          "reason": "insufficient_registration_support"
+        },
+        "reference_spread_pixels": null,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2019_08_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "0b6c6a6593d06a08afb2c61c2fa7e618e1659c17d71995b70cda00b9c46e428a",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2019_08_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2019-08-01T00:00:00+00:00",
+      "acquisition_end": "2019-08-31T23:59:59+00:00",
+      "available_at": "2019-08-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 0.0,
+      "registration": {
+        "shift_pixels": null,
+        "support_fraction": 0.0,
+        "usable": false,
+        "reason": "insufficient_registration_support",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": null,
+          "support_fraction": 0.0,
+          "usable": false,
+          "reason": "insufficient_registration_support"
+        },
+        "reference_spread_pixels": null,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2019_09_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "ed6f2f7efc6a9f1c002bea1dbbad9a9a22ddf9e16c7376a797221b7170ec0ca1",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2019_09_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2019-09-01T00:00:00+00:00",
+      "acquisition_end": "2019-09-30T23:59:59+00:00",
+      "available_at": "2019-09-30T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 0.9417002688172043,
+      "registration": {
+        "shift_pixels": [
+          -0.1,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.42426406871192857,
+        "phase_error": 0.9999946743015202,
+        "support_fraction": 0.9265974385997068,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": null,
+          "support_fraction": 0.0,
+          "usable": false,
+          "reason": "insufficient_registration_support"
+        },
+        "reference_spread_pixels": 0.42426406871192857,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2019_10_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "7f38d877dd810c0fd9a340b316e2ba0868d08373478a09a1199196d16c872548",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2019_10_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2019-10-01T00:00:00+00:00",
+      "acquisition_end": "2019-10-31T23:59:59+00:00",
+      "available_at": "2019-10-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          -0.1,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.42426406871192857,
+        "phase_error": 0.9999968347264984,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": [
+            0.0,
+            0.0
+          ],
+          "shift_magnitude_pixels": 0.0,
+          "phase_error": 0.9999875322955617,
+          "support_fraction": 0.9265974385997068,
+          "usable": true,
+          "reason": "image_only_proxy_with_no_alignment_applied"
+        },
+        "reference_spread_pixels": 0.42426406871192857,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2019_11_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "0b6c6a6593d06a08afb2c61c2fa7e618e1659c17d71995b70cda00b9c46e428a",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2019_11_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2019-11-01T00:00:00+00:00",
+      "acquisition_end": "2019-11-30T23:59:59+00:00",
+      "available_at": "2019-11-30T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 0.0,
+      "registration": {
+        "shift_pixels": null,
+        "support_fraction": 0.0,
+        "usable": false,
+        "reason": "insufficient_registration_support",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": null,
+          "support_fraction": 0.0,
+          "usable": false,
+          "reason": "insufficient_registration_support"
+        },
+        "reference_spread_pixels": null,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    },
+    {
+      "source_id": "sn7:global_monthly_2019_12_mosaic_L15-0457E-1135N_1831_3648_13",
+      "sha256": "ab2b423dbb997aaa04cc5025ef5f9c2864f91db8e0ebf21562929597f431873a",
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2019_12_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "acquisition_start": "2019-12-01T00:00:00+00:00",
+      "acquisition_end": "2019-12-31T23:59:59+00:00",
+      "available_at": "2019-12-31T23:59:59+00:00",
+      "published_at": null,
+      "valid_fraction": 1.0,
+      "registration": {
+        "shift_pixels": [
+          0.0,
+          0.0
+        ],
+        "shift_magnitude_pixels": 0.36055512754639896,
+        "phase_error": 0.9999945399854241,
+        "support_fraction": 0.9883098881964809,
+        "usable": true,
+        "reason": "image_only_proxy_with_no_alignment_applied",
+        "anchor_frame": 0,
+        "adjacent": {
+          "shift_pixels": null,
+          "support_fraction": 0.0,
+          "usable": false,
+          "reason": "insufficient_registration_support"
+        },
+        "reference_spread_pixels": 0.36055512754639896,
+        "protocol": "anchor_and_all_accepted_offsets_v2"
+      }
+    }
+  ],
+  "display": "full-area imagery downsampled for fit; detail nearest-neighbor6x; no enhancement",
+  "source_inputs_sha256": {
+    "cache_rgb.npy": "2ebb1aac02076969bac0bd30effba3227c013c23ddcdbaf8af9e0c492b0e6c3d",
+    "cache_valid.npy": "2b684a8f57a33d7995d7536a580b1e20cea5bc065622b1d83133877f5108fed2",
+    "cache_metadata.json": "8679288849d76df2f0e7ddf22f0bb16d34f294018ab4dab145325d60456cbf30",
+    "frozen_history_events.duckdb": "475e89ee56d4019c90ba038254fc19ce4a0e29f15a4f23f16af09266e785c990",
+    "run.json": "0d3768843a91a490f281a9fe8edaa982eb396f586db1dbfc586cbc8b22862324",
+    "confirmation-v2/comparison.json": "eb6530d09d6ccaceaf316d34636e297d7068a0ea9fa87841cfdd1550946609e2"
+  },
+  "processing_revision": "event-gate:9bae4c22a5fc6dca64b270a0e37a8d899424477ed7b2c4f6ac5c2e6e811e62ba;observation_gate;processing:b94bb8a752062b49b91b6c1d52b6daceb7e1d07880eb66ea75057a78a4393420",
+  "study_event_metrics": {
+    "tp": 27,
+    "fp": 671,
+    "fn": 1479,
+    "predictions": 698,
+    "targets": 1506,
+    "precision": 0.03868194842406877,
+    "recall": 0.017928286852589643,
+    "f1": 0.024500907441016333
+  },
+  "study_limit": "failed geographic transfer; not analyst-ready; new study is separate",
+  "timing": "mosaic filename months; original publication unknown; retrospective month-end availability",
+  "exclusions": "No target.npy, edge.npy, instances.npy or ground-truth geometries read",
+  "credits": {
+    "imagery": "SpaceNet Partners / Planet monthly mosaics",
+    "source_license": "CC-BY-SA-4.0",
+    "source_url": "https://spacenet.ai/sn7-challenge/",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "adaptation": "imagery resized, native detail cropped, event overlays and text added",
+    "video_license": "CC-BY-SA-4.0",
+    "renderer_code_license": "MIT",
+    "font": "Inter; bundled SIL Open Font License"
+  },
+  "artifacts_sha256": {
+    "draft-end.png": "d381d1c71318de442dbf4565e66e0360399e3ee6f1a6544ea18f24c1697c122f",
+    "query-old-answer.json": "3b71c54ead02244933503393afb605e950965460e4fab290f7d0796297586efe",
+    "query-changed.json": "8340abd9622441f7310d813bb7ae54c239a1b7e5fa2aa9d4bbce5d58a4fb65b8",
+    "ffprobe.json": "56ab955b64073b123db44c47f9796963b7fd27729e6296a3eefdf8e38354e3c8",
+    "query-full.json": "04c4f13871f58f5741ef86fa3ee5bb9c74f2bd22cada520d0781da86c950eea4",
+    "encoded-correction.png": "96b9e17ef831b2ebd552b5df114c4e9a7420e2dc3f9fab23a286285bb643af05",
+    "draft-correction.png": "1726499354d2e30df37aff9ee6b8996d7f6fea0c0c6aec85709c2a9c607126e3",
+    "terradelta-data-replay-v2.mp4": "5c350917384cd4952ffc24b7d7a7d885979aad7595264f1ec03e54d076e72939",
+    "poster.png": "9823bbfc49023e2678c9e371cca0eb6c39a10b1edeca7f8d07b37f59485cf1db",
+    "history.json": "beaf3b3ed3db81aae4e9d76ebb60e2bb1b2816cfa150449e913b81b9c4799ea6",
+    "render_demo.py": "e2ac84e9889169d23f908e963281bb16a3603dda2f4465e0eb6175189d440c0c",
+    "encoded-query.png": "eb19b4ca2b27588b39f564c990b6dcdcf35ba855b513da0b0c58aed81d1e8a29",
+    "encoded-start.png": "dde99ebea72baf7ce5cc6f3921cdea752243013db2ca42fd71bac944aa3a12ec",
+    "draft-start.png": "ef14278a5b29078ce78fa5c704f528ed997a9e20e110ec3334474b41337328cd",
+    "draft-middle.png": "b323838d4f93ddbc8615b86f6f759e8b969fb779946430461d23ee8249fff3b4",
+    "encoded-end.png": "fc74e6c9f04151a4f4df824c5855a413b0485267604b9f1d377403080f09c435",
+    "encode.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "encoded-middle.png": "9823bbfc49023e2678c9e371cca0eb6c39a10b1edeca7f8d07b37f59485cf1db"
+  },
+  "asset_sha256": {
+    "rgb-22.png": "42a093ed4d2c2ffe313a860a98dd2712d5a3208b9fb384c33716b713df99401e",
+    "valid-12.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "valid-06.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "valid-07.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "valid-13.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "rgb-23.png": "af5711797d1416f22b977170ced8b3125447df1dc1dc1ef51cb25d5a08958ffc",
+    "rgb-09.png": "42a093ed4d2c2ffe313a860a98dd2712d5a3208b9fb384c33716b713df99401e",
+    "rgb-21.png": "7b32bc7a1bb4b196d866e6f679d8ed34890ed1e7a421c25d6a1a47399af39eb3",
+    "inter-OFL.txt": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57",
+    "valid-05.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "valid-11.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "valid-10.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "valid-04.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "rgb-20.png": "9891be23dedccd39afe6f2631e72895d1258133cb8d7892f7ac3f6bc222231cc",
+    "rgb-08.png": "2ec20ed46dfc746071382b484cea26ec1eb4fa850b2ba0fc1b27ab78cfb0175c",
+    "rgb-18.png": "42a093ed4d2c2ffe313a860a98dd2712d5a3208b9fb384c33716b713df99401e",
+    "valid-00.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "valid-14.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "valid-15.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "valid-01.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "rgb-19.png": "42a093ed4d2c2ffe313a860a98dd2712d5a3208b9fb384c33716b713df99401e",
+    "valid-17.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "valid-03.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "valid-02.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "valid-16.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "inter.ttf": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+    "rgb-03.png": "6ef06810c70bbbee56e4d4b92410d17177a4babf709fbc720eb953c32391d884",
+    "rgb-17.png": "c87a1309aa89c4de92a8724dc498839072f2c2f49cdab190f78aca072c6283cc",
+    "rgb-16.png": "e76496df5da582198e7a6f8f93816a05b739bbd6e141eb654f3d6c6100628a75",
+    "rgb-02.png": "ebe4ffd1d9bf9d47350ca5885ae0388c200fe7498ea39a38e8050ecefa8e6a49",
+    "rgb-14.png": "14e9b1aa48797269832103a7bbd2f310e6cb2f6875cfed1e8c37e9924d015c68",
+    "rgb-00.png": "afb8a000ea579ea2fb9cb3bb980adc58068f48ac6572dd2cc59c0603e8c65d19",
+    "valid-18.png": "a287e095eb53d4362829419bf7caa819e087f7fe1c6bcb01a9998ef72af71d0d",
+    "valid-19.png": "a287e095eb53d4362829419bf7caa819e087f7fe1c6bcb01a9998ef72af71d0d",
+    "rgb-01.png": "439abc3955bf7b8dc2c2bc9467bd92f1c70407a1dac8df9ad061f93ad04e0799",
+    "rgb-15.png": "9c8d0e6c2c114052a206380a4e43e0aff1fc73f01b12122614332ed257306ddd",
+    "rgb-11.png": "72fb2fb54836b6e10f7921b6014a5a62c03113b9a6a085c524b5d8e9309f00f5",
+    "rgb-05.png": "1aed6321e4b9bd3415aa4c9e3bf659ecaed8e5765170d2341b55e22e19e22b97",
+    "valid-09.png": "a287e095eb53d4362829419bf7caa819e087f7fe1c6bcb01a9998ef72af71d0d",
+    "valid-21.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "valid-20.png": "579694fd11731a0d6192b9b4282c0c9e465822bd32f6a275f62e7e2127466de0",
+    "valid-08.png": "879f38bd9f0488c3bb90d3888581354fec668c235f06df1bfe2d20c0aa03cf03",
+    "rgb-04.png": "a6b9966b186e921188164f242888ede14ff525d477732d6db46c52f9c8e7e104",
+    "rgb-10.png": "8cad290380058a740ef7d8b89443107aecc804446d32ddef4e1ad802eda77363",
+    "rgb-06.png": "99ba3a5820d412cc1e75984179eda19e5a7ad258a7d39723bdd16bd3b23b5606",
+    "rgb-12.png": "5240f0b1bf593cfc3fef69f29d9b1b78c1667e8701eb02de06f213b235d633f2",
+    "valid-22.png": "a287e095eb53d4362829419bf7caa819e087f7fe1c6bcb01a9998ef72af71d0d",
+    "valid-23.png": "88a26060926b0709caab26d15f5432de45f6b389b1013c6a19c531f02010d880",
+    "rgb-13.png": "26ac1d3b904c28a716afb66df43af7483ab799d1374e6b1defcfc1ac44f8d61b",
+    "rgb-07.png": "cff87bd1ebb77240db92696ce218e3211ceff222efc5d633f91a8dcb885cc8c1"
+  },
+  "verification": {
+    "encoded_frames": "672",
+    "seconds": "28.000000",
+    "codec": "h264",
+    "pixel_format": "yuv420p",
+    "audio": false,
+    "encoded_stills": [
+      0,
+      10.5,
+      14,
+      20,
+      27.5
+    ],
+    "limit": "sampled encoded stills and technical checks; no audible review needed",
+    "visual_inspection": {
+      "encoded_seconds": [
+        0,
+        10.5,
+        14,
+        20,
+        27.5
+      ],
+      "observed": "readable text; complete area at start/end; source dates, actual query count, fixed native crop and correction states visible",
+      "not_performed": "normal-speed perceptual playback; no browser control used"
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "format": "terradelta-dev-spatial-inference-selection-v1",
+  "created_at": "2026-10-30T00:41:36.715489+00:00",
+  "status": "prospectively_frozen_before_metric_outcomes",
+  "config_sha256": "59433571ca28a99b635fb699362e0e1a91d958c2dd403a3f69e9156fdd6ed881",
+  "config_path": "/Users/nazeeh/Documents/ChatGPT/Github/TerraDelta/configs/experiment-v5.json",
+  "cache_root": "/Users/nazeeh/Documents/ChatGPT/Continue/terradelta-task/cache-v3",
+  "decoder_path": "/Users/nazeeh/Documents/ChatGPT/Github/TerraDelta/artifacts/spatial-v3.pt",
+  "backbone_path": "/Users/nazeeh/Documents/ChatGPT/Continue/terradelta-task/pretrained/resnet18-f37072fd.pth",
+  "backbone_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+  "decoder_identity": "Bind final bytes only after explicit fit-completion acknowledgement, before inference",
+  "development_regions": [
+    "L15-0632E-0892N_2528_4620_13",
+    "L15-1389E-1284N_5557_3054_13",
+    "L15-1716E-1211N_6864_3345_13",
+    "L15-0614E-0946N_2459_4406_13"
+  ],
+  "scenes": [
+    {
+      "region_id": "L15-0632E-0892N_2528_4620_13",
+      "frame_index": 0,
+      "selection": "first_usable",
+      "acquisition_start": "2018-01-01T00:00:00+00:00",
+      "native_shape": [
+        1024,
+        1023
+      ]
+    },
+    {
+      "region_id": "L15-0632E-0892N_2528_4620_13",
+      "frame_index": 24,
+      "selection": "last_usable",
+      "acquisition_start": "2020-01-01T00:00:00+00:00",
+      "native_shape": [
+        1024,
+        1023
+      ]
+    },
+    {
+      "region_id": "L15-1389E-1284N_5557_3054_13",
+      "frame_index": 0,
+      "selection": "first_usable",
+      "acquisition_start": "2018-02-01T00:00:00+00:00",
+      "native_shape": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "region_id": "L15-1389E-1284N_5557_3054_13",
+      "frame_index": 23,
+      "selection": "last_usable",
+      "acquisition_start": "2020-01-01T00:00:00+00:00",
+      "native_shape": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "region_id": "L15-1716E-1211N_6864_3345_13",
+      "frame_index": 0,
+      "selection": "first_usable",
+      "acquisition_start": "2018-01-01T00:00:00+00:00",
+      "native_shape": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "region_id": "L15-1716E-1211N_6864_3345_13",
+      "frame_index": 23,
+      "selection": "last_usable",
+      "acquisition_start": "2020-01-01T00:00:00+00:00",
+      "native_shape": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "region_id": "L15-0614E-0946N_2459_4406_13",
+      "frame_index": 0,
+      "selection": "first_usable",
+      "acquisition_start": "2018-03-01T00:00:00+00:00",
+      "native_shape": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "region_id": "L15-0614E-0946N_2459_4406_13",
+      "frame_index": 20,
+      "selection": "last_usable",
+      "acquisition_start": "2020-01-01T00:00:00+00:00",
+      "native_shape": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "input_sha256": {
+    "L15-0632E-0892N_2528_4620_13": {
+      "metadata.json": "c18b641d36a4e9394ac4a36632d96d3c4e0f9972bf47fe766829ca26f54d5611",
+      "rgb.npy": "f03af49793bd22500c45ca5401e63e9dbf3bf9b49a1c684278fc32901f050cb8",
+      "valid.npy": "08d3216a52146c4f2a4e62a2c8309118fc9754dbda52e33fe97f284950fa3f71",
+      "instances.npy": "fbbfa260dcb4130135b17b2c653f85c6334ef61fd92c8afc746f2ff561df5978",
+      "target.npy": "fe43639926416fd31427283c04492c83f2f5c16ba319454c26c153641660e269",
+      "edge.npy": "9a15b8928f8c7bd3003b4034da9bfa8ebc714fe749fed5a6ef0d591846fc56c0"
+    },
+    "L15-1389E-1284N_5557_3054_13": {
+      "metadata.json": "b2cda4b59b4c0ce0a761d6bcdeacf251791b302924af0ede1ff3950d60fca25e",
+      "rgb.npy": "2d9a7f3ea69f137acbbfa4df9a0d8633c1c3ac4e1ace00b093df8d52a421d690",
+      "valid.npy": "891265bd35de959debc0e2796a120a19c39d00a74fe1b42471d35e14e32bbf49",
+      "instances.npy": "94a069ce14b4354cffe82a194600c6ab10e51fb279b7c03c13baf55e924a6943",
+      "target.npy": "434431f4e45cc795373ac6b967f4ce1e67cd2aba6541c8645a5d86d4c9739a00",
+      "edge.npy": "c06a46481d5bea57c88bbc99ed92f71f3a325e9209707237764d5215af50a49b"
+    },
+    "L15-1716E-1211N_6864_3345_13": {
+      "metadata.json": "3512217275ac02e5c3424b84c80441b34ed69da8a7b1b7fe2cf09f6f6ac933b7",
+      "rgb.npy": "b16f8ba912816536fd4cb6f454088354e3482c53e03aa419791dd58a499ed995",
+      "valid.npy": "891265bd35de959debc0e2796a120a19c39d00a74fe1b42471d35e14e32bbf49",
+      "instances.npy": "cb99fc11f245652b01894b4daca80ef1acf07a1d48cfbfcaaa3358fc43557dde",
+      "target.npy": "2c2f8cb0499d096c1c8d14343e4c751c9207d1f0f32c86c10c15d3327dc39c09",
+      "edge.npy": "d212cb35db4482fa052c5c8823dce91faf8a2ed686e45839af58dfdd4cb5fe72"
+    },
+    "L15-0614E-0946N_2459_4406_13": {
+      "metadata.json": "9338c616ff8c55eb52b3da2c463bd4cf716045f1ee9bf393cd98d4bcc4346212",
+      "rgb.npy": "1a5ceb0b52015966b692ea5b95c16aa5c3b6c2b3035cccb0da4308764d00a83e",
+      "valid.npy": "aecdd8ed5443996d1347154accd206321bb29726f13a3e117497f5498c67d559",
+      "instances.npy": "6126f2241386a442fd043dada684f01a0f66abb8484295af37e47317b5c34621",
+      "target.npy": "b86a5bd4f2b1301c01c59b51079503118f1e4059f0365404386b60a664df7f3b",
+      "edge.npy": "42c4bc3cab62431a147b93881a248dfddacf2f71300ad87ad5787fa5cf23b333"
+    }
+  },
+  "source_sha256": {
+    "scripts/select_spatial_inference.py": "421ca3f44ada8c24de6f69fe06e0ef9b77b19c4cdaf24b05f57ffa9e879e7ea4",
+    "src/terradelta/pretrained_spatial.py": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503",
+    "src/terradelta/spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff",
+    "src/terradelta/features.py": "ca009c494ae17955b2084c0a5f0f4856476b5e4f96bf1a5681164de17b831270",
+    "src/terradelta/data.py": "0e1fa709eb635191101ce1b9e2e669bb3ea04e50d3a1ac51cabdf0de489d02ea",
+    "src/terradelta/schema.py": "9500c25425e546e7a895c9e2e4bbe333e1ef7c93b0eec0fa330aefa98339ebb1"
+  },
+  "tile_sizes": [
+    128,
+    256,
+    512,
+    1024
+  ],
+  "candidate_thresholds": [
+    0.35,
+    0.45,
+    0.55,
+    0.65
+  ],
+  "wall_seconds": 1800,
+  "metric": {
+    "object_matching": "maximum-cardinality one-to-one native pixel IoU>=0.25",
+    "iou_threshold": 0.25,
+    "truth_minimum_source_valid_fraction": 0.8,
+    "truth": "Positive IDs present in native raster; full rasterized object areas, no label alignment",
+    "prediction": "Exact footprint_instances output using original source-valid mask; no temporal site birth",
+    "excluded_truth": "Audit low-valid IDs; predictions still count, with no additional label-assisted ignore mask",
+    "empty_case": "F1=recall=precision=1 only when both truth and prediction are empty; otherwise absent precision/recall=0",
+    "aggregation": "Mean two per-frame scores within each region, then equal mean over all four DEV regions",
+    "selection_order": [
+      "maximum global mean regional object F1",
+      "maximum same-aggregation recall",
+      "minimum total false positives",
+      "minimum tile size",
+      "minimum threshold"
+    ],
+    "diagnostics": "Native footprint Dice at candidate threshold; boundary Dice at0.5, source-valid pixels only",
+    "limit": "Dimensionless native pixel overlap; not geodesic area or physical event-date accuracy"
+  },
+  "completion_policy": "All8 scenes x4 tiles x4 thresholds required; any missing/error/deadline means incomplete and no selected parameters"
+}

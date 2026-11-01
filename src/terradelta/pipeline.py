@@ -21,8 +21,16 @@ from .store import EventStore
 
 LEARNED_TEMPORAL_METHODS = ("observation", "no_quality", "watch_lstm")
 GATE_METHODS = ("observation_gate", "gate_no_quality", "proposal_tracking")
-METHODS = ("pairwise", "spatial_tracking", "smoothing", "hmm", "sn7_retrospective", "ted",
-           *LEARNED_TEMPORAL_METHODS, *GATE_METHODS)
+METHODS = (
+    "pairwise",
+    "spatial_tracking",
+    "smoothing",
+    "hmm",
+    "sn7_retrospective",
+    "ted",
+    *LEARNED_TEMPORAL_METHODS,
+    *GATE_METHODS,
+)
 
 
 def prefix_frames(frames: list[dict], end: str | None) -> list[dict]:
@@ -50,6 +58,8 @@ def export_probability_raster(
     metadata: dict,
     frame: dict,
     model_sha256: str,
+    backbone_sha256: str | None = None,
+    spatial_inference: dict | None = None,
 ) -> Path:
     """Write both per-band nodata and a shared internal mask for GIS readers."""
     path = Path(path)
@@ -88,6 +98,10 @@ def export_probability_raster(
                 1,
             ):
                 ds.set_band_description(index, name)
+            if spatial_inference:
+                ds.update_tags(spatial_inference=json.dumps(spatial_inference, sort_keys=True))
+            if backbone_sha256:
+                ds.update_tags(spatial_backbone_sha256=backbone_sha256)
             ds.update_tags(
                 source_id=frame["source_id"],
                 source_sha256=frame["sha256"],
@@ -111,12 +125,23 @@ def predict_sequence(
     device: str = "cpu",
     tile_size: int = 1024,
     end: str | None = None,
+    backbone_weights: Path | None = None,
 ) -> dict:
     import torch
     from .spatial import load_model, predict_scene
 
     torch.set_num_threads(2)
-    model = load_model(weights, device=device)
+    model = load_model(weights, device=device, backbone_weights=backbone_weights)
+    implementation = ["spatial.py"] + (["pretrained_spatial.py"] if backbone_weights else [])
+    spatial_inference = {
+        "tile_size": int(tile_size),
+        "context_halo_native_pixels": 64,
+        "native_alignment": int(getattr(model, "native_alignment", 8)),
+        "internal_input_scale": int(getattr(model, "input_scale", 1)),
+        "implementation_sha256": {
+            name: sha256(Path(__file__).with_name(name)) for name in implementation
+        },
+    }
     region = load_region(cache)  # labels=False by construction
     rgb = region["rgb"]
     meta = region["metadata"]
@@ -140,7 +165,14 @@ def predict_sequence(
         mmap[t] = prediction
         path = output / f"{frame['filename'][:-4]}_probability.tif"
         export_probability_raster(
-            path, prediction, np.asarray(region["valid"][t]), meta, frame, sha256(weights)
+            path,
+            prediction,
+            np.asarray(region["valid"][t]),
+            meta,
+            frame,
+            sha256(weights),
+            backbone_sha256=getattr(model, "backbone_sha256", None),
+            spatial_inference=spatial_inference,
         )
         print(
             meta["region_id"], t + 1, len(frames), round(time.perf_counter() - start, 2), flush=True
@@ -153,6 +185,9 @@ def predict_sequence(
         "device": device,
         "tile_size": tile_size,
         "spatial_weights_sha256": sha256(weights),
+        "spatial_backbone_sha256": getattr(model, "backbone_sha256", None),
+        "spatial_architecture": type(model).__name__,
+        "spatial_inference": spatial_inference,
         "probability_sha256": sha256(output / "probabilities.npy"),
     }
     (output / "prediction.json").write_text(json.dumps(result, indent=2) + "\n")
@@ -165,6 +200,8 @@ def method_scores(
     method: str,
     temporal_weights: Path | None = None,
     calibration: dict | None = None,
+    *,
+    spatial_info: dict | None = None,
 ) -> np.ndarray:
     from .temporal import (
         causal_smooth,
@@ -196,7 +233,9 @@ def method_scores(
     elif method in ["observation", "no_quality", "watch_lstm"]:
         if temporal_weights is None:
             raise ValueError("Learned temporal methods require versioned trained weights")
-        score = predict_temporal(load_temporal(temporal_weights, method), features, usable)
+        score = predict_temporal(
+            load_temporal(temporal_weights, method, spatial_info=spatial_info), features, usable
+        )
     else:
         raise ValueError("Unknown temporal method")
     if calibration and method in calibration:
@@ -217,8 +256,9 @@ def _method_decoder(method, calibration, decoder=None):
         elif method in calibration.get("decoders", {}):
             settings = DecoderConfig(**calibration["decoders"][method])
         else:
-            settings = replace(RAW_CONFIG,
-                               timing_padding_days=int(params.get("timing_padding_days", 0)))
+            settings = replace(
+                RAW_CONFIG, timing_padding_days=int(params.get("timing_padding_days", 0))
+            )
         if replace(settings, timing_padding_days=0) != RAW_CONFIG:
             raise ValueError("Gate methods must retain the shared raw proposal decoder policy")
         return settings
@@ -239,16 +279,39 @@ def _method_revision(info, method, temporal_weights=None, event_gate_weights=Non
     return f"spatial:{spatial};temporal:{temporal};{method}"
 
 
-def _processing_revision(base, info, method, calibration, decoder,
-                         temporal_weights=None, event_gate_weights=None):
+def _processing_revision(
+    base, info, method, calibration, decoder, temporal_weights=None, event_gate_weights=None
+):
     """Bind effective processing parameters even when callers supply a display label."""
+    implementation = ["pipeline.py", "decoder.py", "schema.py"]
+    if method in GATE_METHODS:
+        implementation.append("event_gate.py")
+    if method in LEARNED_TEMPORAL_METHODS:
+        implementation.append("temporal.py")
+        from .temporal import TEMPORAL_NUMERICS
+
+        numerics = TEMPORAL_NUMERICS
+    else:
+        numerics = None
     payload = {
-        "method": method, "calibration": calibration, "decoder": asdict(decoder),
+        "engine_protocol": "terradelta-processing-v3",
+        "implementation_sha256": {
+            name: sha256(Path(__file__).with_name(name)) for name in implementation
+        },
+        "temporal_numerics": numerics,
+        "spatial_inference": info.get("spatial_inference"),
+        "feature_protocol": info.get("feature_protocol"),
+        "feature_implementation_sha256": info.get("feature_implementation_sha256"),
+        "method": method,
+        "calibration": calibration,
+        "decoder": asdict(decoder),
         "spatial_weights_sha256": info.get("spatial_weights_sha256"),
         "temporal_weights_sha256": sha256(temporal_weights)
-        if temporal_weights and method in LEARNED_TEMPORAL_METHODS else None,
+        if temporal_weights and method in LEARNED_TEMPORAL_METHODS
+        else None,
         "event_gate_weights_sha256": sha256(event_gate_weights)
-        if event_gate_weights and method in GATE_METHODS[:2] else None,
+        if event_gate_weights and method in GATE_METHODS[:2]
+        else None,
     }
     encoded = json.dumps(payload, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
     return f"{base};processing:{hashlib.sha256(encoded).hexdigest()}"
@@ -279,22 +342,53 @@ def method_events(
     if method not in METHODS:
         raise ValueError(f"Unknown event method: {method}")
     calibration = calibration or {}
+    from .contracts import assert_calibration
+
+    assert_calibration(
+        info, calibration, method=method, temporal_weights=temporal_weights,
+        event_gate_weights=event_gate_weights,
+    )
     settings = _method_decoder(method, calibration, decoder)
-    base_revision = model_revision or _method_revision(info, method, temporal_weights, event_gate_weights)
-    revision = _processing_revision(base_revision, info, method, calibration, settings,
-                                    temporal_weights, event_gate_weights)
+    base_revision = model_revision or _method_revision(
+        info, method, temporal_weights, event_gate_weights
+    )
+    revision = _processing_revision(
+        base_revision, info, method, calibration, settings, temporal_weights, event_gate_weights
+    )
     if method in GATE_METHODS:
         from .event_gate import generate_events
 
         params = dict(calibration.get("event_gates", {}).get(method, {}))
         params["timing_padding_days"] = settings.timing_padding_days
-        events = generate_events(features, usable, births, info, event_gate_weights,
-                                 kind=method, calibration={method: params}, record_origin=record_origin)
-        return [event if event.model_revision == revision
-                else event.model_copy(update={"model_revision": revision}) for event in events]
-    scores = method_scores(features, usable, method, temporal_weights, calibration.get("occupancy"))
-    return decode_events(scores, usable, births, info, settings, model_revision=revision,
-                         record_origin=record_origin, retrospective=method == "sn7_retrospective")
+        events = generate_events(
+            features,
+            usable,
+            births,
+            info,
+            event_gate_weights,
+            kind=method,
+            calibration={method: params},
+            record_origin=record_origin,
+        )
+        return [
+            event
+            if event.model_revision == revision
+            else event.model_copy(update={"model_revision": revision})
+            for event in events
+        ]
+    scores = method_scores(
+        features, usable, method, temporal_weights, calibration.get("occupancy"), spatial_info=info
+    )
+    return decode_events(
+        scores,
+        usable,
+        births,
+        info,
+        settings,
+        model_revision=revision,
+        record_origin=record_origin,
+        retrospective=method == "sn7_retrospective",
+    )
 
 
 def reconstruct(
@@ -318,20 +412,32 @@ def reconstruct(
     info = json.loads((feature_dir / "sites.json").read_text())
     calibration = json.loads(calibration_path.read_text()) if calibration_path else {}
     settings = _method_decoder(method, calibration, decoder)
-    base_revision = model_revision or _method_revision(info, method, temporal_weights, event_gate_weights)
+    base_revision = model_revision or _method_revision(
+        info, method, temporal_weights, event_gate_weights
+    )
     with np.load(feature_dir / "features.npz") as features:
         events = method_events(
-            features["x"], features["usable"], features["births"], info, method,
-            temporal_weights=temporal_weights, event_gate_weights=event_gate_weights,
-            calibration=calibration, decoder=decoder, model_revision=base_revision,
+            features["x"],
+            features["usable"],
+            features["births"],
+            info,
+            method,
+            temporal_weights=temporal_weights,
+            event_gate_weights=event_gate_weights,
+            calibration=calibration,
+            decoder=decoder,
+            model_revision=base_revision,
         )
-    revision = events[0].model_revision if events else _processing_revision(
-        base_revision, info, method, calibration, settings, temporal_weights, event_gate_weights
+    revision = (
+        events[0].model_revision
+        if events
+        else _processing_revision(
+            base_revision, info, method, calibration, settings, temporal_weights, event_gate_weights
+        )
     )
     output.mkdir(parents=True, exist_ok=True)
     with EventStore(output / "events.duckdb") as store:
-        for event in events:
-            store.append(event)
+        store.append_many(events)
         geojson = store.export_geojson(output / "events.geojson", include_retracted=True)
         parquet = store.export_parquet(output / "events.parquet", include_retracted=True)
         snapshot = store.snapshot_time()
@@ -368,7 +474,9 @@ def reconstruct(
         ],
     }
     if method in GATE_METHODS:
-        report["event_gate_weights_sha256"] = sha256(event_gate_weights) if event_gate_weights else None
+        report["event_gate_weights_sha256"] = (
+            sha256(event_gate_weights) if event_gate_weights else None
+        )
         report["event_gate_parameters"] = calibration.get("event_gates", {}).get(method, {})
     (output / "run.json").write_text(json.dumps(report, indent=2) + "\n")
     return report

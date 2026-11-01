@@ -15,9 +15,11 @@ PROTOCOL_FILES = [
     "src/terradelta/acquire.py",
     "src/terradelta/data.py",
     "src/terradelta/spatial.py",
+    "src/terradelta/pretrained_spatial.py",
     "src/terradelta/features.py",
     "src/terradelta/temporal.py",
     "src/terradelta/event_gate.py",
+    "src/terradelta/contracts.py",
     "src/terradelta/decoder.py",
     "src/terradelta/pipeline.py",
     "src/terradelta/evaluation.py",
@@ -27,6 +29,8 @@ PROTOCOL_FILES = [
     "src/terradelta/cli.py",
     "src/terradelta/protocol.py",
     "scripts/train_spatial.py",
+    "scripts/train_spatial_pretrained.py",
+    "scripts/select_spatial_inference.py",
     "scripts/train_temporal.py",
     "scripts/train_event_gate.py",
     "scripts/calibrate.py",
@@ -66,13 +70,38 @@ def experiment_boundary(
     Host-local image paths are excluded from semantic metadata hashing.
     """
     settings = json.loads(config.read_text())
+    from .contracts import (
+        assert_calibration, preflight_heads, preflight_implementation,
+        preflight_spatial_checkpoint, study_binding,
+    )
+
+    spatial_binding = study_binding(settings)
     if settings.get("event_gate") and event_gate_weights is None:
         raise ValueError("Event-gate experiment requires frozen gate weights")
+    identity = preflight_spatial_checkpoint(spatial_weights, spatial_binding)
+    model_info = spatial_binding if spatial_binding is not None else identity
+    if spatial_binding is not None:
+        preflight_implementation(spatial_binding)
+    preflight_heads(
+        model_info, temporal_weights=temporal_weights, event_gate_weights=event_gate_weights,
+        temporal_kinds=("observation", "no_quality", "watch_lstm"),
+        require_bound=spatial_binding is not None,
+        config_sha256=sha256(config) if spatial_binding is not None else None,
+    )
+    assert_calibration(
+        model_info, json.loads(calibration.read_text()), temporal_weights=temporal_weights,
+        event_gate_weights=event_gate_weights, require_bound=spatial_binding is not None,
+        config_sha256=sha256(config) if spatial_binding is not None else None,
+    )
     inputs = {}
     for region in regions:
         feature = features_root / region
         cache = cache_root / region
         info = validate_feature_protocol(feature, supervision=False)
+        if spatial_binding is not None:
+            from .event_gate import assert_spatial_provenance
+
+            assert_spatial_provenance(info, spatial_binding)
         metadata = json.loads((cache / "metadata.json").read_text())
         if info.get("region_id") != region or metadata.get("region_id") != region:
             raise ValueError(f"Frozen region identities disagree: {region}")
@@ -91,7 +120,8 @@ def experiment_boundary(
             "probability_sha256": info["probability_sha256"],
         }
     return {
-        "format": "terradelta-full-freeze-v3",
+        "format": "terradelta-full-freeze-v4",
+        "spatial_provenance": spatial_binding,
         "event_gate_weights_sha256": sha256(event_gate_weights) if event_gate_weights else None,
         "temporal_weights_sha256": sha256(temporal_weights),
         "spatial_weights_sha256": sha256(spatial_weights),
@@ -121,6 +151,15 @@ def validate_experiment(path: Path | None, **kwargs) -> dict:
     frozen = json.loads(path.read_text())
     if not frozen.get("frozen_at"):
         raise ValueError("Missing freeze timestamp")
+    for argument, key in (
+        ("spatial_weights", "spatial_weights_sha256"),
+        ("temporal_weights", "temporal_weights_sha256"),
+        ("event_gate_weights", "event_gate_weights_sha256"),
+        ("calibration", "calibration_sha256"), ("config", "config_sha256"),
+    ):
+        artifact = kwargs.get(argument)
+        if frozen.get(key) != (sha256(artifact) if artifact is not None else None):
+            raise ValueError(f"Frozen experiment mismatch: {key}")
     current = experiment_boundary(**kwargs)
     for key, value in current.items():
         if frozen.get(key) != value:

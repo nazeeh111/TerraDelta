@@ -6,7 +6,10 @@ import torch
 from torch import nn
 
 from terradelta.spatial import (
-    BuildingUNet, load_model, masked_segmentation_loss, predict_scene,
+    BuildingUNet,
+    load_model,
+    masked_segmentation_loss,
+    predict_scene,
 )
 
 
@@ -19,8 +22,14 @@ def test_native_odd_shape_and_checkpoint(tmp_path: Path):
         expected = model(x)
     assert expected.shape == (1, 2, 27, 39)
     path = tmp_path / "weights.pt"
-    torch.save({"format": "terradelta-spatial-v1", "architecture": {"base_channels": 2},
-                "state_dict": model.state_dict()}, path)
+    torch.save(
+        {
+            "format": "terradelta-spatial-v1",
+            "architecture": {"base_channels": 2},
+            "state_dict": model.state_dict(),
+        },
+        path,
+    )
     actual = load_model(path)(x)
     torch.testing.assert_close(actual, expected)
 
@@ -41,8 +50,9 @@ def test_invalid_pixels_never_change_loss_or_gradient():
 
 def test_fully_unobserved_patch_has_zero_differentiable_loss():
     logits = torch.randn((2, 2, 8, 8), requires_grad=True)
-    loss = masked_segmentation_loss(logits, torch.ones_like(logits),
-                                    torch.zeros((2, 8, 8), dtype=torch.bool))
+    loss = masked_segmentation_loss(
+        logits, torch.ones_like(logits), torch.zeros((2, 8, 8), dtype=torch.bool)
+    )
     assert loss.item() == 0
     loss.backward()
     assert torch.count_nonzero(logits.grad) == 0
@@ -63,8 +73,9 @@ def test_overlap_stitching_preserves_all_pixels_without_seams():
     assert actual.dtype == np.float32
     assert actual.shape == (2, 83, 109)
     np.testing.assert_allclose(actual, expected, atol=2e-7)
-    np.testing.assert_allclose(predict_scene(model, rgb[:, :7, :9], tile_size=32),
-                               expected[:, :7, :9], atol=2e-7)
+    np.testing.assert_allclose(
+        predict_scene(model, rgb[:, :7, :9], tile_size=32), expected[:, :7, :9], atol=2e-7
+    )
 
 
 def test_inference_rejects_ambiguous_band_contract():
@@ -86,8 +97,14 @@ def test_unet_context_tiles_match_single_scene_on_pooling_grid(input_scale):
 
 def test_scaled_native_probabilities_are_arithmetic_cell_means(monkeypatch):
     model = BuildingUNet(base_channels=2, input_scale=2)
-    cells = torch.tensor([[[[0.1, 0.3, 0.2, 0.6], [0.5, 0.7, 0.4, 0.8]],
-                           [[0.9, 0.7, 0.8, 0.4], [0.5, 0.3, 0.6, 0.2]]]])
+    cells = torch.tensor(
+        [
+            [
+                [[0.1, 0.3, 0.2, 0.6], [0.5, 0.7, 0.4, 0.8]],
+                [[0.9, 0.7, 0.8, 0.4], [0.5, 0.3, 0.6, 0.2]],
+            ]
+        ]
+    )
     captured = []
 
     def synthetic_grid(image):
@@ -95,11 +112,11 @@ def test_scaled_native_probabilities_are_arithmetic_cell_means(monkeypatch):
         return torch.logit(cells)
 
     monkeypatch.setattr(model, "_forward_model_grid", synthetic_grid)
-    image = torch.tensor([[[[0., 1.]], [[0., 1.]], [[0., 1.]]]])
+    image = torch.tensor([[[[0.0, 1.0]], [[0.0, 1.0]], [[0.0, 1.0]]]])
     probabilities = model(image).sigmoid()
     torch.testing.assert_close(probabilities, torch.tensor([[[[0.4, 0.5]], [[0.6, 0.5]]]]))
     assert captured[0].shape == (1, 3, 2, 4)
-    torch.testing.assert_close(captured[0][0, 0, 0], torch.tensor([0., 0.25, 0.75, 1.]))
+    torch.testing.assert_close(captured[0][0, 0, 0], torch.tensor([0.0, 0.25, 0.75, 1.0]))
 
 
 def test_scaled_checkpoint_and_changed_input(tmp_path):
@@ -107,9 +124,14 @@ def test_scaled_checkpoint_and_changed_input(tmp_path):
     torch.manual_seed(73)
     model = BuildingUNet(base_channels=2, input_scale=2).eval()
     path = tmp_path / "scaled.pt"
-    torch.save({"format": "terradelta-spatial-v2",
-                "architecture": {"base_channels": 2, "input_scale": 2},
-                "state_dict": model.state_dict()}, path)
+    torch.save(
+        {
+            "format": "terradelta-spatial-v2",
+            "architecture": {"base_channels": 2, "input_scale": 2},
+            "state_dict": model.state_dict(),
+        },
+        path,
+    )
     loaded = load_model(path)
     assert loaded.input_scale == 2
     rng = np.random.default_rng(81)
@@ -119,3 +141,29 @@ def test_scaled_checkpoint_and_changed_input(tmp_path):
     assert a.shape == (2, 31, 39)
     assert np.isfinite(a).all() and a.min() >= 0 and a.max() <= 1
     assert np.max(np.abs(a - b)) > 1e-7
+
+
+def test_tiled_encoder_keeps_native_pooling_phase_on_odd_scene():
+    from torch import nn
+    from terradelta.spatial import predict_scene
+
+    class PhaseProbe(nn.Module):
+        native_alignment = 16
+
+        def __init__(self):
+            super().__init__()
+            self.origins = []
+
+        def forward(self, x):
+            self.origins.append(
+                (round(float(x[0, 0, 0, 0]) * 255), round(float(x[0, 1, 0, 0]) * 255))
+            )
+            return torch.zeros((len(x), 2, *x.shape[-2:]))
+
+    rows, cols = np.indices((149, 173), dtype="uint8")
+    image = np.stack([cols, rows, np.zeros_like(rows)])
+    model = PhaseProbe()
+    prediction = predict_scene(model, image, tile_size=64)
+    assert len(model.origins) > 1
+    assert all(x % 16 == y % 16 == 0 for x, y in model.origins)
+    np.testing.assert_array_equal(prediction, np.full((2, 149, 173), 0.5, dtype="float32"))

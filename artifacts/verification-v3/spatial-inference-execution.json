@@ -1,0 +1,77 @@
+{
+  "format": "terradelta-dev-inference-execution-freeze-v1",
+  "created_at": "2026-10-30T00:52:06.119144+00:00",
+  "status": "frozen_before_native_DEV_instance_metric_outcomes",
+  "original_plan_path": "/Users/nazeeh/Documents/ChatGPT/Continue/terradelta-task/inference-selection-v3/selection-plan.json",
+  "original_plan_sha256": "bea2f12a117a46693c649abf8653af91658680df4d51c682c8ec49546fd79e68",
+  "execution_plan_path": "/Users/nazeeh/Documents/ChatGPT/Continue/terradelta-task/inference-selection-v3-recovered-v1/selection-plan.json",
+  "execution_plan_sha256": "cb457b6261b2baa21fbb66feb31623b395c3d8aa0bf5c70e53bd3956780db3fc",
+  "plan_differences": [
+    "created_at",
+    "source_sha256"
+  ],
+  "same_scenes_grid_metrics_aggregation_tiebreaks_input_hashes": true,
+  "source_identity_changes": [
+    "scripts/select_spatial_inference.py",
+    "src/terradelta/features.py"
+  ],
+  "feature_difference": "Only prepare_features metadata forwarding of spatial_inference; removing exactly that line reproduces original prospective feature source SHA",
+  "source_sha256": {
+    "scripts/select_spatial_inference.py": "217bdc0150aacdf36027ff4fa51c4c9bdf077e2f4158566675da702a6f1ae24f",
+    "src/terradelta/pretrained_spatial.py": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503",
+    "src/terradelta/spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff",
+    "src/terradelta/features.py": "c8495e7664659e1916157e8de76f8389f5c02e302967e108d6f4be3f4b29731d",
+    "src/terradelta/data.py": "0e1fa709eb635191101ce1b9e2e669bb3ea04e50d3a1ac51cabdf0de489d02ea",
+    "src/terradelta/schema.py": "9500c25425e546e7a895c9e2e4bbe333e1ef7c93b0eec0fa330aefa98339ebb1"
+  },
+  "fit_recovery_receipt_path": "/Users/nazeeh/Documents/ChatGPT/Continue/terradelta-task/spatial-v3-fit-audit.json",
+  "fit_recovery_receipt_sha256": "abe8aebe0fa5a33ab443dd986c5a0aa444fd0e7da4d4adfa87a6ba16122f5e49",
+  "fit_artifact_sha256": {
+    "checkpoint": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+    "final_trace": "a6f157762c5c35a1cbe6c305f9d46333de8884c71f078504283aa238b5d63ef8",
+    "log": "41f573dcfa12ee7dbf490c5195fd48598a7b4bddc8163af9e894c9f1dba8fdf2",
+    "config": "59433571ca28a99b635fb699362e0e1a91d958c2dd403a3f69e9156fdd6ed881"
+  },
+  "decoder_sha256": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+  "backbone_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+  "command": [
+    "/Users/nazeeh/Documents/ChatGPT/Continue/terradelta-task/.venv/bin/python",
+    "/Users/nazeeh/Documents/ChatGPT/Github/TerraDelta/scripts/select_spatial_inference.py",
+    "run",
+    "--cache",
+    "/Users/nazeeh/Documents/ChatGPT/Continue/terradelta-task/cache-v3",
+    "--config",
+    "/Users/nazeeh/Documents/ChatGPT/Github/TerraDelta/configs/experiment-v5.json",
+    "--weights",
+    "/Users/nazeeh/Documents/ChatGPT/Github/TerraDelta/artifacts/spatial-v3.pt",
+    "--backbone",
+    "/Users/nazeeh/Documents/ChatGPT/Continue/terradelta-task/pretrained/resnet18-f37072fd.pth",
+    "--output",
+    "/Users/nazeeh/Documents/ChatGPT/Continue/terradelta-task/inference-selection-v3-recovered-v1",
+    "--device",
+    "mps",
+    "--fit-completed",
+    "--fit-recovery-receipt",
+    "/Users/nazeeh/Documents/ChatGPT/Continue/terradelta-task/spatial-v3-fit-audit.json"
+  ],
+  "watchdog_path": "/Users/nazeeh/Documents/ChatGPT/Continue/terradelta-task/inference-selection-v3-recovered-v1/evidence/run_watchdog.py",
+  "watchdog_sha256": "5cbf3b2ed1c7c9c28b7a0ebd2c4d46354b832bec89a8d936584a39c33cab00c3",
+  "hard_outer_wall_seconds": 1800,
+  "inner_wall_seconds": 1800,
+  "device": "mps",
+  "cpu_threads": 2,
+  "native_alignment": 16,
+  "versions": {
+    "torch": "2.9.1",
+    "torchvision": "0.24.1",
+    "numpy": "2.2.6",
+    "scipy": "1.16.3",
+    "scikit-image": "0.25.2"
+  },
+  "python": "3.12.13 (main, Jun  2 2026, 22:42:28) [Clang 22.1.3 ]",
+  "platform": "macOS-27.2-arm64-arm-64bit",
+  "accelerator_ownership": "Parent confirms no other MPS job; fit has terminated at the source guard",
+  "source_valid_policy": "Exclude truth objects with <80% valid source area, audit exclusions, count all predicted instances without label-assisted ignore masks",
+  "confirmation_or_audit_arrays_opened": false,
+  "completion_policy": "Require all 32 scene/tile predictions and 128 threshold rows; any error or deadline yields no selected parameters"
+}

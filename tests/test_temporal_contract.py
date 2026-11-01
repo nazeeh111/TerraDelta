@@ -1,10 +1,48 @@
 from datetime import datetime, timezone
 import numpy as np
+import pytest
 import torch
 
 from terradelta.decoder import DecoderConfig, decode_events
 from terradelta.features import candidate_sites, feature_cube
-from terradelta.temporal import ObservationTransition, WatchLSTM, causal_smooth, hmm_filter
+from terradelta.temporal import (
+    TEMPORAL_NUMERICS,
+    ObservationTransition,
+    WatchLSTM,
+    causal_smooth,
+    hmm_filter,
+    make_temporal,
+    predict_temporal,
+    load_temporal,
+)
+
+
+def test_temporal_checkpoint_rejects_mixed_spatial_models_before_loading_parameters(tmp_path):
+    binding = {
+        "spatial_weights_sha256": "a" * 64,
+        "candidate_threshold": 0.55,
+        "spatial_backbone_sha256": "b" * 64,
+        "spatial_inference": {
+            "tile_size": 128, "context_halo_native_pixels": 64,
+            "native_alignment": 16, "internal_input_scale": 2,
+            "implementation_sha256": {"spatial.py": "c" * 64, "pretrained_spatial.py": "e" * 64},
+        },
+    }
+    path = tmp_path / "temporal.pt"
+    torch.save({"format": "terradelta-temporal-v1", "spatial_provenance": binding}, path)
+    with pytest.raises(ValueError, match="requires spatial feature provenance"):
+        load_temporal(path)
+    with pytest.raises(ValueError, match="spatial model/backbone/inference"):
+        load_temporal(path, spatial_info=binding | {"spatial_weights_sha256": "d" * 64})
+    model = make_temporal("observation")
+    torch.save({"format": "terradelta-temporal-v1", "spatial_provenance": binding,
+                "models": {"observation": model.state_dict()}}, path)
+    loaded = load_temporal(path, spatial_info=binding)
+    for key, value in model.state_dict().items():
+        torch.testing.assert_close(loaded.state_dict()[key], value, rtol=0, atol=0)
+    torch.save({"format": "terradelta-temporal-v1"}, path)
+    with pytest.raises(ValueError, match="Legacy temporal"):
+        load_temporal(path, spatial_info=binding)
 
 
 def info(months=8):
@@ -110,6 +148,84 @@ def test_learned_methods_causal_and_skip_unknown():
     with torch.inference_mode():
         out = model(x, good)
     torch.testing.assert_close(out[:, 2], out[:, 5])
+
+
+@pytest.mark.parametrize("kind", ["observation", "no_quality", "watch_lstm"])
+@pytest.mark.parametrize("sites,prefix_sites", [(17, 11), (513, 500), (1025, 519)])
+def test_fixed_site_batches_preserve_exact_learned_prefixes(kind, sites, prefix_sites):
+    """Future site births must not change earlier arithmetic or event confidence."""
+    previous_threads = torch.get_num_threads()
+    torch.set_num_threads(2)
+    try:
+        torch.manual_seed(2901)
+        model = make_temporal(kind, spatial_residual=False)
+        # Exercise nonzero learned emissions and recurrent states. The initial
+        # zero GRU head would hide the terminal-batch rounding regression.
+        with torch.no_grad():
+            for parameter in model.parameters():
+                parameter.normal_(0, 0.2)
+
+        def require_fixed_site_batch(_model, inputs):
+            # Assert the versioned numerical contract even when a particular
+            # set of weights happens to round two batch heights identically.
+            assert inputs[0].shape[0] == inputs[1].shape[0] == 512
+
+        model.register_forward_pre_hook(require_fixed_site_batch)
+        rng = np.random.default_rng(2901)
+        x = rng.normal(size=(sites, 8, 17)).astype("float32")
+        usable = np.ones((sites, 8), bool)
+        usable[::7, 2] = False
+        cutoff = 4
+        full = predict_temporal(model, x, usable)
+        short = predict_temporal(model, x[:prefix_sites, :cutoff],
+                                 usable[:prefix_sites, :cutoff])
+        edited_x, edited_usable = x.copy(), usable.copy()
+        edited_x[:, cutoff:] *= -3
+        edited_usable[:, cutoff::2] = False
+        edited = predict_temporal(model, edited_x, edited_usable)
+        assert full.shape == (sites, 8)
+        np.testing.assert_array_equal(full[:prefix_sites, :cutoff], short)
+        np.testing.assert_array_equal(full[:, :cutoff], edited[:, :cutoff])
+
+        context = info(8)
+        context["geometries"] = {
+            str(site): context["geometries"]["1"] for site in range(1, sites + 1)
+        }
+        births = np.where(np.arange(sites) < prefix_sites, 0, cutoff)
+        prefix_context = {
+            **context,
+            "metadata": {"frames": context["metadata"]["frames"][:cutoff]},
+            "geometries": {str(site): context["geometries"][str(site)]
+                           for site in range(1, prefix_sites + 1)},
+        }
+        settings = DecoderConfig(threshold=0.5, confirmations=1, minimum_dwell_days=0)
+        kwargs = dict(config=settings, record_origin=datetime(2026, 1, 1,
+                                                            tzinfo=timezone.utc))
+        long_events = decode_events(full, usable, births, context, **kwargs)
+        short_events = decode_events(short, usable[:prefix_sites, :cutoff],
+                                     births[:prefix_sites], prefix_context, **kwargs)
+        edited_events = decode_events(edited, edited_usable, births, context, **kwargs)
+        def historical(events):
+            return [event.model_dump(mode="json") for event in events
+                    if event.detected_at.month <= cutoff]
+
+        before = historical(long_events)
+        assert before  # Include real proposals/confidences, not only empty histories.
+        assert before == historical(short_events)
+        assert before == historical(edited_events)
+    finally:
+        torch.set_num_threads(previous_threads)
+
+
+def test_fixed_site_batch_protocol_keeps_empty_shape_and_rejects_other_sizes():
+    assert TEMPORAL_NUMERICS == "fixed512-site-batch-v2"
+    x = np.empty((0, 8, 17), dtype="float32")
+    usable = np.empty((0, 8), dtype=bool)
+    result = predict_temporal(ObservationTransition(), x, usable)
+    assert result.shape == (0, 8)
+    assert result.dtype == np.float32
+    with pytest.raises(ValueError, match="requires batch_size=512"):
+        predict_temporal(ObservationTransition(), x, usable, batch_size=256)
 
 
 def test_smoothing_and_hmm_do_not_update_on_invalid_pixels():

@@ -1,5 +1,6 @@
 from dataclasses import asdict
 from datetime import datetime, timezone
+from pathlib import Path
 import json
 
 import geopandas as gpd
@@ -63,7 +64,8 @@ def test_dispatch_all_twelve_methods_keeps_gates_out_of_occupancy_scores(tmp_pat
     weights = gate_weights(tmp_path / "gate.pt")
     scored = []
 
-    def occupancy(features, mask, method, temporal_weights=None, calibration=None):
+    def occupancy(features, mask, method, temporal_weights=None, calibration=None, *, spatial_info=None):
+        assert spatial_info is info
         scored.append(method)
         return features[:, :, 0]
 
@@ -103,8 +105,8 @@ def test_full_calibration_namespaces_and_frozen_raw_policy(tmp_path):
 
 def test_processing_revision_binds_calibration_and_decoder_even_with_custom_label():
     x, usable, births, info = fixture_inputs()
-    first = {"occupancy": {"pairwise": {"scale": 1., "bias": 0.}}, "version": "unit"}
-    reordered = {"version": "unit", "occupancy": {"pairwise": {"bias": 0., "scale": 1.}}}
+    first = {"occupancy": {"pairwise": {"scale": 1., "bias": 0.}}, "version": "unit", "decoder": {}}
+    reordered = {"decoder": {}, "version": "unit", "occupancy": {"pairwise": {"bias": 0., "scale": 1.}}}
     common = dict(method="pairwise", model_revision="custom-label", record_origin=ORIGIN)
     a = pipeline.method_events(x, usable, births, info, calibration=first, **common)
     b = pipeline.method_events(x, usable, births, info, calibration=reordered, **common)
@@ -164,8 +166,12 @@ def test_gate_only_reconstruct_exports_revisions_and_closes_store_without_truth(
 
 def test_cli_defaults_to_gate_and_missing_weights_fail_before_compute(tmp_path, monkeypatch):
     from terradelta import features
+    from terradelta import contracts
+    (tmp_path / "calibration.json").write_text("{}")
+    (tmp_path / "spatial.pt").write_bytes(b"mocked prediction input")
 
     called = []
+    monkeypatch.setattr(contracts, "preflight_heads", lambda *a, **kw: called.append("heads"))
     monkeypatch.setattr(pipeline, "predict_sequence", lambda *args, **kwargs: called.append("predict"))
     monkeypatch.setattr(features, "prepare_features", lambda *args, **kwargs: called.append("features"))
 
@@ -181,7 +187,57 @@ def test_cli_defaults_to_gate_and_missing_weights_fail_before_compute(tmp_path, 
     assert result.exit_code == 0, result.output
     assert called[-1]["method"] == "observation_gate"
     assert called[-1]["event_gate_weights"] == tmp_path / "gate.pt"
+    assert called[0] == "heads"
     called.clear()
     result = runner.invoke(app, [*args[:-1], str(tmp_path / "other")])
     assert result.exit_code == 2 and "--temporal-weights" in result.output
     assert not called
+
+
+def test_cli_uses_bound_tile_and_candidate_policy_and_rejects_source_drift(tmp_path, monkeypatch):
+    from terradelta import features
+    from terradelta.data import sha256
+
+    spatial = tmp_path / "spatial.pt"
+    spatial.write_bytes(b"mocked inference checkpoint")
+    binding = {
+        "spatial_weights_sha256": sha256(spatial), "spatial_backbone_sha256": None,
+        "candidate_threshold": 0.55,
+        "spatial_inference": {
+            "tile_size": 128, "context_halo_native_pixels": 64,
+            "native_alignment": 8, "internal_input_scale": 2,
+            "implementation_sha256": {
+                "spatial.py": sha256(Path(pipeline.__file__).with_name("spatial.py")),
+            },
+        },
+    }
+    calibration = tmp_path / "calibration.json"
+    calibration.write_text(json.dumps({"spatial_provenance": binding,
+                                       "occupancy": {"pairwise": {"scale": 1., "bias": 0.}},
+                                       "decoders": {"pairwise": {}},
+                                       "spatial_weights_sha256": binding["spatial_weights_sha256"]}))
+    calls = []
+
+    def predict(*args, **kwargs):
+        calls.append(("predict", kwargs))
+        return {key: value for key, value in binding.items() if key != "candidate_threshold"}
+
+    monkeypatch.setattr(pipeline, "predict_sequence", predict)
+    monkeypatch.setattr(features, "prepare_features", lambda *a, **kw: calls.append(("features", kw)))
+    monkeypatch.setattr(pipeline, "reconstruct", lambda *a, **kw: {"method": kw["method"]})
+    args = ["run", str(tmp_path / "cache"), "--spatial-weights", str(spatial),
+            "--calibration", str(calibration), "--method", "pairwise", "--output"]
+    runner = CliRunner()
+    result = runner.invoke(app, args + [str(tmp_path / "bound")])
+    assert result.exit_code == 0, result.exception
+    assert calls[0][1]["tile_size"] == 128
+    assert calls[1][1]["threshold"] == 0.55
+    calls.clear()
+    binding["spatial_inference"]["implementation_sha256"]["spatial.py"] = "d" * 64
+    calibration.write_text(json.dumps({"spatial_provenance": binding,
+                                       "occupancy": {"pairwise": {"scale": 1., "bias": 0.}},
+                                       "decoders": {"pairwise": {}},
+                                       "spatial_weights_sha256": binding["spatial_weights_sha256"]}))
+    result = runner.invoke(app, args + [str(tmp_path / "rejected")])
+    assert result.exit_code == 2 and "source differs" in result.output
+    assert not calls and not (tmp_path / "rejected").exists()

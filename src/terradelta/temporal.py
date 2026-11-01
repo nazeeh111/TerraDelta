@@ -9,6 +9,8 @@ from torch import nn
 
 from .features import FEATURE_NAMES, QUALITY_COLUMNS
 
+TEMPORAL_NUMERICS = "fixed512-site-batch-v2"
+
 
 class ObservationTransition(nn.Module):
     """Compact recurrent occupancy/transition emissions, with masked state updates.
@@ -97,21 +99,51 @@ def make_temporal(kind: str, *, spatial_residual: bool = True) -> nn.Module:
 def predict_temporal(
     model: nn.Module, x: np.ndarray, usable: np.ndarray, batch_size: int = 512
 ) -> np.ndarray:
+    """Keep site-batch arithmetic independent of how many future sites exist.
+
+    The CPU linear kernels can round a partial batch differently from a full
+    batch. Masked zero rows keep the numerical protocol fixed; they are removed
+    before returning scores. Other batch sizes require a different protocol.
+    """
+    if batch_size != 512:
+        raise ValueError(f"{TEMPORAL_NUMERICS} requires batch_size=512")
     model.eval()
     results = []
     for start in range(0, len(x), batch_size):
+        count = min(batch_size, len(x) - start)
+        batch_x = np.zeros((batch_size, *x.shape[1:]), dtype=x.dtype)
+        batch_usable = np.zeros((batch_size, *usable.shape[1:]), dtype=usable.dtype)
+        batch_x[:count] = x[start : start + count]
+        batch_usable[:count] = usable[start : start + count]
         logits = model(
-            torch.tensor(x[start : start + batch_size]),
-            torch.tensor(usable[start : start + batch_size]),
+            torch.tensor(batch_x),
+            torch.tensor(batch_usable),
         )
-        results.append(logits[:, :, 0].sigmoid().numpy())
+        results.append(logits[:count, :, 0].sigmoid().numpy())
     return np.concatenate(results) if results else np.empty(usable.shape, dtype="float32")
 
 
-def load_temporal(path: Path, kind: str = "observation") -> nn.Module:
+def load_temporal(path: Path, kind: str = "observation", *, spatial_info=None) -> nn.Module:
     state = torch.load(path, map_location="cpu", weights_only=True)
     if state.get("format") != "terradelta-temporal-v1":
         raise ValueError("Unsupported temporal checkpoint format")
+    binding = state.get("spatial_provenance")
+    if binding is not None:
+        from .event_gate import assert_spatial_provenance
+
+        if spatial_info is None:
+            raise ValueError("Bound temporal checkpoint requires spatial feature provenance")
+        assert_spatial_provenance(spatial_info, binding)
+    elif spatial_info and spatial_info.get("spatial_backbone_sha256") is not None:
+        raise ValueError("Legacy temporal checkpoint does not support this pretrained backbone")
+    elif spatial_info is not None:
+        from .event_gate import assert_legacy_spatial_compatibility
+
+        if spatial_info.get("spatial_weights_sha256") != (
+            "7ab95679a2009918dbab62fca64244476df519080cb8c0d376c00d1494983886"
+        ):
+            raise ValueError("Legacy temporal checkpoint requires the recognized spatial-v2 identity")
+        assert_legacy_spatial_compatibility(spatial_info)
     model = make_temporal(
         kind, spatial_residual=state.get("model_config", {}).get("spatial_residual", True)
     )

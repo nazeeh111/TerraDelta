@@ -20,5 +20,6 @@ jobs:
       - run: uv sync --frozen --extra ml --extra dev
       - run: uv run ruff check src scripts tests
       - run: uv run pytest -q
+      - run: node tests/ui_query_regression.cjs
       - run: uv run terradelta --help
       - run: uv run python -m build

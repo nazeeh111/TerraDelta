@@ -114,7 +114,7 @@ def calibrate(probability, truth, valid):
         "success": bool(fit.success),
         "brier": float(np.mean((calibrated - labels) ** 2)),
         "reliability_bins": bins,
-        "meaning": "occupancy calibration on two development AOIs; not event correctness or arbitrary-shift guarantee",
+        "meaning": "occupancy calibration on development AOIs; not event correctness or arbitrary-shift guarantee",
     }
 
 
@@ -148,6 +148,20 @@ def main():
     torch.manual_seed(config["seed"])
     rng = np.random.default_rng(config["seed"])
     physical = config.get("truth_protocol") == "physical_coverage_v2"
+    from terradelta.contracts import preflight_manifests, study_binding
+
+    if any(set(config.get(a, [])) & set(config.get(b, [])) for a, b in (
+        ("train", "development"), ("train", "confirmation"), ("development", "confirmation"),
+    )):
+        raise ValueError("geographic split overlap")
+    spatial_binding = study_binding(config)
+    if spatial_binding is not None:
+        if args.cache_root is None:
+            raise ValueError("Bound study requires --cache-root observation preflight")
+        preflight_manifests(
+            args.features, args.cache_root, config["train"] + config["development"],
+            spatial_binding, supervision=True,
+        )
     train = load_split(args.features, config["train"], physical_supervision=physical)
     dev = load_split(args.features, config["development"], physical_supervision=physical)
     event_selection = config.get("temporal_selection") == "event_62d"
@@ -289,6 +303,7 @@ def main():
             "models": models,
             "feature_names": FEATURE_NAMES,
             "model_config": {"spatial_residual": config.get("temporal_spatial_residual", True)},
+            "spatial_provenance": spatial_binding,
             "config_sha256": sha256(args.config),
             "train_regions": config["train"],
             "development_regions": config["development"],

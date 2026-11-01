@@ -1,0 +1,35 @@
+{
+  "region_id": "L15-0457E-1135N_1831_3648_13",
+  "method": "no_quality",
+  "torch_threads": 4,
+  "full_sites": 7759,
+  "prefix_sites": 6524,
+  "prefix_observations": 12,
+  "prefix_features_exact": true,
+  "feature_max_abs_difference": 0.0,
+  "score_max_abs_difference": 3.5762786865234375e-07,
+  "score_changed_cells": 1100,
+  "score_changed_row_count": 363,
+  "changed_rows_min_max": [
+    6144,
+    6523
+  ],
+  "prefix_last_batch_start": 6144,
+  "prefix_last_batch_size": 380,
+  "full_history_length": 764,
+  "prefix_history_length": 764,
+  "difference_count": 1,
+  "differing_paths": [
+    "/confidence"
+  ],
+  "differences": [
+    {
+      "revision_index": 762,
+      "event_id": "td-27c54267578fe4dbde6f",
+      "path": "/confidence",
+      "full": 0.5502011775970459,
+      "prefix": 0.5502012968063354,
+      "abs_difference": 1.1920928955078125e-07
+    }
+  ]
+}

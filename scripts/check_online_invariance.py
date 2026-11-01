@@ -112,14 +112,16 @@ def main():
         for method in methods_to_check:
             if method in OCCUPANCY_METHODS:
                 scores = method_scores(
-                    full["x"], full["usable"], method, args.weights, cal["occupancy"]
+                    full["x"], full["usable"], method, args.weights, cal["occupancy"], spatial_info=info
                 )
-                short_scores = method_scores(x, usable, method, args.weights, cal["occupancy"])
+                short_scores = method_scores(
+                    x, usable, method, args.weights, cal["occupancy"], spatial_info=prefix_info
+                )
                 np.testing.assert_allclose(
                     scores[: len(births), :cutoff], short_scores, atol=2e-6, rtol=1e-5
                 )
                 edited_scores = method_scores(
-                    altered, altered_usable, method, args.weights, cal["occupancy"]
+                    altered, altered_usable, method, args.weights, cal["occupancy"], spatial_info=info
                 )
                 np.testing.assert_allclose(
                     scores[:, :cutoff], edited_scores[:, :cutoff], atol=1e-7, rtol=1e-6

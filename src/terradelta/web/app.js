@@ -4,7 +4,8 @@
   const $ = (id) => document.getElementById(id);
   const stateNames = { proposed: "Proposed", confirmed_by_model: "Model confirmed", reviewed: "Reviewed", retracted: "Retracted" };
   const stateColors = { proposed: "#b17c27", confirmed_by_model: "#75be80", reviewed: "#78b3db", retracted: "#d98069" };
-  const state = { catalog: null, region: null, frameIndex: 0, features: [], selected: null, snapshot: null, paths: [], querySequence: 0, historySequence: 0, imageSequence: 0, imageLoaded: false };
+  const eventsPerPage = 100;
+  const state = { catalog: null, region: null, frameIndex: 0, features: [], eventPage: 0, selected: null, snapshot: null, paths: [], querySequence: 0, historySequence: 0, imageSequence: 0, imageLoaded: false, queryController: null, includeRetractedPreference: $("include-retracted").checked };
   const element = (tag, attrs = {}, children = []) => {
     const node = document.createElement(tag);
     Object.entries(attrs).forEach(([key, value]) => {
@@ -45,8 +46,8 @@
       return ["https:", "http:"].includes(url.protocol) && !url.username && !url.password ? url.href : null;
     } catch { return null; }
   };
-  async function getJSON(url) {
-    const response = await fetch(url, { headers: { Accept: "application/json" }, cache: "no-store" });
+  async function getJSON(url, options = {}) {
+    const response = await fetch(url, { headers: { Accept: "application/json" }, cache: "no-store", ...options });
     if (!response.ok) {
       let detail = `Request failed (${response.status}).`;
       try {
@@ -71,7 +72,9 @@
     const start = $("start").value, end = $("end").value;
     if (!state.region || !start || !end) throw new Error("Choose an area and both dates.");
     if (start > end) throw new Error("The starting date must be on or before the ending date.");
-    const params = new URLSearchParams({ region_id: state.region.region_id, start: `${start}T00:00:00+00:00`, end: `${end}T23:59:59+00:00`, include_retracted: String($("include-retracted").checked) });
+    const selectedState = $("state-filter").value;
+    const params = new URLSearchParams({ region_id: state.region.region_id, start: `${start}T00:00:00+00:00`, end: `${end}T23:59:59+00:00`, include_retracted: String(selectedState === "retracted" || $("include-retracted").checked) });
+    if (selectedState !== "all") params.set("state", selectedState);
     const bboxText = $("bbox").value.trim();
     if (bboxText) {
       const box = bboxText.split(",").map((v) => Number(v.trim()));
@@ -97,40 +100,42 @@
     });
   }
   async function queryHistory() {
-    let params;
-    try { params = queryParameters(); }
-    catch (error) { feedback(error.message, true); return; }
     const sequence = ++state.querySequence;
+    state.queryController?.abort();
+    const controller = new AbortController();
+    state.queryController = controller;
+    state.historySequence++;
     $("query-button").disabled = true;
     $("query-button").textContent = "Querying history…";
     $("event-list").setAttribute("aria-busy", "true");
-    state.features = []; state.selected = null; state.snapshot = null;
-    $("event-detail").hidden = true; $("clear-selection").hidden = true;
+    state.features = []; state.eventPage = 0; state.selected = null; state.snapshot = null;
+    setInspectorMode(false);
     $("event-count").textContent = "—";
     $("copy-snapshot").disabled = true;
+    $("snapshot-copy-feedback").textContent = "";
     $("snapshot-status").textContent = "A new history query is pending. No new snapshot has been returned.";
     ["export-geojson", "export-parquet"].forEach((id) => { $(id).removeAttribute("href"); $(id).classList.add("disabled-link"); $(id).setAttribute("aria-disabled", "true"); });
     $("event-list").replaceChildren(emptyState("Reading recorded history…", "Waiting for the local event store."));
     drawOverlay();
-    feedback("Reading the recorded event history…");
     try {
-      const result = await getJSON(`/api/events?${params}`);
+      const params = queryParameters();
+      feedback("Reading the recorded event history…");
+      const result = await getJSON(`/api/events?${params}`, { signal: controller.signal });
       if (sequence !== state.querySequence) return;
       state.features = Array.isArray(result.features) ? result.features : [];
       state.snapshot = result.snapshot_time || result.metadata?.snapshot_time || null;
       state.selected = null;
-      $("event-detail").hidden = true;
-      $("clear-selection").hidden = true;
+      setInspectorMode(false);
       renderEvents();
       drawOverlay();
       enableExports(params, state.snapshot);
       const count = state.features.length;
-      feedback(`${count.toLocaleString()} ${count === 1 ? "event" : "events"} returned for this area and date interval. Inspect coverage before interpreting an empty result.`);
+      feedback(`${count.toLocaleString()} ${count === 1 ? "event" : "events"} returned for this area, date interval and event state. Inspect coverage before interpreting an empty result.`);
       $("snapshot-status").textContent = state.snapshot ? `Recorded answer at ${state.snapshot}. This snapshot token replays the same historical revisions.` : "The ledger has no recorded revision timestamp. No immutable snapshot token is available.";
       $("copy-snapshot").disabled = !state.snapshot;
       $("snapshot-copy-feedback").textContent = "";
     } catch (error) {
-      if (sequence === state.querySequence) {
+      if (sequence === state.querySequence && error.name !== "AbortError") {
         feedback(`${error.message} Check the dates, area and local API, then query again.`, true);
         $("event-list").replaceChildren(emptyState("History could not be loaded.", "No result is being presented for this query. Check the query error and try again."));
         $("event-count").textContent = "—";
@@ -138,6 +143,7 @@
       }
     } finally {
       if (sequence === state.querySequence) {
+        state.queryController = null;
         $("query-button").disabled = false;
         $("query-button").replaceChildren("Query history ", element("span", { "aria-hidden": "true", text: "→" }));
         $("event-list").removeAttribute("aria-busy");
@@ -151,17 +157,29 @@
     const filter = $("state-filter").value;
     return state.features.filter((feature) => filter === "all" || feature.properties?.state === filter);
   }
+  function syncStateChoice() {
+    const explicitlyRetracted = $("state-filter").value === "retracted";
+    $("include-retracted").checked = explicitlyRetracted || state.includeRetractedPreference;
+    $("include-retracted").disabled = explicitlyRetracted;
+  }
   function renderEvents() {
     const features = visibleFeatures();
     $("event-count").textContent = features.length.toLocaleString();
+    const lastPage = Math.max(0, Math.ceil(features.length / eventsPerPage) - 1);
+    state.eventPage = Math.max(0, Math.min(state.eventPage, lastPage));
+    const start = state.eventPage * eventsPerPage;
+    $("event-pagination").hidden = Boolean(state.selected) || !features.length;
+    $("event-page-range").textContent = features.length ? `${(start + 1).toLocaleString()}–${Math.min(start + eventsPerPage, features.length).toLocaleString()} of ${features.length.toLocaleString()} events` : "";
+    $("event-page-previous").disabled = state.eventPage === 0;
+    $("event-page-next").disabled = state.eventPage === lastPage;
     if (!features.length) {
       $("event-list").replaceChildren(emptyState("No supported events returned.", "This does not establish no physical change. Check usable observations, the query period and the model's limits."));
       return;
     }
-    $("event-list").replaceChildren(...features.map((feature) => {
+    $("event-list").replaceChildren(...features.slice(start, start + eventsPerPage).map((feature) => {
       const p = feature.properties || {};
       const id = p.event_id || feature.id;
-      const button = element("button", { type: "button", class: `event-card${state.selected === id ? " selected" : ""}`, "aria-pressed": String(state.selected === id), "aria-label": `${className(p.change_class)}, ${labelState(p.state)}, ${interval(p.observation_interval)}` }, [
+      const button = element("button", { type: "button", class: `event-card${state.selected === id ? " selected" : ""}`, "aria-pressed": String(state.selected === id), "data-event-id": String(id), "aria-label": `${className(p.change_class)}, ${labelState(p.state)}, ${interval(p.observation_interval)}` }, [
         element("span", { class: "event-card-top" }, [element("span", { class: "event-kind", text: className(p.change_class) }), badge(p.state)]),
         element("span", { class: "event-interval", text: interval(p.observation_interval) }),
         element("span", { class: "event-card-bottom" }, [element("span", { text: area(p.area_m2) }), element("span", { class: "event-id", text: `${String(id || "").slice(0, 12)} · r${p.revision || "?"}` })]),
@@ -170,11 +188,62 @@
       return button;
     }));
   }
-  function supportingImages(sources) {
-    const linked = sources.map((source) => ({ source, index: state.region.frames.findIndex((frame) => frame.source_id === source.source_id) })).filter((item) => item.index >= 0);
-    const chosen = linked.length <= 2 ? linked : [linked[0], linked[linked.length - 1]];
-    return element("div", { class: "support-grid" }, chosen.map(({ source, index }) => {
-      const button = element("button", { class: "support-image", type: "button", "aria-label": `Inspect supporting observation ${month(source.acquisition_start)}` }, [element("img", { src: frameUrl(state.region, index), alt: `Complete area, supporting observation ${month(source.acquisition_start)}`, loading: "lazy" }), element("span", { text: month(source.acquisition_start) })]);
+  function changeEventPage(offset) {
+    if (state.selected) return;
+    const lastPage = Math.max(0, Math.ceil(visibleFeatures().length / eventsPerPage) - 1);
+    const page = Math.max(0, Math.min(state.eventPage + offset, lastPage));
+    if (page === state.eventPage) return;
+    state.eventPage = page;
+    renderEvents();
+    $("event-list").scrollTop = 0;
+    $("event-page-range").focus({ preventScroll: true });
+  }
+  function setInspectorMode(active) {
+    $("event-list").hidden = active;
+    $("event-pagination").hidden = active || !visibleFeatures().length;
+    $("event-detail").hidden = !active;
+    $("clear-selection").hidden = !active;
+  }
+  function showEventList() {
+    const previous = state.selected;
+    state.selected = null;
+    state.historySequence++;
+    setInspectorMode(false);
+    renderEvents(); drawOverlay();
+    const priorButton = Array.from($("event-list").children).find((button) => button.getAttribute("data-event-id") === previous);
+    priorButton?.focus({ preventScroll: true });
+  }
+  function supportingImages(sources, properties, eventId) {
+    const linked = sources.map((source) => ({ source, index: state.region.frames.findIndex((frame) => frame.source_id === source.source_id && frame.sha256 === source.sha256) })).filter((item) => item.index >= 0).sort((a, b) => a.index - b.index);
+    if (!linked.length) return element("p", { class: "field-help", text: "The exact supporting image bytes are not loaded. The cited identities and hashes remain available under Sources and provenance." });
+    const quality = properties.quality || {};
+    const currentRole = properties.state === "retracted" ? "Retraction support" : ["confirmed_by_model", "reviewed"].includes(properties.state) ? "Confirmation support" : "Current proposed support";
+    const roles = [ [quality.support_before_index, "Before change"], [quality.support_first_index, "First changed support"], [quality.support_current_index, currentRole] ];
+    const selected = new Map();
+    for (const [index, role] of roles) {
+      if (!Number.isInteger(index)) continue;
+      const item = linked.find((candidate) => candidate.index === index);
+      if (!item) continue;
+      if (!selected.has(index)) selected.set(index, { ...item, roles: [] });
+      if (!selected.get(index).roles.includes(role)) selected.get(index).roles.push(role);
+    }
+    if (!selected.size) {
+      for (const item of [linked[0], linked[Math.floor((linked.length - 1) / 2)], linked[linked.length - 1]]) {
+        selected.set(item.index, { ...item, roles: ["Cited observation"] });
+      }
+    }
+    const revision = properties.revision;
+    const nativeDetail = Boolean(eventId) && Number.isInteger(revision) && revision > 0;
+    return element("div", { class: "support-grid" }, Array.from(selected.values()).map(({ source, index, roles }) => {
+      const role = roles.join(" / ");
+      const url = frameUrl(state.region, index);
+      const detail = nativeDetail ? `${url}?${new URLSearchParams({ detail_event: String(eventId), detail_revision: String(revision) })}` : url;
+      const preview = element("img", { src: detail, alt: `${role}, ${month(source.acquisition_start)}. ${nativeDetail ? "Native-pixel detail around the selected revision footprint, without enhancement" : "Complete study area"}.`, loading: "lazy" });
+      const button = element("button", { class: "support-image", type: "button", "aria-label": `View complete area for ${role.toLowerCase()}, ${month(source.acquisition_start)}` }, [preview, element("strong", { class: "support-role", text: role }), element("span", { text: month(source.acquisition_start) }), element("span", { class: "support-kind", text: nativeDetail ? "Native-pixel detail" : "Complete-area preview" })]);
+      preview.addEventListener("error", () => {
+        preview.hidden = true;
+        button.append(element("span", { class: "support-unavailable", text: "Exact detail unavailable. Select to try the complete source observation." }));
+      }, { once: true });
       button.addEventListener("click", () => { $("frame").value = String(index); showFrame(index); $("frame").focus(); });
       return button;
     }));
@@ -184,31 +253,35 @@
     const id = p.event_id || feature.id;
     state.selected = id;
     const sequence = ++state.historySequence;
-    $("clear-selection").hidden = false;
     renderEvents(); drawOverlay();
     const sources = Array.isArray(p.sources) ? p.sources : [];
     const sourceItems = sources.map((source) => {
       const url = safeSourceLink(source.uri);
-      return element("li", {}, url ? element("a", { href: url, target: "_blank", rel: "noopener", text: `${month(source.acquisition_start)} · original source ↗`, title: source.source_id }) : element("span", { text: `${month(source.acquisition_start)} · ${source.source_id}` }));
+      return element("li", {}, [element("strong", { text: `${month(source.acquisition_start)} · ${source.source_id}` }), url ? element("a", { href: url, target: "_blank", rel: "noopener", text: url }) : element("span", { text: source.uri || "Source URI unavailable" }), element("code", { text: `SHA-256 ${source.sha256 || "unavailable"}` })]);
     });
-    const timingCard = element("div", { class: "timing-card" }, [element("span", { class: "label", text: "SUPPORTED OBSERVATION INTERVAL" }), element("strong", { text: interval(p.observation_interval) }), element("p", { text: "This is timing support from observations, not a known construction or removal date." })]);
+    const timingCard = element("div", { class: "timing-card" }, [element("span", { class: "label", text: "SUPPORTED OBSERVATION INTERVAL" }), element("strong", { text: interval(p.observation_interval) }), element("p", { text: "Observation support, not an exact construction or removal date." })]);
+    const provenance = element("details", { class: "detail-disclosure" }, [element("summary", { text: `Sources and provenance (${sources.length})` }), definitionList([["Event identity", element("span", { class: "event-id", text: String(id) })], ["Returned revision", String(p.revision || "Unknown")], ["Query snapshot", state.snapshot || "Unavailable"], ["Recorded in ledger", timestamp(p.record_time)], ["Availability assumption", sources.some((source) => source.availability_assumption === "retrospective_month_end") ? "Retrospective month-end; original publication unknown" : "Known publication timestamps"], ["Model / processing revision", p.model_revision || "Not supplied"]]), element("h4", { class: "detail-subheading", text: "All cited observations" }), element("ul", { class: "source-list" }, sourceItems)]);
+    const history = element("details", { class: "detail-disclosure" }, [element("summary", { text: "Revision history" }), element("p", { class: "source-instruction", text: "Source availability is when supporting imagery became available. Recorded time is when reconstruction wrote the revision, not the physical event date. Later revisions below do not replace the returned answer above." }), element("div", { id: "revision-content", role: "status", text: "Reading recorded revisions…" })]);
     const detail = $("event-detail");
-    detail.replaceChildren(element("div", { class: "detail-title" }, [element("h3", { id: "event-detail-title", text: className(p.change_class) }), badge(p.state)]), timingCard,
-      definitionList([["Event identity", element("span", { class: "event-id", text: String(id) })], ["Detected", timestamp(p.detected_at)], ["Recorded", timestamp(p.record_time)], ["Availability", sources.some((source) => source.availability_assumption === "retrospective_month_end") ? "Retrospective month-end assumption; publication unknown" : "Known publication timestamps"], ["Footprint area", area(p.area_m2)], ["Model score", Number.isFinite(Number(p.confidence)) && p.confidence != null ? Number(p.confidence).toFixed(3) : "Not supplied"], ["Model / revision", p.model_revision || "Not supplied"], ["Event revision", String(p.revision || "Unknown")]]),
-      element("h4", { class: "detail-subheading", text: "Actual supporting observations" }), supportingImages(sources), element("p", { class: "source-instruction", text: "Select a source to inspect its complete area. All cited images remain available below." }), element("ul", { class: "source-list" }, sourceItems),
-      element("details", {}, [element("summary", { class: "detail-subheading", text: "Quality and registration diagnostics" }), definitionList(Object.entries(p.quality || {}).map(([key, value]) => [key.replaceAll("_", " "), typeof value === "object" ? JSON.stringify(value) : String(value)]))]),
-      element("h4", { class: "detail-subheading", text: "Revision history" }), element("p", { class: "source-instruction", text: "All recorded revisions, including revisions after the query snapshot. The selected revision above remains the returned answer." }), element("div", { id: "revision-content", role: "status", text: "Reading recorded revisions…" }));
-    if (p.reason) detail.insertBefore(element("p", { class: "history-error", text: p.reason }), detail.children[2]);
-    detail.hidden = false;
+    detail.replaceChildren(element("div", { class: "detail-title" }, [element("h3", { id: "event-detail-title", tabindex: "-1", text: className(p.change_class) }), badge(p.state)]), element("p", { class: "returned-revision", text: `Returned answer · revision ${p.revision || "unknown"}` }), timingCard,
+      element("h4", { class: "detail-subheading", text: "Supporting observations" }), supportingImages(sources, p, id), element("p", { class: "source-instruction", text: "Details use the selected revision footprint without enhancement. Select an image to view its complete area." }),
+      definitionList([["Source available", timestamp(p.detected_at)], ["Footprint area", area(p.area_m2)], ["Model score", Number.isFinite(Number(p.confidence)) && p.confidence != null ? Number(p.confidence).toFixed(3) : "Not supplied"]]),
+      ...(p.reason ? [element("p", { class: "decision-note", text: p.reason })] : []),
+      provenance, element("details", { class: "detail-disclosure" }, [element("summary", { text: "Quality and registration" }), definitionList(Object.entries(p.quality || {}).map(([key, value]) => [key.replaceAll("_", " "), typeof value === "object" ? JSON.stringify(value) : String(value)]))]), history);
+    setInspectorMode(true);
+    $("event-detail-title").focus({ preventScroll: true });
     try {
       const response = await getJSON(`/api/events/${encodeURIComponent(id)}/history`);
       if (sequence !== state.historySequence || state.selected !== id) return;
       const revisions = Array.isArray(response.revisions) ? response.revisions : [];
-      const items = revisions.map((revision) => element("li", {}, [element("div", { class: "revision-top" }, [element("strong", { text: `r${revision.revision}` }), badge(revision.state)]), element("span", { text: timestamp(revision.record_time) }), element("p", { text: interval(revision.observation_interval) }), revision.reason ? element("p", { text: revision.reason }) : null]));
+      const items = revisions.map((revision) => {
+        const returned = revision.revision === p.revision;
+        return element("li", { class: returned ? "returned-history-revision" : "" }, [element("div", { class: "revision-top" }, [element("strong", { text: `r${revision.revision}` }), badge(revision.state)]), returned ? element("span", { class: "returned-revision", text: "Returned by this query" }) : null, definitionList([["Source available", timestamp(revision.detected_at)], ["Recorded", timestamp(revision.record_time)]]), element("p", { text: interval(revision.observation_interval) }), revision.reason ? element("p", { text: revision.reason }) : null]);
+      });
       $("revision-content").replaceChildren(revisions.length ? element("ol", { class: "revision-list" }, items) : element("p", { class: "field-help", text: "No revisions returned by the history endpoint." }));
       $("revision-content").removeAttribute("role");
     } catch (error) {
-      if (sequence === state.historySequence && state.selected === id) $("revision-content").replaceChildren(element("p", { class: "history-error", text: `${error.message} The selected revision above remains visible.` }));
+      if (sequence === state.historySequence && state.selected === id) $("revision-content").replaceChildren(element("p", { class: "history-error", text: `${error.message} The returned revision above remains visible.` }));
     }
   }
   function project(lon, lat) {
@@ -257,6 +330,24 @@
     const sourceItems = [["Source identity", frame.source_id || "Not supplied"], ["Acquisition support", `${timestamp(frame.acquisition_start)} to ${timestamp(frame.acquisition_end)}`], ["Publication", frame.published_at ? timestamp(frame.published_at) : "Unknown; original publication time is unavailable"], ["Availability", frame.availability_assumption === "known_publication" ? "Known publication" : "Assumed available at month end; retrospective use"], ["Usable pixels", Number.isFinite(frame.valid_fraction) ? `${(frame.valid_fraction * 100).toFixed(1)}% of full area` : "Not supplied"], ["Registration", reg.usable === true ? "Passed image-only diagnostic" : "Not usable or not established"], ["Estimated shift", Array.isArray(reg.shift_pixels) ? `${reg.shift_pixels.map((v) => Number(v).toFixed(2)).join(", ")} pixels (row, column)` : "Unavailable"], ["SHA-256", element("span", { class: "event-id", text: frame.sha256 || "Not supplied" })]];
     $("source-metadata").replaceChildren(...definitionList(sourceItems).children);
   }
+  function renderStudyStatus(status) {
+    const message = typeof status === "string" ? status : status && typeof status === "object" ? status.summary || status.message : null;
+    $("study-status-copy").textContent = typeof message === "string" && message.trim() ? message : "Validation status is unavailable. Treat this model as experimental; no analyst-ready accuracy is established.";
+  }
+  function fitScene() {
+    if (!state.region) return;
+    const availableWidth = $("observation-controls").clientWidth;
+    if (availableWidth <= 0) return;
+    const ratio = state.region.width / state.region.height;
+    const top = $("scene-shell").getBoundingClientRect().top;
+    const desktop = window.matchMedia("(min-width:981px)").matches;
+    const availableHeight = Math.max(180, window.innerHeight - Math.max(0, top) - 150);
+    const width = desktop ? Math.min(availableWidth, availableHeight * ratio) : availableWidth;
+    $("scene-shell").style.width = `${Math.floor(width)}px`;
+    $("scene-shell").style.aspectRatio = `${state.region.width} / ${state.region.height}`;
+    $("scene-shell").classList.add("has-image-grid");
+    drawOverlay();
+  }
   function showFrame(index) {
     if (!state.region || !state.region.frames[index]) return;
     const frame = state.region.frames[index], sequence = ++state.imageSequence;
@@ -275,11 +366,12 @@
     if (source) { $("source-link").href = source; $("source-link").classList.remove("disabled-link"); $("source-link").removeAttribute("aria-disabled"); }
     else { $("source-link").removeAttribute("href"); $("source-link").classList.add("disabled-link"); $("source-link").setAttribute("aria-disabled", "true"); }
     renderSourceMetadata(frame);
+    fitScene();
     const image = new Image();
     image.onload = () => {
       if (sequence !== state.imageSequence) return;
       $("scene-image").src = image.src; $("scene").hidden = false;
-      $("image-loading").hidden = true; state.imageLoaded = true; drawOverlay();
+      $("image-loading").hidden = true; state.imageLoaded = true; fitScene();
     };
     image.onerror = () => {
       if (sequence !== state.imageSequence) return;
@@ -291,8 +383,8 @@
   function selectRegion() {
     state.querySequence++; state.historySequence++;
     state.region = state.catalog.regions.find((region) => region.region_id === $("region").value);
-    state.features = []; state.selected = null; state.snapshot = null;
-    $("event-detail").hidden = true; $("clear-selection").hidden = true;
+    state.features = []; state.eventPage = 0; state.selected = null; state.snapshot = null;
+    setInspectorMode(false);
     $("event-count").textContent = "—";
     $("query-button").disabled = false;
     ["export-geojson", "export-parquet"].forEach((id) => { $(id).removeAttribute("href"); $(id).classList.add("disabled-link"); $(id).setAttribute("aria-disabled", "true"); });
@@ -314,8 +406,11 @@
   $("region").addEventListener("change", selectRegion);
   $("frame").addEventListener("change", () => showFrame(Number($("frame").value)));
   $("show-overlay").addEventListener("change", drawOverlay);
-  $("state-filter").addEventListener("change", () => { renderEvents(); drawOverlay(); });
-  $("clear-selection").addEventListener("click", () => { state.selected = null; state.historySequence++; $("event-detail").hidden = true; $("clear-selection").hidden = true; renderEvents(); drawOverlay(); });
+  $("state-filter").addEventListener("change", () => { syncStateChoice(); queryHistory(); });
+  $("include-retracted").addEventListener("change", () => { state.includeRetractedPreference = $("include-retracted").checked; queryHistory(); });
+  $("clear-selection").addEventListener("click", showEventList);
+  $("event-page-previous").addEventListener("click", () => changeEventPage(-1));
+  $("event-page-next").addEventListener("click", () => changeEventPage(1));
   $("event-overlay").addEventListener("click", (event) => {
     if (!state.imageLoaded) return;
     const canvas = $("event-overlay"), rect = canvas.getBoundingClientRect(), context = canvas.getContext("2d");
@@ -331,11 +426,13 @@
   $("import-open").addEventListener("click", () => $("import-dialog").showModal());
   $("import-close").addEventListener("click", () => $("import-dialog").close());
   $("import-dialog").addEventListener("click", (event) => { if (event.target === $("import-dialog")) { const rect = $("import-dialog").getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) $("import-dialog").close(); } });
-  const observer = new ResizeObserver(drawOverlay); observer.observe($("scene-shell"));
+  const observer = new ResizeObserver(fitScene); observer.observe($("observation-controls"));
+  window.addEventListener("resize", fitScene);
   async function initialize() {
     try {
       const catalog = await getJSON("/api/catalog");
       state.catalog = catalog;
+      renderStudyStatus(catalog.study_status);
       const regions = Array.isArray(catalog.regions) ? catalog.regions : [];
       state.catalog.regions = regions;
       $("model-revision").textContent = `Installed model: ${catalog.model_revision || "not supplied"}. Coverage is limited to imported, validated sequences.`;

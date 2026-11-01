@@ -35,6 +35,82 @@ QUALITY_DROP_INDICES = tuple(
     block * len(FEATURE_NAMES) + column for block in range(4) for column in EXTRA_QUALITY_COLUMNS
 )
 FORMAT = "terradelta-event-gate-v1"
+SPATIAL_PROVENANCE_KEYS = (
+    "spatial_weights_sha256", "spatial_backbone_sha256", "spatial_inference",
+    "candidate_threshold",
+)
+
+
+def _full_sha256(value):
+    return (isinstance(value, str) and len(value) == 64
+            and all(character in "0123456789abcdef" for character in value))
+
+
+def validate_spatial_provenance(value):
+    """Validate an explicit model/base/inference binding, with no file/label reads."""
+    if not isinstance(value, dict) or set(value) != set(SPATIAL_PROVENANCE_KEYS):
+        raise ValueError("explicit spatial provenance requires model, backbone and inference keys")
+    if not _full_sha256(value["spatial_weights_sha256"]):
+        raise ValueError("spatial provenance requires a full lowercase checkpoint SHA256")
+    threshold = value["candidate_threshold"]
+    if type(threshold) not in (int, float) or not 0 < threshold < 1:
+        raise ValueError("spatial provenance requires a finite candidate threshold between zero and one")
+    backbone = value["spatial_backbone_sha256"]
+    if backbone is not None and not _full_sha256(backbone):
+        raise ValueError("spatial provenance backbone must be full SHA256 or explicit null")
+    inference = value["spatial_inference"]
+    integer_fields = {"tile_size": 16, "context_halo_native_pixels": 0,
+                      "native_alignment": 1, "internal_input_scale": 1}
+    if (not isinstance(inference, dict)
+            or set(inference) != set(integer_fields) | {"implementation_sha256"}):
+        raise ValueError("spatial inference provenance is missing or has unsupported fields")
+    if any(type(inference[key]) is not int or inference[key] < minimum
+           for key, minimum in integer_fields.items()):
+        raise ValueError("spatial inference grid parameters must be explicit valid integers")
+    if inference["internal_input_scale"] not in (1, 2):
+        raise ValueError("unsupported spatial inference internal scale")
+    implementations = inference["implementation_sha256"]
+    required_implementations = {"spatial.py", "pretrained_spatial.py"} if backbone else {"spatial.py"}
+    if (not isinstance(implementations, dict) or not implementations
+            or set(implementations) != required_implementations
+            or any(key not in {"spatial.py", "pretrained_spatial.py"} or not _full_sha256(sha)
+                   for key, sha in implementations.items())):
+        raise ValueError("spatial inference requires full implementation source hashes")
+    return json.loads(json.dumps(value, sort_keys=True, allow_nan=False))
+
+
+def assert_legacy_spatial_compatibility(info):
+    """Allow historical metadata or the independently checked v2 replay grid.
+
+    This is an explicit implementation allowlist, never a hash of whichever
+    implementation happens to be installed. Original freeze replay uses bd33082.
+    """
+    if (info.get("spatial_backbone_sha256") is not None
+            or ("candidate_threshold" in info and info["candidate_threshold"] != .45)):
+        raise ValueError("legacy gate has no binding for new backbone/inference provenance")
+    inference = info.get("spatial_inference")
+    if inference is None:
+        return
+    expected = {
+        "tile_size": 1024, "context_halo_native_pixels": 64,
+        "native_alignment": 8, "internal_input_scale": 2,
+        "implementation_sha256": {
+            "spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff",
+        },
+    }
+    if (info.get("spatial_weights_sha256") !=
+            "7ab95679a2009918dbab62fca64244476df519080cb8c0d376c00d1494983886"
+            or info.get("candidate_threshold") != .45 or inference != expected):
+        raise ValueError("legacy gate has no binding for new backbone/inference provenance")
+
+
+def assert_spatial_provenance(info, expected):
+    expected = validate_spatial_provenance(expected)
+    if any(key not in info for key in SPATIAL_PROVENANCE_KEYS):
+        raise ValueError("features are missing explicit spatial provenance fields")
+    observed = validate_spatial_provenance({key: info[key] for key in SPATIAL_PROVENANCE_KEYS})
+    if observed != expected:
+        raise ValueError("feature spatial model/backbone/inference differs from frozen provenance")
 
 
 class EventGate(nn.Sequential):
@@ -136,6 +212,7 @@ class GateBundle:
     calibration: dict
     model_revision: str
     spatial_weights_sha256: str
+    spatial_provenance: dict | None = None
 
     @torch.inference_mode()
     def logit(self, row, kind):
@@ -153,6 +230,11 @@ def load_gate(weights: str | Path | GateBundle) -> GateBundle:
     if (checkpoint.get("raw_decoder") != asdict(RAW_CONFIG)
             or checkpoint.get("quality_drop_indices") != list(QUALITY_DROP_INDICES)):
         raise ValueError("stored event-gate decoder or quality-ablation policy differs from runtime")
+    provenance = None
+    if "spatial_provenance" in checkpoint:
+        provenance = validate_spatial_provenance(checkpoint["spatial_provenance"])
+        if provenance["spatial_weights_sha256"] != checkpoint["spatial_weights_sha256"]:
+            raise ValueError("event-gate spatial identity fields disagree")
     models = {}
     for kind in KINDS[:2]:
         model = EventGate()
@@ -163,8 +245,13 @@ def load_gate(weights: str | Path | GateBundle) -> GateBundle:
     if (mean.shape != (len(GATE_FEATURE_NAMES),) or std.shape != mean.shape
             or not np.isfinite(mean).all() or not np.isfinite(std).all() or np.any(std <= 0)):
         raise ValueError("invalid train-only gate standardizer")
+    for kind in KINDS[:2]:
+        fit = checkpoint.get("calibration", {}).get(kind, {})
+        if (any(type(fit.get(key)) not in (int, float) or not np.isfinite(fit[key])
+                for key in ("scale", "bias")) or fit["scale"] < 0):
+            raise ValueError("invalid or missing development gate calibration")
     return GateBundle(models, mean, std, checkpoint["calibration"],
-                      f"event-gate:{sha256(path)}", checkpoint["spatial_weights_sha256"])
+                      f"event-gate:{sha256(path)}", checkpoint["spatial_weights_sha256"], provenance)
 
 
 def generate_events(
@@ -179,6 +266,17 @@ def generate_events(
     """
     if kind not in KINDS:
         raise ValueError("unknown event gate method")
+    bundle = None
+    if kind != "proposal_tracking":
+        if weights is None:
+            raise ValueError("learned event methods require trained gate weights")
+        bundle = load_gate(weights)
+        if info.get("spatial_weights_sha256") != bundle.spatial_weights_sha256:
+            raise ValueError("spatial checkpoint differs from event-gate training provenance")
+        if bundle.spatial_provenance is not None:
+            assert_spatial_provenance(info, bundle.spatial_provenance)
+        else:
+            assert_legacy_spatial_compatibility(info)
     origin = record_origin or datetime.now(timezone.utc)
     raw = raw_proposals(x, usable, births, info, record_origin=origin)
     params = (calibration or {}).get(kind, calibration or {})
@@ -193,11 +291,7 @@ def generate_events(
                                  model_revision=raw[0].model_revision if raw else "proposal-v1",
                                  record_origin=origin)
         return raw
-    if weights is None:
-        raise ValueError("learned event methods require trained gate weights")
-    bundle = load_gate(weights)
-    if info.get("spatial_weights_sha256") != bundle.spatial_weights_sha256:
-        raise ValueError("spatial checkpoint differs from event-gate training provenance")
+    assert bundle is not None
     params = {**bundle.calibration[kind], **params}
     padding = int(params.get("timing_padding_days", 0))
     if padding < 0:

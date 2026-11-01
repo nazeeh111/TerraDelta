@@ -165,16 +165,19 @@ def predict_scene(
     if tile_size < 16 or min(rgb.shape[-2:]) < 1:
         raise ValueError("tile_size must be >=16 and scene dimensions positive")
     model.eval()
+    alignment = int(getattr(model, "native_alignment", 8))
+    if alignment < 1:
+        raise ValueError("model native alignment must be positive")
     height, width = rgb.shape[-2:]
     total = np.zeros((2, height, width), dtype=np.float32)
     denominator = np.zeros((height, width), dtype=np.float32)
     for top in _anchors(height, tile_size):
         for left in _anchors(width, tile_size):
             bottom, right = min(top + tile_size, height), min(left + tile_size, width)
-            y0 = max(0, (top - 64) // 8 * 8)
-            x0 = max(0, (left - 64) // 8 * 8)
-            y1 = min(height, ((bottom + 64 + 7) // 8) * 8)
-            x1 = min(width, ((right + 64 + 7) // 8) * 8)
+            y0 = max(0, (top - 64) // alignment * alignment)
+            x0 = max(0, (left - 64) // alignment * alignment)
+            y1 = min(height, ((bottom + 64 + alignment - 1) // alignment) * alignment)
+            x1 = min(width, ((right + 64 + alignment - 1) // alignment) * alignment)
             patch = np.ascontiguousarray(rgb[:, y0:y1, x0:x1], dtype=np.float32) / 255
             tensor = torch.from_numpy(patch)[None].to(device)
             pred = model(tensor).sigmoid()[0].cpu().numpy()

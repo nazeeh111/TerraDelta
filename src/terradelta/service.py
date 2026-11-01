@@ -5,6 +5,8 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from copy import deepcopy
 from io import BytesIO
+import hashlib
+import math
 import json
 from pathlib import Path
 import tempfile
@@ -20,6 +22,9 @@ from pydantic import BaseModel, ConfigDict, Field, create_model
 from .data import load_region
 from .schema import EventRevision, utc_datetime
 from .store import EventStore
+
+
+EventState = Literal["proposed", "confirmed_by_model", "reviewed", "retracted"]
 
 
 class ReviewRequest(BaseModel):
@@ -136,10 +141,12 @@ def create_app(cache_root: Path, run_root: Path) -> FastAPI:
             raise ValueError("start must precede end")
         return {"bbox": parsed, "start": start, "end": end, "as_of": as_of}
 
-    def selected(bbox, start, end, as_of, region_id, include_retracted):
+    def selected(bbox, start, end, as_of, region_id, include_retracted, state=None):
         if region_id and region_id not in regions:
             raise HTTPException(404, "Unknown study area")
         kwargs = query_args(bbox, start, end, as_of)
+        kwargs.update(region_id=region_id, states=[state] if state else None)
+        include_retracted = include_retracted or state == "retracted"
         snapshot = store.snapshot_time(kwargs["as_of"])
         if snapshot is None:
             store.query(**kwargs, include_retracted=include_retracted)
@@ -158,8 +165,9 @@ def create_app(cache_root: Path, run_root: Path) -> FastAPI:
         as_of: str | None = None,
         region_id: str | None = None,
         include_retracted: bool = False,
+        state: EventState | None = None,
     ):
-        result, snapshot, _ = selected(bbox, start, end, as_of, region_id, include_retracted)
+        result, snapshot, _ = selected(bbox, start, end, as_of, region_id, include_retracted, state)
         return {
             "type": "FeatureCollection",
             "features": [e.as_feature() for e in result],
@@ -195,17 +203,65 @@ def create_app(cache_root: Path, run_root: Path) -> FastAPI:
         return event.model_dump(mode="json")
 
     @app.get("/api/regions/{region_id}/frames/{index}.png")
-    def frame(region_id: str, index: int):
+    def frame(
+        region_id: str,
+        index: int,
+        detail_event: str | None = None,
+        detail_revision: int | None = None,
+    ):
         if region_id not in regions:
             raise HTTPException(404, "Unknown study area")
         path, meta = regions[region_id]
         if index < 0 or index >= len(meta["frames"]):
             raise HTTPException(404, "Unknown observation")
+        if (detail_event is None) != (detail_revision is None):
+            raise ValueError("Detail imagery requires both event identity and exact revision")
+        left, top, width, height = 0, 0, int(meta["width"]), int(meta["height"])
+        if detail_event is not None:
+            if detail_revision < 1:
+                raise ValueError("Detail revision must be positive")
+            selected_event = next(
+                (
+                    event
+                    for event in store.history(detail_event)
+                    if event.revision == detail_revision
+                ),
+                None,
+            )
+            if selected_event is None or selected_event.region_id != region_id:
+                raise HTTPException(404, "Unknown event revision in this area")
+            source_frame = meta["frames"][index]
+            if not any(
+                source.source_id == source_frame["source_id"]
+                and source.sha256 == source_frame["sha256"]
+                for source in selected_event.sources
+            ):
+                raise HTTPException(409, "Exact cited image bytes are not loaded for this revision")
+            from rasterio.features import bounds
+            from rasterio.transform import Affine
+            from rasterio.warp import transform_geom
+
+            if "transform" not in meta:
+                raise ValueError("Native transform is required for event detail")
+            native = transform_geom("EPSG:4326", meta["crs"], selected_event.geometry)
+            west, south, east, north = bounds(native)
+            inverse = ~Affine(*meta["transform"])
+            x0, y0 = inverse * (west, north)
+            x1, y1 = inverse * (east, south)
+            if x1 <= 0 or y1 <= 0 or x0 >= width or y0 >= height:
+                raise ValueError("Event geometry does not overlap the loaded observation")
+            # Native pixels only: contextual crop, with no enhancement/resampling.
+            crop_width = min(width, max(64, math.ceil(x1 - x0) + 32))
+            crop_height = min(height, max(64, math.ceil(y1 - y0) + 32))
+            left = max(0, min(width - crop_width, math.floor((x0 + x1 - crop_width) / 2)))
+            top = max(0, min(height - crop_height, math.floor((y0 + y1 - crop_height) / 2)))
+            width, height = crop_width, crop_height
         data = load_region(path)
+        window = (slice(top, top + height), slice(left, left + width))
         rgba = np.concatenate(
             [
-                np.asarray(data["rgb"][index]),
-                np.asarray(data["valid"][index][None], dtype="uint8") * 255,
+                np.asarray(data["rgb"][index, :, window[0], window[1]]),
+                np.asarray(data["valid"][index, window[0], window[1]][None], dtype="uint8") * 255,
             ]
         ).transpose(1, 2, 0)
         stream = BytesIO()
@@ -214,21 +270,39 @@ def create_app(cache_root: Path, run_root: Path) -> FastAPI:
             stream.getvalue(),
             media_type="image/png",
             headers={
-                "Cache-Control": "public,max-age=3600",
-                "ETag": meta["frames"][index]["sha256"],
+                "Cache-Control": "private,max-age=3600",
+                "ETag": '"'
+                + hashlib.sha256(
+                    f"{meta['frames'][index]['sha256']}:{left},{top},{width},{height}".encode()
+                ).hexdigest()
+                + '"',
+                "X-TerraDelta-Source-SHA256": meta["frames"][index]["sha256"],
+                "X-TerraDelta-Pixel-Window": f"{left},{top},{width},{height}",
+                "X-TerraDelta-View": "native-detail" if detail_event else "complete-native-area",
             },
         )
 
-    def exported(kind, bbox, start, end, as_of, region_id, include_retracted):
-        result, snapshot, _ = selected(bbox, start, end, as_of, region_id, include_retracted)
+    def exported(kind, bbox, start, end, as_of, region_id, include_retracted, state=None):
+        result, snapshot, query = selected(
+            bbox, start, end, as_of, region_id, include_retracted, state
+        )
         if kind == "geojson":
             payload = {
                 "type": "FeatureCollection",
                 "features": [e.as_feature() for e in result],
                 "snapshot_time": snapshot.isoformat() if snapshot else None,
-                "license": "CC-BY-SA-4.0",
                 "coordinate_reference_system": "OGC:CRS84",
             }
+            names = {e.region_id for e in result} or ({region_id} if region_id else set())
+            licenses = {
+                name: regions[name][1].get("license") or "unspecified"
+                for name in names
+                if name in regions
+            }
+            payload["source_licenses"] = licenses
+            terms = set(licenses.values())
+            if len(terms) == 1 and "unspecified" not in terms:
+                payload["license"] = next(iter(terms))
             return Response(
                 json.dumps(payload),
                 media_type="application/geo+json",
@@ -237,8 +311,11 @@ def create_app(cache_root: Path, run_root: Path) -> FastAPI:
         # Export the exact ledger revisions at the same immutable query snapshot.
         with tempfile.TemporaryDirectory(prefix="terradelta-export-") as temporary:
             output = Path(temporary) / "events.parquet"
-            kwargs = query_args(bbox, start, end, as_of)
-            kwargs.update(as_of=snapshot, region_id=region_id, include_retracted=include_retracted)
+            kwargs = {
+                **query,
+                "as_of": snapshot,
+                "include_retracted": include_retracted or state == "retracted",
+            }
             store.export_parquet(output, **kwargs)
             content = output.read_bytes()
         return Response(
@@ -258,8 +335,9 @@ def create_app(cache_root: Path, run_root: Path) -> FastAPI:
         as_of: str | None = None,
         region_id: str | None = None,
         include_retracted: bool = False,
+        state: EventState | None = None,
     ):
-        return exported("geojson", bbox, start, end, as_of, region_id, include_retracted)
+        return exported("geojson", bbox, start, end, as_of, region_id, include_retracted, state)
 
     @app.get("/api/export.parquet")
     def export_parquet(
@@ -269,7 +347,8 @@ def create_app(cache_root: Path, run_root: Path) -> FastAPI:
         as_of: str | None = None,
         region_id: str | None = None,
         include_retracted: bool = False,
+        state: EventState | None = None,
     ):
-        return exported("parquet", bbox, start, end, as_of, region_id, include_retracted)
+        return exported("parquet", bbox, start, end, as_of, region_id, include_retracted, state)
 
     return app

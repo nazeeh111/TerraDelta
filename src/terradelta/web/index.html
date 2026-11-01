@@ -14,6 +14,7 @@
     <a href="/" class="wordmark" aria-label="TerraDelta home"><span class="brand-symbol" aria-hidden="true">▱</span>TerraDelta<span class="brand-divider" aria-hidden="true"></span><span class="workspace-name">Change history</span></a>
     <nav aria-label="Resources"><button class="text-button" id="import-open" type="button">Import imagery</button><a href="/docs" target="_blank" rel="noopener">API docs <span aria-hidden="true">↗</span></a><span class="research-label">RESEARCH MODEL</span></nav>
   </header>
+  <section class="study-status" aria-labelledby="study-status-title" role="status" aria-live="polite"><strong id="study-status-title">Study validation</strong><p id="study-status-copy">Loading the recorded study status. Analyst-ready accuracy has not been established.</p></section>
   <main class="app-layout" id="workspace">
     <aside class="query-rail" aria-labelledby="query-title">
       <div class="rail-heading"><span class="eyebrow">OBSERVATION WORKSPACE</span><h1 id="query-title">Inspect a change.</h1><p>Query a supported history, then follow an event back to its observations.</p></div>
@@ -29,11 +30,11 @@
       </form>
       <div id="query-feedback" class="query-feedback" role="status" aria-live="polite">Connecting to the local dataset…</div>
       <div class="export-group" aria-labelledby="export-title"><h2 id="export-title">Take the history with you</h2><p>Geometry, revisions and source identities.</p><a id="export-geojson" class="secondary-button disabled-link" aria-disabled="true">GeoJSON <span aria-hidden="true">↓</span></a><a id="export-parquet" class="secondary-button disabled-link" aria-disabled="true">GeoParquet <span aria-hidden="true">↓</span></a></div>
-      <div class="rail-footnote"><span class="tiny-square" aria-hidden="true"></span><p>Imagery and derived data: SpaceNet Partners, CC BY-SA 4.0. <a href="https://spacenet.ai/sn7-challenge/" target="_blank" rel="noopener">Source dataset ↗</a></p></div>
+      <div class="rail-footnote"><span class="tiny-square" aria-hidden="true"></span><p>Source licensing is recorded with each imported area. SpaceNet demonstration imagery: SpaceNet Partners, CC BY-SA 4.0. <a href="https://spacenet.ai/sn7-challenge/" target="_blank" rel="noopener">Source dataset ↗</a></p></div>
     </aside>
     <section class="observation-panel" aria-labelledby="observation-title">
       <div class="panel-title"><div><span class="eyebrow">SUPPORTING IMAGERY</span><h2 id="observation-title">Complete study area</h2></div><span class="extent-chip" id="extent-chip">Native image grid</span></div>
-      <div class="observation-controls"><div class="month-control"><label for="frame">Observation month</label><select id="frame" disabled><option>Waiting for imagery</option></select></div><label class="check-field overlay-toggle"><input id="show-overlay" type="checkbox" checked>Event geometries</label></div>
+      <div class="observation-controls" id="observation-controls"><div class="month-control"><label for="frame">Observation month</label><select id="frame" disabled><option>Waiting for imagery</option></select></div><label class="check-field overlay-toggle"><input id="show-overlay" type="checkbox" checked>Event geometries</label></div>
       <div class="scene-shell" id="scene-shell">
         <div class="scene-empty" id="scene-empty"><span aria-hidden="true">▱</span><p>Select an available area to inspect its actual satellite imagery.</p></div>
         <div class="scene" id="scene" hidden><img id="scene-image" alt="" draggable="false"><canvas id="event-overlay" aria-hidden="true"></canvas></div>
@@ -47,7 +48,8 @@
     </section>
     <aside class="history-panel" aria-labelledby="history-title">
       <div class="panel-title"><div><span class="eyebrow">QUERY RESULTS</span><h2 id="history-title">Event history</h2></div><span class="count-chip" id="event-count">—</span></div>
-      <div class="history-actions"><label for="state-filter" class="sr-only">Filter event states</label><select id="state-filter"><option value="all">All event states</option><option value="confirmed_by_model">Model confirmed</option><option value="proposed">Proposed</option><option value="reviewed">Reviewed</option><option value="retracted">Retracted</option></select><button type="button" class="text-button" id="clear-selection" hidden>Clear selection</button></div>
+      <div class="history-actions"><label for="state-filter" class="sr-only">Event state</label><select id="state-filter"><option value="confirmed_by_model" selected>Model confirmed</option><option value="proposed">Proposed</option><option value="reviewed">Reviewed</option><option value="retracted">Retracted</option><option value="all">All event states</option></select><button type="button" class="text-button" id="clear-selection" hidden>← Back to events</button></div>
+      <nav id="event-pagination" class="event-pagination" aria-label="Event result pages" hidden><p id="event-page-range" tabindex="-1" aria-live="polite" aria-atomic="true"></p><div><button id="event-page-previous" class="text-button" type="button" aria-label="Previous page of events" aria-controls="event-list" disabled>← Previous</button><button id="event-page-next" class="text-button" type="button" aria-label="Next page of events" aria-controls="event-list" disabled>Next →</button></div></nav>
       <div id="event-list" class="event-list" aria-label="Returned events"><div class="empty-state"><span aria-hidden="true">↳</span><h3>Evidence will appear here.</h3><p>Choose an area and dates to query the recorded history.</p></div></div>
       <section id="event-detail" class="event-detail" aria-labelledby="event-detail-title" hidden></section>
       <details class="snapshot-details"><summary>Query snapshot</summary><p id="snapshot-status">No history query has completed.</p><button class="secondary-button" id="copy-snapshot" type="button" disabled>Copy snapshot time</button><p id="snapshot-copy-feedback" class="field-help" role="status"></p></details>

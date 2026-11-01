@@ -61,10 +61,17 @@ def footprint_instances(
     whole, n = ndimage.label(foreground)
     maxima = ndimage.maximum(markers, whole, np.arange(1, n + 1)) if n else []
     count = int(markers.max())
-    for index, maximum in enumerate(maxima, 1):
-        if maximum == 0:
+    unseeded = np.flatnonzero(np.asarray(maxima) == 0) + 1
+    if len(unseeded):
+        boxes = ndimage.find_objects(whole)
+        for index in unseeded:
             count += 1
-            markers[whole == index] = count
+            # Preserve label order and exact membership without rescanning the
+            # full image for every component. Boxes can overlap (e.g. a ring
+            # around an island), so retain the component-ID mask inside each.
+            bounds = boxes[index - 1]
+            local = markers[bounds]
+            local[whole[bounds] == index] = count
     objects = watershed(-interior, markers, mask=foreground).astype("int32")
     areas = np.bincount(objects.ravel())
     too_small = areas < min_pixels
@@ -263,6 +270,10 @@ def prepare_features(
     ):
         raise ValueError("Probability bytes or region identity differ from their prediction record")
     info["spatial_weights_sha256"] = prediction["spatial_weights_sha256"]
+    info["spatial_backbone_sha256"] = prediction.get("spatial_backbone_sha256")
+    info["spatial_architecture"] = prediction.get("spatial_architecture")
+    info["spatial_inference"] = prediction.get("spatial_inference")
+    info["feature_implementation_sha256"] = sha256(Path(__file__))
     info["metadata_semantic_sha256"] = semantic_metadata_hash(Path(cache_dir) / "metadata.json")
     (out_dir / "sites.json").write_text(json.dumps(info) + "\n")
     return {"sites": len(births), "usable_fraction": float(good.mean()) if len(births) else 0}

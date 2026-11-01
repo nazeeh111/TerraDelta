@@ -1,0 +1,194 @@
+{
+  "AOI_data_read": false,
+  "MPS_used": false,
+  "source_before": {
+    "src/terradelta/contracts.py": "a31b0b9c6267c95cbc1ba6f12a9de856c4563bf18fcffcf122286c5e0d059280",
+    "src/terradelta/event_gate.py": "0b6b38054ac84c813adcf0eb5ed7b775d6f0b2470c60247a949e1fef38c8df8b",
+    "src/terradelta/temporal.py": "534cc05ca713d9d3f66d8ee8a64f3efe0ff2f01be0a02a31a8abdce047fd2159",
+    "src/terradelta/cli.py": "bfedff5a3f40ef55eba095b9ac8acb9cc07bbbea34d91bef7c45737a0983ec91",
+    "src/terradelta/protocol.py": "b774bb0f209d296181c7ff7d4b50d6618159bcd22b0d0a8c1b4a3f70be7a8960",
+    "src/terradelta/pipeline.py": "2e3cac760259a4f13c2edc22ff2a7f633c8f9be635e0176df2a1a1e414044069",
+    "src/terradelta/spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff",
+    "src/terradelta/pretrained_spatial.py": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503",
+    "scripts/train_event_gate.py": "eded8c52ba7be4d36fa43cd96e94df83f844adf3c093a166c256adac4adb8b93",
+    "scripts/train_temporal.py": "2d20a781982e20c60999c9c35c9c75d74b52ab894133629749ce077a89b66068",
+    "scripts/calibrate.py": "2c8cb87a2c6fc77151d011058c5416ffdb130ab7c3ec665b8a54b28dd2819a2f",
+    "scripts/predict_all.py": "b9bcc9ccb80116e78ad39a047acaf64e4af457ecc921ac30caced2e2a8b0450f",
+    "configs/experiment-v6.json": "531999182720a75a09bf394d8bcb4a4a25983a0e345aad925b33bc0eaa73d159"
+  },
+  "probes": {
+    "freeze_valid_control": {
+      "return": true,
+      "synthetic_truth_hash_calls": 1
+    },
+    "freeze_missing_gate_fit": {
+      "exception": "ValueError",
+      "message": "invalid or missing development gate calibration",
+      "synthetic_truth_hash_calls": 0
+    },
+    "freeze_negative_gate_scale": {
+      "exception": "ValueError",
+      "message": "invalid or missing development gate calibration",
+      "synthetic_truth_hash_calls": 0
+    },
+    "freeze_missing_selected_head_hash": {
+      "exception": "ValueError",
+      "message": "calibration event_gate_weights_sha256 differs from selected head",
+      "synthetic_truth_hash_calls": 0
+    },
+    "freeze_wrong_candidate": {
+      "exception": "ValueError",
+      "message": "feature spatial model/backbone/inference differs from frozen provenance",
+      "synthetic_truth_hash_calls": 0
+    },
+    "freeze_nan_event_bias": {
+      "exception": "ValueError",
+      "message": "invalid event calibration parameters: observation_gate",
+      "synthetic_truth_hash_calls": 0
+    },
+    "freeze_negative_occupancy_scale": {
+      "exception": "ValueError",
+      "message": "missing or invalid occupancy calibration: observation",
+      "synthetic_truth_hash_calls": 0
+    },
+    "freeze_fractional_decoder_count": {
+      "exception": "ValueError",
+      "message": "invalid decoder operating point: observation",
+      "synthetic_truth_hash_calls": 0
+    },
+    "freeze_missing_operating_point": {
+      "exception": "ValueError",
+      "message": "missing operational event calibration: observation_gate",
+      "synthetic_truth_hash_calls": 0
+    },
+    "trainer_one_class_zero_scale_roundtrip": {
+      "return": {
+        "observation_gate": 0.0,
+        "gate_no_quality": 0.0
+      }
+    },
+    "dispatcher_missing_versioned_head_hash": {
+      "exception": "ValueError",
+      "message": "calibration event_gate_weights_sha256 differs from selected head"
+    },
+    "cli_backbone_missing_calibration_binding": {
+      "exception": "BadParameter",
+      "message": "Pretrained inference requires source-bound calibration",
+      "compute_calls": []
+    },
+    "actual_old_spatial_checkpoint": {
+      "return": {
+        "spatial_weights_sha256": "7ab95679a2009918dbab62fca64244476df519080cb8c0d376c00d1494983886",
+        "spatial_backbone_sha256": null
+      }
+    },
+    "actual_old_all_heads_preflight": {
+      "return": null
+    },
+    "actual_calibration_v2_all_operating_points": {
+      "return": null
+    },
+    "actual_old_historical_null_pairwise": {
+      "return": 0
+    },
+    "actual_old_historical_null_spatial_tracking": {
+      "return": 0
+    },
+    "actual_old_historical_null_smoothing": {
+      "return": 0
+    },
+    "actual_old_historical_null_hmm": {
+      "return": 0
+    },
+    "actual_old_historical_null_sn7_retrospective": {
+      "return": 0
+    },
+    "actual_old_historical_null_ted": {
+      "return": 0
+    },
+    "actual_old_historical_null_observation": {
+      "return": 0
+    },
+    "actual_old_historical_null_no_quality": {
+      "return": 0
+    },
+    "actual_old_historical_null_watch_lstm": {
+      "return": 0
+    },
+    "actual_old_historical_null_observation_gate": {
+      "return": 7
+    },
+    "actual_old_historical_null_gate_no_quality": {
+      "return": 8
+    },
+    "actual_old_historical_null_proposal_tracking": {
+      "return": 7
+    },
+    "actual_old_reviewed_replay_grid_pairwise": {
+      "return": 0
+    },
+    "actual_old_reviewed_replay_grid_spatial_tracking": {
+      "return": 0
+    },
+    "actual_old_reviewed_replay_grid_smoothing": {
+      "return": 0
+    },
+    "actual_old_reviewed_replay_grid_hmm": {
+      "return": 0
+    },
+    "actual_old_reviewed_replay_grid_sn7_retrospective": {
+      "return": 0
+    },
+    "actual_old_reviewed_replay_grid_ted": {
+      "return": 0
+    },
+    "actual_old_reviewed_replay_grid_observation": {
+      "return": 0
+    },
+    "actual_old_reviewed_replay_grid_no_quality": {
+      "return": 0
+    },
+    "actual_old_reviewed_replay_grid_watch_lstm": {
+      "return": 0
+    },
+    "actual_old_reviewed_replay_grid_observation_gate": {
+      "return": 7
+    },
+    "actual_old_reviewed_replay_grid_gate_no_quality": {
+      "return": 8
+    },
+    "actual_old_reviewed_replay_grid_proposal_tracking": {
+      "return": 7
+    },
+    "legacy_wrong_candidate_with_null_inference": {
+      "exception": "ValueError",
+      "message": "legacy gate has no binding for new backbone/inference provenance"
+    },
+    "legacy_temporal_unknown_model": {
+      "exception": "ValueError",
+      "message": "Legacy temporal checkpoint requires the recognized spatial-v2 identity"
+    }
+  },
+  "actual_old_artifact_sha256": {
+    "spatial-v2.pt": "7ab95679a2009918dbab62fca64244476df519080cb8c0d376c00d1494983886",
+    "temporal-v2.pt": "11af3e5e4e105795f4c74d00887afc786b906e786cb2c2c5afb4c085a5115295",
+    "event-gate-v1.pt": "9bae4c22a5fc6dca64b270a0e37a8d899424477ed7b2c4f6ac5c2e6e811e62ba",
+    "calibration-v2.json": "6d448246aa6c0cc21fcd69d675c6f591bd7aef996edaa2da9ccb659f7b4b95cf"
+  },
+  "source_after": {
+    "src/terradelta/contracts.py": "a31b0b9c6267c95cbc1ba6f12a9de856c4563bf18fcffcf122286c5e0d059280",
+    "src/terradelta/event_gate.py": "0b6b38054ac84c813adcf0eb5ed7b775d6f0b2470c60247a949e1fef38c8df8b",
+    "src/terradelta/temporal.py": "534cc05ca713d9d3f66d8ee8a64f3efe0ff2f01be0a02a31a8abdce047fd2159",
+    "src/terradelta/cli.py": "bfedff5a3f40ef55eba095b9ac8acb9cc07bbbea34d91bef7c45737a0983ec91",
+    "src/terradelta/protocol.py": "b774bb0f209d296181c7ff7d4b50d6618159bcd22b0d0a8c1b4a3f70be7a8960",
+    "src/terradelta/pipeline.py": "2e3cac760259a4f13c2edc22ff2a7f633c8f9be635e0176df2a1a1e414044069",
+    "src/terradelta/spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff",
+    "src/terradelta/pretrained_spatial.py": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503",
+    "scripts/train_event_gate.py": "eded8c52ba7be4d36fa43cd96e94df83f844adf3c093a166c256adac4adb8b93",
+    "scripts/train_temporal.py": "2d20a781982e20c60999c9c35c9c75d74b52ab894133629749ce077a89b66068",
+    "scripts/calibrate.py": "2c8cb87a2c6fc77151d011058c5416ffdb130ab7c3ec665b8a54b28dd2819a2f",
+    "scripts/predict_all.py": "b9bcc9ccb80116e78ad39a047acaf64e4af457ecc921ac30caced2e2a8b0450f",
+    "configs/experiment-v6.json": "531999182720a75a09bf394d8bcb4a4a25983a0e345aad925b33bc0eaa73d159"
+  },
+  "source_stable": true
+}

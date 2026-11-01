@@ -1,0 +1,448 @@
+{
+  "verdict": "CLEAR_FOR_EXPLICIT_RECOVERY_RECEIPT_WITH_CONSTRAINTS",
+  "scope": "Retained best decoder is valid for the completed 4000-step TRAIN/DEV selection loop; terminal command failed its conservative disk source guard. This is not a clean successful trainer receipt or a completed confirmation study.",
+  "commit": "17e6a9fde572ea9751002ac23c048c100471d68a",
+  "artifacts_sha256_before": {
+    "checkpoint": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+    "final_trace": "a6f157762c5c35a1cbe6c305f9d46333de8884c71f078504283aa238b5d63ef8",
+    "log": "41f573dcfa12ee7dbf490c5195fd48598a7b4bddc8163af9e894c9f1dba8fdf2",
+    "config": "59433571ca28a99b635fb699362e0e1a91d958c2dd403a3f69e9156fdd6ed881"
+  },
+  "artifacts_sha256_after": {
+    "checkpoint": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+    "final_trace": "a6f157762c5c35a1cbe6c305f9d46333de8884c71f078504283aa238b5d63ef8",
+    "log": "41f573dcfa12ee7dbf490c5195fd48598a7b4bddc8163af9e894c9f1dba8fdf2",
+    "config": "59433571ca28a99b635fb699362e0e1a91d958c2dd403a3f69e9156fdd6ed881"
+  },
+  "all_audited_artifact_bytes_preserved": true,
+  "source_checks": {
+    "scripts/train_spatial_pretrained.py": {
+      "recorded": "734224bf530f78cdde70c51e18bc4f07508d693b6d5dfddcc1ec9c9ed1a65479",
+      "commit17_sha256": "734224bf530f78cdde70c51e18bc4f07508d693b6d5dfddcc1ec9c9ed1a65479",
+      "current_sha256": "734224bf530f78cdde70c51e18bc4f07508d693b6d5dfddcc1ec9c9ed1a65479",
+      "recorded_matches_commit17": true,
+      "current_matches_recorded": true
+    },
+    "scripts/train_spatial.py": {
+      "recorded": "787158065edc05b89b0affa7a56d50b3ee5428fa6f52a6955661c14b58189b28",
+      "commit17_sha256": "787158065edc05b89b0affa7a56d50b3ee5428fa6f52a6955661c14b58189b28",
+      "current_sha256": "787158065edc05b89b0affa7a56d50b3ee5428fa6f52a6955661c14b58189b28",
+      "recorded_matches_commit17": true,
+      "current_matches_recorded": true
+    },
+    "src/terradelta/pretrained_spatial.py": {
+      "recorded": "2bec25499465baa64fc9606f283c1debcef3d1f20ff88ecf0847b1d68c0d3021",
+      "commit17_sha256": "2bec25499465baa64fc9606f283c1debcef3d1f20ff88ecf0847b1d68c0d3021",
+      "current_sha256": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503",
+      "recorded_matches_commit17": true,
+      "current_matches_recorded": false
+    },
+    "src/terradelta/spatial.py": {
+      "recorded": "9a855209ac02a6eda14cf51ade292b21b7fed11ffe8be7963ed9eeb3a1fa0f2e",
+      "commit17_sha256": "9a855209ac02a6eda14cf51ade292b21b7fed11ffe8be7963ed9eeb3a1fa0f2e",
+      "current_sha256": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff",
+      "recorded_matches_commit17": true,
+      "current_matches_recorded": false
+    }
+  },
+  "config_matches_commit_and_embedded_checkpoint": true,
+  "final_trace_rows": 42,
+  "final_trace_matches_log": true,
+  "logged_schedule_complete": true,
+  "optimizer_steps_recorded_complete": 4000,
+  "retained_checkpoint_steps_completed_field": 3600,
+  "retained_selected_step": 3600,
+  "retained_selection_metric": {
+    "footprint_dice": 0.46242393246017804,
+    "boundary_dice": 0.37780514403139537,
+    "loss": 0.859264001250267,
+    "selection_score": 0.4201145382457867,
+    "valid_positive_pixels": [
+      74687,
+      60559
+    ]
+  },
+  "retained_trace_exact_prefix_of_final_trace": true,
+  "selected_unique_maximum": true,
+  "later_development_evaluations": [
+    {
+      "step": 3700,
+      "selection_score": 0.3905568648378077
+    },
+    {
+      "step": 3800,
+      "selection_score": 0.386904363158182
+    },
+    {
+      "step": 3900,
+      "selection_score": 0.3843500321209051
+    },
+    {
+      "step": 4000,
+      "selection_score": 0.3851530706788845
+    }
+  ],
+  "resource_elapsed_seconds": 2668.0256974159856,
+  "resource_limit_seconds": 10800,
+  "semantic_source_audit": {
+    "model_module_ast_identical_after_removing_only_new_plain_attribute": true,
+    "new_model_statement": [
+      "self.native_alignment = 32 // self.input_scale"
+    ],
+    "spatial_changed_definitions": [
+      "predict_scene"
+    ],
+    "training_script_byte_identical": true,
+    "sampler_script_byte_identical": true,
+    "loss_definition_ast_identical": true,
+    "no_module_reload_in_trainer_or_sampler": true,
+    "training_calls_predict_scene": false,
+    "training_math_functions": "constructor except unused alignment attribute; _block, train, _forward_model_grid, forward, shared masked loss, extract/train_batch/development_batch/validate, optimizer/config unchanged"
+  },
+  "synthetic_runtime_check": {
+    "device": "cpu",
+    "threads": 2,
+    "input_shape": [
+      1,
+      3,
+      31,
+      29
+    ],
+    "same_exact_registered_state": true,
+    "new_attribute_is_plain_unregistered_int": true,
+    "forward_bitwise_equal": true,
+    "masked_loss_bitwise_equal": true,
+    "no_optimizer_or_refit": true,
+    "all_checkpoint_decoder_tensors_finite": true
+  },
+  "data_provenance": {
+    "train_count": 9,
+    "development_count": 4,
+    "confirmation_count": 3,
+    "input_regions_exactly_train_plus_development": true,
+    "no_confirmation_or_audit_only_region_in_inputs": true,
+    "config_roles_match_prospective_selection_manifest": {
+      "train": true,
+      "development": true,
+      "confirmation": true
+    },
+    "actual_input_hash_checks": {
+      "L15-0331E-1257N_1327_3160_13": {
+        "rgb.npy": {
+          "sha256": "535237142a131319b4fb7ca10c76338ca3865886e83ae2d9d3e831d233cacfb6",
+          "matches": true
+        },
+        "target.npy": {
+          "sha256": "117674f0815193e2580c7241f227e7b37d7a6e26c19b7be1f2672e96a573c2ee",
+          "matches": true
+        },
+        "edge.npy": {
+          "sha256": "20a43c3315060908edf43028aded7c96c1fb3e33dc08d09141351e091d1bf2f2",
+          "matches": true
+        },
+        "valid.npy": {
+          "sha256": "caf3587866e72e2b62d0b0548428c3f4ed3e49dc9c66c6a18ebf3c22322ed89e",
+          "matches": true
+        },
+        "metadata.json": {
+          "sha256": "edaa7f31e5a922bcac599bb9ebef92cd0e979fc285350969e72f3a8fe704a54c",
+          "matches": true
+        }
+      },
+      "L15-0506E-1204N_2027_3374_13": {
+        "rgb.npy": {
+          "sha256": "7c8315ee569e7b1a0d1693a34c6f1c1982195cee89375acb326e7d439cc066ca",
+          "matches": true
+        },
+        "target.npy": {
+          "sha256": "27e6ab78bffd743deefdf440cebfa6201f4a85de3008ec6dce12f2553ada09e1",
+          "matches": true
+        },
+        "edge.npy": {
+          "sha256": "1e8ab2c8cadfaa778c60bcb24c0d7122a8806c70e4c617f00846ff31b5042f12",
+          "matches": true
+        },
+        "valid.npy": {
+          "sha256": "15e0b1c5ed8dcde45eb67e7a70f2ef8ef097ffcf4ccfeb330c55143524b95970",
+          "matches": true
+        },
+        "metadata.json": {
+          "sha256": "508cf8c82a3b04bb5d54bf131b274cd9ab8cdb6a942a45bd073fea96834a9592",
+          "matches": true
+        }
+      },
+      "L15-0924E-1108N_3699_3757_13": {
+        "rgb.npy": {
+          "sha256": "31d40484a482075a3e020031c13454a2c1de1f34cd1e621b01195c906022f6d9",
+          "matches": true
+        },
+        "target.npy": {
+          "sha256": "62ac5154ee4629d8b4cfbc3392a630558e042a7a552461cac7d47ad0330f7b75",
+          "matches": true
+        },
+        "edge.npy": {
+          "sha256": "066a1db9ea6252206d1dffe6e6b3355f7acca96cae44edaa59afc573a442bead",
+          "matches": true
+        },
+        "valid.npy": {
+          "sha256": "0c492d35ce14914e7850a433d4d0d40de23881c503c9aac4154ff41518c1256a",
+          "matches": true
+        },
+        "metadata.json": {
+          "sha256": "cc44f1028a4de200839db63e11ea7e702b93d6d5e5c8b40ef88129cf64e3490a",
+          "matches": true
+        }
+      },
+      "L15-1276E-1107N_5105_3761_13": {
+        "rgb.npy": {
+          "sha256": "e945cb7822b65364a43c4579edd52c28de322a21a9479d6e619d0c7a04e4f671",
+          "matches": true
+        },
+        "target.npy": {
+          "sha256": "033c1bd5e92bb7866f3e31ee9ec41040c9cc93cfd18397925d053d9f62508c1d",
+          "matches": true
+        },
+        "edge.npy": {
+          "sha256": "e47bf697e8d520e7029f9da65ad4315968ba38110da1f0e94f4ca0c1a211530d",
+          "matches": true
+        },
+        "valid.npy": {
+          "sha256": "eaffef8977329415871561cb32cbefce508f9f5b38b0d9572376e977aad21902",
+          "matches": true
+        },
+        "metadata.json": {
+          "sha256": "039058da8af9b133529382cd5a4b6e3f6524de59458258daf7dc0867e853a3d8",
+          "matches": true
+        }
+      },
+      "L15-1669E-1153N_6678_3579_13": {
+        "rgb.npy": {
+          "sha256": "210a6f8eee719f14ed796d82bb762b4062b45f3fad9aeb71748f1f9a30435349",
+          "matches": true
+        },
+        "target.npy": {
+          "sha256": "2e002ee9f2253891247355c81d96a7e78214dbf606f8beb624ae80c47008e63c",
+          "matches": true
+        },
+        "edge.npy": {
+          "sha256": "ad89df92855b3cfeec44e5bb537b42e9e81c49fb1cba6fbcd160923e33c46e5d",
+          "matches": true
+        },
+        "valid.npy": {
+          "sha256": "75085212f787b2cbd059dbc67bcb242f4235affbffa96174202d1939fc955a6d",
+          "matches": true
+        },
+        "metadata.json": {
+          "sha256": "35430c589a6999bcf8043e7d1b7e415a29d5be646afc968d0f6c18b4364d0b9b",
+          "matches": true
+        }
+      },
+      "L15-1669E-1160N_6678_3548_13": {
+        "rgb.npy": {
+          "sha256": "ff9cf7aa2e59b2a59e9ead8430421d524a5fbe6e3ac961ccb112cf0507139458",
+          "matches": true
+        },
+        "target.npy": {
+          "sha256": "dea9305e59e06670a22d8c8669474e969b5d1828a0f0b59ced2a2e83ddeea833",
+          "matches": true
+        },
+        "edge.npy": {
+          "sha256": "4e3e1b8885c75d0eabfcd53dcfaa2d1d982667c0259f887ca285e9a2faca452c",
+          "matches": true
+        },
+        "valid.npy": {
+          "sha256": "1de9557ff905445e41b84b3695fcf32750428db935b4356ff660157e6cada79d",
+          "matches": true
+        },
+        "metadata.json": {
+          "sha256": "2b805fc5267f89ba0742fa4c94d198932134092d6ed41b27890c7c9827a67815",
+          "matches": true
+        }
+      },
+      "L15-1335E-1166N_5342_3524_13": {
+        "rgb.npy": {
+          "sha256": "86312ecf0c56ad75248e6b24d7264f0231637c7da090b66f9ee87842eed46de7",
+          "matches": true
+        },
+        "target.npy": {
+          "sha256": "91321db29f0f56a741172a6d52738a7470796b6ca78db0af0b74a0654ad1db4a",
+          "matches": true
+        },
+        "edge.npy": {
+          "sha256": "f299eca4ab1a0f8787d751afc50823454fefabc09bc381355d8711da8b9c599b",
+          "matches": true
+        },
+        "valid.npy": {
+          "sha256": "fd54bcbb2c58fe700c16c0ff89ab30b8aa32b5c99f87abeae56bc47107eb3e79",
+          "matches": true
+        },
+        "metadata.json": {
+          "sha256": "602a6df2b93cad72eb945d43b9c5270498baefb18355782152da8f7c64d727ae",
+          "matches": true
+        }
+      },
+      "L15-0487E-1246N_1950_3207_13": {
+        "rgb.npy": {
+          "sha256": "b95321c5cb10afd5209ec5988581c15e376832148fa7458d7c3e524b1780f03b",
+          "matches": true
+        },
+        "target.npy": {
+          "sha256": "11639bd736fe7860a8e0941b3388477497ea386f4a1359f06a8e35dc72d49069",
+          "matches": true
+        },
+        "edge.npy": {
+          "sha256": "71662d94de9a0f4f66ecdc5f3197e1f2028a34be42605d1086456531106ef528",
+          "matches": true
+        },
+        "valid.npy": {
+          "sha256": "fb8836e816b0cce1edfbcec012031e9b20be7876298e4bf964bdb155095a2591",
+          "matches": true
+        },
+        "metadata.json": {
+          "sha256": "311164062513348d413764e743e740977f36261204337ba6f4edf50d7943868b",
+          "matches": true
+        }
+      },
+      "L15-1298E-1322N_5193_2903_13": {
+        "rgb.npy": {
+          "sha256": "00e7faa79747040a4b244cff685e16ec485a28cc57393606d96b4cadd07a109d",
+          "matches": true
+        },
+        "target.npy": {
+          "sha256": "24db8e1988d6be2c122d359b551433f6450c113d7199a99cc649820468bba721",
+          "matches": true
+        },
+        "edge.npy": {
+          "sha256": "1f3a0ea794dd8ac1c2513e89feec948c73d43e649d1dee380312e92b432f22fc",
+          "matches": true
+        },
+        "valid.npy": {
+          "sha256": "15d6df625fae365c15f91eccaff3cc3ba1c6beedfa5237ce878788ab8bb72f27",
+          "matches": true
+        },
+        "metadata.json": {
+          "sha256": "b534cd25cbf886a936b8c0e8af8e1d6611e57d6cca61879b245e22bcc9d4ec1c",
+          "matches": true
+        }
+      },
+      "L15-0632E-0892N_2528_4620_13": {
+        "rgb.npy": {
+          "sha256": "f03af49793bd22500c45ca5401e63e9dbf3bf9b49a1c684278fc32901f050cb8",
+          "matches": true
+        },
+        "target.npy": {
+          "sha256": "fe43639926416fd31427283c04492c83f2f5c16ba319454c26c153641660e269",
+          "matches": true
+        },
+        "edge.npy": {
+          "sha256": "9a15b8928f8c7bd3003b4034da9bfa8ebc714fe749fed5a6ef0d591846fc56c0",
+          "matches": true
+        },
+        "valid.npy": {
+          "sha256": "08d3216a52146c4f2a4e62a2c8309118fc9754dbda52e33fe97f284950fa3f71",
+          "matches": true
+        },
+        "metadata.json": {
+          "sha256": "c18b641d36a4e9394ac4a36632d96d3c4e0f9972bf47fe766829ca26f54d5611",
+          "matches": true
+        }
+      },
+      "L15-1389E-1284N_5557_3054_13": {
+        "rgb.npy": {
+          "sha256": "2d9a7f3ea69f137acbbfa4df9a0d8633c1c3ac4e1ace00b093df8d52a421d690",
+          "matches": true
+        },
+        "target.npy": {
+          "sha256": "434431f4e45cc795373ac6b967f4ce1e67cd2aba6541c8645a5d86d4c9739a00",
+          "matches": true
+        },
+        "edge.npy": {
+          "sha256": "c06a46481d5bea57c88bbc99ed92f71f3a325e9209707237764d5215af50a49b",
+          "matches": true
+        },
+        "valid.npy": {
+          "sha256": "891265bd35de959debc0e2796a120a19c39d00a74fe1b42471d35e14e32bbf49",
+          "matches": true
+        },
+        "metadata.json": {
+          "sha256": "b2cda4b59b4c0ce0a761d6bcdeacf251791b302924af0ede1ff3950d60fca25e",
+          "matches": true
+        }
+      },
+      "L15-1716E-1211N_6864_3345_13": {
+        "rgb.npy": {
+          "sha256": "b16f8ba912816536fd4cb6f454088354e3482c53e03aa419791dd58a499ed995",
+          "matches": true
+        },
+        "target.npy": {
+          "sha256": "2c2f8cb0499d096c1c8d14343e4c751c9207d1f0f32c86c10c15d3327dc39c09",
+          "matches": true
+        },
+        "edge.npy": {
+          "sha256": "d212cb35db4482fa052c5c8823dce91faf8a2ed686e45839af58dfdd4cb5fe72",
+          "matches": true
+        },
+        "valid.npy": {
+          "sha256": "891265bd35de959debc0e2796a120a19c39d00a74fe1b42471d35e14e32bbf49",
+          "matches": true
+        },
+        "metadata.json": {
+          "sha256": "3512217275ac02e5c3424b84c80441b34ed69da8a7b1b7fe2cf09f6f6ac933b7",
+          "matches": true
+        }
+      },
+      "L15-0614E-0946N_2459_4406_13": {
+        "rgb.npy": {
+          "sha256": "1a5ceb0b52015966b692ea5b95c16aa5c3b6c2b3035cccb0da4308764d00a83e",
+          "matches": true
+        },
+        "target.npy": {
+          "sha256": "b86a5bd4f2b1301c01c59b51079503118f1e4059f0365404386b60a664df7f3b",
+          "matches": true
+        },
+        "edge.npy": {
+          "sha256": "42c4bc3cab62431a147b93881a248dfddacf2f71300ad87ad5787fa5cf23b333",
+          "matches": true
+        },
+        "valid.npy": {
+          "sha256": "aecdd8ed5443996d1347154accd206321bb29726f13a3e117497f5498c67d559",
+          "matches": true
+        },
+        "metadata.json": {
+          "sha256": "9338c616ff8c55eb52b3da2c463bd4cf716045f1ee9bf393cd98d4bcc4346212",
+          "matches": true
+        }
+      }
+    },
+    "confirmation_or_audit_only_arrays_opened_by_this_audit": false,
+    "audit_label_access": "Only TRAIN/DEV target and edge file bytes streamed for hash comparison; no label metrics computed or new confirmation arrays opened"
+  },
+  "terminal_error": "RuntimeError: training source/config bytes changed during fit",
+  "terminal_control_flow_inference": "The final assert_frozen at line 223 completed before guard failure at line 228. Final saved checkpoint/terminal provenance rewrite at lines 229-239 did not run.",
+  "constraints": [
+    "Keep checkpoint, trace, log and config bytes unchanged; bind them by full SHA256 in a separate recovery receipt.",
+    "Report selected step 3600, completed observed optimizer loop 4000, and failed source-guard termination separately. Do not rewrite checkpoint metadata to pretend its steps_completed field is 4000.",
+    "Recover training implementation from commit 17e6a9f, explicitly document later unused-attribute and inference-only tiling changes. Do not attribute current tiled inference identity to the fit.",
+    "No fresh confirmation selection/performance may be inferred from these DEV scores; preserve geographic holdouts and separate inference policy selection.",
+    "Do not silently disable the guard or treat this audit as permission to ignore future source/config mismatches."
+  ],
+  "limits": [
+    "Loaded process code was not separately captured from memory; source provenance and absence of reloads support the normal single-process import interpretation.",
+    "Final encoder-frozen assertion success is inferred from the exact traceback location and preserved unchanged trainer control flow, not from a clean terminal success field.",
+    "The synthetic runtime check is CPU source-equivalence evidence, not a repeated MPS training run or proof of bitwise MPS reproducibility."
+  ],
+  "format": "terradelta-spatial-fit-recovery-review-v1",
+  "status": "clear",
+  "checkpoint_sha256": "7c35a3f04ef9e7610e4618a003a056ce6512a930be67db2ce9999ad8dc24820d",
+  "trace_sha256": "a6f157762c5c35a1cbe6c305f9d46333de8884c71f078504283aa238b5d63ef8",
+  "config_sha256": "59433571ca28a99b635fb699362e0e1a91d958c2dd403a3f69e9156fdd6ed881",
+  "log_sha256": "41f573dcfa12ee7dbf490c5195fd48598a7b4bddc8163af9e894c9f1dba8fdf2",
+  "completed_steps": 4000,
+  "selected_step": 3600,
+  "artifact_paths": {
+    "checkpoint": "/Users/nazeeh/Documents/ChatGPT/Github/TerraDelta/artifacts/spatial-v3.pt",
+    "final_trace": "/Users/nazeeh/Documents/ChatGPT/Github/TerraDelta/artifacts/spatial-v3.training.json",
+    "log": "/Users/nazeeh/Documents/ChatGPT/Continue/terradelta-task/spatial-pretrained-v1.log",
+    "config": "/Users/nazeeh/Documents/ChatGPT/Github/TerraDelta/configs/experiment-v5.json"
+  }
+}

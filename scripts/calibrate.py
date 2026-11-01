@@ -54,6 +54,23 @@ def main():
     if args.output.exists():
         raise ValueError("Calibration output exists; use a new versioned path")
     config = json.loads(args.config.read_text())
+    from terradelta.contracts import (
+        preflight_heads, preflight_manifests, preflight_spatial_checkpoint, study_binding,
+    )
+
+    binding = study_binding(config)
+    if config.get("event_gate") and args.event_gate_weights is None:
+        raise ValueError("Study requires --event-gate-weights")
+    if binding is not None:
+        preflight_manifests(
+            args.features_root, args.cache_root, config["development"], binding, supervision=True,
+        )
+        preflight_spatial_checkpoint(args.spatial_weights, binding)
+        preflight_heads(
+            binding, temporal_weights=args.weights, event_gate_weights=args.event_gate_weights,
+            temporal_kinds=("observation", "no_quality", "watch_lstm"), require_bound=True,
+            config_sha256=sha256(args.config),
+        )
     development = []
     for aoi in config["development"]:
         root = args.features_root / aoi
@@ -73,8 +90,8 @@ def main():
         ys = []
         masks = []
         regional_scores = []
-        for _, f, s, _, _ in development:
-            scores = method_scores(f["x"], f["usable"], method, args.weights)
+        for _, f, s, info, _ in development:
+            scores = method_scores(f["x"], f["usable"], method, args.weights, spatial_info=info)
             regional_scores.append(scores)
             raw.append(scores.ravel())
             ys.append(s["y"].ravel())
@@ -254,6 +271,7 @@ def main():
         "matched_detection_horizon_days": 62,
         "weights_sha256": sha256(args.weights),
         "spatial_weights_sha256": sha256(args.spatial_weights),
+        "spatial_provenance": config.get("event_gate", {}).get("spatial_provenance"),
         "config_sha256": sha256(args.config),
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

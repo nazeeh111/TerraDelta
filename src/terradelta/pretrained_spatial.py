@@ -3,6 +3,7 @@
 This module never downloads weights. Torchvision's code license and the
 pretraining-data/weight terms are separate provenance records.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -28,9 +29,11 @@ def sha256_file(path: str | Path) -> str:
 def _block(inputs: int, outputs: int) -> nn.Sequential:
     return nn.Sequential(
         nn.Conv2d(inputs, outputs, 3, padding=1, bias=False),
-        nn.GroupNorm(8, outputs), nn.ReLU(),
+        nn.GroupNorm(8, outputs),
+        nn.ReLU(),
         nn.Conv2d(outputs, outputs, 3, padding=1, bias=False),
-        nn.GroupNorm(8, outputs), nn.ReLU(),
+        nn.GroupNorm(8, outputs),
+        nn.ReLU(),
     )
 
 
@@ -42,19 +45,27 @@ class PretrainedBuildingUNet(nn.Module):
     """
 
     def __init__(
-        self, backbone_path: str | Path | None = None,
-        backbone_sha256: str | None = None, input_scale: int = 2,
-        *, encoder: nn.Module | None = None,
+        self,
+        backbone_path: str | Path | None = None,
+        backbone_sha256: str | None = None,
+        input_scale: int = 2,
+        *,
+        encoder: nn.Module | None = None,
     ):
         super().__init__()
         if input_scale not in (1, 2):
             raise ValueError("input_scale must be 1 or 2")
         self.input_scale = input_scale
+        # ResNet18 downsamples by32 internal pixels; tile origins share this phase.
+        self.native_alignment = 32 // self.input_scale
         self.test_encoder = encoder is not None
         if encoder is None:
-            if (backbone_path is None or backbone_sha256 is None
-                    or len(backbone_sha256) != 64
-                    or any(c not in "0123456789abcdef" for c in backbone_sha256)):
+            if (
+                backbone_path is None
+                or backbone_sha256 is None
+                or len(backbone_sha256) != 64
+                or any(c not in "0123456789abcdef" for c in backbone_sha256)
+            ):
                 raise ValueError("local backbone path and full lowercase SHA256 are required")
             if sha256_file(backbone_path) != backbone_sha256:
                 raise ValueError("backbone SHA256 mismatch")
@@ -67,15 +78,19 @@ class PretrainedBuildingUNet(nn.Module):
             encoder.fc = nn.Identity()  # Excluded only AFTER successful complete load.
         self.backbone_sha256 = backbone_sha256
         self.encoder = encoder.requires_grad_(False).eval()
-        self.decoder = nn.ModuleDict({
-            "blocks": nn.ModuleList([
-                _block(a, b) for a, b in
-                ((768, 128), (256, 64), (128, 32), (96, 16), (19, 16))
-            ]),
-            "head": nn.Conv2d(16, 2, 1),
-        })
-        self.register_buffer("mean", torch.tensor([.485, .456, .406])[None, :, None, None])
-        self.register_buffer("std", torch.tensor([.229, .224, .225])[None, :, None, None])
+        self.decoder = nn.ModuleDict(
+            {
+                "blocks": nn.ModuleList(
+                    [
+                        _block(a, b)
+                        for a, b in ((768, 128), (256, 64), (128, 32), (96, 16), (19, 16))
+                    ]
+                ),
+                "head": nn.Conv2d(16, 2, 1),
+            }
+        )
+        self.register_buffer("mean", torch.tensor([0.485, 0.456, 0.406])[None, :, None, None])
+        self.register_buffer("std", torch.tensor([0.229, 0.224, 0.225])[None, :, None, None])
 
     def train(self, mode: bool = True):
         super().train(mode)
@@ -90,14 +105,26 @@ class PretrainedBuildingUNet(nn.Module):
             stem = self.encoder.relu(self.encoder.bn1(self.encoder.conv1(normalized)))
             value = self.encoder.maxpool(stem)
             stages = [rgb, stem]
-            for layer in (self.encoder.layer1, self.encoder.layer2,
-                          self.encoder.layer3, self.encoder.layer4):
+            for layer in (
+                self.encoder.layer1,
+                self.encoder.layer2,
+                self.encoder.layer3,
+                self.encoder.layer4,
+            ):
                 value = layer(value)
                 stages.append(value)
         for block, skip in zip(self.decoder["blocks"], reversed(stages[:-1])):
-            value = block(torch.cat((F.interpolate(
-                value, size=skip.shape[-2:], mode="bilinear", align_corners=False
-            ), skip), dim=1))
+            value = block(
+                torch.cat(
+                    (
+                        F.interpolate(
+                            value, size=skip.shape[-2:], mode="bilinear", align_corners=False
+                        ),
+                        skip,
+                    ),
+                    dim=1,
+                )
+            )
         return self.decoder["head"](value)[..., :height, :width]
 
     def forward(self, rgb: torch.Tensor) -> torch.Tensor:
@@ -116,23 +143,35 @@ def make_checkpoint(model: PretrainedBuildingUNet, training: dict) -> dict:
         raise ValueError("test/random encoder cannot produce a research checkpoint")
     return {
         "format": FORMAT,
-        "architecture": {"name": "FrozenResNet18GroupNormDecoder", "input_scale": model.input_scale,
-                         "group_norm_groups": 8, "outputs": ["footprint", "boundary"],
-                         "native_output": "mean internal-cell probabilities; equivalent logits"},
-        "backbone": {"uri": BACKBONE_URI, "sha256": model.backbone_sha256,
-                     "enum": BACKBONE_ENUM, "torchvision": "0.24.1",
-                     "classifier": "strictly loaded then excluded as Identity",
-                     "terms": {"code": "https://github.com/pytorch/vision/blob/v0.24.1/LICENSE",
-                               "weights_notice": "https://github.com/pytorch/vision/blob/v0.24.1/README.md",
-                               "dataset": "https://image-net.org/accessagreement"}},
-        "decoder_state_dict": {k: v.detach().cpu().clone()
-                               for k, v in model.decoder.state_dict().items()},
+        "architecture": {
+            "name": "FrozenResNet18GroupNormDecoder",
+            "input_scale": model.input_scale,
+            "group_norm_groups": 8,
+            "outputs": ["footprint", "boundary"],
+            "native_output": "mean internal-cell probabilities; equivalent logits",
+        },
+        "backbone": {
+            "uri": BACKBONE_URI,
+            "sha256": model.backbone_sha256,
+            "enum": BACKBONE_ENUM,
+            "torchvision": "0.24.1",
+            "classifier": "strictly loaded then excluded as Identity",
+            "terms": {
+                "code": "https://github.com/pytorch/vision/blob/v0.24.1/LICENSE",
+                "weights_notice": "https://github.com/pytorch/vision/blob/v0.24.1/README.md",
+                "dataset": "https://image-net.org/accessagreement",
+            },
+        },
+        "decoder_state_dict": {
+            k: v.detach().cpu().clone() for k, v in model.decoder.state_dict().items()
+        },
         "training": training,
     }
 
 
-def load_model(weights: str | Path, *, backbone_path: str | Path,
-               device: str = "cpu") -> PretrainedBuildingUNet:
+def load_model(
+    weights: str | Path, *, backbone_path: str | Path, device: str = "cpu"
+) -> PretrainedBuildingUNet:
     checkpoint = torch.load(weights, map_location="cpu", weights_only=True)
     if checkpoint.get("format") != FORMAT:
         raise ValueError("unsupported pretrained spatial checkpoint format")
@@ -140,8 +179,10 @@ def load_model(weights: str | Path, *, backbone_path: str | Path,
     if backbone["enum"] != BACKBONE_ENUM or backbone["uri"] != BACKBONE_URI:
         raise ValueError("unsupported backbone identity")
     architecture = checkpoint["architecture"]
-    if (architecture["name"] != "FrozenResNet18GroupNormDecoder"
-            or architecture["group_norm_groups"] != 8):
+    if (
+        architecture["name"] != "FrozenResNet18GroupNormDecoder"
+        or architecture["group_norm_groups"] != 8
+    ):
         raise ValueError("unsupported decoder architecture")
     model = PretrainedBuildingUNet(backbone_path, backbone["sha256"], architecture["input_scale"])
     model.decoder.load_state_dict(checkpoint["decoder_state_dict"], strict=True)

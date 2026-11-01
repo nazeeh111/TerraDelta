@@ -9,6 +9,7 @@ import numpy as np
 import pytest
 import torch
 from typer.testing import CliRunner
+from click import unstyle
 
 from terradelta import pipeline
 from terradelta.cli import app
@@ -190,7 +191,7 @@ def test_cli_defaults_to_gate_and_missing_weights_fail_before_compute(tmp_path, 
     assert called[0] == "heads"
     called.clear()
     result = runner.invoke(app, [*args[:-1], str(tmp_path / "other")])
-    assert result.exit_code == 2 and "--temporal-weights" in result.output
+    assert result.exit_code == 2 and "--temporal-weights" in unstyle(result.output)
     assert not called
 
 

@@ -1,0 +1,34 @@
+{
+  "format": "terradelta-platform-install-preflight-v1",
+  "checked_at": "2026-11-01T08:32:22.959527+00:00",
+  "uv_version": "0.11.20",
+  "python": "3.12",
+  "pyproject_sha256": "e36b3e47ef93c8c3aa7858e7e6d629f9d8d60d2155bfe9d1b34ff2f05a5c3736",
+  "uv_lock_sha256": "f1eb8b56c65aafc049ab2a7d0e3730610fcae0c0ec60932406b774af11813045",
+  "targets": [
+    {
+      "target": "x86_64-manylinux_2_28",
+      "status": "frozen_sync_dry_run_passed",
+      "torchvision": "0.24.1+cpu",
+      "log_sha256": "bf94c9bd96f1b5283ceafa9ab089edf8713d0e05b52019ba108e3ca1377b7c23"
+    },
+    {
+      "target": "x86_64-pc-windows-msvc",
+      "status": "frozen_sync_dry_run_passed",
+      "torchvision": "0.24.1+cpu",
+      "log_sha256": "ce37dfc90edf0e8995a596d4fbbd0f0a844acac6c2ada2aee9926a42d956deaf"
+    },
+    {
+      "target": "aarch64-apple-darwin",
+      "status": "frozen_sync_dry_run_passed",
+      "torchvision": "0.24.1",
+      "log_sha256": "2a57e52ff170a0698abb080ee67cb757e863af3c6aae895ec56ef311eea75664"
+    }
+  ],
+  "cause": "First public CI selected ARM-only torchvision0.24.1 for Linuxx86; explicit CPU local-version pin and required environments correct resolver selection. Original failed CI/log retained.",
+  "limits": "Dry runs validate wheel resolution, not runtime. Public Linux CI and clean Mac clone remain separate executed checks; Windows runtime not tested. Mac Torch2.9.1/torchvision0.24.1 unchanged, model/data/threshold/source implementations unchanged.",
+  "sources": [
+    "https://github.com/astral-sh/uv/blob/main/docs/concepts/projects/config.md",
+    "https://download.pytorch.org/whl/cpu/torchvision/"
+  ]
+}

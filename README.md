@@ -63,8 +63,10 @@ the failure trace are preserved.
 
 ## Install
 
-Use Python 3.12 and [uv](https://docs.astral.sh/uv/). The lock uses CPU PyTorch on
-Linux/Windows and the native Mac build, which can use MPS when available.
+Use Python 3.12 and [uv](https://docs.astral.sh/uv/). Required install targets are
+Linux x86-64, Windows x86-64 and Apple Silicon macOS. The lock selects explicit
+CPU builds on Linux/Windows and native Mac builds with optional MPS. Windows
+wheel resolution is checked; Windows runtime execution has not been tested here.
 
 ```sh
 git clone https://github.com/nazeeh111/TerraDelta.git

@@ -284,14 +284,24 @@ separate from final public clean-clone, CI and release-download verification.
 
 The [independent pre-freeze review](../artifacts/verification-v2/independent-review.md)
 cleared the reviewed correctness issues before scoring; it explicitly did not
-establish scientific success. Public release, remote CI and downloaded-release
-checks remain pending. Any release of this version should be labeled a research
-release with known scientific failure, not an analyst-ready alerting service.
+establish scientific success. The subsequent
+[v0.1.0-research release](https://github.com/nazeeh111/TerraDelta/releases/tag/v0.1.0-research)
+preserves this failed study. Its
+[public delivery receipt](../artifacts/verification-v3/public-release-v1.json)
+records successful remote CI, verified downloads of all 17 assets and a cold
+public-only replay of the complete history, snapshots and source imagery.
+These checks establish research delivery, not analyst-ready detection.
 
 A further scientific revision requires a declared new method/experiment and
 fresh complete geographic confirmation data, since these regions have now been
-examined. New version-5 study data have been acquired and pilot preparation is
-underway; at this update no version-5 fit or confirmation result is available.
-Neither the numerical repair nor data acquisition is a performance win. No
-successful future model or date is promised, and both earlier negative outcomes
-remain part of the record.
+examined. The later [experiment-v8](../configs/experiment-v8.json) declares nine
+training, four development and three fresh confirmation regions. Its new fits,
+development calibration and
+[independently audited freeze](../artifacts/verification-v3/confirmation-boundary-v3.md)
+are complete, but fresh confirmation remains deliberately unscored while
+development checks address weak proposals. The retained spatial checkpoint has
+an explicit [fit recovery audit](../artifacts/verification-v3/spatial-v3-fit-audit.md),
+including the original failed source-integrity check. Neither preparation nor
+the numerical repair establishes improved event performance. The
+[current research status](../README.md) distinguishes that unfinished revision
+from this released result; both earlier negative outcomes remain in the record.

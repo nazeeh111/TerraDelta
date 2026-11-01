@@ -1,0 +1,87 @@
+{
+  "format": "terradelta-rendered-interface-review-v3",
+  "checked_at": "2026-10-30T00:51:24.464242+00:00",
+  "method": "Observed browser DOM and screenshots through CUA; current source preview on loopback62277, copied first-study Mexico ledger",
+  "sources": {
+    "src/terradelta/web/index.html": "b85a055aa3bf6bd83d1bc8f585bf40db31abf06815fd7f45d318f7949c1717f6",
+    "src/terradelta/web/style.css": "28107ab8dc7eff05ce65d9342eb5108647af89cf505bcc30dd1adf04a2919cc2",
+    "src/terradelta/web/app.js": "a0a5ad8c33738c154636d49fcafeba4788180de13ee7ba43de0cedc116774e92"
+  },
+  "desktop": {
+    "viewport": [
+      1280,
+      720
+    ],
+    "complete_area_visible": true,
+    "confirmed_result_count": 292,
+    "retracted_result_count": 9550,
+    "retracted_page_1": "1\u2013100 of 9,550 events",
+    "retracted_page_2": "101\u2013200 of 9,550 events",
+    "rendered_page_buttons": 100,
+    "page_change_geojson_url_exactly_unchanged": true,
+    "back_from_inspector_restores_page_2": true
+  },
+  "mobile": {
+    "viewport": [
+      390,
+      844
+    ],
+    "horizontal_overflow": false,
+    "selected_state": "retracted",
+    "returned_revision": 4,
+    "support_crops_native_pixels": [
+      64,
+      64,
+      64
+    ],
+    "all_support_crops_loaded": true,
+    "support_roles": [
+      "Before change",
+      "First changed support",
+      "Retraction support"
+    ],
+    "support_months": [
+      "2018-05",
+      "2018-06",
+      "2018-09"
+    ],
+    "current_status_banner_visible": "Failed geographic transfer; research inspection only"
+  },
+  "source_crop_checks": "Earlier actual selected confirmed revision5 sourceID+SHA exactnative64pixel crops; fullarea thumbnail switch toJun2018 verified; API byte-level mask/window tests pass.",
+  "limits": [
+    "Browser preview shows frozen first study, not improved scientific accuracy.",
+    "Snapshots and rendered screenshots were viewed inline; no invented screenshot artifact paths."
+  ],
+  "saved_snapshot_replay": {
+    "as_of": "2026-10-29T23:06:28.502897Z",
+    "retracted_results": 9550,
+    "same_export_token": true,
+    "page_reset": "1\u2013100 of 9,550 events"
+  },
+  "changed_area_and_date_query": {
+    "bbox": [
+      -99.53613281249997,
+      19.2904245813072,
+      -99.51416015625303,
+      19.31114335506463
+    ],
+    "start": "2019-01-01",
+    "end": "2019-12-31",
+    "state": "confirmed_by_model",
+    "results": 16,
+    "geojson_parquet_exact_event_ids": true,
+    "parquet_crs": "{\"$schema\": \"https://proj.org/schemas/v0.7/projjson.schema.json\", \"type\": \"GeographicCRS\", \"name\": \"WGS 84\", \"datum_ensemble\": {\"name\": \"World Geodetic System 1984 ensemble\", \"members\": [{\"name\": \"World Geodetic System 1984 (Transit)\"}, {\"name\": \"World Geodetic System 1984 (G730)\"}, {\"name\": \"World Geodetic System 1984 (G873)\"}, {\"name\": \"World Geodetic System 1984 (G1150)\"}, {\"name\": \"World Geodetic System 1984 (G1674)\"}, {\"name\": \"World Geodetic System 1984 (G1762)\"}, {\"name\": \"World Geodetic System 1984 (G2139)\"}, {\"name\": \"World Geodetic System 1984 (G2296)\"}], \"ellipsoid\": {\"name\": \"WGS 84\", \"semi_major_axis\": 6378137, \"inverse_flattening\": 298.257223563}, \"accuracy\": \"2.0\", \"id\": {\"authority\": \"EPSG\", \"code\": 6326}}, \"coordinate_system\": {\"subtype\": \"ellipsoidal\", \"axis\": [{\"name\": \"Geodetic latitude\", \"abbreviation\": \"Lat\", \"direction\": \"north\", \"unit\": \"degree\"}, {\"name\": \"Geodetic longitude\", \"abbreviation\": \"Lon\", \"direction\": \"east\", \"unit\": \"degree\"}]}, \"scope\": \"Horizontal component of 3D system.\", \"area\": \"World.\", \"bbox\": {\"south_latitude\": -90, \"west_longitude\": -180, \"north_latitude\": 90, \"east_longitude\": 180}, \"id\": {\"authority\": \"EPSG\", \"code\": 4326}}",
+    "all_geometry_valid": true,
+    "snapshot_bound_export_urls": true,
+    "files": {
+      "events.parquet": {
+        "sha256": "91dc600fbedd9c6a4b88483b0990a1797b5b77120b40a8d6280f54f704da6526",
+        "bytes": 42655
+      },
+      "events.geojson": {
+        "sha256": "3cbb865fd37fbc03d6f52b1411f48a007c344f8dc6fd9f78deae48b9a26492ad",
+        "bytes": 201372
+      }
+    }
+  }
+}

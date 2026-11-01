@@ -46,8 +46,10 @@ API, revision semantics and independently readable exports do not make its
 alerts reliable. The [full result](docs/results-v2.md) includes every method,
 complete-region results, masks/exclusions, timing, calibration and uncertainty.
 Earlier negative development evidence remains in the
-[development record](docs/development-log.md). Public release and remote-CI
-verification are still pending; no analyst-ready release is claimed.
+[development record](docs/development-log.md). The source and
+[Linux CI](https://github.com/nazeeh111/TerraDelta/actions/runs/41289676021)
+are public. Versioned release-download verification is in progress; no
+analyst-ready release is claimed.
 
 A separate revision uses a frozen ImageNet ResNet18 encoder with a trained
 decoder. Its nine training, four development and three fresh confirmation regions
@@ -77,6 +79,9 @@ uv run terradelta --help
 
 No imagery account, API key or paid service is required for the bounded public
 SpaceNet workflow. [Data and artifact terms](DATA_LICENSE.md) apply.
+The [independent install](artifacts/verification-v3/public-install-v1.json) and
+[real API/consumer check](artifacts/verification-v3/public-api-v1.json) used an
+anonymous public clone and fresh public image/mask bytes, with no private cache.
 
 ## Replay the complete research history
 

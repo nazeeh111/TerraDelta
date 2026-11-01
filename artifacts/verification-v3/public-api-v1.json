@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "base_url": "OS-selected loopback port (real HTTP server, not TestClient)",
+  "source": "Installed non-editable package from anonymous public clone; no private task inputs",
+  "area_a_count": 19,
+  "area_b_count": 43,
+  "earlier_date_count": 0,
+  "outside_bbox_count": 0,
+  "snapshot_time": "2026-11-01T08:43:18.355712Z",
+  "exact_snapshot_replay": true,
+  "changed_bbox_and_date_matches_area_a": true,
+  "exports": {
+    "rows": 19,
+    "same_ids": true,
+    "crs": "EPSG:4326",
+    "geometry_valid": true,
+    "sha256": {
+      "events.parquet": "48308f451495192f8cc4018544d1924ede64be92ee43a97856b3b401bca293e4",
+      "events.geojson": "4efbccaf3ec4b2201b395039d09584cb2e4d7297ccb2a90a37f4763f1cecf102"
+    }
+  },
+  "second_consumer": {
+    "snapshot_time": "2026-11-01T08:43:18.355712Z",
+    "groups": [
+      {
+        "region": "area-b",
+        "change_class": "building_addition",
+        "state": "proposed",
+        "events": 5,
+        "footprint_area_m2": 667.46,
+        "distinct_supporting_sources": 3
+      },
+      {
+        "region": "area-b",
+        "change_class": "building_removal",
+        "state": "proposed",
+        "events": 38,
+        "footprint_area_m2": 10881.71,
+        "distinct_supporting_sources": 3
+      }
+    ]
+  },
+  "limits": "Real public cropped imagery checks input/CLI/API/GIS/consumer contracts; it does not establish detector accuracy or replace the complete-region study.",
+  "raw_evidence_sha256": "45dc7de9720c2d97472a53e067a910873a36449589381b03fc7c26ad05427b97",
+  "second_consumer_implementation": "examples/consume_history.py; Python standard library only, run with -I"
+}

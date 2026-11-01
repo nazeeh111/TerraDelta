@@ -11,6 +11,16 @@ geometries and trained artifacts distributed with this project retain
 This conservative artifact designation does not claim to resolve general legal
 questions about learned weights. Third-party code retains its original notices.
 
+The experimental `spatial-v3.pt` contains only TerraDelta decoder parameters.
+Its frozen ImageNet ResNet18 encoder is a separate official input and is not
+redistributed. Reproduction requires that input and its applicable terms.
+[Torchvision's BSD code license](https://github.com/pytorch/vision/blob/v0.24.1/LICENSE)
+does not establish blanket rights for the pretrained weights or ImageNet data;
+see the [upstream weights notice](https://github.com/pytorch/vision/blob/v0.24.1/README.md)
+and [ImageNet access terms](https://image-net.org/accessagreement).
+This project's conservative CC designation does not override upstream terms or
+grant unrestricted commercial rights to that separate input.
+
 Cite Adam Van Etten, Daniel Hogan, Jesus Martinez Manso, Jacob Shermeyer, Nicholas
 Weir and Ryan Lewis, *The Multi-Temporal Urban Development SpaceNet Dataset*,
 CVPR 2021, [paper](https://arxiv.org/abs/2102.04420).

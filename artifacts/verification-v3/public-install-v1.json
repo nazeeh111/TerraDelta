@@ -1,0 +1,114 @@
+{
+  "package_origin": "isolated .venv/lib/python3.12/site-packages/terradelta/__init__.py (verified with python -I; non-editable)",
+  "runs": {
+    "a-full": {
+      "seconds": 16.9266,
+      "frames": 3,
+      "probability_sha256": "bd1f8f6e8d07c4da8e37ffed49959d714673e95b4e90bb9a22252fe07edfce32",
+      "native_transform": [
+        4.77731426716,
+        0.0,
+        -11079088.627766754,
+        0.0,
+        -4.77731426716,
+        2190379.4825401795
+      ],
+      "export_rows": 27
+    },
+    "a-prefix": {
+      "seconds": 10.6379,
+      "frames": 2,
+      "probability_sha256": "4ce2d779606fcdc46abcb21f8b645d9c32a7f5b4b216b26bf2ae494a0632d93a",
+      "native_transform": [
+        4.77731426716,
+        0.0,
+        -11079088.627766754,
+        0.0,
+        -4.77731426716,
+        2190379.4825401795
+      ],
+      "export_rows": 12
+    },
+    "b-full": {
+      "seconds": 12.5443,
+      "frames": 3,
+      "probability_sha256": "d581b66804e60addd1213e84bb838f7b5c17e8eed2e2f98c0b807485908e916c",
+      "native_transform": [
+        4.77731426716,
+        0.0,
+        -11077865.63531436,
+        0.0,
+        -4.77731426716,
+        2189156.490087786
+      ],
+      "export_rows": 46
+    }
+  },
+  "changed_pixel_max_probability_delta": 0.9996151924133301,
+  "public_input_provenance": [
+    {
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_01_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "sha256": "e49e5931ac8654100669cc4ade518b8f91d5ccb81b2386ae6bd5b746e4595514",
+      "bytes": 4193671
+    },
+    {
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/labels/global_monthly_2018_01_mosaic_L15-0457E-1135N_1831_3648_13_UDM.geojson",
+      "sha256": "57637baf82c3fd2638c3f55889f45a17a5a20115cf8644b0c7a3cf03f23a9e11",
+      "bytes": 217
+    },
+    {
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_02_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "sha256": "03ed0821fe956bb1c0834e129aafb86080735ed0bb0cc6ea7106e538365e33df",
+      "bytes": 4193671
+    },
+    {
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/labels/global_monthly_2018_02_mosaic_L15-0457E-1135N_1831_3648_13_UDM.geojson",
+      "sha256": "57637baf82c3fd2638c3f55889f45a17a5a20115cf8644b0c7a3cf03f23a9e11",
+      "bytes": 217
+    },
+    {
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/images_masked/global_monthly_2018_03_mosaic_L15-0457E-1135N_1831_3648_13.tif",
+      "sha256": "bfeb4fa584a522c4216002607891707c03369d01e8fed5120abb3fe9451b47bc",
+      "bytes": 4193671
+    },
+    {
+      "uri": "https://spacenet-dataset.s3.amazonaws.com/spacenet/SN7_buildings/train/L15-0457E-1135N_1831_3648_13/labels/global_monthly_2018_03_mosaic_L15-0457E-1135N_1831_3648_13_UDM.geojson",
+      "sha256": "57637baf82c3fd2638c3f55889f45a17a5a20115cf8644b0c7a3cf03f23a9e11",
+      "bytes": 217
+    }
+  ],
+  "limits": "Installed non-editable package from anonymous public clone, fresh package cache and newly downloaded public sources; release downloads and remote CI are separate checks.",
+  "source_commit": "4d2847dfdcd89d63ec3f76da2131d49718595318",
+  "source_url": "https://github.com/nazeeh111/TerraDelta",
+  "installation": "Anonymous HTTPS clone, new virtual environment and empty public-package cache; uv sync --frozen --no-editable --extra ml --extra dev. PYTHONPATH removed.",
+  "checked_at": "2026-11-01T08:56:26.760115+00:00",
+  "raw_evidence_sha256": "5dedf7e7ff2ba794661278e576ff076b93e46d0a1e1dc7d2b128ed3907a6ccc3",
+  "model_sha256": {
+    "spatial-v2.pt": "7ab95679a2009918dbab62fca64244476df519080cb8c0d376c00d1494983886",
+    "event-gate-v1.pt": "9bae4c22a5fc6dca64b270a0e37a8d899424477ed7b2c4f6ac5c2e6e811e62ba",
+    "calibration-v2.json": "6d448246aa6c0cc21fcd69d675c6f591bd7aef996edaa2da9ccb659f7b4b95cf"
+  },
+  "byte_identical_to_public_source": true,
+  "package_files_sha256": {
+    "decoder.py": "716eac715ec0e38396bd6bf7f36170e4b72d98bcf5a18b3c9096889ec215fe4e",
+    "store.py": "53a148128938a1d7b425332f3ae7bdcc872c42d253cba17b37ae97f4815af43d",
+    "service.py": "5a4a0349ce452a51cac8ec869bccc0483b68f6d29d117d2627f89e3447961936",
+    "temporal.py": "534cc05ca713d9d3f66d8ee8a64f3efe0ff2f01be0a02a31a8abdce047fd2159",
+    "acquire.py": "6eb0794cc0677315ac039cebec1faf0bcd03c9f544d6989eef76dd04cd71bf69",
+    "protocol.py": "b774bb0f209d296181c7ff7d4b50d6618159bcd22b0d0a8c1b4a3f70be7a8960",
+    "evaluation.py": "66fd8b765a9d4dc552efefc4b4728858e0370b40808946ae1573121b4d2b3c7b",
+    "__init__.py": "e8391859f1475069434edfcb9e42f300199dd422a394b1070f1c1e09cafcbc68",
+    "features.py": "c8495e7664659e1916157e8de76f8389f5c02e302967e108d6f4be3f4b29731d",
+    "pretrained_spatial.py": "f529a7bb201106964a974944fd096e5b0b60a90700254e7462cc16a3b28fe503",
+    "spatial.py": "a801eef9f770057cb7e5e26f74b7edc027ea73cd3136da8d1e7541d20b03ebff",
+    "event_gate.py": "0b6b38054ac84c813adcf0eb5ed7b775d6f0b2470c60247a949e1fef38c8df8b",
+    "cli.py": "bfedff5a3f40ef55eba095b9ac8acb9cc07bbbea34d91bef7c45737a0983ec91",
+    "pipeline.py": "2e3cac760259a4f13c2edc22ff2a7f633c8f9be635e0176df2a1a1e414044069",
+    "contracts.py": "a31b0b9c6267c95cbc1ba6f12a9de856c4563bf18fcffcf122286c5e0d059280",
+    "data.py": "0e1fa709eb635191101ce1b9e2e669bb3ea04e50d3a1ac51cabdf0de489d02ea",
+    "schema.py": "9500c25425e546e7a895c9e2e4bbe333e1ef7c93b0eec0fa330aefa98339ebb1",
+    "web/index.html": "b85a055aa3bf6bd83d1bc8f585bf40db31abf06815fd7f45d318f7949c1717f6",
+    "web/style.css": "28107ab8dc7eff05ce65d9342eb5108647af89cf505bcc30dd1adf04a2919cc2",
+    "web/app.js": "a0a5ad8c33738c154636d49fcafeba4788180de13ee7ba43de0cedc116774e92"
+  }
+}
